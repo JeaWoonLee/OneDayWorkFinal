@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">OneDayWorkFinal</string>
+    <string name="app_name">하루일감</string>
+    <string name="url">http://1.250.62.149/</string>
+
+    <!-- activity_login-->
+    <string name="activity_login_find_ID_and_PW">아이디 / 비밀번호 찾기</string>
+    <string name="activity_login_joinUser">혹시, 하루살이가 처음이신가요?</string>
+    <string name="activity_login_joinUser2">회원가입</string>
+    <string name="activity_login_tabItem1">구직자 로그인</string>
+    <string name="activity_login_tabItem2">구인자 로그인</string>
+    <string name="login_seeker_fragment1">아이디를 입력하세요</string>
+    <string name="login_seeker_fragment2">패스워드를 입력하세요</string>
+    <string name="login_offer_fragment1">아이디를 입력하세요</string>
+    <string name="login_offer_fragment2">패스워드를 입력하세요</string>
+    <string name="login_offer_fragment3">로그인</string>
+    <string name="login_seeker_fragment3">로그인</string>
+
 </resources>

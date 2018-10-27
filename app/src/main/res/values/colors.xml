@@ -3,4 +3,14 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <!-- 옥수수빵파랑 -->
+    <color name="seeker">#1e90ff</color>
+    <!-- 옥수수꽃파랑 -->
+    <color name="blue1">#6495ed</color>
+    <!-- 코랄(산호빛) -->
+    <color name="offer">#ff7f50</color>
+    <!-- 검정색 -->
+    <color name="black">#000000</color>
+    <!-- 하얀색 -->
+    <color name="white">#ffffff</color>
 </resources>

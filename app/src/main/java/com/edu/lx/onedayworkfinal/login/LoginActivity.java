@@ -5,8 +5,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
+
+import org.jetbrains.annotations.NotNull;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -16,17 +21,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //TODO 권한체크 한번에 하기
+        //AutoPermission
+        AutoPermissions.Companion.loadAllPermissions(this,101);
 
         seekerLoginFrag = new SeekerLoginFragment();
         offerLoginFrag = new OfferLoginFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,seekerLoginFrag).commit();
 
-        //로그인 구분탭
+        // 로그인 구분탭
         TabLayout loginTabs = findViewById(R.id.loginTabs);
 
-        //탭이 눌렸을 때 콜백함수
+        // 탭이 눌렸을 때 콜백함수
         loginTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -41,14 +46,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+        // end 탭이 눌렸을 떄 콜백함수
     }
 
-    //탭이 눌렸을 때 탭 바꾸기
+    // 로그인 구분탭이 눌렸을 때 탭 바꾸기
     private void changeTab(@NonNull TabLayout.Tab tab) {
         //몇 번째 탭이 눌렸는가
         int position = tab.getPosition();
 
-        //TODO 몇 번째 탭이 눌렸는지에 따라 프래그먼트 바꾸기
         switch (position) {
             case 0 :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,seekerLoginFrag).commit();
@@ -58,4 +63,21 @@ public class LoginActivity extends AppCompatActivity {
                 break;
         }
     }
+    // end 로그인 구분탭이 눌렸을 때 탭 바꾸기
+    // AutoPermission CallBack
+    @Override
+    public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, new AutoPermissionsListener() {
+            @Override
+            public void onGranted (int i, @NotNull String[] permissions) {
+                Toast.makeText(getApplicationContext(),"거절한 권한 : " + permissions.length,Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onDenied (int i, @NotNull String[] permissions) {
+                Toast.makeText(getApplicationContext(),"거절한 권한 : " + permissions.length,Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    // end AutoPermission CallBack
 }

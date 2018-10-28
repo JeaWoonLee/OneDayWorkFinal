@@ -4,14 +4,30 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class BasicApplication extends MultiDexApplication {
+
+    //Volley
+    RequestQueue requestQueue;
+
+    //init Volley
+    @Override
+    public void onCreate () {
+        super.onCreate();
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+    }
+
+    //MultiDex
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
 
-
-    //TODO VolleyBaseSetting - RequestQueue
-    //TODO Manifests 설정
+    @Override
+    public void onTerminate () {
+        super.onTerminate();
+    }
 }

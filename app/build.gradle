@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.uphyca.android-aspectj'
+//apply plugin: 'com.uphyca.android-aspectj'
+apply plugin: 'com.jakewharton.hugo'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -32,12 +34,11 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'org.apache.commons:commons-lang3:3.6'
     //AspectJ
-
-    implementation 'org.aspectj:aspectjrt:1.9.1'
-    //implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'org.aspectj:aspectjrt:1.9.2'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     //MultiDex
     implementation 'com.android.support:multidex:1.0.3'
 
 }
-
-//apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'android-aspectj'
+apply plugin: 'com.google.gms.google-services'

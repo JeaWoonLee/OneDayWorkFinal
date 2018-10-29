@@ -7,10 +7,10 @@ import android.support.multidex.MultiDexApplication;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class BasicApplication extends MultiDexApplication {
+public class BaseApplication extends MultiDexApplication {
 
     //Volley
-    RequestQueue requestQueue;
+    public static RequestQueue requestQueue;
 
     //init Volley
     @Override

@@ -5,14 +5,23 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.util.volley.BaseApplication;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class OfferLoginFragment extends Fragment {
 
@@ -45,9 +54,37 @@ public class OfferLoginFragment extends Fragment {
     }
 
     private void loginOffer() {
-        String offerId = offerIdInput.getText().toString();
-        String offerPw = offerPwInput.getText().toString();
+        final String offerId = offerIdInput.getText().toString();
+        final String offerPw = offerPwInput.getText().toString();
 
-        Toast.makeText(activity,"loginOffer Id : " + offerId + ", Pw : " + offerPw,Toast.LENGTH_LONG).show();
+        String url = getResources().getString(R.string.url) + "loginOffer.do";
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("onResponse",response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId",offerId);
+                params.put("userPw",offerPw);
+
+                return params;
+            }
+        };
+
+        request.setShouldCache(false);
+        BaseApplication.requestQueue.add(request);
     }
 }

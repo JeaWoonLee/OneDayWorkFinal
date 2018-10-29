@@ -20,7 +20,7 @@ public class Logger {
      * AOP TargetMethod
      * 대상 메소드 : 모든 접근 제어자 / com.edu.lx.onedayworkfinal 의 하위 패키지 / 모든 클래스 / 모든 메소드
      */
-    @Pointcut("execution(* com.edu.lx.onedayworkfinal..*(..))")
+    @Pointcut("execution(* com.edu.lx.onedayworkfinal..*Activity.*(..)) || execution(* com.edu.lx.onedayworkfinal..*Fragment.*(..))")
     public void targetMethod() {
 
     }
@@ -33,11 +33,20 @@ public class Logger {
     public void beforeTargetMethod(JoinPoint joinPoint) {
         Log.d(TAG,"beforeTargetMethod");
 
+        if(joinPoint.getTarget() == null) return;
+
+        @SuppressWarnings("unused")
+        Class<? extends Object> clazz = joinPoint.getTarget().getClass();
+        // Get Class Name
+        String className = clazz.getSimpleName();
+        // Get Method Name
+        String methodName = joinPoint.getSignature().getName();
+
         // Make log message
         StringBuffer buffer = new StringBuffer();
 
         // append [class.method()]
-        buffer.append(processJoinPoint(joinPoint));
+        buffer.append("["+className+"."+methodName+"()]==");
 
         // append args
         Object[] arguments = joinPoint.getArgs();
@@ -45,7 +54,7 @@ public class Logger {
         for (Object obj : arguments) {
             buffer.append("\n -arg" + argCount++ + " : ");
             // commons-lang : toStringBuilder
-            buffer.append(ToStringBuilder.reflectionToString(obj));
+            if(obj != null) buffer.append(ToStringBuilder.reflectionToString(obj));
         }
         Log.d(TAG,buffer.toString());
 
@@ -60,6 +69,7 @@ public class Logger {
     public void afterReturningTargetMethod(JoinPoint joinPoint, Object returnValue) {
         Log.d(TAG,"afterReturningTargetMethod");
 
+        if (joinPoint.getTarget() == null )return;
         // Make log message
         StringBuffer buffer = new StringBuffer();
 
@@ -77,7 +87,7 @@ public class Logger {
 
         } else {
             // Object 인 경우
-            buffer.append(ToStringBuilder.reflectionToString(returnValue));
+            if(returnValue != null) buffer.append(ToStringBuilder.reflectionToString(returnValue));
         }
 
         Log.d(TAG,buffer.toString());
@@ -91,8 +101,8 @@ public class Logger {
      *  @return String
      */
     private String processJoinPoint(JoinPoint joinPoint) {
-
         // Get Target Class
+        @SuppressWarnings("unused")
         Class<? extends Object> clazz = joinPoint.getTarget().getClass();
         // Get Class Name
         String className = clazz.getSimpleName();

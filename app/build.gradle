@@ -35,7 +35,7 @@ dependencies {
     //Commons-lang : toStringBuilder
     implementation 'org.apache.commons:commons-lang3:3.6'
     //AspectJ : Aspect Oriented Programming
-    implementation 'org.aspectj:aspectjrt:1.9.2'
+    //implementation 'org.aspectj:aspectjrt:1.9.2'
     //MultiDex
     implementation 'com.android.support:multidex:1.0.3'
     //AutoPermission
@@ -57,3 +57,4 @@ apply plugin: 'com.google.gms.google-services'
 
 //AspectJ Another Plugin
 //apply plugin: 'com.uphyca.android-aspectj'
+

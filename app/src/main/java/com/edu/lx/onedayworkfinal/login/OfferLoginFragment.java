@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,7 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.util.volley.BaseApplication;
+import com.edu.lx.onedayworkfinal.util.volley.Base;
+import com.edu.lx.onedayworkfinal.vo.OfferVO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,20 +59,25 @@ public class OfferLoginFragment extends Fragment {
         final String offerId = offerIdInput.getText().toString();
         final String offerPw = offerPwInput.getText().toString();
 
-        String url = getResources().getString(R.string.url) + "loginOffer.do";
+        String url = getResources().getString(R.string.url) + "offerLogin.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("onResponse",response);
+                        OfferVO offerVO = Base.gson.fromJson(response,OfferVO.class);
+                        if (offerVO != null) {
+                            processOfferLogin(offerVO);
+                        }else {
+                            Toast.makeText(activity,"로그인에 실패하였습니다",Toast.LENGTH_LONG).show();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.i("error",error.getStackTrace().toString());
                     }
                 }
         ){
@@ -85,6 +92,10 @@ public class OfferLoginFragment extends Fragment {
         };
 
         request.setShouldCache(false);
-        BaseApplication.requestQueue.add(request);
+        Base.requestQueue.add(request);
+    }
+
+    private void processOfferLogin(OfferVO offerVO) {
+        Toast.makeText(activity,"로그인에 성공하였습니다",Toast.LENGTH_LONG).show();
     }
 }

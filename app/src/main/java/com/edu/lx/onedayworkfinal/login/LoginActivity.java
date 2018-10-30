@@ -1,13 +1,17 @@
 package com.edu.lx.onedayworkfinal.login;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.join.JoinActivity;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
@@ -17,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     SeekerLoginFragment seekerLoginFrag;
     OfferLoginFragment offerLoginFrag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         // end 탭이 눌렸을 떄 콜백함수
+
+        //회원가입 글씨를 클릭했을 때 회원가입 페이지로 보내기
+        TextView joinUserTextView = findViewById(R.id.joinUserTextView);
+        joinUserTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showJoinActivity();
+            }
+        });
+    }
+
+    private void showJoinActivity() {
+        Intent intent = new Intent(this,JoinActivity.class);
+        startActivityForResult(intent,101);
     }
 
     // 로그인 구분탭이 눌렸을 때 탭 바꾸기

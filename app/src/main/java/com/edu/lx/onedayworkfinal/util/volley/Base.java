@@ -6,17 +6,20 @@ import android.support.multidex.MultiDexApplication;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
-public class BaseApplication extends MultiDexApplication {
+public class Base extends MultiDexApplication {
 
     //Volley
     public static RequestQueue requestQueue;
-
+    //Gson
+    public static Gson gson;
     //init Volley
     @Override
     public void onCreate () {
         super.onCreate();
         requestQueue = Volley.newRequestQueue(getApplicationContext());
+        gson = new Gson();
     }
 
     //MultiDex

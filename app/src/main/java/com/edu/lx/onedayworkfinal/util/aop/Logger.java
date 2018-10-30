@@ -31,30 +31,25 @@ public class Logger {
      */
     @Before("targetMethod()")
     public void beforeTargetMethod(JoinPoint joinPoint) {
-        Log.d(TAG,"beforeTargetMethod");
 
+        //인터페이스 리스너 메소드가 실행되면 클래스 인스턴스를 갖고 올 수 없어서 에러가 난다
         if(joinPoint.getTarget() == null) return;
-
-        @SuppressWarnings("unused")
-        Class<? extends Object> clazz = joinPoint.getTarget().getClass();
-        // Get Class Name
-        String className = clazz.getSimpleName();
-        // Get Method Name
-        String methodName = joinPoint.getSignature().getName();
 
         // Make log message
         StringBuffer buffer = new StringBuffer();
 
         // append [class.method()]
-        buffer.append("["+className+"."+methodName+"()]==");
+        buffer.append("beforeTargetMethod="+processJoinPoint(joinPoint));
 
         // append args
         Object[] arguments = joinPoint.getArgs();
         int argCount = 0;
         for (Object obj : arguments) {
+
             buffer.append("\n -arg" + argCount++ + " : ");
-            // commons-lang : toStringBuilder
-            if(obj != null) buffer.append(ToStringBuilder.reflectionToString(obj));
+
+            if(obj != null) buffer.append(obj.toString());
+            else buffer.append("null");
         }
         Log.d(TAG,buffer.toString());
 
@@ -67,14 +62,16 @@ public class Logger {
      */
     @AfterReturning(pointcut = "targetMethod()", returning = "returnValue")
     public void afterReturningTargetMethod(JoinPoint joinPoint, Object returnValue) {
-        Log.d(TAG,"afterReturningTargetMethod");
 
+        //인터페이스 리스너 메소드가 실행되면 클래스 인스턴스를 갖고 올 수 없어서 에러가 난다
         if (joinPoint.getTarget() == null )return;
+        //리턴값이 없다면 AfterReturning 의 로그를 추가로 찍어 줄 필요가 없다
+        else if (returnValue == null) return;;
         // Make log message
         StringBuffer buffer = new StringBuffer();
 
         // append [class.method()]
-        buffer.append(processJoinPoint(joinPoint));
+        buffer.append("afterReturningTargetMethod=="+processJoinPoint(joinPoint));
 
         // return 의 결과값이 List<> 와 Object 에 따라 다르게 로그메세지를 출력
         // List<> 인 경우
@@ -83,11 +80,11 @@ public class Logger {
             //List 의 size 출력
             buffer.append("resultList size : " + resultList.size() + "\n");
             //item.toString() 출력
-            for (Object item : resultList) buffer.append(ToStringBuilder.reflectionToString(item) + "\n");
+            for (Object item : resultList) buffer.append(item.toString());
 
         } else {
             // Object 인 경우
-            if(returnValue != null) buffer.append(ToStringBuilder.reflectionToString(returnValue));
+            if(returnValue != null) buffer.append(returnValue.toString());
         }
 
         Log.d(TAG,buffer.toString());

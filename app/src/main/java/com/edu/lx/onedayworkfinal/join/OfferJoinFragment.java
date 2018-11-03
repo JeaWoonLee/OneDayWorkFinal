@@ -26,6 +26,8 @@ public class OfferJoinFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.join_offer_fragment,container,false);
 
+        //TODO 사업자 회원가입 구현하기
+
         return rootView;
     }
 }

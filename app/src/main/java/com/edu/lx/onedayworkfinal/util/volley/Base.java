@@ -6,6 +6,8 @@ import android.support.multidex.MultiDexApplication;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.edu.lx.onedayworkfinal.vo.OfferVO;
+import com.edu.lx.onedayworkfinal.vo.SeekerVO;
 import com.google.gson.Gson;
 
 public class Base extends MultiDexApplication {
@@ -14,6 +16,10 @@ public class Base extends MultiDexApplication {
     public static RequestQueue requestQueue;
     //Gson
     public static Gson gson;
+    //Seeker LoginSession
+    public static SeekerVO sessionSeeker;
+    //Offer LoginSession
+    public static OfferVO sessionOffer;
     //init Volley
     @Override
     public void onCreate () {

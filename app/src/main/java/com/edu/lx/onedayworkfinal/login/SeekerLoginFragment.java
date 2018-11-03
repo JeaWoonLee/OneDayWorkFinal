@@ -1,6 +1,7 @@
 package com.edu.lx.onedayworkfinal.login;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.SeekerVO;
 
@@ -46,6 +48,7 @@ public class SeekerLoginFragment extends Fragment {
         seekerIdInput = rootView.findViewById(R.id.seekerIdInput);
         seekerPwInput = rootView.findViewById(R.id.seekerPwInput);
 
+        //로그인 버튼
         Button seekerLoginButton = rootView.findViewById(R.id.seekerLoginButton);
         seekerLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +59,7 @@ public class SeekerLoginFragment extends Fragment {
         return rootView;
     }
 
+    //구직자 로그인
     private void loginSeeker() {
         final String seekerId = seekerIdInput.getText().toString();
         final String seekerPw = seekerPwInput.getText().toString();
@@ -95,7 +99,16 @@ public class SeekerLoginFragment extends Fragment {
         Base.requestQueue.add(request);
     }
 
+    //로그인 결과 처리
     private void processSeekerLogin(SeekerVO seekerVO) {
-        Toast.makeText(activity,"SeekerLogin 성공",Toast.LENGTH_LONG).show();
+
+        //노동자 로그인 결과를 세션에 담음
+        Base.sessionSeeker = seekerVO;
+
+        //노동자 메인화면으로 이동
+        Intent intent = new Intent(activity, SeekerMainActivity.class);
+        startActivity(intent);
     }
+
+
 }

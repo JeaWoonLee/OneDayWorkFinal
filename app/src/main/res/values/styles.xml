@@ -40,6 +40,30 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">15sp</item>
         <item name="android:background">@color/seeker</item>
-
     </style>
+
+    <!-- RecyclerView Item Text -->
+    <style name="itemTextView" parent="@android:style/Widget.TextView">
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- Seeker RecyclerView Item Text -->
+    <style name="seekerItemText" parent="@android:style/Widget.TextView">
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textColor">@color/seeker</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

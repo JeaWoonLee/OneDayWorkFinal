@@ -23,24 +23,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".seeker.SeekerMainActivity"></activity>
         <!-- googleMaps Library -->
         <uses-library android:name="com.google.android.maps" />
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />
-
-        <!-- API Key -->
+            android:required="false" /> <!-- API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAgQnQTrVIG7rNPGo1L6nDQoVkEqCCzlQE" />
-
-        <!-- GoogleMapService Version -->
+            android:value="AIzaSyAgQnQTrVIG7rNPGo1L6nDQoVkEqCCzlQE" /> <!-- GoogleMapService Version -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <!-- Activity -->
+            android:value="@integer/google_play_services_version" /> <!-- Activity -->
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".join.JoinActivity"></activity>
+        <activity android:name=".join.JoinActivity" />
     </application>
 
 </manifest>

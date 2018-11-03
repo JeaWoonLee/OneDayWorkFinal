@@ -18,8 +18,17 @@ public class SeekerVO {
     String seekerInfo;
     String seekerHeight;
     String seekerWeight;
+    String seekerSex;
     double seekerLatitude;
     double seekerLongitude;
+
+    public String getSeekerSex() {
+        return seekerSex;
+    }
+
+    public void setSeekerSex(String seekerSex) {
+        this.seekerSex = seekerSex;
+    }
 
     public String getSeekerId() {
         return seekerId;

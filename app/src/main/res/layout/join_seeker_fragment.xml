@@ -1,12 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- 아이디 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="seeker"/>
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_seeker_fragment2" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/seekerIdInput"
+            style="@style/seekerJoinEditText"
+            app:theme="@style/seekerJoinEditText"
+            android:hint="@string/join_seeker_fragment1"
+            android:inputType="text"
+            android:layout_weight="2"/>
+
+        <Button
+            android:id="@+id/checkIdOverlapButton"
+            style="@style/seekerButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/join_seeker_fragment14"/>
+    </LinearLayout>
+
+    <!-- 패스워드 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_seeker_fragment3" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/seekerPwInput"
+            style="@style/seekerJoinEditText"
+            app:theme="@style/seekerJoinEditText"
+            android:hint="@string/join_seeker_fragment4"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <!-- 패스워드 재입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_seeker_fragment13" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/seekerPwReInput"
+            style="@style/seekerJoinEditText"
+            app:theme="@style/seekerJoinEditText"
+            android:hint="@string/join_seeker_fragment15"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+    <!-- 이름 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_seeker_fragment6"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/seekerNameInput"
+            style="@style/seekerJoinEditText"
+            android:hint="@string/join_seeker_fragment5"
+            android:inputType="text"
+            app:theme="@style/seekerJoinEditText" />
+    </LinearLayout>
+
+    <!-- 성별 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_seeker_fragment7" />
+        
+        <RadioGroup
+            android:id="@+id/sexGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/join_seeker_fragment8"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/join_seeker_fragment9"
+                android:layout_weight="3"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <!-- 이메일 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_seeker_fragment10"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/seekerEmailInput"
+            style="@style/seekerJoinEditText"
+            app:theme="@style/seekerJoinEditText"
+            android:hint="@string/join_seeker_fragment11"
+            android:inputType="textEmailAddress"/>
+
+    </LinearLayout>
+
+    <!-- 회원가입 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/seekerJoinButton"
+            style="@style/seekerButton"
+            android:text="@string/join_seeker_fragment12"/>
+    </LinearLayout>
+
 </LinearLayout>

@@ -13,4 +13,6 @@
     <color name="black">#000000</color>
     <!-- 하얀색 -->
     <color name="white">#ffffff</color>
+    <!-- 회색 -->
+    <color name="gray">#808080</color>
 </resources>

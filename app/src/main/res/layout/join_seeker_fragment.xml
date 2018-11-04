@@ -19,14 +19,15 @@
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/seekerIdInput"
-            style="@style/seekerJoinEditText"
-            app:theme="@style/seekerJoinEditText"
+            style="@style/seekerEditText"
+            app:theme="@style/seekerEditText"
             android:hint="@string/join_seeker_fragment1"
             android:inputType="text"
             android:layout_weight="2"/>
 
         <Button
             android:id="@+id/checkIdOverlapButton"
+            android:layout_marginStart="10dp"
             style="@style/seekerButton"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -46,8 +47,8 @@
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/seekerPwInput"
-            style="@style/seekerJoinEditText"
-            app:theme="@style/seekerJoinEditText"
+            style="@style/seekerEditText"
+            app:theme="@style/seekerEditText"
             android:hint="@string/join_seeker_fragment4"
             android:inputType="textPassword"/>
     </LinearLayout>
@@ -65,8 +66,8 @@
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/seekerPwReInput"
-            style="@style/seekerJoinEditText"
-            app:theme="@style/seekerJoinEditText"
+            style="@style/seekerEditText"
+            app:theme="@style/seekerEditText"
             android:hint="@string/join_seeker_fragment15"
             android:inputType="textPassword"/>
     </LinearLayout>
@@ -83,10 +84,10 @@
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/seekerNameInput"
-            style="@style/seekerJoinEditText"
+            style="@style/seekerEditText"
             android:hint="@string/join_seeker_fragment5"
             android:inputType="text"
-            app:theme="@style/seekerJoinEditText" />
+            app:theme="@style/seekerEditText" />
     </LinearLayout>
 
     <!-- 성별 입력 -->
@@ -138,8 +139,8 @@
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/seekerEmailInput"
-            style="@style/seekerJoinEditText"
-            app:theme="@style/seekerJoinEditText"
+            style="@style/seekerEditText"
+            app:theme="@style/seekerEditText"
             android:hint="@string/join_seeker_fragment11"
             android:inputType="textEmailAddress"/>
 

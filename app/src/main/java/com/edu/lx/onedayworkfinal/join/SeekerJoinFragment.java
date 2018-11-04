@@ -112,6 +112,12 @@ public class SeekerJoinFragment extends Fragment {
 
     //중복확인 체크
     private void requestCheckOverlap() {
+        //아이디를 입력하지 않았다면 return 하면서 Toast 메세지를 띄움
+        if (TextUtils.isEmpty(seekerIdInput.getText().toString())){
+            Toast.makeText(activity,"아이디를 입력해야 합니다!",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         final String userId = seekerIdInput.getText().toString();
         String url = getResources().getString(R.string.url) + "checkSeekerOverlap.do";
 

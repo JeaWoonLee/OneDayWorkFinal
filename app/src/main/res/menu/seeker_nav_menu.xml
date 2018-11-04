@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 현제 어디 화면을 표시하고 있는가-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/find_job"
+            android:checked="true"
+            android:title="일찾기"/>
+        <item
+            android:id="@+id/manage_job"
+            android:title="일관리"/>
+    </group>
+
+
+    <!-- 사용자 메뉴 서브헤더 -->
+    <item
+        android:id="@+id/my_account_info"
+        android:title="내 계정 관리"/>
+
+    <item
+        android:id="@+id/logout"
+        android:title="로그아웃"/>
+
+</menu>

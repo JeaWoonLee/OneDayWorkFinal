@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".seeker.SeekerMainActivity"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
     <!-- TODO 네비게이션 바 구현하기 -->
 
-    <!-- Toolbar -->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/seeker">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </android.support.v7.widget.Toolbar>
-    <!-- //end Toolbar -->
+        <!-- Toolbar -->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:title="일용직 노동자 메인 화면"/>ad
+        <!-- //end Toolbar -->
 
-    <!-- Fragment Container -->
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <!-- Fragment Container -->
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </FrameLayout>
-    <!-- //end Fragment Container -->
-</LinearLayout>
+        </FrameLayout>
+        <!-- //end Fragment Container -->
+    </LinearLayout>
+
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/seeker_nav_header"
+        app:menu="@menu/seeker_nav_menu"/>
+
+</android.support.v4.widget.DrawerLayout>

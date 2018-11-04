@@ -18,7 +18,7 @@ public class Logger {
 
     /*
      * AOP TargetMethod
-     * 대상 메소드 : 모든 접근 제어자 / com.edu.lx.onedayworkfinal 의 하위 패키지 / 모든 클래스 / 모든 메소드
+     * 대상 메소드 : 모든 접근 제어자 / com.edu.lx.onedayworkfinal 의 하위 패키지 / Activity & Fragment 클래스 / 모든 메소드
      */
     @Pointcut("execution(* com.edu.lx.onedayworkfinal..*Activity.*(..)) || execution(* com.edu.lx.onedayworkfinal..*Fragment.*(..))")
     public void targetMethod() {

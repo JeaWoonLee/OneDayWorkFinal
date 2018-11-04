@@ -107,7 +107,7 @@ public class SeekerLoginFragment extends Fragment {
 
         //노동자 메인화면으로 이동
         Intent intent = new Intent(activity, SeekerMainActivity.class);
-        startActivity(intent);
+        activity.startActivityForResult(intent,101);
     }
 
 

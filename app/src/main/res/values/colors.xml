@@ -3,16 +3,18 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <!-- 옥수수빵파랑 -->
-    <color name="seeker">#1e90ff</color>
+    <!-- 찐노랑 -->
+    <color name="seeker">#f7b417</color>
     <!-- 옥수수꽃파랑 -->
     <color name="blue1">#6495ed</color>
     <!-- 코랄(산호빛) -->
-    <color name="offer">#ff7f50</color>
+    <color name="offer">#03611c</color>
     <!-- 검정색 -->
     <color name="black">#000000</color>
     <!-- 하얀색 -->
     <color name="white">#ffffff</color>
     <!-- 회색 -->
-    <color name="gray">#808080</color>
+    <color name="gray">#E2E2E2</color>
+    <!-- 회색 -->
+    <color name="dark_gray">#808080</color>
 </resources>

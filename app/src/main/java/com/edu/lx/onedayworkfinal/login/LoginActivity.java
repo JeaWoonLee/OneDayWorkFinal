@@ -1,11 +1,11 @@
 package com.edu.lx.onedayworkfinal.login;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,6 +99,19 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     // end AutoPermission CallBack
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //구직자 화면에서 로그아웃을 통해 돌아왔을 경우
+        if (requestCode == 101) {
+            //SeekerLoginFragment 의 EditText 를 지워준다
+            seekerLoginFrag.seekerIdInput.setText("");
+            seekerLoginFrag.seekerPwInput.setText("");
+        }
+    }
+
 
     //TODO 회원가입에 성공하면 해당 정보를 기반으로 바로 로그인을 하도록 구현할까?
 }

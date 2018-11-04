@@ -28,7 +28,7 @@ public class SeekerMainActivity extends AppCompatActivity {
         //TODO 신청 일감 관리 구현하기
         //TODO 일감 관리 구현하기
         //TODO 오늘의 일감 구현하기
-        //TODO 오늘의 일감 관리하기
+        //TODO 이력 관리 구현하기
         //TODO 일감 초대 구현하기
 
     }

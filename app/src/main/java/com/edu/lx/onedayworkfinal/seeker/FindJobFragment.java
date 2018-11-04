@@ -100,4 +100,5 @@ public class FindJobFragment extends Fragment {
         adapter.setItems(items);
         projectListRecyclerView.setAdapter(adapter);
     }
+
 }

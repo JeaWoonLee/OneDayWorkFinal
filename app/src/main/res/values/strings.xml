@@ -1,8 +1,9 @@
 <resources>
-    <!--http://1.250.62.149/-->
-
+    <!-- 클라우드 서버 http://1.250.62.149/-->
+    <!-- 아카데미 서버 http://192.168.40.20/odw/-->
+    <!-- 로컬 서버 http://10.0.2.2/odw/-->
     <string name="app_name">하루일감</string>
-    <string name="url">http://192.168.40.20/odw/</string>
+    <string name="url">http://10.0.2.2/odw/</string>
 
     <!-- activity_login-->
     <string name="activity_login_find_ID_and_PW">아이디 / 비밀번호 찾기</string>
@@ -10,13 +11,41 @@
     <string name="activity_login_joinUser2">회원가입</string>
     <string name="activity_login_tabItem1">구직자 로그인</string>
     <string name="activity_login_tabItem2">구인자 로그인</string>
+    <!-- //end activity_login -->
+
+    <!-- login_seeker_fragment -->
     <string name="login_seeker_fragment1">아이디를 입력하세요</string>
     <string name="login_seeker_fragment2">패스워드를 입력하세요</string>
+    <string name="login_seeker_fragment3">로그인</string>
+    <!-- //end login_seeker_fragment -->
+
+    <!-- login_offer_fragment -->
     <string name="login_offer_fragment1">아이디를 입력하세요</string>
     <string name="login_offer_fragment2">패스워드를 입력하세요</string>
     <string name="login_offer_fragment3">로그인</string>
-    <string name="login_seeker_fragment3">로그인</string>
+    <!-- //end login_offer_fragment -->
+
+    <!-- join_front_fragment -->
     <string name="join_front_fragment1">일용직 회원 가입</string>
     <string name="join_front_fragment2">사업자 회원 가입</string>
+    <!-- //end join_front_fragment -->
+
+    <!-- join_seeker_fragment -->
+    <string name="join_seeker_fragment1">아이디를 입력하세요</string>
+    <string name="join_seeker_fragment2">아이디</string>
+    <string name="join_seeker_fragment3">비밀번호</string>
+    <string name="join_seeker_fragment4">비밀번호를 입력하세요</string>
+    <string name="join_seeker_fragment5">이름을 입력하세요</string>
+    <string name="join_seeker_fragment6">이름</string>
+    <string name="join_seeker_fragment7">성별</string>
+    <string name="join_seeker_fragment8">남자</string>
+    <string name="join_seeker_fragment9">여자</string>
+    <string name="join_seeker_fragment10">이메일</string>
+    <string name="join_seeker_fragment11">example@lx.org</string>
+    <string name="join_seeker_fragment12">회원 가입</string>
+    <string name="join_seeker_fragment13">비밀번호 확인</string>
+    <string name="join_seeker_fragment14">중복 체크</string>
+    <string name="join_seeker_fragment15">비밀번호를 다시 입력하세요</string>
+    <!-- //end join_seeker_fragment -->
 
 </resources>

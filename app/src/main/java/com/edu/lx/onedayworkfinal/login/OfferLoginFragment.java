@@ -97,5 +97,6 @@ public class OfferLoginFragment extends Fragment {
 
     private void processOfferLogin(OfferVO offerVO) {
         Toast.makeText(activity,"로그인에 성공하였습니다",Toast.LENGTH_LONG).show();
+        //TODO 사업자 로그인 구현하기
     }
 }

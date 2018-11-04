@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="10dp"
+    app:cardCornerRadius="10dp"
+    android:padding="10dp"
+    android:layout_margin="10dp">
+
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/seeker">
+
+            <TextView
+                android:id="@+id/projectName"
+                style="@style/itemTextView"
+                android:layout_width="wrap_content"
+                android:text="일감 이름"/>
+
+            <!-- 가운데 공간 -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/projectDate"
+                style="@style/itemTextView"
+                android:layout_width="wrap_content"
+                android:text="일감 기간"/>
+
+        </LinearLayout>
+        <!-- //end Header -->
+
+        <!-- Body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Contents -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- project Subject -->
+                    <TextView
+                        android:id="@+id/projectSubject"
+                        style="@style/seekerItemText"
+                        android:text="직종"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        style="@style/joinTextView"
+                        android:text="등록 날짜"
+                        android:layout_width="wrap_content"/>
+                    <TextView
+                        android:id="@+id/projectEnrollDate"
+                        style="@style/seekerItemText"
+                        android:layout_width="wrap_content"
+                        android:text="프로젝트 등록일"/>
+
+                </LinearLayout>
+
+
+                <!-- TODO Project Job List -->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/jobListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+            <!-- //end Contents-->
+
+            <!-- Button Area -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/projectDetailButton"
+                    android:layout_margin="10dp"
+                    style="@style/seekerButton"
+                    android:text="상세정보"/>
+            </LinearLayout>
+            <!-- //end Button Area -->
+
+        </LinearLayout>
+        <!-- //end Body -->
+
+    </LinearLayout>
+    <!-- //end Container -->
+
+</android.support.v7.widget.CardView>

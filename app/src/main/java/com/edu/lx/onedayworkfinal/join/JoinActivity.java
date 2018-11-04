@@ -24,13 +24,15 @@ public class JoinActivity extends AppCompatActivity {
     SeekerJoinFragment seekerJoinFragment;
     OfferJoinFragment offerJoinFragment;
 
+    //툴바
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
         //Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -56,16 +58,19 @@ public class JoinActivity extends AppCompatActivity {
             case FRONT_JOIN_FRAGMENT :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,frontJoinFragment).commit();
                 fragIndex = FRONT_JOIN_FRAGMENT;
+                toolbar.setBackgroundColor(getResources().getColor(R.color.seeker,this.getTheme()));
                 break;
 
             case SEEKER_JOIN_FRAGMENT :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,seekerJoinFragment).commit();
                 fragIndex = SEEKER_JOIN_FRAGMENT;
+                toolbar.setBackgroundColor(getResources().getColor(R.color.seeker,this.getTheme()));
                 break;
 
             case OFFER_JOIN_FRAGMENT :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,offerJoinFragment).commit();
                 fragIndex = OFFER_JOIN_FRAGMENT;
+                toolbar.setBackgroundColor(getResources().getColor(R.color.offer,this.getTheme()));
                 break;
         }
     }
@@ -86,12 +91,10 @@ public class JoinActivity extends AppCompatActivity {
 
             case SEEKER_JOIN_FRAGMENT :
                 changeTab(FRONT_JOIN_FRAGMENT);
-                fragIndex = FRONT_JOIN_FRAGMENT;
                 break;
 
             case OFFER_JOIN_FRAGMENT :
                 changeTab(FRONT_JOIN_FRAGMENT);
-                fragIndex = FRONT_JOIN_FRAGMENT;
                 break;
         }
         return true;

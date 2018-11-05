@@ -1,5 +1,6 @@
 package com.edu.lx.onedayworkfinal.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,9 @@ import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.join.JoinActivity;
+import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
+import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
+import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
@@ -22,12 +26,20 @@ public class LoginActivity extends AppCompatActivity {
     SeekerLoginFragment seekerLoginFrag;
     OfferLoginFragment offerLoginFrag;
 
+    BackPressCloseHandler backPressCloseHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //AutoPermission
         AutoPermissions.Companion.loadAllPermissions(this,101);
+
+        //로그인 세션 체크. 로그인이 되어 있다면 해당 액티비티로 보낸다
+        loginCheck();
+
+        //back 키 두 번 누르면 액티비티 종료 해주는 Util 클래스
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         seekerLoginFrag = new SeekerLoginFragment();
         offerLoginFrag = new OfferLoginFragment();
@@ -61,11 +73,36 @@ public class LoginActivity extends AppCompatActivity {
                 showJoinActivity();
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
+    }
+
+    //로그인 세션 체크. 로그인이 되어 있다면 해당 액티비티로 보낸다
+    private void loginCheck() {
+        if (Base.sessionManager.isLoggedIn()) {
+            String index = Base.sessionManager.getUserDetails().get("userIndex");
+
+            if (index.equals(Base.sessionManager.IS_SEEKER)) {
+                Intent intent = new Intent(this,SeekerMainActivity.class);
+                startActivityForResult(intent,101);
+            } else if (index.equals(Base.sessionManager.IS_OFFER)) {
+                //TODO 구인자 페이지로 보내기
+                Toast.makeText(this,"구인자 세션 로그인",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this,"로그인세션은 존재하지만 구분이 되어있지 않은 오류",Toast.LENGTH_LONG).show();
+            }
+
+        }
     }
 
     private void showJoinActivity() {
         Intent intent = new Intent(this,JoinActivity.class);
-        startActivityForResult(intent,101);
+        startActivityForResult(intent,102);
     }
 
     // 로그인 구분탭이 눌렸을 때 탭 바꾸기
@@ -90,11 +127,9 @@ public class LoginActivity extends AppCompatActivity {
         AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, new AutoPermissionsListener() {
             @Override
             public void onGranted (int i, @NotNull String[] permissions) {
-                Toast.makeText(getApplicationContext(),"거절한 권한 : " + permissions.length,Toast.LENGTH_LONG).show();
             }
             @Override
             public void onDenied (int i, @NotNull String[] permissions) {
-                Toast.makeText(getApplicationContext(),"거절한 권한 : " + permissions.length,Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -106,12 +141,24 @@ public class LoginActivity extends AppCompatActivity {
 
         //구직자 화면에서 로그아웃을 통해 돌아왔을 경우
         if (requestCode == 101) {
+
+            //뒤로 가기 키를 눌러서 돌아온 경우. 재 로그인을 하지 않고 프로그램을 종료시킨다
+            if (resultCode == Activity.RESULT_CANCELED) {
+                this.finish();
+                return;
+            }
+
             //SeekerLoginFragment 의 EditText 를 지워준다
             seekerLoginFrag.seekerIdInput.setText("");
             seekerLoginFrag.seekerPwInput.setText("");
-        }
-    }
 
+        } else if (requestCode == 102) {
+            //회원가입 화면에서 돌아온 경우
+        }
+
+        //로그인 세션 체크. 로그인이 되어 있다면 해당 액티비티로 보낸다
+        loginCheck();
+    }
 
     //TODO 회원가입에 성공하면 해당 정보를 기반으로 바로 로그인을 하도록 구현할까?
 }

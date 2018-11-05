@@ -1,6 +1,5 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,16 +12,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 
 public class SeekerMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FindJobFragment findJobFragment;
 
+    private BackPressCloseHandler backPressCloseHandler;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_main);
+
+        //로그인 체크
+        Base.sessionManager.checkLogin();
+
+        //back 키 두 번 누르면 액티비티 종료 해주는 Util 클래스
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         //툴바 설정
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -42,8 +49,8 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         //네비게이션 바 Id / name 세팅
         TextView seekerId = navigationView.getHeaderView(0).findViewById(R.id.seekerId);
         TextView seekerName = navigationView.getHeaderView(0).findViewById(R.id.seekerName);
-        seekerId.setText(Base.sessionSeeker.getSeekerId());
-        seekerName.setText(Base.sessionSeeker.getSeekerName());
+        seekerId.setText(Base.sessionManager.getUserDetails().get("id"));
+        seekerName.setText(Base.sessionManager.getUserDetails().get("name"));
 
         //TODO 일감 구하기 구현하기
         findJobFragment = new FindJobFragment();
@@ -76,13 +83,28 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 //로그 아웃
             case R.id.logout :
                 //세션 정보를 null 로 삭제하고 finish 해준다
-                Base.sessionSeeker = null;
                 Toast.makeText(this,"정상적으로 로그아웃 되었습니다",Toast.LENGTH_LONG).show();
-                setResult(Activity.RESULT_OK);
-                finish();
+                Base.sessionManager.logoutUser();
                 break;
         }
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Base.sessionManager.checkLogin();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Base.sessionManager.checkLogin();
+    }
 }

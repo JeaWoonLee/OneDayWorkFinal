@@ -5,8 +5,11 @@
     <!-- 현제 어디 화면을 표시하고 있는가-->
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/find_job"
+            android:id="@+id/front"
             android:checked="true"
+            android:title="선택 화면"/>
+        <item
+            android:id="@+id/find_job"
             android:title="일찾기"/>
 
         <item

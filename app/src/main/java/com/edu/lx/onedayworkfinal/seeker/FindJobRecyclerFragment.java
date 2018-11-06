@@ -25,8 +25,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
+import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
+
 //일감 구하기 Fragment
-public class FindJobFragment extends Fragment {
+public class FindJobRecyclerFragment extends Fragment {
 
     SeekerMainActivity activity;
 
@@ -41,7 +43,7 @@ public class FindJobFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seeker_find_job_fragment,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seeker_find_job_recycler_fragment,container,false);
         projectListRecyclerView = rootView.findViewById(R.id.projectListRecyclerView);
         return rootView;
     }
@@ -93,7 +95,7 @@ public class FindJobFragment extends Fragment {
     private void processProjectResponse (String response) {
         ProjectVO[] projectArray = Base.gson.fromJson(response,ProjectVO[].class);
 
-        ArrayList<ProjectVO> items = new ArrayList<>(Arrays.asList(projectArray));
+        items = new ArrayList<>(Arrays.asList(projectArray));
 
         //Adapter 할당
         adapter = new SeekerProjectListRecyclerViewAdapter(activity);

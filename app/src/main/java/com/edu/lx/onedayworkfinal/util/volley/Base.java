@@ -1,6 +1,7 @@
 package com.edu.lx.onedayworkfinal.util.volley;
 
 import android.content.Context;
+import android.location.LocationManager;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
@@ -23,6 +24,9 @@ public class Base extends MultiDexApplication {
     public static SeekerVO sessionSeeker;
     //Offer LoginSession
     public static OfferVO sessionOffer;
+    //LocationManager
+    public static LocationManager locationManager;
+
     //1000 단위 콤마 찍어주기
     public static String decimalFormat(int num) {
         DecimalFormat dc = new DecimalFormat("###,###,###,###");
@@ -37,6 +41,7 @@ public class Base extends MultiDexApplication {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         sessionManager = new SessionManager(getApplicationContext());
         gson = new Gson();
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     //MultiDex

@@ -14,9 +14,13 @@ import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
 
 public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<ProjectJobListVO> {
 
+
+
+
     public SeekerJobListRecyclerViewAdapter (Context context) {
         super(context);
     }
+
 
     @NonNull
     @Override
@@ -28,7 +32,6 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Pr
         TextView jobName;
         TextView jobPay;
         TextView jobDate;
-        TextView jobCount;
 
 
         public SeekerProjectListViewHolder (@NonNull View itemView) {
@@ -36,7 +39,6 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Pr
             jobName = itemView.findViewById(R.id.jobName);
             jobPay = itemView.findViewById(R.id.jobPay);
             jobDate = itemView.findViewById(R.id.jobDate);
-            jobCount = itemView.findViewById(R.id.jobCount);
         }
 
         @Override
@@ -46,7 +48,6 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Pr
             //1000 단위 숫자로 콤마를 찍어서 보여준다
             jobPay.setText(Base.decimalFormat(item.getJobPay()));
             jobDate.setText(item.getJobStartDate() + " - " + item.getJobEndDate());
-            jobCount.setText(item.getJobCurrentCount() + " / " + item.getJobLimitCount());
 
         }
 

@@ -1,13 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- //TODO 사업자 회원가입 화면 구현하기 -->
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- 아이디 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="offer"/>
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_offer_fragment2" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/offerIdInput"
+            style="@style/offerEditText"
+            app:theme="@style/offerEditText"
+            android:hint="@string/join_offer_fragment1"
+            android:inputType="text"
+            android:layout_weight="2"/>
+
+        <Button
+            android:id="@+id/checkIdOverlapButton1"
+            android:layout_width="0dp"
+            android:layout_marginStart="10dp"
+            style="@style/offerButton"
+            android:layout_weight="1"
+            android:text="@string/join_offer_fragment14" />
+    </LinearLayout>
+
+    <!-- 패스워드 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_offer_fragment3" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/offerPwInput"
+            style="@style/offerEditText"
+            app:theme="@style/offerEditText"
+            android:hint="@string/join_offer_fragment4"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <!-- 패스워드 재입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_offer_fragment13" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/offerPwReInput"
+            style="@style/offerEditText"
+            app:theme="@style/offerEditText"
+            android:hint="@string/join_offer_fragment15"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+    <!-- 이름 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_offer_fragment6"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/offerNameInput"
+            style="@style/offerEditText"
+            android:hint="@string/join_offer_fragment5"
+            android:inputType="text"
+            app:theme="@style/offerEditText" />
+    </LinearLayout>
+
+    <!-- offer_account 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_offer_fragment7" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/offerAccountInput"
+            style="@style/offerEditText"
+            android:layout_weight="2"
+            android:hint="@string/join_offer_fragment7"
+            android:inputType="text|number"
+            app:theme="@style/offerEditText" />
+
+    </LinearLayout>
+
+    <!-- 이메일 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_offer_fragment10"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/offerEmailInput"
+            style="@style/offerEditText"
+            app:theme="@style/offerEditText"
+            android:hint="@string/join_offer_fragment11"
+            android:inputType="textEmailAddress"/>
+
+    </LinearLayout>
+
+    <!-- 회사명-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/joinTextView"
+            android:text="@string/join_offer_fragment16" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/companyNameInput"
+            style="@style/offerEditText"
+            android:inputType="text"
+            app:theme="@style/offerEditText" />
+    </LinearLayout>
+
+    <!---->
+
+    <!-- 회원가입 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/offerJoinButton"
+            style="@style/offerButton"
+            android:text="@string/join_offer_fragment12"/>
+    </LinearLayout>
+
 </LinearLayout>

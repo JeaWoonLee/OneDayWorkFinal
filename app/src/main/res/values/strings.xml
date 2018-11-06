@@ -3,7 +3,7 @@
     <!-- 아카데미 서버 http://192.168.40.20/odw/-->
     <!-- 로컬 서버 http://10.0.2.2/odw/-->
     <string name="app_name">하루일감</string>
-    <string name="url">http://192.168.40.20/odw/</string>
+    <string name="url">http://192.168.40.160/odw/</string>
 
     <!-- activity_login-->
     <string name="activity_login_find_ID_and_PW">아이디 / 비밀번호 찾기</string>
@@ -48,6 +48,27 @@
     <string name="join_seeker_fragment15">비밀번호를 다시 입력하세요</string>
     <string name="navigation_drawer_open">열기</string>
     <string name="navigation_drawer_close">닫기</string>
+    <!-- //end join_seeker_fragment -->
+
+    <!-- join_offer_fragment -->
+    <string name="join_offer_fragment1">아이디를 입력하세요</string>
+    <string name="join_offer_fragment2">아이디</string>
+    <string name="join_offer_fragment3">비밀번호</string>
+    <string name="join_offer_fragment4">비밀번호를 입력하세요</string>
+    <string name="join_offer_fragment5">이름을 입력하세요</string>
+    <string name="join_offer_fragment6">이름</string>
+    <string name="join_offer_fragment7">구인자 계좌</string>
+    <string name="join_offer_fragment8">거래은행</string>
+    <string name="join_offer_fragment9">맡기신 금액</string>
+    <string name="join_offer_fragment10">이메일</string>
+    <string name="join_offer_fragment11">example@lx.org</string>
+    <string name="join_offer_fragment12">회원 가입</string>
+    <string name="join_offer_fragment13">비밀번호 확인</string>
+    <string name="join_offer_fragment14">중복 체크</string>
+    <string name="join_offer_fragment15">비밀번호를 다시 입력하세요</string>
+    <string name="join_offer_fragment16">회사명</string>
+    <string name="navigation_drawer_open1">열기</string>
+    <string name="navigation_drawer_close1">닫기</string>
     <!-- //end join_seeker_fragment -->
 
 </resources>

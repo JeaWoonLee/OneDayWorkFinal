@@ -28,6 +28,11 @@
                 android:layout_width="wrap_content"
                 android:text="일감 이름"/>
 
+            <TextView
+                android:id="@+id/projectNumber"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
             <!-- 가운데 공간 -->
             <View
                 android:layout_width="0dp"
@@ -48,12 +53,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <!-- Contents -->
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="3">
 
@@ -66,6 +71,7 @@
                     <TextView
                         android:id="@+id/projectSubject"
                         style="@style/seekerItemText"
+                        android:gravity="start"
                         android:text="직종"/>
 
                     <View
@@ -85,8 +91,6 @@
 
                 </LinearLayout>
 
-
-                <!-- TODO Project Job List -->
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/jobListRecyclerView"
                     android:layout_width="match_parent"
@@ -95,22 +99,6 @@
 
             </LinearLayout>
             <!-- //end Contents-->
-
-            <!-- Button Area -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
-
-                <Button
-                    android:id="@+id/projectDetailButton"
-                    android:layout_margin="10dp"
-                    style="@style/seekerButton"
-                    android:text="상세정보"/>
-            </LinearLayout>
-            <!-- //end Button Area -->
 
         </LinearLayout>
         <!-- //end Body -->

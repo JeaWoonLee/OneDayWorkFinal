@@ -33,6 +33,7 @@ public class JoinActivity extends AppCompatActivity {
 
         //Toolbar
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("하루일감 회원가입");
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -59,18 +60,21 @@ public class JoinActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,frontJoinFragment).commit();
                 fragIndex = FRONT_JOIN_FRAGMENT;
                 toolbar.setBackgroundColor(getResources().getColor(R.color.seeker,this.getTheme()));
+                toolbar.setTitle("하루일감 회원가입");
                 break;
 
             case SEEKER_JOIN_FRAGMENT :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,seekerJoinFragment).commit();
                 fragIndex = SEEKER_JOIN_FRAGMENT;
                 toolbar.setBackgroundColor(getResources().getColor(R.color.seeker,this.getTheme()));
+                toolbar.setTitle("구직자 회원가입");
                 break;
 
             case OFFER_JOIN_FRAGMENT :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,offerJoinFragment).commit();
                 fragIndex = OFFER_JOIN_FRAGMENT;
                 toolbar.setBackgroundColor(getResources().getColor(R.color.offer,this.getTheme()));
+                toolbar.setTitle("구인자 회원가입");
                 break;
         }
     }

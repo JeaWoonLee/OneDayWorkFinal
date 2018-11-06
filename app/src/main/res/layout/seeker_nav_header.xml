@@ -34,7 +34,6 @@
         android:text="아이디"
         style="@style/joinTextView"/>
 
-
     <TextView
         android:id="@+id/seekerName"
         android:text="이름"

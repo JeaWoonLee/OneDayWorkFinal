@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="MissingDefaultResource">
+    android:orientation="vertical">
 
     <!-- 필터 영역 -->
     <LinearLayout
@@ -14,6 +12,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/filterButton"
             style="@style/seekerButton"
             android:layout_width="wrap_content"
             android:text="필터1"
@@ -27,6 +26,7 @@
         <!-- //end 가운데 공간 채우기 -->
 
         <Button
+            android:id="@+id/changeViewButton"
             style="@style/seekerButton"
             android:layout_width="wrap_content"
             android:layout_gravity="end"
@@ -34,11 +34,10 @@
     </LinearLayout>
     <!-- //end 필터 영역 -->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/projectListRecyclerView"
+    <FrameLayout
+        android:id="@+id/frag_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
-
+    </FrameLayout>
 </LinearLayout>

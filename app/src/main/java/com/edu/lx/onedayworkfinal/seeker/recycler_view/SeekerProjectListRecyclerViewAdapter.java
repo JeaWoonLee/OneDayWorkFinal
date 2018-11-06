@@ -7,9 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
@@ -45,19 +44,28 @@ public class SeekerProjectListRecyclerViewAdapter extends BaseRecyclerViewAdapte
         TextView projectDate;
         TextView projectSubject;
         TextView projectEnrollDate;
+        TextView projectNumber;
         RecyclerView jobListRecyclerView;
-        Button projectDetailButton;
 
         SeekerJobListRecyclerViewAdapter adapter;
 
         //SeekerProjectListViewHolder
         public SeekerProjectListViewHolder (@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView projectNumber = v.findViewById(R.id.projectNumber);
+                    String projectNum = projectNumber.getText().toString();
+                    SeekerMainActivity activity = (SeekerMainActivity)context;
+                    activity.showProjectDetail(Integer.parseInt(projectNum));
+                }
+            });
+            projectNumber = itemView.findViewById(R.id.projectNumber);
             projectName = itemView.findViewById(R.id.projectName);
             projectDate = itemView.findViewById(R.id.projectDate);
             projectEnrollDate = itemView.findViewById(R.id.projectEnrollDate);
             projectSubject = itemView.findViewById(R.id.projectSubject);
-            projectDetailButton = itemView.findViewById(R.id.projectDetailButton);
 
             //내부 RecyclerView
             jobListRecyclerView = itemView.findViewById(R.id.jobListRecyclerView);
@@ -67,13 +75,6 @@ public class SeekerProjectListRecyclerViewAdapter extends BaseRecyclerViewAdapte
             //Adapter Init
             adapter = new SeekerJobListRecyclerViewAdapter(context);
 
-            projectDetailButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick (View v) {
-                    //TODO 프로젝트 정보 상세보기 구현하기
-                    Toast.makeText(context,"프로젝트 상세보기 버튼이 눌렸어요",Toast.LENGTH_LONG).show();
-                }
-            });
         }
         //end SeekerProjectListViewHolder
 
@@ -87,7 +88,7 @@ public class SeekerProjectListRecyclerViewAdapter extends BaseRecyclerViewAdapte
                 projectSubject.setText(projectVO.getProjectSubject());
                 projectDate.setText(projectVO.getProjectStartDate() + " - " + projectVO.getProjectEndDate());
                 projectEnrollDate.setText(projectVO.getProjectEnrollDate());
-
+                projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
                 requestProjectJobList(projectVO.getProjectNumber());
             } else {
 

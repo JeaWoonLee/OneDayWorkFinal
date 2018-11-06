@@ -9,13 +9,18 @@ import android.widget.TextView;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
+import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
 
 public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<ProjectJobListVO> {
 
+
+
+
     public SeekerJobListRecyclerViewAdapter (Context context) {
         super(context);
     }
+
 
     @NonNull
     @Override
@@ -27,23 +32,22 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Pr
         TextView jobName;
         TextView jobPay;
         TextView jobDate;
-        TextView jobCount;
+
 
         public SeekerProjectListViewHolder (@NonNull View itemView) {
             super(itemView);
             jobName = itemView.findViewById(R.id.jobName);
             jobPay = itemView.findViewById(R.id.jobPay);
             jobDate = itemView.findViewById(R.id.jobDate);
-            jobCount = itemView.findViewById(R.id.jobCount);
         }
 
         @Override
         public void setItem (ProjectJobListVO item) {
 
             jobName.setText(item.getJobName());
-            jobPay.setText(String.valueOf(item.getJobPay()));
+            //1000 단위 숫자로 콤마를 찍어서 보여준다
+            jobPay.setText(Base.decimalFormat(item.getJobPay()));
             jobDate.setText(item.getJobStartDate() + " - " + item.getJobEndDate());
-            jobCount.setText(item.getJobCurrentCount() + " / " + item.getJobLimitCount());
 
         }
 

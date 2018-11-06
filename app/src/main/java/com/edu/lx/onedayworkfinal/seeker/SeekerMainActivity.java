@@ -1,5 +1,6 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -21,14 +22,11 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     //Fragment
     FrontFragment frontFragment;
     FindJobFrontFragment findJobFrontFragment;
-    ProjectDetailFragment projectDetailFragment;
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
     //Fragment Index
     public final static int FRONT_FRAGMENT = 0;
     public final static int FIND_JOB_FRAGMENT = 1;
-    public final static int PROJECT_DETAIL_FRAGMENT = 2;
-    int fragIndex = FRONT_FRAGMENT;
     //네비게이션 뷰
     NavigationView navigationView;
 
@@ -73,7 +71,6 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         //TODO 일감 구하기 구현하기
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
-        projectDetailFragment = new ProjectDetailFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //TODO 신청 일감 관리 구현하기
@@ -92,14 +89,12 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         switch (resId) {
                 //프론트 페이지
             case R.id.front :
-                fragIndex = FRONT_FRAGMENT;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,frontFragment).commit();
 
                 break;
                 //일 찾기
             case R.id.find_job :
                 //일 찾기 프래그먼트로 이동
-                fragIndex = FIND_JOB_FRAGMENT;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
                 //일 관리 프래그먼트로 이동
@@ -139,7 +134,6 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     //프래그먼트 바꾸기
     public void changeFragment(int fragmentIndex1) {
-        fragIndex = fragmentIndex1;
 
         switch (fragmentIndex1) {
             case FRONT_FRAGMENT :
@@ -149,15 +143,13 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 navigationView.getMenu().findItem(R.id.find_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
-            case PROJECT_DETAIL_FRAGMENT :
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,projectDetailFragment).commit();
         }
     }
 
     //프로젝트 디테일 보여주기
     public void showProjectDetail(int projectNumber) {
-        changeFragment(PROJECT_DETAIL_FRAGMENT);
-        projectDetailFragment.projectNumber = projectNumber;
-        projectDetailFragment.fragIndex = fragIndex;
+        Intent intent = new Intent(this,ProjectDetailActivity.class);
+        intent.putExtra("projectNumber",projectNumber);
+        startActivityForResult(intent,201);
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- //TODO 구직자 프래그먼트를 추가할 때 마다 여기에 item 으로 추가하기-->
+    <!-- //TODO 구직자 프래그먼트를 추가할 때 마다 여기에 item 으로 추가하기 (김동가-종료)-->
     <!-- 현제 어디 화면을 표시하고 있는가-->
     <group android:checkableBehavior="single">
         <item

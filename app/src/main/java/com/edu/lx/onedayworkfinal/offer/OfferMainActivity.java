@@ -7,6 +7,8 @@ import com.edu.lx.onedayworkfinal.R;
 
 public class OfferMainActivity extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

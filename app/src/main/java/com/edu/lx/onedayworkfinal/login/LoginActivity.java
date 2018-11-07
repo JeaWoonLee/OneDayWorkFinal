@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.join.JoinActivity;
+import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
@@ -91,7 +92,9 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,SeekerMainActivity.class);
                 startActivityForResult(intent,101);
             } else if (index.equals(Base.sessionManager.IS_OFFER)) {
-                //TODO 구인자 페이지로 보내기
+                //TODO 구인자 페이지로 보내기(김동가 - 종료)
+                Intent intent = new Intent(this, OfferMainActivity.class);
+                startActivityForResult(intent,101);
                 Toast.makeText(this,"구인자 세션 로그인",Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this,"로그인세션은 존재하지만 구분이 되어있지 않은 오류",Toast.LENGTH_LONG).show();
@@ -161,4 +164,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //TODO 회원가입에 성공하면 해당 정보를 기반으로 바로 로그인을 하도록 구현할까?
+
+
+
 }

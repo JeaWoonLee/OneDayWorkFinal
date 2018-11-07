@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- //TODO 구직자 프래그먼트를 추가할 때 마다 여기에 item 으로 추가하기-->
+    <!-- 현제 어디 화면을 표시하고 있는가-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/front2"
+            android:checked="true"
+            android:title="선택 화면"/>
+        <item
+            android:id="@+id/regist_work"
+            android:title="일감 등록"/>
+
+        <item
+            android:id="@+id/req_manage"
+            android:title="신청 관리"/>
+
+    </group>
+
+
+    <!-- 사용자 메뉴 서브헤더 -->
+    <item
+        android:id="@+id/subHeader"
+        android:title="사용자 메뉴">
+
+        <menu>
+            <item
+                android:id="@+id/my_account_info"
+                android:title="내 계정 관리"/>
+
+            <item
+                android:id="@+id/logout"
+                android:title="로그아웃"/>
+
+        </menu>
+
+    </item>
+    <!--//end 사용자 메뉴 서브헤더 -->
+</menu>

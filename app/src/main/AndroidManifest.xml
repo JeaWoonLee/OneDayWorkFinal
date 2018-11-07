@@ -43,7 +43,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".join.JoinActivity" />
-        <activity android:name=".seeker.ProjectDetailActivity"></activity>
+        <activity android:name=".seeker.ProjectDetailActivity" />
+        <activity android:name=".offer.OfferMainActivity"></activity>
     </application>
 
 </manifest>

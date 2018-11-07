@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferVO;
@@ -102,7 +103,7 @@ public class OfferLoginFragment extends Fragment {
         //TODO 사업자 로그인 구현하기
         Base.sessionOffer = offerVO; // 사업자 로그인 정보를 세션에 담기
 
-        Intent intent = new Intent(activity, SeekerMainActivity.class);
+        Intent intent = new Intent(activity, OfferMainActivity.class);
         activity.startActivityForResult(intent,10);
 
     }

@@ -104,7 +104,7 @@ public class OfferLoginFragment extends Fragment {
         Base.sessionOffer = offerVO; // 사업자 로그인 정보를 세션에 담기
 
         Intent intent = new Intent(activity, OfferMainActivity.class);
-        activity.startActivityForResult(intent,10);
+        activity.startActivityForResult(intent,101);
 
     }
 }

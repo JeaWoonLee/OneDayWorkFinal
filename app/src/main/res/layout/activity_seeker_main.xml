@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <!-- TODO 네비게이션 바 구현하기 -->
+    <!-- TODO 네비게이션 바 구현하기  -->
 
     <LinearLayout
         android:layout_width="match_parent"

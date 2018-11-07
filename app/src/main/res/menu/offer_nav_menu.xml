@@ -26,11 +26,11 @@
 
         <menu>
             <item
-                android:id="@+id/my_account_info"
+                android:id="@+id/my_account_info2"
                 android:title="내 계정 관리"/>
 
             <item
-                android:id="@+id/logout"
+                android:id="@+id/logout2"
                 android:title="로그아웃"/>
 
         </menu>

@@ -28,7 +28,6 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     //Fragment Index
     public final static int FRONT_FRAGMENT = 0;
     public final static int FIND_JOB_FRAGMENT = 1;
-    public final static int MANAGE_JOB_FRAGMENT = 2;
     //네비게이션 뷰
     NavigationView navigationView;
 

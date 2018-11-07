@@ -1,9 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".seeker.ProjectDetailActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="title"
+            android:background="@color/seeker">
+
+        </android.support.v7.widget.Toolbar>
+
+        <!-- 프로젝트 영역 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <!-- 프로젝트 이름-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/joinTextView"
+                    android:text="일감 이름"/>
+
+                <TextView
+                    android:id="@+id/projectName"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="projectName"/>
+
+            </LinearLayout>
+
+            <!-- 프로젝트 종류 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/joinTextView"
+                    android:text="일감 분류"/>
+
+                <TextView
+                    android:id="@+id/projectSubject"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="projectSubject"/>
+
+            </LinearLayout>
+
+            <!-- 프로젝트 기간 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/joinTextView"
+                    android:text="기간"/>
+
+                <TextView
+                    android:id="@+id/projectDate"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="projectDate"/>
+
+            </LinearLayout>
+
+            <!-- 등록 날짜 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/joinTextView"
+                    android:text="등록 날짜"/>
+
+                <TextView
+                    android:id="@+id/projectEnrollDate"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="projectEnrollDate"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <!-- 요구 자격 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/joinTextView"
+                    android:text="요구 자격" />
+
+                <TextView
+                    android:id="@+id/projectRequirement"
+                    style="@style/seekerItemText"
+                    android:layout_width="wrap_content"
+                    android:text="projectRequirement" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- 코멘트 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <TextView
+                style="@style/joinTextView"
+                android:text="설명"/>
+
+            <TextView
+                android:id="@+id/projectComment"
+                android:layout_width="wrap_content"
+                style="@style/seekerItemText"
+                android:text="projectComment"/>
+
+        </LinearLayout>
+
+
+            <!-- 맵 뷰 -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/seeker_border">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.google.android.gms.maps.MapView>
+            </FrameLayout>
+
+        <!-- 일감 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/seeker_border"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/joinTextView"
+                android:text="일감 목록"/>
+            
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/jobListRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+        <!-- 일감 목록 -->
+
+    </LinearLayout>
+    <!-- Container -->
+
+</ScrollView>

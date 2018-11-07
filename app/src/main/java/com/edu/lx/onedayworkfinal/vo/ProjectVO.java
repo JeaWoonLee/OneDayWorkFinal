@@ -15,6 +15,15 @@ public class ProjectVO {
     String projectComment;
     String projectSubject;
     String projectEnrollDate;
+    String projectRequirement;
+
+    public String getProjectRequirement() {
+        return projectRequirement;
+    }
+
+    public void setProjectRequirement(String projectRequirement) {
+        this.projectRequirement = projectRequirement;
+    }
 
     public int getProjectNumber () {
         return projectNumber;

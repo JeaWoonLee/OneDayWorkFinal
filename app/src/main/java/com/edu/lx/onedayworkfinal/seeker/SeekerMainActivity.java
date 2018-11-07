@@ -1,5 +1,6 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -74,9 +75,16 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //TODO 신청 일감 관리 구현하기
+        // 수정 181107 yjm
+
+        getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
+
         //TODO 일감 관리 구현하기
+
         //TODO 오늘의 일감 구현하기
+
         //TODO 이력 관리 구현하기
+
         //TODO 일감 초대 구현하기
 
     }
@@ -87,22 +95,24 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         int resId = menuItem.getItemId();
 
         switch (resId) {
+
                 //프론트 페이지
             case R.id.front :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,frontFragment).commit();
 
                 break;
+
                 //일 찾기
             case R.id.find_job :
+
                 //일 찾기 프래그먼트로 이동
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
-                //일 관리 프래그먼트로 이동
-            case R.id.manage_job :
-                break;
+
                 //내 계정 정보 프래그먼트로 이동
             case R.id.my_account_info :
                 break;
+
                 //로그 아웃
             case R.id.logout :
                 //세션 정보를 null 로 삭제하고 finish 해준다
@@ -143,6 +153,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 navigationView.getMenu().findItem(R.id.find_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
+
         }
     }
 

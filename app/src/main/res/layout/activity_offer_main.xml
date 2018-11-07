@@ -3,14 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/drawer_layout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <!-- TODO 네비게이션 바 구현하기  -->
-
+    <!--TODO 사업자 네비게이션 바 화면(김동가 - 구현완료- )-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,12 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-            app:title="일용직 노동자 메인 화면"/>ad
+            app:title="사업자 메인 화면"/>ad
         <!-- //end Toolbar -->
 
         <!-- Fragment Container -->
         <FrameLayout
-            android:id="@+id/container"
+            android:id="@+id/container2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -37,12 +36,12 @@
 
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/navigationView"
+        android:id="@+id/navigationView2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/seeker_nav_header"
-        app:menu="@menu/seeker_nav_menu"/>
+        app:headerLayout="@layout/offer_nav_header"
+        app:menu="@menu/offer_nav_menu"/>
 
 </android.support.v4.widget.DrawerLayout>

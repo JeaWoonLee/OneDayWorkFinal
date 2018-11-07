@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -14,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
@@ -65,6 +67,8 @@ public class ProjectDetailActivity extends AppCompatActivity {
     //모집 직군 ArrayList
     ArrayList<ProjectJobListVO> jobList;
 
+    //리사이클러 뷰 어뎁터
+    SeekerDetailJobListRecyclerViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +110,13 @@ public class ProjectDetailActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
+    }
+
+
     //프로젝트 상세정보 요청
     private void requestProjectDetail() {
         String url = getResources().getString(R.string.url) + "requestProjectDetail.do";
@@ -140,6 +151,9 @@ public class ProjectDetailActivity extends AppCompatActivity {
     //프로젝트 상세정보 처리
     private void processProjectDetailResponse(String response) {
         projectVO = Base.gson.fromJson(response,ProjectVO.class);
+
+        //Toolbar Title 입력
+        toolbar.setTitle(projectVO.getProjectName());
 
         //TextView 에 값 입력
         projectName.setText(projectVO.getProjectName());
@@ -222,8 +236,16 @@ public class ProjectDetailActivity extends AppCompatActivity {
     private void processProjectJobLIstResponse(String response) {
         ProjectJobListVO[] projectJobListVOS = Base.gson.fromJson(response,ProjectJobListVO[].class);
         jobList = new ArrayList<>(Arrays.asList(projectJobListVOS));
+        adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
+        adapter.setItems(jobList);
+        jobListRecyclerView.setAdapter(adapter);
+    }
 
-
+    //지원하기 창 띄우기
+    public void showCandidate(int jobNumber) {
+        Intent intent = new Intent(this,CandidateActivity.class);
+        intent.putExtra("jobNumber",jobNumber);
+        startActivityForResult(intent,301);
     }
 
     @Override
@@ -249,6 +271,4 @@ public class ProjectDetailActivity extends AppCompatActivity {
         super.onDestroy();
         mapView.onLowMemory();
     }
-
-
 }

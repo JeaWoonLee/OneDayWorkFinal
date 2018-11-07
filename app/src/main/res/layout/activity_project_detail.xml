@@ -22,6 +22,11 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/itemTextView"
+            android:text="기본 정보"/>
+
         <!-- 프로젝트 영역 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,22 +109,18 @@
 
         </LinearLayout>
 
+        <!-- 요구 자격 -->
+        <TextView
+            style="@style/joinTextView"
+            android:text="요구 자격"
+            android:layout_width="wrap_content"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/seeker_border"
             android:layout_margin="10dp">
-
-            <!-- 요구 자격 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/joinTextView"
-                    android:text="요구 자격" />
 
                 <TextView
                     android:id="@+id/projectRequirement"
@@ -127,21 +128,20 @@
                     android:layout_width="wrap_content"
                     android:text="projectRequirement" />
 
-            </LinearLayout>
-
         </LinearLayout>
 
         <!-- 코멘트 -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/joinTextView"
+            android:text="설명"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/seeker_border"
             android:layout_margin="10dp">
-
-            <TextView
-                style="@style/joinTextView"
-                android:text="설명"/>
 
             <TextView
                 android:id="@+id/projectComment"
@@ -170,6 +170,11 @@
             </FrameLayout>
 
         <!-- 일감 목록 -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/joinTextView"
+            android:text="일감 목록"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -177,11 +182,6 @@
             android:layout_margin="10dp"
             android:background="@drawable/seeker_border"
             android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                style="@style/joinTextView"
-                android:text="일감 목록"/>
             
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/jobListRecyclerView"

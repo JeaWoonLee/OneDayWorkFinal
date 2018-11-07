@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp">
+
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- content -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/seeker">
+
+                <TextView
+                    android:id="@+id/jobName"
+                    style="@style/itemTextView"
+                    android:layout_width="wrap_content"
+                    android:text="직종"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/jobPay"
+                    android:layout_width="wrap_content"
+                    style="@style/itemTextView"
+                    android:text="일당"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/itemTextView"
+                    android:text="원"/>
+
+            </LinearLayout>
+            <!-- //end Header -->
+
+            <!-- Body -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/joinTextView"
+                    android:text="모집기간"/>
+
+                <TextView
+                    android:id="@+id/jobDate"
+                    android:layout_width="wrap_content"
+                    style="@style/joinTextView"
+                    android:text="모집기간"/>
+
+            </LinearLayout>
+
+            <!-- //end Body-->
+
+        </LinearLayout>
+        <!-- //end content-->
+
+        <!-- button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/candidateButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/seekerButton"
+                android:text="신청하기"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <!-- //end button-->
+
+    </LinearLayout>
+    <!-- //end Container -->
+</android.support.v7.widget.CardView>

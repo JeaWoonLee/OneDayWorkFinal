@@ -1,6 +1,5 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +16,8 @@ import android.widget.Toast;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
+
+import java.util.Date;
 
 public class SeekerMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,6 +37,20 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     //백키 핸들러
     private BackPressCloseHandler backPressCloseHandler;
+
+    //FindJobFragment(일 찾기) 에서 사용되는 필터 설정
+    //프로젝트 대분류
+    String F_projectSubjectFilter;
+    //프로젝트 거리
+    String F_maxDistanceFilter;
+    //직군 중분류
+    String F_jobNameFilter;
+    //일당
+    String F_jobPayFilter;
+    //요구 조건
+    String F_jobRequirementFilter;
+    //대상 날짜
+    String F_targetDateFilter;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -69,15 +84,16 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         seekerId.setText(Base.sessionManager.getUserDetails().get("id"));
         seekerName.setText(Base.sessionManager.getUserDetails().get("name"));
 
-        //TODO 일감 구하기 구현하기
+        //프래그먼트 초기 설정
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
+        //필터 설정 init
+        filterInit();
+
         //TODO 신청 일감 관리 구현하기
         // 수정 181107 yjm
-
-        getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //TODO 일감 관리 구현하기
 
@@ -87,6 +103,19 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
         //TODO 일감 초대 구현하기
 
+    }
+
+    //필터 초기 설정
+    private void filterInit() {
+
+
+        //초기설정(없음) 으로 설정하기
+        F_projectSubjectFilter = getResources().getStringArray(R.array.projectSubjectFilter)[0];
+        F_maxDistanceFilter = getResources().getStringArray(R.array.maxDistanceFilter)[0];
+        F_jobNameFilter = getResources().getStringArray(R.array.noneFilter)[0];
+        F_jobPayFilter = getResources().getStringArray(R.array.jobPayFilter)[0];
+        F_jobRequirementFilter = getResources().getStringArray(R.array.jobRequirementFilter)[0];
+        F_targetDateFilter = Base.simpleDateFormat.format(new Date());
     }
 
     //네비게이션 뷰 아이템 클릭 리스너
@@ -99,12 +128,10 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 //프론트 페이지
             case R.id.front :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,frontFragment).commit();
-
                 break;
 
                 //일 찾기
             case R.id.find_job :
-
                 //일 찾기 프래그먼트로 이동
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;

@@ -44,8 +44,12 @@
         </activity>
         <activity android:name=".join.JoinActivity" />
         <activity android:name=".seeker.ProjectDetailActivity" />
-        <activity android:name=".seeker.CandidateActivity"></activity>
-        <activity android:name=".offer.OfferMainActivity"></activity>
+        <activity android:name=".seeker.CandidateActivity" />
+        <activity android:name=".offer.OfferMainActivity" />
+
+        <activity android:name=".seeker.SeekerJobFilterPopupActivity"
+            android:theme="@style/PopupTheme"></activity>
+
     </application>
 
 </manifest>

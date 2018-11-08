@@ -7,7 +7,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        style="@style/joinTextView"
+        style="@style/blackTextView"
         android:text="하루일감 메뉴"
         android:layout_gravity="center_horizontal"
         android:textSize="35sp"/>
@@ -34,7 +34,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="오늘의 일감"/>
             </LinearLayout>
 
@@ -53,7 +53,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="일감 찾기"/>
 
             </LinearLayout>

@@ -42,7 +42,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="일감 이름"/>
 
                 <TextView
@@ -60,7 +60,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="일감 분류"/>
 
                 <TextView
@@ -78,7 +78,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="기간"/>
 
                 <TextView
@@ -96,7 +96,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="등록 날짜"/>
 
                 <TextView
@@ -111,7 +111,7 @@
 
         <!-- 요구 자격 -->
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="요구 자격"
             android:layout_width="wrap_content"/>
 
@@ -133,7 +133,7 @@
         <!-- 코멘트 -->
         <TextView
             android:layout_width="wrap_content"
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="설명"/>
 
         <LinearLayout
@@ -172,7 +172,7 @@
         <!-- 일감 목록 -->
         <TextView
             android:layout_width="wrap_content"
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="일감 목록"/>
 
         <LinearLayout

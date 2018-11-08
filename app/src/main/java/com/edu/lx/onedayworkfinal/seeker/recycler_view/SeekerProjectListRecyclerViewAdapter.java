@@ -19,7 +19,7 @@ import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
+import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
@@ -134,8 +134,8 @@ public class SeekerProjectListRecyclerViewAdapter extends BaseRecyclerViewAdapte
 
         //서버에서 받아온 projectJobList 를 RecyclerView 에 뿌려줌
         private void processJobListResponse (String response) {
-            ProjectJobListVO[] jobsArray = Base.gson.fromJson(response,ProjectJobListVO[].class);
-            ArrayList<ProjectJobListVO> items = new ArrayList<>(Arrays.asList(jobsArray));
+            JobVO[] jobsArray = Base.gson.fromJson(response, JobVO[].class);
+            ArrayList<JobVO> items = new ArrayList<>(Arrays.asList(jobsArray));
 
             adapter.setItems(items);
             jobListRecyclerView.setAdapter(adapter);

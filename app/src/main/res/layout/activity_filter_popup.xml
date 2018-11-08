@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
     tools:context=".seeker.SeekerJobFilterPopupActivity"
     android:orientation="vertical">
 
@@ -33,7 +33,7 @@
 
             <Spinner
                 android:id="@+id/projectSubjectSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
 
@@ -50,7 +50,7 @@
 
             <Spinner
                 android:id="@+id/jobNameSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
 
@@ -68,7 +68,7 @@
 
             <Spinner
                 android:id="@+id/jobPaySpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
 
@@ -85,7 +85,7 @@
 
             <Spinner
                 android:id="@+id/maxDistanceSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
 
@@ -102,7 +102,7 @@
 
             <Spinner
                 android:id="@+id/jobRequirementSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
 
@@ -115,7 +115,7 @@
 
             <TextView
                 style="@style/blackTextView"
-                android:text="직군 분류"/>
+                android:text="검색 날짜"/>
 
             <TextView
                 android:id="@+id/targetDate"

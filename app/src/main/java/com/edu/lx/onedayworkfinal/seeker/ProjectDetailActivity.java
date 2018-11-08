@@ -17,7 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
+import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -65,7 +65,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
     RecyclerView jobListRecyclerView;
 
     //모집 직군 ArrayList
-    ArrayList<ProjectJobListVO> jobList;
+    ArrayList<JobVO> jobList;
 
     //리사이클러 뷰 어뎁터
     SeekerDetailJobListRecyclerViewAdapter adapter;
@@ -234,7 +234,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
 
     //직군 상세정보 처리
     private void processProjectJobLIstResponse(String response) {
-        ProjectJobListVO[] projectJobListVOS = Base.gson.fromJson(response,ProjectJobListVO[].class);
+        JobVO[] projectJobListVOS = Base.gson.fromJson(response, JobVO[].class);
         jobList = new ArrayList<>(Arrays.asList(projectJobListVOS));
         adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
         adapter.setItems(jobList);

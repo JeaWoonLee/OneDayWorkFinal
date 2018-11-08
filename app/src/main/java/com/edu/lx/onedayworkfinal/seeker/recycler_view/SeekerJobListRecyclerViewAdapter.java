@@ -10,12 +10,9 @@ import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
+import com.edu.lx.onedayworkfinal.vo.JobVO;
 
-public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<ProjectJobListVO> {
-
-
-
+public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<JobVO> {
 
     public SeekerJobListRecyclerViewAdapter (Context context) {
         super(context);
@@ -28,7 +25,7 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Pr
         return new SeekerProjectListViewHolder(inflateView(super.context, R.layout.seeker_find_job_item,viewGroup));
     }
 
-    class SeekerProjectListViewHolder extends BaseViewHolder<ProjectJobListVO> {
+    class SeekerProjectListViewHolder extends BaseViewHolder<JobVO> {
         TextView jobName;
         TextView jobPay;
         TextView jobDate;
@@ -42,7 +39,7 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Pr
         }
 
         @Override
-        public void setItem (ProjectJobListVO item) {
+        public void setItem (JobVO item) {
 
             jobName.setText(item.getJobName());
             //1000 단위 숫자로 콤마를 찍어서 보여준다

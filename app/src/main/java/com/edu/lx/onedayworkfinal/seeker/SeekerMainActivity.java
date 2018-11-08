@@ -3,6 +3,7 @@ package com.edu.lx.onedayworkfinal.seeker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,17 +41,17 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     //FindJobFragment(일 찾기) 에서 사용되는 필터 설정
     //프로젝트 대분류
-    String F_projectSubjectFilter;
+    static String F_projectSubjectFilter;
     //프로젝트 거리
-    String F_maxDistanceFilter;
+    static String F_maxDistanceFilter;
     //직군 중분류
-    String F_jobNameFilter;
+    static String F_jobNameFilter;
     //일당
-    String F_jobPayFilter;
+    static String F_jobPayFilter;
     //요구 조건
-    String F_jobRequirementFilter;
+    static String F_jobRequirementFilter;
     //대상 날짜
-    String F_targetDateFilter;
+    static String F_targetDateFilter;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -107,7 +108,6 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     //필터 초기 설정
     private void filterInit() {
-
 
         //초기설정(없음) 으로 설정하기
         F_projectSubjectFilter = getResources().getStringArray(R.array.projectSubjectFilter)[0];
@@ -189,5 +189,29 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         Intent intent = new Intent(this,ProjectDetailActivity.class);
         intent.putExtra("projectNumber",projectNumber);
         startActivityForResult(intent,201);
+    }
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if (intent != null) {
+            switch (requestCode) {
+                //프로젝트 디테일 액티비티
+                case  201 :
+                    break;
+                //필터 팝업 액티비티
+                case 301 :
+                    //인텐트로부터 필터 데이터 설정
+                    F_projectSubjectFilter = intent.getStringExtra("projectSubjectFilter");
+                    F_maxDistanceFilter = intent.getStringExtra("maxDistanceFilter");
+                    F_jobNameFilter = intent.getStringExtra("jobNameFilter");
+                    F_jobPayFilter = intent.getStringExtra("jobPayFilter");
+                    F_jobRequirementFilter = intent.getStringExtra("jobRequirementFilter");
+                    F_targetDateFilter = intent.getStringExtra("targetDateFilter");
+                    break;
+            }
+        }
+
     }
 }

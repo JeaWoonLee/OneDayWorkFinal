@@ -27,7 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerJobListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
+import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -68,7 +68,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener {
     FloatingActionButton myLocationFab;
 
     //JobList
-    Map<Integer,ArrayList<ProjectJobListVO>> jobListMap = new HashMap<>();
+    Map<Integer,ArrayList<JobVO>> jobListMap = new HashMap<>();
     SeekerJobListRecyclerViewAdapter adapter;
     @Override
     public void onAttach(Context context) {
@@ -170,8 +170,8 @@ public class FindJobMapFragment extends Fragment implements LocationListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse (String response) {
-                        ProjectJobListVO[] jobsArray = Base.gson.fromJson(response,ProjectJobListVO[].class);
-                        ArrayList<ProjectJobListVO> items = new ArrayList<>(Arrays.asList(jobsArray));
+                        JobVO[] jobsArray = Base.gson.fromJson(response, JobVO[].class);
+                        ArrayList<JobVO> items = new ArrayList<>(Arrays.asList(jobsArray));
                         jobListMap.put(projectNumber,items);
                     }
                 },

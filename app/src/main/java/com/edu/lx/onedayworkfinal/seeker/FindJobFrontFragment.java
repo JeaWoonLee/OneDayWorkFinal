@@ -99,12 +99,12 @@ public class FindJobFrontFragment extends Fragment {
     //필터 팝업
     private void showFilter() {
         Intent intent = new Intent(activity,SeekerJobFilterPopupActivity.class);
-        intent.putExtra("projectSubjectFilter",activity.F_projectSubjectFilter);
-        intent.putExtra("maxDistanceFilter",activity.F_maxDistanceFilter);
-        intent.putExtra("jobNameFilter",activity.F_jobNameFilter);
-        intent.putExtra("jobPayFilter",activity.F_jobPayFilter);
-        intent.putExtra("jobRequirementFilter",activity.F_jobRequirementFilter);
-        intent.putExtra("targetDateFilter",activity.F_targetDateFilter);
+        intent.putExtra("projectSubjectFilter",SeekerMainActivity.F_projectSubjectFilter);
+        intent.putExtra("maxDistanceFilter",SeekerMainActivity.F_maxDistanceFilter);
+        intent.putExtra("jobNameFilter",SeekerMainActivity.F_jobNameFilter);
+        intent.putExtra("jobPayFilter",SeekerMainActivity.F_jobPayFilter);
+        intent.putExtra("jobRequirementFilter",SeekerMainActivity.F_jobRequirementFilter);
+        intent.putExtra("targetDateFilter",SeekerMainActivity.F_targetDateFilter);
 
         activity.startActivityForResult(intent,301);
     }

@@ -65,6 +65,14 @@
     </string-array>
     <!-- //end 조선 -->
 
+    <!-- 공장 -->
+    <string-array name="factoryFilter">
+        <item>없음</item>
+        <item>공장</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 공장 -->
+
     <!-- 운송 -->
     <string-array name="transitFilter">
         <item>없음</item>

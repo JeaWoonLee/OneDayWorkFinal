@@ -16,14 +16,8 @@ public class ProjectVO {
     String projectSubject;
     String projectEnrollDate;
     String projectRequirement;
-
-    public String getProjectRequirement() {
-        return projectRequirement;
-    }
-
-    public void setProjectRequirement(String projectRequirement) {
-        this.projectRequirement = projectRequirement;
-    }
+    String workStartTime;
+    String workEndTime;
 
     public int getProjectNumber () {
         return projectNumber;
@@ -103,6 +97,30 @@ public class ProjectVO {
 
     public void setProjectEnrollDate (String projectEnrollDate) {
         this.projectEnrollDate = projectEnrollDate;
+    }
+
+    public String getProjectRequirement () {
+        return projectRequirement;
+    }
+
+    public void setProjectRequirement (String projectRequirement) {
+        this.projectRequirement = projectRequirement;
+    }
+
+    public String getWorkStartTime () {
+        return workStartTime;
+    }
+
+    public void setWorkStartTime (String workStartTime) {
+        this.workStartTime = workStartTime;
+    }
+
+    public String getWorkEndTime () {
+        return workEndTime;
+    }
+
+    public void setWorkEndTime (String workEndTime) {
+        this.workEndTime = workEndTime;
     }
 
     @Override

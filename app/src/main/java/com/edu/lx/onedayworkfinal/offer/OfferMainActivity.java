@@ -18,17 +18,22 @@ import com.edu.lx.onedayworkfinal.util.volley.Base;
 
 public class OfferMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    //TODO 사업자 네비게이션 바 활성화(김동가 - 완료)
     AnotherFrontFragment anotherFrontFragment;
-    FindLaborFrontFragment findLaborFrontFragment;
+    RegistWorkFrontFragment registWorkFrontFragment;
+    ReqManageFrontFragment reqManageFrontFragment;
+
 
     public final static int ANOTHER_FRAGMENT = 0;
-    public final static int FIND_LABOR_FRAGMENT = 1;
+    public final static int REGIST_WORK_FRAGMENT = 1;
+    public final static int REQ_MANAGE_FRAGMENT = 2;
 
     NavigationView navigationView2;
 
     DrawerLayout drawerLayout2;
 
     private BackPressCloseHandler backPressCloseHandler;
+
 
 
     @Override
@@ -56,6 +61,11 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
         offerId.setText(Base.sessionManager.getUserDetails().get("id"));
         offerName.setText(Base.sessionManager.getUserDetails().get("name"));
 
+        anotherFrontFragment = new AnotherFrontFragment();
+        registWorkFrontFragment = new RegistWorkFrontFragment();
+        reqManageFrontFragment = new ReqManageFrontFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.container2,anotherFrontFragment).commit();
+
     }
 
     @Override
@@ -65,14 +75,17 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
         switch (resId){
             case R.id.front2:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container2,anotherFrontFragment).commit();
+                Toast.makeText(this,"작동 됨",Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.regist_work:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container2,anotherFrontFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,registWorkFrontFragment).commit();
+                Toast.makeText(this,"작동 됨2",Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.req_manage:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container2,anotherFrontFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,reqManageFrontFragment).commit();
+                Toast.makeText(this,"작동 됨3",Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.my_account_info2:
@@ -110,9 +123,13 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
             case ANOTHER_FRAGMENT:
                 navigationView2.getMenu().findItem(R.id.front2).setChecked(true);
                 break;
-            case FIND_LABOR_FRAGMENT:
-                navigationView2.getMenu().findItem(R.id.work_manage).setChecked(true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.container2,anotherFrontFragment).commit();
+            case REGIST_WORK_FRAGMENT:
+                navigationView2.getMenu().findItem(R.id.regist_work).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,registWorkFrontFragment).commit();
+                break;
+            case REQ_MANAGE_FRAGMENT:
+                navigationView2.getMenu().findItem(R.id.req_manage).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,reqManageFrontFragment).commit();
                 break;
         }
     }

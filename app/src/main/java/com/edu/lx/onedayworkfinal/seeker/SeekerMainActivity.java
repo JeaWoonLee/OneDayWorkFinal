@@ -138,9 +138,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
 
-                //일 관리
+                //신청 일감 관리
             case R.id.manage_job :
-                // 일 관리 프래그먼트로 이동
+                // 신청 일감 관리 프래그먼트로 이동
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,manageJobFrontFragment).commit();
                 break;
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
-
+ㅉ
         <TextView
             style="@style/blackTextView"
             android:text="@string/join_offer_fragment2" />

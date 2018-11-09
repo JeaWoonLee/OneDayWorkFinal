@@ -35,6 +35,7 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
     private BackPressCloseHandler backPressCloseHandler;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

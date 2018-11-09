@@ -1,32 +1,28 @@
 package com.edu.lx.onedayworkfinal.offer;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.seeker.FindJobMapFragment;
-import com.edu.lx.onedayworkfinal.seeker.FindJobRecyclerFragment;
-import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
-import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
-import java.util.ArrayList;
+public class ReqManageFrontFragment extends Fragment {
 
-public class FindLaborFrontFragment extends Fragment {
-
+    //TODO 신청관리 (김동가 - 진행중)
     OfferMainActivity activity;
+
+    FindLaborFrontFragment findLaborFrontFragment;
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.offer_labor_item,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.req_manager_front_fragment,container,false);
 
         return rootView;
     }

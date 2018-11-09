@@ -1,6 +1,7 @@
 package com.edu.lx.onedayworkfinal.offer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
@@ -45,14 +47,15 @@ public class AnotherFrontFragment extends Fragment {
         work_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               /* Intent intent = new Intent(activity,WorkManageFrontFragment.class);
+                startActivityForResult(intent,305);*/
             }
         });
 
         rec_labor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.changeFragment(activity.FIND_LABOR_FRAGMENT);
+                activity.changeFragment(activity.REC_LABOR_FRAGMENT);
             }
         });
     }

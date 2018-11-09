@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    tools:context=".offer.OfferFilterActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/blackTextView"
+        android:text="필터 설정"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/offer_border"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="산업군 분류"/>
+
+            <Spinner
+                android:id="@+id/projectSubjectSpinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+            </Spinner>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"        >
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="직군 분류"/>
+
+            <Spinner
+                android:id="@+id/jobNameSpinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"        >
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="임금"/>
+
+            <Spinner
+                android:id="@+id/jobPaySpinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+            </Spinner>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"        >
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="거리"/>
+
+            <Spinner
+                android:id="@+id/maxDistanceSpinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+            </Spinner>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"        >
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="요구 자격"/>
+
+            <Spinner
+                android:id="@+id/jobRequirementSpinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+            </Spinner>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"        >
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="검색 날짜"/>
+
+            <TextView
+                android:id="@+id/targetDate"
+                android:layout_width="wrap_content"
+                style="@style/offerItemText"
+                android:layout_gravity="center_vertical"
+                android:text="targetDate">
+            </TextView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/selectTargetDateButton2"
+                android:layout_width="wrap_content"
+                style="@style/offerButton"
+                android:text="날짜 선택"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/confirmFilterButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/offerButton"
+        android:layout_margin="10dp"
+        android:text="필터 설정"/>
+
+</LinearLayout>

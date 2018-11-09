@@ -1,111 +1,113 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ManageJobFrontFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ManageJobFrontFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+//신청 일감 관리 FrontFragment 윤정민(진행중)
 public class ManageJobFrontFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     SeekerMainActivity activity;
 
-    FindJobRecyclerFragment findJobRecyclerFragment;
-    FindJobMapFragment findJobMapFragment;
+    ManageJobListFragment manageJobListFragment;
+    ManageJobMapFragment manageJobMapFragment;
 
-    private OnFragmentInteractionListener mListener;
+    //필터 버튼
+    Button filterButton;
+    //보기 전환 버튼
+    Button changeViewButton;
 
-    public ManageJobFrontFragment() {
-        // Required empty public constructor
-    }
+    //리사이클러 뷰 / 맵 뷰 인덱스
+    public final int FIND_JOB_RECYCLER_FRAGMENT = 0;
+    public final int FIND_JOB_MAP_FRAGMENT = 1;
+    private int fragmentIndex = 0;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ManageJobFrontFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ManageJobFrontFragment newInstance(String param1, String param2) {
-        ManageJobFrontFragment fragment = new ManageJobFrontFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_manage_job_front,container,false);
-        // Inflate the layout for this fragment
-        return rootView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+    //리사이클러 뷰 / 맵 뷰 에서 사용되는 프로젝트 배열
+    static ArrayList<ProjectVO> items = null;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (SeekerMainActivity) getActivity();
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seeker_find_job_main_fragment,container,false);
+
+        filterButton = rootView.findViewById(R.id.filterButton);
+        changeViewButton = rootView.findViewById(R.id.changeViewButton);
+
+        return rootView;
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = (OnFragmentInteractionListener) getActivity();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //필터 버튼 클릭
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFilter();
+            }
+        });
+
+        changeViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeView();
+            }
+        });
+
+        manageJobListFragment = new ManageJobListFragment();
+        manageJobMapFragment = new ManageJobMapFragment();
+        activity.getSupportFragmentManager().beginTransaction().add(R.id.frag_container,manageJobListFragment).commit();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    //지도화면 / 리사이클러 뷰 화면 보기전환 버튼
+    private void changeView() {
+
+        switch (fragmentIndex) {
+            case FIND_JOB_RECYCLER_FRAGMENT :
+                fragmentIndex = FIND_JOB_MAP_FRAGMENT;
+                changeViewButton.setText("리스트로 보기");
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,manageJobMapFragment).commit();
+                break;
+            case FIND_JOB_MAP_FRAGMENT :
+                fragmentIndex = FIND_JOB_RECYCLER_FRAGMENT;
+                changeViewButton.setText("맵으로 보기");
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,manageJobListFragment).commit();
+                break;
+        }
+    }
+
+
+    //필터 팝업
+    private void showFilter() {
+        Intent intent = new Intent(activity,SeekerJobFilterPopupActivity.class);
+        intent.putExtra("projectSubjectFilter",SeekerMainActivity.F_projectSubjectFilter);
+        intent.putExtra("maxDistanceFilter",SeekerMainActivity.F_maxDistanceFilter);
+        intent.putExtra("jobNameFilter",SeekerMainActivity.F_jobNameFilter);
+        intent.putExtra("jobPayFilter",SeekerMainActivity.F_jobPayFilter);
+        intent.putExtra("jobRequirementFilter",SeekerMainActivity.F_jobRequirementFilter);
+        intent.putExtra("targetDateFilter",SeekerMainActivity.F_targetDateFilter);
+
+        activity.startActivityForResult(intent,301);
     }
 }

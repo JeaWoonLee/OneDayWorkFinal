@@ -51,7 +51,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/jobName"
+                    android:id="@+id/jobName2"
                     android:layout_width="wrap_content"
                     style="@style/offerItemText"
                     android:text="jobName"/>
@@ -75,7 +75,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/jobPay"
+                    android:id="@+id/jobPay2"
                     android:layout_width="wrap_content"
                     android:layout_margin="0dp"
                     style="@style/offerItemText"
@@ -105,7 +105,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/jobRequirement"
+                    android:id="@+id/jobRequirement2"
                     android:layout_width="wrap_content"
                     style="@style/offerItemText"
                     android:text="jobRequirement"/>
@@ -121,14 +121,14 @@
             style="@style/itemTextView"
             android:text="날짜 선택"/>
 
-        <CalendarView
-            android:id="@+id/calendar"
+        <DatePicker
+            android:id="@+id/calendar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/offer_border">
 
-        </CalendarView>
+        </DatePicker>
 
         <!-- 신청 정보 -->
         <LinearLayout
@@ -155,7 +155,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/selectDay"
+                    android:id="@+id/selectDay2"
                     android:layout_width="wrap_content"
                     style="@style/offerItemText"
                     android:layout_margin="5dp"
@@ -180,7 +180,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/currentCount"
+                    android:id="@+id/currentCount2"
                     android:layout_width="wrap_content"
                     style="@style/offerItemText"
                     android:layout_margin="5dp"
@@ -193,7 +193,7 @@
                     android:text="/" />
 
                 <TextView
-                    android:id="@+id/limitCount"
+                    android:id="@+id/limitCount2"
                     android:layout_width="wrap_content"
                     style="@style/offerItemText"
                     android:layout_margin="5dp"
@@ -211,11 +211,11 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/candidateButton"
+            android:id="@+id/candidateButton2"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             style="@style/offerButton"
-            android:text="신청하기"/>
+            android:text="등록하기"/>
 
     </LinearLayout>
     <!-- //end container -->

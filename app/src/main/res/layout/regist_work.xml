@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+    <!-- container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/offer"
+            app:title="일감 등록">
+
+        </android.support.v7.widget.Toolbar>
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/itemTextView"
+            android:text="모집 항목"/>
+
+        <!-- 모집 정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp"
+            android:paddingRight="10dp"
+            android:orientation="vertical">
+
+            <!-- 직군 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/itemTextView"
+                    android:text="직종" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/jobName"
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="jobName"/>
+
+            </LinearLayout>
+            <!-- //end 직군 -->
+
+            <!-- 급여 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/itemTextView"
+                    android:text="급여" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/jobPay"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="0dp"
+                    style="@style/offerItemText"
+                    android:text="jobPay"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="원"/>
+
+            </LinearLayout>
+            <!-- //end 급여 -->
+
+            <!-- 요구자격 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/itemTextView"
+                    android:text="요구자격" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/jobRequirement"
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="jobRequirement"/>
+
+            </LinearLayout>
+            <!-- //end 요구자격 -->
+
+        </LinearLayout>
+        <!-- //end 모집정보 -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/itemTextView"
+            android:text="날짜 선택"/>
+
+        <CalendarView
+            android:id="@+id/calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/offer_border">
+
+        </CalendarView>
+
+        <!-- 신청 정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_marginHorizontal="10dp"
+            android:paddingEnd="30dp">
+
+            <!-- 모집 인원 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/itemTextView"
+                    android:text="선택 날짜" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/selectDay"
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:layout_margin="5dp"
+                    android:text="날짜를 선택하세요" />
+
+            </LinearLayout>
+            <!-- //end 모집 인원 -->
+
+            <!-- 모집 인원 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/itemTextView"
+                    android:text="인원" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/currentCount"
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:layout_margin="5dp"
+                    android:text="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:layout_margin="5dp"
+                    android:text="/" />
+
+                <TextView
+                    android:id="@+id/limitCount"
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:layout_margin="5dp"
+                    android:text="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:layout_margin="10dp"
+                    android:text="명" />
+
+            </LinearLayout>
+            <!-- //end 모집 인원 -->
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/candidateButton"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            style="@style/offerButton"
+            android:text="신청하기"/>
+
+    </LinearLayout>
+    <!-- //end container -->
+
+</ScrollView>

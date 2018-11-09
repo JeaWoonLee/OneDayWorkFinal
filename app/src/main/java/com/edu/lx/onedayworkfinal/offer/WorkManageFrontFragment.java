@@ -21,16 +21,14 @@ public class WorkManageFrontFragment extends Fragment {
     //TODO 신청관리 (김동가 - 진행중)
     OfferMainActivity activity;
 
-    FindLaborFrontFragment findLaborFrontFragment;
-    WorkManageFrontFragment workManageFrontFragment;
     RecyclerFragment recyclerFragment;
+    OftenFindFragment oftenFindFragment;
 
     Button filterButton2;
     Button changeViewButton2;
 
     public final int RECYLER_FRAGMENT = 0;
-    public final int FIND_LABOR_FRAGMENT = 1;
-    public final int WORK_MANAGER_FRAGMENT = 2;
+    public final int OFTEN_FIND_FRAGMENT = 1;
     private int fragmentIndex2 = 0;
 
     static ArrayList<ProjectVO> items = null;
@@ -70,22 +68,22 @@ public class WorkManageFrontFragment extends Fragment {
             }
         });
 
-        findLaborFrontFragment = new FindLaborFrontFragment();
-        workManageFrontFragment = new WorkManageFrontFragment();
+        recyclerFragment = new RecyclerFragment();
+        oftenFindFragment = new OftenFindFragment();
         activity.getSupportFragmentManager().beginTransaction().add(R.id.frag_container2,recyclerFragment).commit();
     }
 
     private void changeView(){
         switch (fragmentIndex2){
             case RECYLER_FRAGMENT :
-                fragmentIndex2 = FIND_LABOR_FRAGMENT;
-                changeViewButton2.setText("추천 근로자");
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container2,findLaborFrontFragment).commit();
+                fragmentIndex2 = OFTEN_FIND_FRAGMENT;
+                changeViewButton2.setText("일감관리");
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container2,recyclerFragment).commit();
                  break;
-            case FIND_LABOR_FRAGMENT:
-                fragmentIndex2 = WORK_MANAGER_FRAGMENT;
-                changeViewButton2.setText("일감 관리");
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container2,workManageFrontFragment).commit();
+            case OFTEN_FIND_FRAGMENT:
+                fragmentIndex2 = RECYLER_FRAGMENT;
+                changeViewButton2.setText("즐겨찾기");
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container2,oftenFindFragment).commit();
                 break;
         }
     }

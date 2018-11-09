@@ -30,7 +30,7 @@
             style="@style/offerButton"
             android:layout_width="wrap_content"
             android:layout_gravity="end"
-            android:text="맵으로 보기"/>
+            android:text="즐겨찾기"/>
     </LinearLayout>
     <!-- //end 필터 영역 -->
 

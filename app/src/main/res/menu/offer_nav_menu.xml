@@ -16,6 +16,10 @@
             android:id="@+id/req_manage"
             android:title="신청 관리"/>
 
+        <item
+            android:id="@+id/rec_labor"
+            android:title="추천근로자"
+            />
     </group>
 
 

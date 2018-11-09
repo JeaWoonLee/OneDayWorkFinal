@@ -61,7 +61,7 @@ public class OfferLoginFragment extends Fragment {
         final String offerId = offerIdInput.getText().toString();
         final String offerPw = offerPwInput.getText().toString();
 
-        String url = getResources().getString(R.string.url) + "offerLogin.do";
+        String url = getResources().getString(R.string.url) + "offerMobileLogin.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,

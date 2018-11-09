@@ -17,17 +17,18 @@ import com.edu.lx.onedayworkfinal.R;
 public class OfferFilterActivity extends AppCompatActivity {
 
     //스피너 설정
-    Spinner projectSubjectSpinner;
-    Spinner jobNameSpinner;
-    Spinner jobPaySpinner;
-    Spinner maxDistanceSpinner;
-    Spinner jobRequirementSpinner;
-    TextView targetDate;
+    Spinner projectSubjectSpinner2;
+    Spinner jobNameSpinner2;
+    Spinner jobPaySpinner2;
+    Spinner maxDistanceSpinner2;
+    Spinner jobRequirementSpinner2;
+    TextView targetDate2;
 
     //프로젝트 대분류
-    String[] projectSubjectFilter;
+    String[] projectSubjectFilter2;
     //프로젝트 거리
-    String[] maxDistanceFilter;
+    String[] maxDistanceFilter2;
+
     //직군 중분류
 
     //건설현장
@@ -72,23 +73,23 @@ public class OfferFilterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter_popup);
+        setContentView(R.layout.activity_offer_filter_popup);
 
         Intent intent = getIntent();
         initFilterSetting(intent);
         initFilterArrays();
 
-        targetDate = findViewById(R.id.targetDate);
+        targetDate2 = findViewById(R.id.targetDate);
 
-        projectSubjectSpinner = findViewById(R.id.projectSubjectSpinner2);
-        jobNameSpinner = findViewById(R.id.jobNameSpinner2);
-        jobPaySpinner = findViewById(R.id.jobPaySpinner);
-        maxDistanceSpinner = findViewById(R.id.maxDistanceSpinner);
-        jobRequirementSpinner = findViewById(R.id.jobRequirementSpinner2);
-        setSubjectSpinner(projectSubjectSpinner,projectSubjectFilter);
-        setSpinner(jobPaySpinner,jobPayFilter);
-        setSpinner(maxDistanceSpinner,maxDistanceFilter);
-        setSpinner(jobRequirementSpinner,jobRequirementFilter);
+        projectSubjectSpinner2 = findViewById(R.id.projectSubjectSpinner2);
+        jobNameSpinner2 = findViewById(R.id.jobNameSpinner2);
+        jobPaySpinner2 = findViewById(R.id.jobPaySpinner2);
+        maxDistanceSpinner2 = findViewById(R.id.maxDistanceSpinner2);
+        jobRequirementSpinner2 = findViewById(R.id.jobRequirementSpinner2);
+        setSubjectSpinner2(projectSubjectSpinner2,projectSubjectFilter2);
+        setSpinner(jobPaySpinner2,jobPayFilter);
+        setSpinner(maxDistanceSpinner2,maxDistanceFilter2);
+        setSpinner(jobRequirementSpinner2,jobRequirementFilter);
         Button confirmFilterButton = findViewById(R.id.confirmFilterButton2);
         confirmFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +101,7 @@ public class OfferFilterActivity extends AppCompatActivity {
         setFilterSelected();
     }
 
-    private void setSubjectSpinner(Spinner projectSubjectSpinner, String[] projectSubjectFilter) {
+    private void setSubjectSpinner2(Spinner projectSubjectSpinner, String[] projectSubjectFilter) {
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item,projectSubjectFilter);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         projectSubjectSpinner.setAdapter(adapter);
@@ -109,34 +110,34 @@ public class OfferFilterActivity extends AppCompatActivity {
             public void onItemSelected (AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0 :
-                        setSpinner(jobNameSpinner,noneFilter);
+                        setSpinner(jobNameSpinner2,noneFilter);
                         break;
                     case 1:
-                        setSpinner(jobNameSpinner,constructionSiteFilter);
+                        setSpinner(jobNameSpinner2,constructionSiteFilter);
                         break;
                     case 2:
-                        setSpinner(jobNameSpinner,civilEngineeringFilter);
+                        setSpinner(jobNameSpinner2,civilEngineeringFilter);
                         break;
                     case 3:
-                        setSpinner(jobNameSpinner,shipbuildingFilter);
+                        setSpinner(jobNameSpinner2,shipbuildingFilter);
                         break;
                     case 4:
-                        setSpinner(jobNameSpinner,factoryFilter);
+                        setSpinner(jobNameSpinner2,factoryFilter);
                         break;
                     case 5:
-                        setSpinner(jobNameSpinner,transitFilter);
+                        setSpinner(jobNameSpinner2,transitFilter);
                         break;
                     case 6:
-                        setSpinner(jobNameSpinner,cateringFilter);
+                        setSpinner(jobNameSpinner2,cateringFilter);
                         break;
                     case 7:
-                        setSpinner(jobNameSpinner,eventFilter);
+                        setSpinner(jobNameSpinner2,eventFilter);
                         break;
                     case 8:
-                        setSpinner(jobNameSpinner,cleaningFilter);
+                        setSpinner(jobNameSpinner2,cleaningFilter);
                         break;
                     case 9:
-                        setSpinner(jobNameSpinner,otherFilter);
+                        setSpinner(jobNameSpinner2,otherFilter);
                         break;
                 }
             }
@@ -168,12 +169,12 @@ public class OfferFilterActivity extends AppCompatActivity {
 
     private void confirmFilter () {
         Intent intent = new Intent();
-        intent.putExtra("projectSubjectFilter",(String) projectSubjectSpinner.getSelectedItem());
-        intent.putExtra("maxDistanceFilter",(String) maxDistanceSpinner.getSelectedItem());
-        intent.putExtra("jobNameFilter",(String) jobNameSpinner.getSelectedItem());
-        intent.putExtra("jobPayFilter",(String) jobPaySpinner.getSelectedItem());
-        intent.putExtra("jobRequirementFilter",(String) jobRequirementSpinner.getSelectedItem());
-        intent.putExtra("targetDateFilter",targetDate.getText().toString());
+        intent.putExtra("projectSubjectFilter",(String) projectSubjectSpinner2.getSelectedItem());
+        intent.putExtra("maxDistanceFilter",(String) maxDistanceSpinner2.getSelectedItem());
+        intent.putExtra("jobNameFilter",(String) jobNameSpinner2.getSelectedItem());
+        intent.putExtra("jobPayFilter",(String) jobPaySpinner2.getSelectedItem());
+        intent.putExtra("jobRequirementFilter",(String) jobRequirementSpinner2.getSelectedItem());
+        intent.putExtra("targetDateFilter",targetDate2.getText().toString());
 
         setResult(Activity.RESULT_OK,intent);
         finish();
@@ -190,39 +191,39 @@ public class OfferFilterActivity extends AppCompatActivity {
     }
 
     private void setFilterSelected () {
-        for (int i = 0 ; i < projectSubjectFilter.length ; i ++ ) {
-            if (TextUtils.equals(projectSubjectFilter[i],F_projectSubjectFilter)) {
-                projectSubjectSpinner.setSelection(i);
+        for (int i = 0 ; i < projectSubjectFilter2.length ; i ++ ) {
+            if (TextUtils.equals(projectSubjectFilter2[i],F_projectSubjectFilter)) {
+                projectSubjectSpinner2.setSelection(i);
                 break;
             }
         }
 
-        for (int i = 0 ; i < maxDistanceFilter.length ; i ++ ) {
-            if (TextUtils.equals(maxDistanceFilter[i],F_maxDistanceFilter)) {
-                maxDistanceSpinner.setSelection(i);
+        for (int i = 0 ; i < maxDistanceFilter2.length ; i ++ ) {
+            if (TextUtils.equals(maxDistanceFilter2[i],F_maxDistanceFilter)) {
+                maxDistanceSpinner2.setSelection(i);
                 break;
             }
         }
         for (int i = 0 ; i < jobPayFilter.length ; i ++ ) {
             if (TextUtils.equals(jobPayFilter[i],F_jobPayFilter)) {
-                jobPaySpinner.setSelection(i);
+                jobPaySpinner2.setSelection(i);
                 break;
             }
         }
         for (int i = 0 ; i < jobRequirementFilter.length ; i ++ ) {
             if (TextUtils.equals(jobRequirementFilter[i],F_jobRequirementFilter)) {
-                jobRequirementSpinner.setSelection(i);
+                jobRequirementSpinner2.setSelection(i);
                 break;
             }
         }
-        targetDate.setText(F_targetDateFilter);
+        targetDate2.setText(F_targetDateFilter);
 
     }
 
     //res/values/arrays 에 설정해 둔 필터 배열 설정
     private void initFilterArrays() {
-        projectSubjectFilter = getResources().getStringArray(R.array.projectSubjectFilter);
-        maxDistanceFilter = getResources().getStringArray(R.array.maxDistanceFilter);
+        projectSubjectFilter2 = getResources().getStringArray(R.array.projectSubjectFilter);
+        maxDistanceFilter2 = getResources().getStringArray(R.array.maxDistanceFilter);
         constructionSiteFilter = getResources().getStringArray(R.array.constructionSiteFilter);
         civilEngineeringFilter = getResources().getStringArray(R.array.civilEngineeringFilter);
         factoryFilter = getResources().getStringArray(R.array.factoryFilter);

@@ -25,11 +25,13 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     //Fragment
     FrontFragment frontFragment;
     FindJobFrontFragment findJobFrontFragment;
+    ManageJobFrontFragment manageJobFrontFragment;
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
     //Fragment Index
     public final static int FRONT_FRAGMENT = 0;
     public final static int FIND_JOB_FRAGMENT = 1;
+    public final static int MANAGE_JOB_FRAGMENT = 2;
     //네비게이션 뷰
     NavigationView navigationView;
 
@@ -136,6 +138,12 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
 
+                //일 관리
+            case R.id.manage_job :
+                // 일 관리 프래그먼트로 이동
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,manageJobFrontFragment).commit();
+                break;
+
                 //내 계정 정보 프래그먼트로 이동
             case R.id.my_account_info :
                 break;
@@ -180,6 +188,11 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 navigationView.getMenu().findItem(R.id.find_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
+            case MANAGE_JOB_FRAGMENT :
+                navigationView.getMenu().findItem(R.id.manage_job).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,manageJobFrontFragment).commit();
+                break;
+
 
         }
     }

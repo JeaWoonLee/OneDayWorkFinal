@@ -20,8 +20,8 @@ public class FindJobFrontFragment extends Fragment {
 
     SeekerMainActivity activity;
 
-    FindJobRecyclerFragment findJobRecyclerFragment;
-    FindJobMapFragment findJobMapFragment;
+    public FindJobRecyclerFragment findJobRecyclerFragment;
+    public FindJobMapFragment findJobMapFragment;
 
     //필터 버튼
     Button filterButton;
@@ -79,7 +79,7 @@ public class FindJobFrontFragment extends Fragment {
     }
 
     //지도화면 / 리사이클러 뷰 화면 보기전환 버튼
-    private void changeView() {
+    public void changeView() {
 
         switch (fragmentIndex) {
             case FIND_JOB_RECYCLER_FRAGMENT :

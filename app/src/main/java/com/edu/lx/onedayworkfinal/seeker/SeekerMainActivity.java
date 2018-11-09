@@ -1,6 +1,9 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +13,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,13 +23,16 @@ import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 
+import java.security.MessageDigest;
 import java.util.Date;
+
 
 public class SeekerMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //Fragment
     FrontFragment frontFragment;
-    FindJobFrontFragment findJobFrontFragment;
+    public FindJobFrontFragment findJobFrontFragment;
+    DaumMapFragment daumMapFragment;
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
     //Fragment Index
@@ -58,6 +66,19 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_main);
 
+        try{
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String key = new String(Base64.encode(md.digest(), 0));
+                Log.d("Hash key:", "!!!!!!!"+key+"!!!!!!");
+            }
+        } catch (Exception e){
+            Log.e("name not found", e.toString());
+        }
+
         //로그인 체크
         Base.sessionManager.checkLogin();
 
@@ -88,6 +109,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         //프래그먼트 초기 설정
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
+        daumMapFragment = new DaumMapFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //필터 설정 init
@@ -138,6 +160,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
                 //내 계정 정보 프래그먼트로 이동
             case R.id.my_account_info :
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,daumMapFragment).commit();
                 break;
 
                 //로그 아웃

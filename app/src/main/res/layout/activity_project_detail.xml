@@ -109,27 +109,6 @@
 
         </LinearLayout>
 
-        <!-- 요구 자격 -->
-        <TextView
-            style="@style/blackTextView"
-            android:text="요구 자격"
-            android:layout_width="wrap_content"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/seeker_border"
-            android:layout_margin="10dp">
-
-                <TextView
-                    android:id="@+id/projectRequirement"
-                    style="@style/seekerItemText"
-                    android:layout_width="wrap_content"
-                    android:text="projectRequirement" />
-
-        </LinearLayout>
-
         <!-- 코멘트 -->
         <TextView
             android:layout_width="wrap_content"
@@ -155,18 +134,18 @@
             <!-- 맵 뷰 -->
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:padding="10dp"
                 android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/seeker_border">
 
-                <com.google.android.gms.maps.MapView
-                    android:id="@+id/mapView"
+                <RelativeLayout
+                    android:id="@+id/map_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                </com.google.android.gms.maps.MapView>
+                </RelativeLayout>
             </FrameLayout>
 
         <!-- 일감 목록 -->

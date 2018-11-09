@@ -12,10 +12,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +29,12 @@ import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerJobListRecyclerView
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+
+import net.daum.mf.map.api.CalloutBalloonAdapter;
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,31 +43,28 @@ import java.util.Map;
 
 import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
 
-public class FindJobMapFragment extends Fragment implements LocationListener {
+public class FindJobMapFragment extends Fragment implements LocationListener,MapView.POIItemEventListener {
 
     SeekerMainActivity activity;
 
     //맵 뷰 레이아웃
-    MapView mapView;
-    //구글 맵
-    GoogleMap map;
+    //다음 맵
+    RelativeLayout mapContainer;
+    MapView mMapView;
 
     //내 위치 마커
-    MarkerOptions myLocationMarkerOption;
-    Marker myLocationMarker;
+    MapPOIItem myLocationMarker;
     boolean isAim = false;
 
     //일감 마커
-    MarkerOptions projectOptions;
-    Marker projectMarker;
-    ArrayList<Marker> projectMarkers = new ArrayList<>();
+    ArrayList<MapPOIItem> projectMarkers = new ArrayList<>();
 
     //내 위치 보기 플로팅 아이콘
     FloatingActionButton myLocationFab;
 
     //JobList
-    Map<Integer,ArrayList<JobVO>> jobListMap = new HashMap<>();
-    SeekerJobListRecyclerViewAdapter adapter;
+    public Map<Integer,ArrayList<JobVO>> jobListMap = new HashMap<>();
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -81,76 +76,62 @@ public class FindJobMapFragment extends Fragment implements LocationListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seeker_find_job_map_framgent,container,false);
 
-        mapView = rootView.findViewById(R.id.googleMap);
         myLocationFab = rootView.findViewById(R.id.myLocationFab);
+        mapContainer = rootView.findViewById(R.id.map_view);
+        mMapView = new MapView(activity);
+        mMapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
+        mMapView.setDaumMapApiKey(getResources().getString(R.string.kakao_app_key));
+        mMapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
+
+        //다른 액티비티에서 사용할 것
+        //mMapView.setMapViewEventListener(this);
+        mMapView.setPOIItemEventListener(this);
+
+        inflateProjectsLocation();
+
+        mapContainer.addView(mMapView);
         return rootView;
+    }
+
+    // CalloutBalloonAdapter 인터페이스 구현
+    class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
+        private final View mCalloutBalloon;
+
+        public CustomCalloutBalloonAdapter() {
+            mCalloutBalloon = getLayoutInflater().inflate(R.layout.custom_callout_balloon, null);
+        }
+
+        @Override
+        public View getCalloutBalloon(MapPOIItem poiItem) {
+            if (poiItem.getUserObject() instanceof ProjectVO){
+                final ProjectVO item = (ProjectVO) poiItem.getUserObject();
+                ((TextView) mCalloutBalloon.findViewById(R.id.projectName)).setText(item.getProjectName());
+                ((TextView) mCalloutBalloon.findViewById(R.id.projectDate)).setText(item.getProjectStartDate() + " - " + item.getProjectEndDate());
+                ((TextView) mCalloutBalloon.findViewById(R.id.projectSubject)).setText(item.getProjectSubject());
+                ((TextView) mCalloutBalloon.findViewById(R.id.projectEnrollDate)).setText(item.getProjectEnrollDate());
+                LinearLayoutManager layoutManager = new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+                SeekerJobListRecyclerViewAdapter adapter = new SeekerJobListRecyclerViewAdapter(activity);
+                //Adapter 에서 setItems 를 해줄 때, 맵에 담아두었던 ArrayList 를 가져온다
+                adapter.setItems(jobListMap.get(item.getProjectNumber()));
+                RecyclerView recyclerView =  mCalloutBalloon.findViewById(R.id.jobListRecyclerView);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(adapter);
+                return mCalloutBalloon;
+            }else {
+                return null;
+            }
+
+        }
+
+        @Override
+        public View getPressedCalloutBalloon(MapPOIItem poiItem) {
+            return null;
+        }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //구글 맵이 로드 되었을 떄
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                map = googleMap;
-
-                //인포윈도우 설정
-                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-                    @Override
-                    public View getInfoWindow(Marker marker) {
-                        return null;
-                    }
-
-                    //마커를 클릭했을 때 나타나는 인포윈도우
-                    @Override
-                    public View getInfoContents(Marker marker) {
-                        //내 위치 인포윈도우는 기본 뷰를 보여준다
-                        if (TextUtils.equals(marker.getTitle(),"내 위치")){
-                            return null;
-
-                            //일감들의 인포윈도우는 리스트 뷰 형식에 따라 만든다
-                        } else {
-                            final ProjectVO item = (ProjectVO) marker.getTag();
-                            View v = getLayoutInflater().inflate(R.layout.seeker_find_project_item,null);
-                            TextView projectName = v.findViewById(R.id.projectName);
-                            TextView projectDate = v.findViewById(R.id.projectDate);
-                            TextView projectSubject = v.findViewById(R.id.projectSubject);
-                            TextView projectEnrollDate = v.findViewById(R.id.projectEnrollDate);
-                            projectName.setText(item.getProjectName());
-                            projectDate.setText(item.getProjectStartDate() + " - " + item.getProjectEndDate());
-                            projectSubject.setText(item.getProjectSubject());
-                            projectEnrollDate.setText(item.getProjectEnrollDate());
-                            RecyclerView jobListRecyclerView = v.findViewById(R.id.jobListRecyclerView);
-                            LinearLayoutManager layoutManager = new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
-                            jobListRecyclerView.setLayoutManager(layoutManager);
-                            adapter = new SeekerJobListRecyclerViewAdapter(activity);
-                            //Adapter 에서 setItems 를 해줄 때, 맵에 담아두었던 ArrayList 를 가져온다
-                            adapter.setItems(jobListMap.get(item.getProjectNumber()));
-                            jobListRecyclerView.setAdapter(adapter);
-                            return v;
-                        } //end 일감 인포 윈도우 설정
-
-                    } //end getInfoContents
-
-                }); //end 인포윈도우 설정
-
-                //인포윈도우 클릭 리스너
-                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(Marker marker) {
-                        ProjectVO projectVO = (ProjectVO) marker.getTag();
-                        activity.showProjectDetail(projectVO.getProjectNumber());
-                    }
-                });
-
-                showMyLocation(null);
-
-                inflateProjectsLocation();
-            }
-
-        });
 
         //내 위치보기 플로팅 아이콘을 클릭했을 때
         myLocationFab.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +140,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener {
                 traceMyLocation();
             }
         });
+        showMyLocation(null);
 
     }
 
@@ -198,23 +180,25 @@ public class FindJobMapFragment extends Fragment implements LocationListener {
 
     //프로젝트 리스트를 화면에 뿌려주기
     private void inflateProjectsLocation() {
-        if (items != null) {
 
-            //프로젝트 데이터를 하나씩 가져와서 맵에 뿌려준다
-            projectOptions = new MarkerOptions();
-            for (ProjectVO item : items) {
-                projectOptions.position(new LatLng(item.getProjectLat(),item.getProjectLng()))
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.select_loctaion))
-                        .title(item.getProjectName());
-                projectMarker = map.addMarker(projectOptions);
-                //각 마커를 생성할 때 직업 목록을 조회해서 map 에 담아둔다
-                requestProjectJobList(item.getProjectNumber());
-                projectMarker.setTag(item);
-                projectMarkers.add(projectMarker);
-            }
-        } else {
-            Toast.makeText(activity,"지도에 일감 목록을 불러오는 데 실패했습니다",Toast.LENGTH_SHORT).show();
+        //프로젝트 데이터를 하나씩 가져와서 맵에 뿌려준다
+
+        int i = 0;
+        for (ProjectVO item : items) {
+            MapPOIItem projectMarker = new MapPOIItem();
+            projectMarker.setItemName(item.getProjectName());
+            projectMarker.setTag(i);
+            projectMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(item.getProjectLat(),item.getProjectLng()));
+            projectMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+            projectMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+            //각 마커를 생성할 때 직업 목록을 조회해서 map 에 담아둔다
+            requestProjectJobList(item.getProjectNumber());
+            projectMarker.setUserObject(item);
+            projectMarkers.add(projectMarker);
         }
+        mMapView.addPOIItems(projectMarkers.toArray(new MapPOIItem[projectMarkers.size()]));
+
     }
 
     //내 위치보기 플로팅 아이콘을 클릭했을 때
@@ -255,69 +239,26 @@ public class FindJobMapFragment extends Fragment implements LocationListener {
             Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
         }
 
-        //플로팅 아이콘을 클릭하여 LocationListener 를 통해 위치를 받았다면 해당 위치를 사용한다
-        if (location != null) {
-            lastLocation = location;
-        }
-
         //lastLocation 을 받아 왔다면 LatLng 타입의 변수에 집어 넣음
-        if (lastLocation != null){
-            LatLng curPoint = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
+        LatLng curPoint = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
 
-            //카메라를 현제 위치로 이동함
-            if (map != null){
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(curPoint,15));
+        //카메라를 현제 위치로 이동함
+        mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(curPoint.latitude,curPoint.longitude),2,true);
 
-                //마커가 만들어 져 있지 않다면 마커를 새로 만듦
-                if (myLocationMarkerOption == null) {
-                    myLocationMarkerOption = new MarkerOptions();
-                    myLocationMarkerOption.position(curPoint)
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocation))
-                            .title("내 위치");
-                    myLocationMarker = map.addMarker(myLocationMarkerOption);
-                } else {
-                   //마커가 null 이라면 마커를 remove 한 뒤에 새로 찍어준다. addMarker 로 인해 마커가 늘어나는 것을 방지
-                    myLocationMarker.remove();
-                    myLocationMarkerOption.position(curPoint);
-                    myLocationMarker = map.addMarker(myLocationMarkerOption);
-                }
-            }
-
-        } else {
-            Toast.makeText(activity,"lastLocation 이 null 입니다!",Toast.LENGTH_SHORT).show();
+        //마커가 만들어 져 있지 않다면 마커를 새로 만듦
+        if (myLocationMarker == null){
+            myLocationMarker = new MapPOIItem();
+            myLocationMarker.setItemName("내 위치");
+            myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(curPoint.latitude,curPoint.longitude));
+            myLocationMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+            myLocationMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+            mMapView.addPOIItem(myLocationMarker);
+        }else {
+            mMapView.removePOIItem(myLocationMarker);
+            myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(curPoint.latitude,curPoint.longitude));
+            mMapView.addPOIItem(myLocationMarker);
         }
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        //액티비티가 처음 생성될 때 실행되는 함수
-        if(mapView != null) mapView.onCreate(savedInstanceState);
     }
 
     //LocationListener
@@ -340,6 +281,29 @@ public class FindJobMapFragment extends Fragment implements LocationListener {
     public void onProviderDisabled(String provider) {
 
     }
-
     //end LocationListener
+
+    @Override
+    public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+        if (mapPOIItem.getUserObject() instanceof ProjectVO) {
+            activity.findJobFrontFragment.changeView();
+            ProjectVO item =(ProjectVO) mapPOIItem.getUserObject();
+            activity.showProjectDetail(item.getProjectNumber());
+        }
+    }
+
+    @Override
+    public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
+    }
 }

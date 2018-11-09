@@ -3,7 +3,7 @@
     <!-- 아카데미 서버 http://192.168.40.20/odw/-->
     <!-- 로컬 서버 http://10.0.2.2/odw/-->
     <string name="app_name">하루일감</string>
-    <string name="url">http://1.250.62.149/odw/</string>
+    <string name="url">http://192.168.40.20/odw/</string>
 
     <!-- activity_login-->
     <string name="activity_login_find_ID_and_PW">아이디 / 비밀번호 찾기</string>

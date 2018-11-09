@@ -17,6 +17,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 
 }
@@ -29,7 +33,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     //Design
     implementation 'com.android.support:design:28.0.0'
     //Commons-lang : toStringBuilder
@@ -41,14 +44,14 @@ dependencies {
     //AutoPermission
     implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'
     //GoogleFireBase
-    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-core:16.0.5'
     //GoogleMap
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     //Volley : RequestQueue
     implementation 'com.android.volley:volley:1.1.1'
     //Google Gson : JSON Parser
     implementation 'com.google.code.gson:gson:2.8.5'
-
+    implementation files('libs/libDaumMapAndroid.jar')
 }
 //AspectJ Plugin
 apply plugin: 'com.jakewharton.hugo'

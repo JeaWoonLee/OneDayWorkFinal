@@ -18,8 +18,8 @@ import com.edu.lx.onedayworkfinal.util.volley.Base;
 
 public class OfferMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    //TODO 사업자 네비게이션 바 활성화(김동가 - 완료)
     AnotherFrontFragment anotherFrontFragment;
-    FindLaborFrontFragment findLaborFrontFragment;
     RegistWorkFrontFragment registWorkFrontFragment;
     ReqManageFrontFragment reqManageFrontFragment;
 
@@ -61,7 +61,6 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
         offerName.setText(Base.sessionManager.getUserDetails().get("name"));
 
         anotherFrontFragment = new AnotherFrontFragment();
-        findLaborFrontFragment = new FindLaborFrontFragment();
         registWorkFrontFragment = new RegistWorkFrontFragment();
         reqManageFrontFragment = new ReqManageFrontFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container2,anotherFrontFragment).commit();

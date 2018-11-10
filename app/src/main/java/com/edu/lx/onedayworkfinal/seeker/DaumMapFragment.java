@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.google.android.gms.maps.model.LatLng;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -67,24 +66,15 @@ public class DaumMapFragment extends Fragment {
 
         //플로팅 아이콘을 클릭하여 LocationListener 를 통해 위치를 받았다면 해당 위치를 사용한다
 
+        //카메라를 현제 위치로 이동함
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),2,true);
 
-        //lastLocation 을 받아 왔다면 LatLng 타입의 변수에 집어 넣음
-        if (lastLocation != null){
-            LatLng curPoint = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
-
-            //카메라를 현제 위치로 이동함
-            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(curPoint.latitude,curPoint.longitude),2,true);
-
-            myLocationMarkerOption = new MapPOIItem();
-            myLocationMarkerOption.setItemName("내 위치");
-            myLocationMarkerOption.setMapPoint(MapPoint.mapPointWithGeoCoord(curPoint.latitude,curPoint.longitude));
-            myLocationMarkerOption.setTag(0);
-            myLocationMarkerOption.setMarkerType(MapPOIItem.MarkerType.BluePin);
-            myLocationMarkerOption.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-            mapView.addPOIItem(myLocationMarkerOption);
-
-        } else {
-            Toast.makeText(activity,"lastLocation 이 null 입니다!",Toast.LENGTH_SHORT).show();
-        }
+        myLocationMarkerOption = new MapPOIItem();
+        myLocationMarkerOption.setItemName("내 위치");
+        myLocationMarkerOption.setMapPoint(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()));
+        myLocationMarkerOption.setTag(0);
+        myLocationMarkerOption.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        myLocationMarkerOption.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+        mapView.addPOIItem(myLocationMarkerOption);
     }
 }

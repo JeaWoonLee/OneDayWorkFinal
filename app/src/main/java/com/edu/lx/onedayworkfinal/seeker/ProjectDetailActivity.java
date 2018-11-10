@@ -1,12 +1,19 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -99,6 +106,46 @@ public class ProjectDetailActivity extends AppCompatActivity {
         mapContainer = findViewById(R.id.map_view);
         mapView = new MapView(this);
         mapContainer.addView(mapView);
+
+        //길 찾기 버튼
+        Button findRouteButton = findViewById(R.id.findRouteButton);
+        findRouteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDaumMapFindRoute();
+            }
+        });
+
+    }
+
+    private void showDaumMapFindRoute() {
+        Location myLocation = null;
+        try{
+            myLocation = Base.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+        if (myLocation != null) {
+            double projectLat = projectMarker.getMapPoint().getMapPointGeoCoord().latitude;
+            double projectLng = projectMarker.getMapPoint().getMapPointGeoCoord().longitude;
+            double myLat = myLocation.getLatitude();
+            double myLng = myLocation.getLongitude();
+
+            try{
+                //다음 맵 길찾기 띄워주기
+                String url = "daummaps://route?sp="+myLat+","+myLng+"&ep="+projectLat+","+projectLng;
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+                startActivity(intent);
+
+                //다음맵이 없을경우 까는 곳 보여주기
+            } catch (ActivityNotFoundException e){
+                String url = "https://play.google.com/store/apps/details?id=net.daum.android.map";
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+                startActivity(intent);
+            }
+
+        }
 
     }
 

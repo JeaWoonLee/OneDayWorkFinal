@@ -29,7 +29,6 @@ import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerJobListRecyclerView
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
-import com.google.android.gms.maps.model.LatLng;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.MapPOIItem;
@@ -41,27 +40,27 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
-
 public class FindJobMapFragment extends Fragment implements LocationListener,MapView.POIItemEventListener {
 
     SeekerMainActivity activity;
 
     //맵 뷰 레이아웃
     //다음 맵
-    RelativeLayout mapContainer;
-    MapView mMapView;
+    public RelativeLayout mapContainer;
+    public MapView mMapView;
 
     //내 위치 마커
-    MapPOIItem myLocationMarker;
+    public MapPOIItem myLocationMarker;
     boolean isAim = false;
 
     //일감 마커
-    ArrayList<MapPOIItem> projectMarkers = new ArrayList<>();
+    public ArrayList<MapPOIItem> projectMarkers;
 
     //내 위치 보기 플로팅 아이콘
     FloatingActionButton myLocationFab;
 
+    //ProjectList
+    public ArrayList<ProjectVO> items;
     //JobList
     public Map<Integer,ArrayList<JobVO>> jobListMap = new HashMap<>();
 
@@ -87,7 +86,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
         //mMapView.setMapViewEventListener(this);
         mMapView.setPOIItemEventListener(this);
 
-        inflateProjectsLocation();
+        requestProjectList();
 
         mapContainer.addView(mMapView);
         return rootView;
@@ -144,6 +143,49 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
 
     }
 
+    //projectList 요청
+    public void requestProjectList() {
+        String url = getResources().getString(R.string.url) + "getProjectList.do";
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse (String response) {
+                        processProjectResponse(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse (VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams () throws AuthFailureError {
+                //필터 정보를 담아서 보내기
+                Map<String,String> params = new HashMap<>();
+                params.put("projectSubjectFilter", SeekerMainActivity.F_projectSubjectFilter);
+                params.put("jobNameFilter", SeekerMainActivity.F_jobNameFilter);
+                params.put("jobPayFilter",SeekerMainActivity.F_jobPayFilter);
+                params.put("jobRequirementFilter",SeekerMainActivity.F_jobRequirementFilter);
+                params.put("maxDistanceFilter",SeekerMainActivity.F_maxDistanceFilter);
+                params.put("targetDateFilter",SeekerMainActivity.F_targetDateFilter);
+                return params;
+            }
+        };
+
+        request.setShouldCache(false);
+        Base.requestQueue.add(request);
+    }
+
+    private void processProjectResponse (String response) {
+        ProjectVO[] projectArray = Base.gson.fromJson(response,ProjectVO[].class);
+        items = new ArrayList<>(Arrays.asList(projectArray));
+        inflateProjectsLocation();
+    }
+
     private  void requestProjectJobList(final int projectNumber) {
         String url = activity.getResources().getString(R.string.url) + "requestProjectJobListByProjectNumber.do";
         StringRequest request = new StringRequest(
@@ -179,10 +221,10 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
     }
 
     //프로젝트 리스트를 화면에 뿌려주기
-    private void inflateProjectsLocation() {
+    public void inflateProjectsLocation() {
 
         //프로젝트 데이터를 하나씩 가져와서 맵에 뿌려준다
-
+        projectMarkers = new ArrayList<>();
         int i = 0;
         for (ProjectVO item : items) {
             MapPOIItem projectMarker = new MapPOIItem();
@@ -239,23 +281,20 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
             Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
         }
 
-        //lastLocation 을 받아 왔다면 LatLng 타입의 변수에 집어 넣음
-        LatLng curPoint = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
-
         //카메라를 현제 위치로 이동함
-        mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(curPoint.latitude,curPoint.longitude),2,true);
+        mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),2,true);
 
         //마커가 만들어 져 있지 않다면 마커를 새로 만듦
         if (myLocationMarker == null){
             myLocationMarker = new MapPOIItem();
             myLocationMarker.setItemName("내 위치");
-            myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(curPoint.latitude,curPoint.longitude));
+            myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()));
             myLocationMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
             myLocationMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
             mMapView.addPOIItem(myLocationMarker);
         }else {
             mMapView.removePOIItem(myLocationMarker);
-            myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(curPoint.latitude,curPoint.longitude));
+            myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()));
             mMapView.addPOIItem(myLocationMarker);
         }
 

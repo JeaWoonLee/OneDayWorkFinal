@@ -31,7 +31,7 @@ public class FindJobFrontFragment extends Fragment {
     //리사이클러 뷰 / 맵 뷰 인덱스
     public final int FIND_JOB_RECYCLER_FRAGMENT = 0;
     public final int FIND_JOB_MAP_FRAGMENT = 1;
-    private int fragmentIndex = 0;
+    public int fragmentIndex = 0;
 
     //리사이클러 뷰 / 맵 뷰 에서 사용되는 프로젝트 배열
     static ArrayList<ProjectVO> items = null;

@@ -23,6 +23,8 @@ import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 
+import net.daum.mf.map.api.MapPOIItem;
+
 import java.security.MessageDigest;
 import java.util.Date;
 
@@ -232,6 +234,15 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                     F_jobPayFilter = intent.getStringExtra("jobPayFilter");
                     F_jobRequirementFilter = intent.getStringExtra("jobRequirementFilter");
                     F_targetDateFilter = intent.getStringExtra("targetDateFilter");
+
+                    if (findJobFrontFragment.fragmentIndex == findJobFrontFragment.FIND_JOB_RECYCLER_FRAGMENT){
+                        findJobFrontFragment.findJobRecyclerFragment.requestProjectList();
+                    }
+                    else if (findJobFrontFragment.fragmentIndex == findJobFrontFragment.FIND_JOB_MAP_FRAGMENT) {
+                        //findJobFrontFragment.findJobMapFragment.mMapView.removePOIItems(findJobFrontFragment.findJobMapFragment.projectMarkers.toArray(new MapPOIItem[findJobFrontFragment.findJobMapFragment.projectMarkers.size()]));
+                        findJobFrontFragment.findJobMapFragment.mMapView.removeAllPOIItems();
+                        findJobFrontFragment.findJobMapFragment.requestProjectList();
+                    }
                     break;
             }
         }

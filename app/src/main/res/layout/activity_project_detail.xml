@@ -132,6 +132,30 @@
 
 
             <!-- 맵 뷰 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="위치"
+                android:layout_width="wrap_content"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/findRouteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="길 찾기"
+                style="@style/seekerButton"
+                android:layout_marginEnd="20dp"/>
+
+        </LinearLayout>
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"

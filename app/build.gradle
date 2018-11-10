@@ -47,11 +47,12 @@ dependencies {
     //GoogleFireBase
     implementation 'com.google.firebase:firebase-core:16.0.5'
     //GoogleMap
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    //implementation 'com.google.android.gms:play-services-maps:16.0.0'
     //Volley : RequestQueue
     implementation 'com.android.volley:volley:1.1.1'
     //Google Gson : JSON Parser
     implementation 'com.google.code.gson:gson:2.8.5'
+    //DaumMap
     implementation files('libs/libDaumMapAndroid.jar')
 }
 //AspectJ Plugin

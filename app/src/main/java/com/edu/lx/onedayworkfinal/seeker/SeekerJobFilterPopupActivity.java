@@ -139,6 +139,7 @@ public class SeekerJobFilterPopupActivity extends AppCompatActivity {
                         setSpinner(jobNameSpinner,otherFilter);
                         break;
                 }
+                F_jobNameFilter = "없음";
             }
 
             @Override

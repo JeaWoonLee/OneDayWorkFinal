@@ -89,7 +89,7 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.regist_work:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container2,registWorkFrontFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,registWorkFrontFragment).commit();
                 Toast.makeText(this,"옜다 일자리다.", Toast.LENGTH_LONG).show();
                 break;
 

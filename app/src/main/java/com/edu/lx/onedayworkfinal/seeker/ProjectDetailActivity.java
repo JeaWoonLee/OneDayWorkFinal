@@ -1,12 +1,20 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -17,16 +25,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
+import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,24 +52,20 @@ public class ProjectDetailActivity extends AppCompatActivity {
     TextView projectSubject;
     TextView projectDate;
     TextView projectEnrollDate;
-    TextView projectRequirement;
     TextView projectComment;
 
     //프로젝트 위치 MapView
+    RelativeLayout mapContainer;
     MapView mapView;
 
-    //구글 맵
-    GoogleMap map;
-
     //프로젝트 위치 마커
-    MarkerOptions projectMarkerOption;
-    Marker projectMarker;
+    MapPOIItem projectMarker;
 
     //모집 직군 RecyclerView
     RecyclerView jobListRecyclerView;
 
     //모집 직군 ArrayList
-    ArrayList<ProjectJobListVO> jobList;
+    ArrayList<JobVO> jobList;
 
     //리사이클러 뷰 어뎁터
     SeekerDetailJobListRecyclerViewAdapter adapter;
@@ -94,7 +94,6 @@ public class ProjectDetailActivity extends AppCompatActivity {
         projectSubject = findViewById(R.id.projectSubject);
         projectDate = findViewById(R.id.projectDate);
         projectEnrollDate = findViewById(R.id.projectEnrollDate);
-        projectRequirement = findViewById(R.id.projectRequirement);
         projectComment = findViewById(R.id.projectComment);
 
         //모집 직군 RecyclerView
@@ -104,15 +103,55 @@ public class ProjectDetailActivity extends AppCompatActivity {
         jobListRecyclerView.setLayoutManager(layoutManager);
 
         //프로젝트 위치 MapView
-        mapView = findViewById(R.id.mapView);
-        //액티비티가 처음 생성될 때 실행되는 함수
-        if(mapView != null) mapView.onCreate(savedInstanceState);
+        mapContainer = findViewById(R.id.map_view);
+        mapView = new MapView(this);
+        mapContainer.addView(mapView);
+
+        //길 찾기 버튼
+        Button findRouteButton = findViewById(R.id.findRouteButton);
+        findRouteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDaumMapFindRoute();
+            }
+        });
+
+    }
+
+    private void showDaumMapFindRoute() {
+        Location myLocation = null;
+        try{
+            myLocation = Base.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+        if (myLocation != null) {
+            double projectLat = projectMarker.getMapPoint().getMapPointGeoCoord().latitude;
+            double projectLng = projectMarker.getMapPoint().getMapPointGeoCoord().longitude;
+            double myLat = myLocation.getLatitude();
+            double myLng = myLocation.getLongitude();
+
+            try{
+                //다음 맵 길찾기 띄워주기
+                String url = "daummaps://route?sp="+myLat+","+myLng+"&ep="+projectLat+","+projectLng;
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+                startActivity(intent);
+
+                //다음맵이 없을경우 까는 곳 보여주기
+            } catch (ActivityNotFoundException e){
+                String url = "https://play.google.com/store/apps/details?id=net.daum.android.map";
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+                startActivity(intent);
+            }
+
+        }
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        onBackPressed();
+        finish();
         return true;
     }
 
@@ -160,47 +199,23 @@ public class ProjectDetailActivity extends AppCompatActivity {
         projectSubject.setText(projectVO.getProjectSubject());
         projectDate.setText(projectVO.getProjectStartDate() + " - " + projectVO.getProjectEndDate());
         projectEnrollDate.setText(projectVO.getProjectEnrollDate());
-        projectRequirement.setText(projectVO.getProjectRequirement());
         projectComment.setText(projectVO.getProjectComment());
 
-        //MapView 띄우기
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                map = googleMap;
-
-                //프로젝트 위치로 이동하기
-                showProjectLocation(projectVO.getProjectLat(),projectVO.getProjectLng());
-            }
-        });
-
+        mapView.setDaumMapApiKey(getResources().getString(R.string.kakao_app_key));
+        showProjectLocation(projectVO.getProjectLat(),projectVO.getProjectLng());
     }
 
     //프로젝트 위치로 이동하기
     private void showProjectLocation(double projectLat, double projectLng) {
-
-        //위치 변수 만들기
-        LatLng projectPoint = new LatLng(projectLat,projectLng);
-
-        //해당 위치로 카메라 이동하기
-        if (map != null) {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(projectPoint,15));
-
-            //마커 만들기
-            if (projectMarkerOption == null){
-                projectMarkerOption = new MarkerOptions();
-                projectMarkerOption.position(projectPoint)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.select_loctaion))
-                        .title(projectVO.getProjectName());
-                projectMarker = map.addMarker(projectMarkerOption);
-            } else {
-                projectMarker.remove();
-                projectMarkerOption.position(projectPoint);
-                projectMarker = map.addMarker(projectMarkerOption);
-            }
-        }
-
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(projectLat,projectLng),3,false);
+        projectMarker = new MapPOIItem();
+        projectMarker.setItemName("일감 위치");
+        projectMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(projectLat,projectLng));
+        projectMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        projectMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+        mapView.addPOIItem(projectMarker);
     }
+
 
     //직군 상세정보 요청
     private void requestProjectJobList() {
@@ -234,7 +249,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
 
     //직군 상세정보 처리
     private void processProjectJobLIstResponse(String response) {
-        ProjectJobListVO[] projectJobListVOS = Base.gson.fromJson(response,ProjectJobListVO[].class);
+        JobVO[] projectJobListVOS = Base.gson.fromJson(response, JobVO[].class);
         jobList = new ArrayList<>(Arrays.asList(projectJobListVOS));
         adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
         adapter.setItems(jobList);
@@ -248,27 +263,4 @@ public class ProjectDetailActivity extends AppCompatActivity {
         startActivityForResult(intent,301);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onLowMemory();
-    }
 }

@@ -3,7 +3,7 @@ package com.edu.lx.onedayworkfinal.vo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class ProjectJobListVO {
+public class JobVO {
 
     int jobNumber;
     int projectNumber;
@@ -12,18 +12,7 @@ public class ProjectJobListVO {
     String jobStartDate;
     String jobEndDate;
     String jobRequirement;
-    String workStartTime;
-    String workEndTime;
     int jobLimitCount;
-    int jobCurrentCount;
-
-    public String getJobName () {
-        return jobName;
-    }
-
-    public void setJobName (String jobName) {
-        this.jobName = jobName;
-    }
 
     public int getJobNumber () {
         return jobNumber;
@@ -47,6 +36,14 @@ public class ProjectJobListVO {
 
     public void setJobPay (int jobPay) {
         this.jobPay = jobPay;
+    }
+
+    public String getJobName () {
+        return jobName;
+    }
+
+    public void setJobName (String jobName) {
+        this.jobName = jobName;
     }
 
     public String getJobStartDate () {
@@ -73,36 +70,12 @@ public class ProjectJobListVO {
         this.jobRequirement = jobRequirement;
     }
 
-    public String getWorkStartTime () {
-        return workStartTime;
-    }
-
-    public void setWorkStartTime (String workStartTime) {
-        this.workStartTime = workStartTime;
-    }
-
-    public String getWorkEndTime () {
-        return workEndTime;
-    }
-
-    public void setWorkEndTime (String workEndTime) {
-        this.workEndTime = workEndTime;
-    }
-
     public int getJobLimitCount () {
         return jobLimitCount;
     }
 
     public void setJobLimitCount (int jobLimitCount) {
         this.jobLimitCount = jobLimitCount;
-    }
-
-    public int getJobCurrentCount () {
-        return jobCurrentCount;
-    }
-
-    public void setJobCurrentCount (int jobCurrentCount) {
-        this.jobCurrentCount = jobCurrentCount;
     }
 
     @Override

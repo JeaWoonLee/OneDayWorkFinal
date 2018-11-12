@@ -23,6 +23,7 @@ import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
@@ -62,7 +63,7 @@ public class FindJobRecyclerFragment extends Fragment {
     }
 
     //projectList 요청
-    private void requestProjectList () {
+    public void requestProjectList() {
         //TODO 거리기반으로 요청이 가도록 구현
         String url = getResources().getString(R.string.url) + "getProjectList.do";
         StringRequest request = new StringRequest(
@@ -83,7 +84,15 @@ public class FindJobRecyclerFragment extends Fragment {
         ){
             @Override
             protected Map<String, String> getParams () throws AuthFailureError {
-                return super.getParams();
+                //필터 정보를 담아서 보내기
+                Map<String,String> params = new HashMap<>();
+                params.put("projectSubjectFilter", SeekerMainActivity.F_projectSubjectFilter);
+                params.put("jobNameFilter", SeekerMainActivity.F_jobNameFilter);
+                params.put("jobPayFilter",SeekerMainActivity.F_jobPayFilter);
+                params.put("jobRequirementFilter",SeekerMainActivity.F_jobRequirementFilter);
+                params.put("maxDistanceFilter",SeekerMainActivity.F_maxDistanceFilter);
+                params.put("targetDateFilter",SeekerMainActivity.F_targetDateFilter);
+                return params;
             }
         };
 

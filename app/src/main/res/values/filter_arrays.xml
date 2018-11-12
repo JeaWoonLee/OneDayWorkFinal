@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--프로잭트 필터-->
+
+    <!-- 프로젝트 대분류 -->
+    <string-array name="projectSubjectFilter">
+        <item>없음</item>
+        <item>건설현장</item>
+        <item>토목</item>
+        <item>조선</item>
+        <item>공장</item>
+        <item>운송</item>
+        <item>식당</item>
+        <item>이벤트</item>
+        <item>청소</item>
+        <item>기타</item>
+    </string-array>
+
+    <!-- 거리 분류 m 단위-->
+    <string-array name="maxDistanceFilter">
+        <item>없음</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>5000</item>
+        <item>10000</item>
+    </string-array>
+
+    <!-- 직군 필터 -->
+    <!-- 직군 중분류 -->
+    <!-- 건설현장-->
+    <string-array name="constructionSiteFilter">
+        <item>없음</item>
+        <item>보통인부</item>
+        <item>목공</item>
+        <item>철근공</item>
+        <item>콘크리트공</item>
+        <item>비계공</item>
+        <item>미장조적공</item>
+        <item>철거할석공</item>
+        <item>용접공</item>
+        <item>타일공</item>
+        <item>작업팀장</item>
+        <item>청소</item>
+        <item>관로공</item>
+    </string-array>
+    <!--//end 건설현장-->
+
+    <!-- 토목 -->
+    <string-array name="civilEngineeringFilter">
+        <item>없음</item>
+        <item>보통인부</item>
+        <item>경계석</item>
+        <item>보도블록</item>
+        <item>배관공</item>
+        <item>포장공</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 토목 -->
+
+    <!-- 조선 -->
+    <string-array name="shipbuildingFilter">
+        <item>없음</item>
+        <item>조선</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 조선 -->
+
+    <!-- 공장 -->
+    <string-array name="factoryFilter">
+        <item>없음</item>
+        <item>공장</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 공장 -->
+
+    <!-- 운송 -->
+    <string-array name="transitFilter">
+        <item>없음</item>
+        <item>운송</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 운송 -->
+
+    <!-- 식당 -->
+    <string-array name="cateringFilter">
+        <item>없음</item>
+        <item>식당</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 식당 -->
+
+    <!-- 이벤트 -->
+    <string-array name="eventFilter">
+        <item>없음</item>
+        <item>이벤트</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 이벤트 -->
+
+    <!-- 청소 -->
+    <string-array name="cleaningFilter">
+        <item>없음</item>
+        <item>청소</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 청소 -->
+
+    <!-- 기타 -->
+    <string-array name="otherFilter">
+        <item>없음</item>
+        <item>기타</item>
+        <item>기타</item>
+    </string-array>
+    <!-- //end 기타 -->
+
+    <!-- 없음 -->
+    <string-array name="noneFilter">
+        <item>없음</item>
+    </string-array>
+    <!-- //end 없음 -->
+    <!-- //end 직군 중분류 -->
+    <!-- //end 직군 필터 -->
+
+    <!-- 임금 필터 -->
+    <string-array name="jobPayFilter">
+        <item>없음</item>
+        <item>100,000 미만</item>
+        <item>100,000 – 150,000</item>
+        <item>150,000 이상</item>
+    </string-array>
+
+    <!-- 요구 조건 필터 -->
+    <string-array name="jobRequirementFilter">
+        <item>없음</item>
+        <item>건설안전교육이수증</item>
+    </string-array>
+
+
+</resources>

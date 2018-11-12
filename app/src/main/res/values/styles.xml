@@ -8,8 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- 팝업 액티비티 Theme -->
+    <style name="PopupTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <!-- 회원가입 TextView -->
-    <style name="joinTextView" parent="@android:style/Widget.TextView">
+    <style name="blackTextView" parent="@android:style/Widget.TextView">
         <item name="android:layout_margin">10dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>

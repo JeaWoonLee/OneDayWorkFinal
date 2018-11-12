@@ -42,7 +42,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="일감 이름"/>
 
                 <TextView
@@ -60,7 +60,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="일감 분류"/>
 
                 <TextView
@@ -78,7 +78,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="기간"/>
 
                 <TextView
@@ -96,7 +96,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/joinTextView"
+                    style="@style/blackTextView"
                     android:text="등록 날짜"/>
 
                 <TextView
@@ -109,31 +109,10 @@
 
         </LinearLayout>
 
-        <!-- 요구 자격 -->
-        <TextView
-            style="@style/joinTextView"
-            android:text="요구 자격"
-            android:layout_width="wrap_content"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/seeker_border"
-            android:layout_margin="10dp">
-
-                <TextView
-                    android:id="@+id/projectRequirement"
-                    style="@style/seekerItemText"
-                    android:layout_width="wrap_content"
-                    android:text="projectRequirement" />
-
-        </LinearLayout>
-
         <!-- 코멘트 -->
         <TextView
             android:layout_width="wrap_content"
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="설명"/>
 
         <LinearLayout
@@ -153,26 +132,50 @@
 
 
             <!-- 맵 뷰 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="위치"
+                android:layout_width="wrap_content"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/findRouteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="길 찾기"
+                style="@style/seekerButton"
+                android:layout_marginEnd="20dp"/>
+
+        </LinearLayout>
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:padding="10dp"
                 android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/seeker_border">
 
-                <com.google.android.gms.maps.MapView
-                    android:id="@+id/mapView"
+                <RelativeLayout
+                    android:id="@+id/map_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                </com.google.android.gms.maps.MapView>
+                </RelativeLayout>
             </FrameLayout>
 
         <!-- 일감 목록 -->
         <TextView
             android:layout_width="wrap_content"
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="일감 목록"/>
 
         <LinearLayout

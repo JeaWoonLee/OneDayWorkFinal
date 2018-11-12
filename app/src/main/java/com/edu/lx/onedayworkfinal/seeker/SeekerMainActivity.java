@@ -1,15 +1,20 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,11 +23,18 @@ import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 
+import net.daum.mf.map.api.MapPOIItem;
+
+import java.security.MessageDigest;
+import java.util.Date;
+
+
 public class SeekerMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //Fragment
     FrontFragment frontFragment;
-    FindJobFrontFragment findJobFrontFragment;
+    public FindJobFrontFragment findJobFrontFragment;
+    DaumMapFragment daumMapFragment;
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
     //Fragment Index
@@ -37,10 +49,37 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     //백키 핸들러
     private BackPressCloseHandler backPressCloseHandler;
 
+    //FindJobFragment(일 찾기) 에서 사용되는 필터 설정
+    //프로젝트 대분류
+    static String F_projectSubjectFilter;
+    //프로젝트 거리
+    static String F_maxDistanceFilter;
+    //직군 중분류
+    static String F_jobNameFilter;
+    //일당
+    static String F_jobPayFilter;
+    //요구 조건
+    static String F_jobRequirementFilter;
+    //대상 날짜
+    static String F_targetDateFilter;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_main);
+
+        try{
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String key = new String(Base64.encode(md.digest(), 0));
+                Log.d("Hash key:", "!!!!!!!"+key+"!!!!!!");
+            }
+        } catch (Exception e){
+            Log.e("name not found", e.toString());
+        }
 
         //로그인 체크
         Base.sessionManager.checkLogin();
@@ -69,15 +108,17 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         seekerId.setText(Base.sessionManager.getUserDetails().get("id"));
         seekerName.setText(Base.sessionManager.getUserDetails().get("name"));
 
-        //TODO 일감 구하기 구현하기
+        //프래그먼트 초기 설정
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
+        daumMapFragment = new DaumMapFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
+
+        //필터 설정 init
+        filterInit();
 
         //TODO 신청 일감 관리 구현하기
         // 수정 181107 yjm
-
-        getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //TODO 일감 관리 구현하기
 
@@ -87,6 +128,18 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
         //TODO 일감 초대 구현하기
 
+    }
+
+    //필터 초기 설정
+    private void filterInit() {
+
+        //초기설정(없음) 으로 설정하기
+        F_projectSubjectFilter = getResources().getStringArray(R.array.projectSubjectFilter)[0];
+        F_maxDistanceFilter = getResources().getStringArray(R.array.maxDistanceFilter)[0];
+        F_jobNameFilter = getResources().getStringArray(R.array.noneFilter)[0];
+        F_jobPayFilter = getResources().getStringArray(R.array.jobPayFilter)[0];
+        F_jobRequirementFilter = getResources().getStringArray(R.array.jobRequirementFilter)[0];
+        F_targetDateFilter = Base.simpleDateFormat.format(new Date());
     }
 
     //네비게이션 뷰 아이템 클릭 리스너
@@ -99,18 +152,17 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 //프론트 페이지
             case R.id.front :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,frontFragment).commit();
-
                 break;
 
                 //일 찾기
             case R.id.find_job :
-
                 //일 찾기 프래그먼트로 이동
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
 
                 //내 계정 정보 프래그먼트로 이동
             case R.id.my_account_info :
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,daumMapFragment).commit();
                 break;
 
                 //로그 아웃
@@ -162,5 +214,38 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         Intent intent = new Intent(this,ProjectDetailActivity.class);
         intent.putExtra("projectNumber",projectNumber);
         startActivityForResult(intent,201);
+    }
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if (intent != null) {
+            switch (requestCode) {
+                //프로젝트 디테일 액티비티
+                case  201 :
+                    break;
+                //필터 팝업 액티비티
+                case 301 :
+                    //인텐트로부터 필터 데이터 설정
+                    F_projectSubjectFilter = intent.getStringExtra("projectSubjectFilter");
+                    F_maxDistanceFilter = intent.getStringExtra("maxDistanceFilter");
+                    F_jobNameFilter = intent.getStringExtra("jobNameFilter");
+                    F_jobPayFilter = intent.getStringExtra("jobPayFilter");
+                    F_jobRequirementFilter = intent.getStringExtra("jobRequirementFilter");
+                    F_targetDateFilter = intent.getStringExtra("targetDateFilter");
+
+                    if (findJobFrontFragment.fragmentIndex == findJobFrontFragment.FIND_JOB_RECYCLER_FRAGMENT){
+                        findJobFrontFragment.findJobRecyclerFragment.requestProjectList();
+                    }
+                    else if (findJobFrontFragment.fragmentIndex == findJobFrontFragment.FIND_JOB_MAP_FRAGMENT) {
+                        //findJobFrontFragment.findJobMapFragment.mMapView.removePOIItems(findJobFrontFragment.findJobMapFragment.projectMarkers.toArray(new MapPOIItem[findJobFrontFragment.findJobMapFragment.projectMarkers.size()]));
+                        findJobFrontFragment.findJobMapFragment.mMapView.removeAllPOIItems();
+                        findJobFrontFragment.findJobMapFragment.requestProjectList();
+                    }
+                    break;
+            }
+        }
+
     }
 }

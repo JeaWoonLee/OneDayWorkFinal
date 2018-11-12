@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/seeker_border"
+    android:orientation="vertical" >
+
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/seeker_header_border">
+
+            <TextView
+                android:id="@+id/projectName"
+                style="@style/itemTextView"
+                android:layout_width="wrap_content"
+                android:text="일감 이름"/>
+
+            <TextView
+                android:id="@+id/projectNumber"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+            <!-- 가운데 공간 -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/projectDate"
+                style="@style/itemTextView"
+                android:layout_width="wrap_content"
+                android:text="일감 기간"/>
+
+        </LinearLayout>
+        <!-- //end Header -->
+
+        <!-- Body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Contents -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- project Subject -->
+                    <TextView
+                        android:id="@+id/projectSubject"
+                        style="@style/seekerItemText"
+                        android:gravity="start"
+                        android:text="직종"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        style="@style/blackTextView"
+                        android:text="등록 날짜"
+                        android:layout_width="wrap_content"/>
+                    <TextView
+                        android:id="@+id/projectEnrollDate"
+                        style="@style/seekerItemText"
+                        android:layout_width="wrap_content"
+                        android:text="프로젝트 등록일"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/jobListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+            <!-- //end Contents-->
+
+        </LinearLayout>
+        <!-- //end Body -->
+
+    </LinearLayout>
+    <!-- //end Container -->
+
+</LinearLayout>

@@ -14,7 +14,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_seeker_fragment2" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -42,7 +42,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_seeker_fragment3" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -61,7 +61,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_seeker_fragment13" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -79,7 +79,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_seeker_fragment6"/>
 
         <android.support.v7.widget.AppCompatEditText
@@ -98,7 +98,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_seeker_fragment7" />
         
         <RadioGroup
@@ -134,7 +134,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_seeker_fragment10"/>
 
         <android.support.v7.widget.AppCompatEditText

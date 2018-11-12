@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
-
+ㅉ
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_offer_fragment2" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -43,7 +43,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_offer_fragment3" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -62,7 +62,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_offer_fragment13" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -80,7 +80,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_offer_fragment6"/>
 
         <android.support.v7.widget.AppCompatEditText
@@ -99,7 +99,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_offer_fragment7" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -120,7 +120,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_offer_fragment10"/>
 
         <android.support.v7.widget.AppCompatEditText
@@ -140,7 +140,7 @@
         android:padding="10dp">
 
         <TextView
-            style="@style/joinTextView"
+            style="@style/blackTextView"
             android:text="@string/join_offer_fragment16" />
 
         <android.support.v7.widget.AppCompatEditText

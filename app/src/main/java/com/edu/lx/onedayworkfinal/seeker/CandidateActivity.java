@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.ProjectJobListVO;
+import com.edu.lx.onedayworkfinal.vo.JobVO;
 
 import java.sql.Date;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class CandidateActivity extends AppCompatActivity {
     int jobNumber;
 
     //일감의 상세정보
-    ProjectJobListVO item;
+    JobVO item;
 
     //툴바
     Toolbar toolbar;
@@ -86,7 +87,6 @@ public class CandidateActivity extends AppCompatActivity {
                 requestTargetDateCount(date,jobNumber);
             }
         });
-
         candidateButton = findViewById(R.id.candidateButton);
         candidateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +98,10 @@ public class CandidateActivity extends AppCompatActivity {
     }
 
     private void candidate() {
+        if (TextUtils.equals(selectDay.getText().toString(),"날짜를 선택하세요")){
+            Toast.makeText(getApplicationContext(),"먼저 신청할 날짜를 선택해 주세요!",Toast.LENGTH_LONG).show();
+            return;
+        }
         final String targetDate = selectDay.getText().toString();
         final String seekerId = Base.sessionManager.getUserDetails().get("id");
 
@@ -213,7 +217,7 @@ public class CandidateActivity extends AppCompatActivity {
     }
 
     private void processRequestJobDetail(String response) {
-        item = Base.gson.fromJson(response,ProjectJobListVO.class);
+        item = Base.gson.fromJson(response, JobVO.class);
 
         //setText 하기
         jobName.setText(item.getJobName());

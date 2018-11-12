@@ -1,6 +1,8 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -84,8 +87,19 @@ public class FindJobRecyclerFragment extends Fragment {
         ){
             @Override
             protected Map<String, String> getParams () throws AuthFailureError {
+                Location lastLocation = null;
+
+                //LocationService 로 부터 lastLocation 을 받아옴
+                try {
+                    lastLocation = Base.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                }
+                catch (SecurityException e) {
+                    Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
+                }
                 //필터 정보를 담아서 보내기
                 Map<String,String> params = new HashMap<>();
+                params.put("myLat",String.valueOf(lastLocation.getLatitude()));
+                params.put("myLng",String.valueOf(lastLocation.getLongitude()));
                 params.put("projectSubjectFilter", SeekerMainActivity.F_projectSubjectFilter);
                 params.put("jobNameFilter", SeekerMainActivity.F_jobNameFilter);
                 params.put("jobPayFilter",SeekerMainActivity.F_jobPayFilter);

@@ -139,7 +139,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         F_jobNameFilter = getResources().getStringArray(R.array.noneFilter)[0];
         F_jobPayFilter = getResources().getStringArray(R.array.jobPayFilter)[0];
         F_jobRequirementFilter = getResources().getStringArray(R.array.jobRequirementFilter)[0];
-        F_targetDateFilter = Base.simpleDateFormat.format(new Date());
+        F_targetDateFilter = "없음";
     }
 
     //네비게이션 뷰 아이템 클릭 리스너
@@ -241,6 +241,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                     else if (findJobFrontFragment.fragmentIndex == findJobFrontFragment.FIND_JOB_MAP_FRAGMENT) {
                         //findJobFrontFragment.findJobMapFragment.mMapView.removePOIItems(findJobFrontFragment.findJobMapFragment.projectMarkers.toArray(new MapPOIItem[findJobFrontFragment.findJobMapFragment.projectMarkers.size()]));
                         findJobFrontFragment.findJobMapFragment.mMapView.removeAllPOIItems();
+                        findJobFrontFragment.findJobMapFragment.showMyLocation(null);
                         findJobFrontFragment.findJobMapFragment.requestProjectList();
                     }
                     break;

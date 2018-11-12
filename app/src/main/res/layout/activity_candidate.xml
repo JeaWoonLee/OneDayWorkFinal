@@ -122,14 +122,17 @@
             style="@style/itemTextView"
             android:text="날짜 선택"/>
 
-        <CalendarView
+        <com.applandeo.materialcalendarview.CalendarView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/seeker_border">
+            app:selectionColor="@color/offer"
+            app:selectionLabelColor="@color/seeker"
+            app:disabledDaysLabelsColor="@color/red"
+            app:type="one_day_picker">
 
-        </CalendarView>
+        </com.applandeo.materialcalendarview.CalendarView>
 
         <!-- 신청 정보 -->
         <LinearLayout

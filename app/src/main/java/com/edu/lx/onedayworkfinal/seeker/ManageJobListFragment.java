@@ -35,9 +35,9 @@ public class ManageJobListFragment extends Fragment {
 
     SeekerMainActivity activity;
     String seekerId;
-
     RecyclerView ManageJobRecylerView;
     SeekerManageProjectRecyclerViewAdapter adapter;
+
     @Override
     public void onAttach (Context context) {
         super.onAttach(context);

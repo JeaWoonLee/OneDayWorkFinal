@@ -89,7 +89,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
                 projectDate.setText(projectVO.getProjectStartDate() + projectVO.getProjectEndDate());
                 projectEnrollDate.setText(projectVO.getProjectEnrollDate());
                 projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
-                requestProjectJobList(projectVO.getProjectNumber());
+                //requestProjectJobList(projectVO.getProjectNumber());
 
             } else {
 

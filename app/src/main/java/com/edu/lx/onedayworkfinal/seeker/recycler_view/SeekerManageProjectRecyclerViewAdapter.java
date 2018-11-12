@@ -30,114 +30,115 @@ import java.util.Map;
 
 public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ProjectVO> {
 
-        public SeekerManageProjectRecyclerViewAdapter (Context context) {
-            super(context);
-        }
+    public SeekerManageProjectRecyclerViewAdapter(Context context) {
+        super(context);
+    }
 
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SeekerManageProjectViewHolder(inflateView(super.context, R.layout.seeker_find_project_item,viewGroup));
+        return new SeekerManageProjectViewHolder(inflateView(super.context, R.layout.seeker_find_project_item, viewGroup));
     }
 
     class SeekerManageProjectViewHolder extends BaseViewHolder<ProjectVO> {
 
-            TextView projectName;
-            TextView projectDate;
-            TextView projectSubject;
-            TextView projectEnrollDate;
-            TextView projectNumber;
-            RecyclerView jobListRecyclerView;
+        TextView projectName;
+        TextView projectDate;
+        TextView projectSubject;
+        TextView projectEnrollDate;
+        TextView projectNumber;
+        RecyclerView jobListRecyclerView;
 
-            SeekerManageProjectRecyclerViewAdapter adapter;
+        SeekerManageProjectRecyclerViewAdapter adapter;
 
-            public SeekerManageProjectViewHolder (@NonNull View itemView) {
-                super(itemView);
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        TextView projectNumber = v.findViewById(R.id.projectNumber);
-                        String projectNum = projectNumber.getText().toString();
-                        SeekerMainActivity activity = (SeekerMainActivity) context;
-                        activity.showProjectDetail(Integer.parseInt(projectNum));
-                    }
-                });
-                projectNumber = itemView.findViewById(R.id.projectNumber);
-                projectName = itemView.findViewById(R.id.projectName);
-                projectDate = itemView.findViewById(R.id.projectDate);
-                projectEnrollDate = itemView.findViewById(R.id.projectEnrollDate);
-                projectSubject = itemView.findViewById(R.id.projectSubject);
+        public SeekerManageProjectViewHolder(@NonNull View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView projectNumber = v.findViewById(R.id.projectNumber);
+                    String projectNum = projectNumber.getText().toString();
+                    SeekerMainActivity activity = (SeekerMainActivity) context;
+                    activity.showProjectDetail(Integer.parseInt(projectNum));
+                }
+            });
+            projectNumber = itemView.findViewById(R.id.projectNumber);
+            projectName = itemView.findViewById(R.id.projectName);
+            projectDate = itemView.findViewById(R.id.projectDate);
+            projectEnrollDate = itemView.findViewById(R.id.projectEnrollDate);
+            projectSubject = itemView.findViewById(R.id.projectSubject);
 
-                jobListRecyclerView = itemView.findViewById(R.id.jobListRecyclerView);
+            jobListRecyclerView = itemView.findViewById(R.id.jobListRecyclerView);
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(context.getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-                jobListRecyclerView.setLayoutManager(layoutManager);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+            jobListRecyclerView.setLayoutManager(layoutManager);
 
-                adapter = new SeekerManageProjectRecyclerViewAdapter(context);
+            adapter = new SeekerManageProjectRecyclerViewAdapter(context);
 
 
-            }
+        }
 
 
         @Override
         public void setItem(ProjectVO projectVO) {
 
-                if(projectVO != null) {
+            if (projectVO != null) {
 
-                    projectName.setText(projectVO.getProjectName());
-                    projectSubject.setText(projectVO.getProjectSubject());
-                    projectDate.setText(projectVO.getProjectStartDate() + projectVO.getProjectEndDate());
-                    projectEnrollDate.setText(projectVO.getProjectEnrollDate());
-                    projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
+                projectName.setText(projectVO.getProjectName());
+                projectSubject.setText(projectVO.getProjectSubject());
+                projectDate.setText(projectVO.getProjectStartDate() + projectVO.getProjectEndDate());
+                projectEnrollDate.setText(projectVO.getProjectEnrollDate());
+                projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
+                requestProjectJobList(projectVO.getProjectNumber());
 
-                } else {
+            } else {
 
-                    Log.d(this.getClass().getSimpleName(),"item 이 null 입니다.");
-                }
+                Log.d(this.getClass().getSimpleName(), "item 이 null 입니다.");
             }
+        }
 
-            private  void requestProjectJobList(final int projectNumber) {
-                String url = context.getResources().getString(R.string.url) + "manageJobList.do";
 
-                StringRequest request = new StringRequest(
-                        Request.Method.POST,
-                        url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                processJobListResponse(response);
-                            }
-                        },
+        private void requestProjectJobList(final int projectNumber) {
+            String url = context.getResources().getString(R.string.url) + "manageJobList.do";
 
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
+            StringRequest request = new StringRequest(
+                    Request.Method.POST,
+                    url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            processJobListResponse(response);
                         }
+                    },
 
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
-                ) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("projectNumber",String.valueOf(projectNumber));
-                        return params;
+                        }
                     }
-                };
 
-                request.setShouldCache(false);
-                Base.requestQueue.add(request);
+
+            ) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("projectNumber", String.valueOf(projectNumber));
+                    return params;
+                }
+            };
+
+            request.setShouldCache(false);
+            Base.requestQueue.add(request);
 
         }
 
-        //수정필요
-        private  void processJobListResponse(String response) {
-                ProjectVO[] jobsArray = Base.gson.fromJson(response, ProjectVO[].class);
-                ArrayList<ProjectVO> items = new ArrayList<>(Arrays.asList(jobsArray));
+        private void processJobListResponse(String response) {
+            ProjectVO[] jobsArray = Base.gson.fromJson(response, ProjectVO[].class);
+            ArrayList<ProjectVO> items = new ArrayList<>(Arrays.asList(jobsArray));
 
-                adapter.setItems(items);
-                jobListRecyclerView.setAdapter(adapter);
+            adapter.setItems(items);
+            jobListRecyclerView.setAdapter(adapter);
         }
     }
 

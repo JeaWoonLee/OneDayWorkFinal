@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,9 +21,11 @@ import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageProjectRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
+import com.edu.lx.onedayworkfinal.vo.SeekerVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
@@ -31,6 +34,7 @@ import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
 public class ManageJobListFragment extends Fragment {
 
     SeekerMainActivity activity;
+    String seekerId;
 
     RecyclerView ManageJobRecylerView;
     SeekerManageProjectRecyclerViewAdapter adapter;
@@ -45,6 +49,7 @@ public class ManageJobListFragment extends Fragment {
     public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_manage_job_list,container,false);
         ManageJobRecylerView = rootView.findViewById(R.id.ManageJobRecylerView);
+
         return rootView;
     }
 
@@ -55,14 +60,15 @@ public class ManageJobListFragment extends Fragment {
         //RecyclerView 의 layoutManager 세팅
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         ManageJobRecylerView.setLayoutManager(layoutManager);
-
+        seekerId = Base.sessionManager.getUserDetails().get("id");
         //신청 일감 요청
-        requestManageList();
+
+        requestManageList(seekerId);
 
     }
 
     //신청 일감 요청
-    private void requestManageList () {
+    private void requestManageList (final String seekerId) {
         //TODO 거리기반으로 요청이 가도록 구현
         String url = getResources().getString(R.string.url) + "manageJobList.do";
         StringRequest request = new StringRequest(
@@ -83,7 +89,10 @@ public class ManageJobListFragment extends Fragment {
         ){
             @Override
             protected Map<String, String> getParams () throws AuthFailureError {
-                return super.getParams();
+                //TODO ID로 결과값 가져오기
+                Map<String, String> params = new HashMap<>();
+                params.put("seekerId", String.valueOf(seekerId));
+                return params;
             }
         };
 
@@ -102,5 +111,6 @@ public class ManageJobListFragment extends Fragment {
         adapter.setItems(items);
         ManageJobRecylerView.setAdapter(adapter);
     }
+
 
 }

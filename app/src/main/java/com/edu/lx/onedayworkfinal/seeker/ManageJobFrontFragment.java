@@ -31,8 +31,8 @@ public class ManageJobFrontFragment extends Fragment {
     Button changeViewButton;
 
     //리사이클러 뷰 / 맵 뷰 인덱스
-    public final int FIND_JOB_RECYCLER_FRAGMENT = 0;
-    public final int FIND_JOB_MAP_FRAGMENT = 1;
+    public final int MANAGE_JOB_LIST_FRAGMENT = 0;
+    public final int MANAGE_JOB_MAP_FRAGMENT = 1;
     private int fragmentIndex = 0;
 
     //리사이클러 뷰 / 맵 뷰 에서 사용되는 프로젝트 배열
@@ -48,7 +48,7 @@ public class ManageJobFrontFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seeker_find_job_main_fragment,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_manage_job_front,container,false);
 
         filterButton = rootView.findViewById(R.id.filterButton);
         changeViewButton = rootView.findViewById(R.id.changeViewButton);
@@ -84,13 +84,13 @@ public class ManageJobFrontFragment extends Fragment {
     private void changeView() {
 
         switch (fragmentIndex) {
-            case FIND_JOB_RECYCLER_FRAGMENT :
-                fragmentIndex = FIND_JOB_MAP_FRAGMENT;
+            case MANAGE_JOB_LIST_FRAGMENT :
+                fragmentIndex = MANAGE_JOB_LIST_FRAGMENT;
                 changeViewButton.setText("리스트로 보기");
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,manageJobMapFragment).commit();
                 break;
-            case FIND_JOB_MAP_FRAGMENT :
-                fragmentIndex = FIND_JOB_RECYCLER_FRAGMENT;
+            case MANAGE_JOB_MAP_FRAGMENT :
+                fragmentIndex = MANAGE_JOB_MAP_FRAGMENT;
                 changeViewButton.setText("맵으로 보기");
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,manageJobListFragment).commit();
                 break;

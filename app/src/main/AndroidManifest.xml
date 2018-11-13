@@ -46,6 +46,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- detailManage Activity-->
+        <activity android:name=".seeker.ProjectDetailManage"/>
         <activity android:name=".join.JoinActivity" />
         <activity android:name=".seeker.ProjectDetailActivity" />
         <activity android:name=".seeker.CandidateActivity" />

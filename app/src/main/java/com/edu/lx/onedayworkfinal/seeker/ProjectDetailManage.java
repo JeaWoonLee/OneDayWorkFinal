@@ -33,7 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ProjectDetailActivity extends AppCompatActivity {
+// Managedetail 가져옴 .... 일감 신청하기 recycler view 없음
+public class ProjectDetailManage extends AppCompatActivity {
 
     //이전 액티비티로 부터 받아온 엑스트라 데이터
     int projectNumber;
@@ -67,7 +68,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_detail);
+        setContentView(R.layout.activity_project_detail_manage);
 
         //로그인 체크
         Base.sessionManager.checkLogin();
@@ -75,10 +76,8 @@ public class ProjectDetailActivity extends AppCompatActivity {
         //이전 액티비티로 부터 받아온 인텐트 처리
         Intent intent = getIntent();
         projectNumber = intent.getIntExtra("projectNumber",0);
-
-
         requestProjectDetail();
-        requestProjectJobList();
+        //requestProjectJobList();
 
         //툴바 설정
         toolbar = findViewById(R.id.toolbar);
@@ -94,10 +93,10 @@ public class ProjectDetailActivity extends AppCompatActivity {
         projectComment = findViewById(R.id.projectComment);
 
         //모집 직군 RecyclerView
-        jobListRecyclerView = findViewById(R.id.jobListRecyclerView);
+       // jobListRecyclerView = findViewById(R.id.jobListRecyclerView);
         //RecyclerView 의 layoutManager 세팅
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
-        jobListRecyclerView.setLayoutManager(layoutManager);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+        //jobListRecyclerView.setLayoutManager(layoutManager);
 
         //프로젝트 위치 MapView
         mapContainer = findViewById(R.id.map_view);
@@ -202,41 +201,41 @@ public class ProjectDetailActivity extends AppCompatActivity {
 
 
     //직군 상세정보 요청
-    private void requestProjectJobList() {
-        String url = getResources().getString(R.string.url) + "requestProjectJobListByProjectNumber.do";
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                url,
-                this::processProjectJobLIstResponse,
-                error -> {
+//    private void requestProjectJobList() {
+//        String url = getResources().getString(R.string.url) + "requestProjectJobListByProjectNumber.do";
+//        StringRequest request = new StringRequest(
+//                Request.Method.POST,
+//                url,
+//                this::processProjectJobLIstResponse,
+//                error -> {
+//
+//                }
+//        ){
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("projectNumber",String.valueOf(projectNumber));
+//                return params;
+//            }
+//        };
+//        request.setShouldCache(false);
+//        Base.requestQueue.add(request);
+//    }
 
-                }
-        ){
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String,String> params = new HashMap<>();
-                params.put("projectNumber",String.valueOf(projectNumber));
-                return params;
-            }
-        };
-        request.setShouldCache(false);
-        Base.requestQueue.add(request);
-    }
-
-    //직군 상세정보 처리
-    private void processProjectJobLIstResponse(String response) {
-        JobVO[] projectJobListVOS = Base.gson.fromJson(response, JobVO[].class);
-        jobList = new ArrayList<>(Arrays.asList(projectJobListVOS));
-        adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
-        adapter.setItems(jobList);
-        jobListRecyclerView.setAdapter(adapter);
-    }
-
-    //지원하기 창 띄우기
-    public void showCandidate(int jobNumber) {
-        Intent intent = new Intent(this,CandidateActivity.class);
-        intent.putExtra("jobNumber",jobNumber);
-        startActivityForResult(intent,301);
-    }
+//    //직군 상세정보 처리
+//    private void processProjectJobLIstResponse(String response) {
+//        JobVO[] projectJobListVOS = Base.gson.fromJson(response, JobVO[].class);
+//        jobList = new ArrayList<>(Arrays.asList(projectJobListVOS));
+//        adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
+//        adapter.setItems(jobList);
+//        jobListRecyclerView.setAdapter(adapter);
+//    }
+//
+//    //지원하기 창 띄우기
+//    public void showCandidate(int jobNumber) {
+//        Intent intent = new Intent(this,CandidateActivity.class);
+//        intent.putExtra("jobNumber",jobNumber);
+//        startActivityForResult(intent,301);
+//    }
 
 }

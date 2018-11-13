@@ -25,7 +25,7 @@ import java.util.Map;
 
 import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
 
-//신청 일감 관리 RecyclerViewFragment 윤정민 (진행중)
+//신청 일감 관리 RecyclerViewFragment 윤정민
 public class ManageJobListFragment extends Fragment {
 
     SeekerMainActivity activity;
@@ -64,7 +64,6 @@ public class ManageJobListFragment extends Fragment {
 
     //신청 일감 요청
     private void requestManageList (final String seekerId) {
-        //TODO 거리기반으로 요청이 가도록 구현
         String url = getResources().getString(R.string.url) + "manageJobList.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,

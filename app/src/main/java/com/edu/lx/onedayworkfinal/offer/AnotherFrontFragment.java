@@ -47,14 +47,14 @@ public class AnotherFrontFragment extends Fragment {
         work_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.changeFragment(activity.WORK_MANAGE_FRAGMENT);
+                activity.changeFragment(OfferMainActivity.WORK_MANAGE_FRAGMENT);
             }
         });
 
         rec_labor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.changeFragment(activity.REC_LABOR_FRAGMENT);
+                activity.changeFragment(OfferMainActivity.REC_LABOR_FRAGMENT);
             }
         });
     }

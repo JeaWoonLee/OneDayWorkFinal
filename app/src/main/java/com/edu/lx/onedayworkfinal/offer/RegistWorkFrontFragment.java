@@ -13,14 +13,14 @@ import com.edu.lx.onedayworkfinal.R;
 
 public class RegistWorkFrontFragment extends Fragment{
 
-//    //TODO 일감 등록 (김동가 - 진행중)
-//    OfferMainActivity offerMainActivity;
-//
-//
-//    @Nullable
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.regist_work,container,false);
-//        return rootView;
-//    }
+    //TODO 일감 등록 (김동가 - 진행중)
+    OfferMainActivity offerMainActivity;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_regist_work,container,false);
+        return rootView;
+    }
 }

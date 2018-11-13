@@ -22,9 +22,7 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
     AnotherFrontFragment anotherFrontFragment;
     ReqManageFrontFragment reqManageFrontFragment;
     FindLaborFrontFragment findLaborFrontFragment;
-    RegistWorkFrontFragment registWorkFrontFragment;
-    FistPage fistPage;
-    WorkManageFrontFragment workManageFrontFragment;
+    WorkListFragment workListFragment;
 
     public final static int ANOTHER_FRAGMENT = 0;
     public final static int WORK_MANAGE_FRAGMENT = 1;
@@ -91,7 +89,7 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.regist_work:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container2,fistPage).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,workListFragment).commit();
                 Toast.makeText(this,"옜다 일자리다.", Toast.LENGTH_LONG).show();
                 break;
 
@@ -133,7 +131,7 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
 
             case WORK_MANAGE_FRAGMENT:
                 navigationView2.getMenu().findItem(R.id.work_manage).setChecked(true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.container2,workManageFrontFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,workListFragment).commit();
 
             case REC_LABOR_FRAGMENT:
                 navigationView2.getMenu().findItem(R.id.rec_labor).setChecked(true);

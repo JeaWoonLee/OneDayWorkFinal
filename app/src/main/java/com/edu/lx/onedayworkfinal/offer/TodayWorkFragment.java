@@ -1,6 +1,7 @@
-package com.edu.lx.onedayworkfinal.seeker;
+package com.edu.lx.onedayworkfinal.offer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,31 +9,29 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
-public class FrontFragment extends Fragment {
+import java.util.ArrayList;
 
-    SeekerMainActivity activity;
+public class TodayWorkFragment extends Fragment {
 
-    LinearLayout today_work;
-    LinearLayout find_job;
+    //TODO 오늘의 일감 (김동가 - 진행중)
+    OfferMainActivity activity;
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        activity = (SeekerMainActivity) getActivity();
+        activity = (OfferMainActivity) getActivity();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seeker_front_fragment,container,false);
-
-        today_work = rootView.findViewById(R.id.today_work);
-        find_job = rootView.findViewById(R.id.find_job);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_offer_project_detail,container,false);
 
         return rootView;
     }
@@ -41,10 +40,7 @@ public class FrontFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        today_work.setOnClickListener(v -> {
 
-        });
-
-        find_job.setOnClickListener(v -> activity.changeFragment(SeekerMainActivity.FIND_JOB_FRAGMENT));
     }
+
 }

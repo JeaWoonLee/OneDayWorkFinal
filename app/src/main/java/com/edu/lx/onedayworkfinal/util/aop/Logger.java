@@ -2,7 +2,6 @@ package com.edu.lx.onedayworkfinal.util.aop;
 
 import android.util.Log;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import java.util.List;
 
+@SuppressWarnings("ALL")
 @Aspect
 public class Logger {
 
@@ -36,17 +36,17 @@ public class Logger {
         if(joinPoint.getTarget() == null) return;
 
         // Make log message
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         // append [class.method()]
-        buffer.append("beforeTargetMethod="+processJoinPoint(joinPoint));
+        buffer.append("beforeTargetMethod=").append(processJoinPoint(joinPoint));
 
         // append args
         Object[] arguments = joinPoint.getArgs();
         int argCount = 0;
         for (Object obj : arguments) {
 
-            buffer.append("\n -arg" + argCount++ + " : ");
+            buffer.append("\n -arg").append(argCount++).append(" : ");
 
             if(obj != null) buffer.append(obj.toString());
             else buffer.append("null");
@@ -66,25 +66,25 @@ public class Logger {
         //인터페이스 리스너 메소드가 실행되면 클래스 인스턴스를 갖고 올 수 없어서 에러가 난다
         if (joinPoint.getTarget() == null )return;
         //리턴값이 없다면 AfterReturning 의 로그를 추가로 찍어 줄 필요가 없다
-        else if (returnValue == null) return;;
+        else if (returnValue == null) return;
         // Make log message
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         // append [class.method()]
-        buffer.append("afterReturningTargetMethod=="+processJoinPoint(joinPoint));
+        buffer.append("afterReturningTargetMethod==").append(processJoinPoint(joinPoint));
 
         // return 의 결과값이 List<> 와 Object 에 따라 다르게 로그메세지를 출력
         // List<> 인 경우
         if (returnValue instanceof List) {
             List<?> resultList = (List<?>) returnValue;
             //List 의 size 출력
-            buffer.append("resultList size : " + resultList.size() + "\n");
+            buffer.append("resultList size : ").append(resultList.size()).append("\n");
             //item.toString() 출력
             for (Object item : resultList) buffer.append(item.toString());
 
         } else {
             // Object 인 경우
-            if(returnValue != null) buffer.append(returnValue.toString());
+            buffer.append(returnValue.toString());
         }
 
         Log.d(TAG,buffer.toString());
@@ -100,7 +100,7 @@ public class Logger {
     private String processJoinPoint(JoinPoint joinPoint) {
         // Get Target Class
         @SuppressWarnings("unused")
-        Class<? extends Object> clazz = joinPoint.getTarget().getClass();
+        Class<?> clazz = joinPoint.getTarget().getClass();
         // Get Class Name
         String className = clazz.getSimpleName();
         // Get Method Name

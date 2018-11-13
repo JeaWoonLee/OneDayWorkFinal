@@ -59,19 +59,9 @@ public class FindJobFrontFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //필터 버튼 클릭
-        filterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFilter();
-            }
-        });
+        filterButton.setOnClickListener(v -> showFilter());
 
-        changeViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeView();
-            }
-        });
+        changeViewButton.setOnClickListener(v -> changeView());
 
         findJobRecyclerFragment = new FindJobRecyclerFragment();
         findJobMapFragment = new FindJobMapFragment();

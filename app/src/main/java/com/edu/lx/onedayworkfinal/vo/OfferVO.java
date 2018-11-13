@@ -3,6 +3,7 @@ package com.edu.lx.onedayworkfinal.vo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+@SuppressWarnings("ALL")
 public class OfferVO {
 
     String offerId;

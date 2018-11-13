@@ -61,7 +61,7 @@ dependencies {
     //DaumMap
     implementation files('libs/libDaumMapAndroid.jar')
     //Material-Calendar-View
-    compile 'com.applandeo:material-calendar-view:1.5.0'
+    implementation 'com.applandeo:material-calendar-view:1.5.0'
 }
 //AspectJ Plugin
 apply plugin: 'com.jakewharton.hugo'

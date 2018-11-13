@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".seeker.ProjectDetailActivity">
+    android:layout_height="match_parent">
 
+    <!--TODO 5 오늘의 일감 관리-->
     <!-- Container -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,25 +14,41 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="title"
-            android:background="@color/seeker">
+            android:background="@color/offer">
 
         </android.support.v7.widget.Toolbar>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            style="@style/itemTextView"
-            android:text="기본 정보"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/itemTextView"
+                android:layout_width="wrap_content"
+                android:text="기본 정보" />
+
+            <Button
+                android:id="@+id/AlterButton"
+                style="@style/offerButton"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="195dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="수정" />
+        </LinearLayout>
 
         <!-- 프로젝트 영역 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/seeker_border"
+            android:background="@drawable/offer_border"
             android:layout_margin="10dp">
 
             <!-- 프로젝트 이름-->
@@ -46,9 +62,9 @@
                     android:text="공사명"/>
 
                 <TextView
-                    android:id="@+id/projectName"
+                    android:id="@+id/projectName2"
                     android:layout_width="wrap_content"
-                    style="@style/seekerItemText"
+                    style="@style/offerItemText"
                     android:text="projectName"/>
 
             </LinearLayout>
@@ -64,9 +80,9 @@
                     android:text="일감 분류"/>
 
                 <TextView
-                    android:id="@+id/projectSubject"
+                    android:id="@+id/projectSubject2"
                     android:layout_width="wrap_content"
-                    style="@style/seekerItemText"
+                    style="@style/offerItemText"
                     android:text="projectSubject"/>
 
             </LinearLayout>
@@ -82,9 +98,9 @@
                     android:text="기간"/>
 
                 <TextView
-                    android:id="@+id/projectDate"
+                    android:id="@+id/projectDate2"
                     android:layout_width="wrap_content"
-                    style="@style/seekerItemText"
+                    style="@style/offerItemText"
                     android:text="projectDate"/>
 
             </LinearLayout>
@@ -100,9 +116,9 @@
                     android:text="등록 날짜"/>
 
                 <TextView
-                    android:id="@+id/projectEnrollDate"
+                    android:id="@+id/projectEnrollDate2"
                     android:layout_width="wrap_content"
-                    style="@style/seekerItemText"
+                    style="@style/offerItemText"
                     android:text="projectEnrollDate"/>
 
             </LinearLayout>
@@ -110,22 +126,38 @@
         </LinearLayout>
 
         <!-- 코멘트 -->
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            style="@style/blackTextView"
-            android:text="설명"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/blackTextView"
+                android:layout_width="wrap_content"
+                android:text="설명" />
+
+            <Button
+                android:id="@+id/AlterButton2"
+                style="@style/offerButton"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="228dp"
+                android:layout_weight="1"
+                android:text="수정" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/seeker_border"
+            android:background="@drawable/offer_border"
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/projectComment"
+                android:id="@+id/projectComment2"
                 android:layout_width="wrap_content"
-                style="@style/seekerItemText"
+                style="@style/offerItemText"
                 android:text="projectComment"/>
 
         </LinearLayout>
@@ -139,21 +171,22 @@
 
             <TextView
                 style="@style/blackTextView"
-                android:text="위치"
-                android:layout_width="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:text="사업장 위치" />
+
+            <Button
+                android:id="@+id/RouteButton"
+                style="@style/offerButton"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="175dp"
+                android:layout_weight="1"
+                android:text="위치 찾기" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/findRouteButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="길 찾기"
-                style="@style/seekerButton"
-                android:layout_marginEnd="20dp"/>
 
         </LinearLayout>
             <FrameLayout
@@ -162,10 +195,10 @@
                 android:padding="10dp"
                 android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/seeker_border">
+                android:background="@drawable/offer_border">
 
                 <RelativeLayout
-                    android:id="@+id/map_view"
+                    android:id="@+id/map_view2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -173,27 +206,27 @@
             </FrameLayout>
 
         <!-- 일감 목록 -->
-        <TextView
-            android:layout_width="wrap_content"
-            style="@style/blackTextView"
-            android:text="일감 목록"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:background="@drawable/seeker_border"
-            android:padding="10dp">
-            
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/jobListRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-            </android.support.v7.widget.RecyclerView>
+            <TextView
+                style="@style/blackTextView"
+                android:layout_width="wrap_content"
+                android:text="근로자 명단" />
 
+            <Button
+                android:id="@+id/LaborManageButton"
+                style="@style/offerButton"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="182dp"
+                android:text="관리" />
         </LinearLayout>
+
         <!-- 일감 목록 -->
 
     </LinearLayout>

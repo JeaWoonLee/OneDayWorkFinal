@@ -1,5 +1,6 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -22,11 +23,12 @@ import android.widget.Toast;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
 
-import net.daum.mf.map.api.MapPOIItem;
+import org.jetbrains.annotations.NotNull;
 
 import java.security.MessageDigest;
-import java.util.Date;
 
 
 public class SeekerMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,7 +44,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     //Fragment Index
     public final static int FRONT_FRAGMENT = 0;
     public final static int FIND_JOB_FRAGMENT = 1;
-    public final static int MANAGE_JOB_FRAGEMENT = 2;
+    public final static int MANAGE_JOB_FRAGMENT = 2;
     //네비게이션 뷰
     NavigationView navigationView;
 
@@ -71,7 +73,11 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_main);
 
+        //AutoPermission
+        AutoPermissions.Companion.loadAllPermissions(this,101);
+
         try{
+            @SuppressLint("PackageManagerGetSignatures")
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md;
@@ -134,9 +140,24 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     }
 
+    // AutoPermission CallBack
+    @Override
+    public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, new AutoPermissionsListener() {
+            @Override
+            public void onGranted (int i, @NotNull String[] permissions) {
+            }
+            @Override
+            public void onDenied (int i, @NotNull String[] permissions) {
+            }
+        });
+    }
+    // end AutoPermission CallBack
+
+
     //필터 초기 설정
     private void filterInit() {
-
         //초기설정(없음) 으로 설정하기
         F_projectSubjectFilter = getResources().getStringArray(R.array.projectSubjectFilter)[0];
         F_maxDistanceFilter = getResources().getStringArray(R.array.maxDistanceFilter)[0];
@@ -215,7 +236,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 navigationView.getMenu().findItem(R.id.find_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
-            case MANAGE_JOB_FRAGEMENT :
+            case MANAGE_JOB_FRAGMENT:
                 navigationView.getMenu().findItem(R.id.manage_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,manageJobFrontFragment).commit();
                 break;
@@ -224,6 +245,12 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     }
 
     //프로젝트 디테일 보여주기
+
+    /**
+     * showProjectDetail
+     * FindJobMapFragment, SeekerProjectListRecyclerView, SeekerManagerFragmentRecyclerView 에서 호출됨
+     * @param projectNumber 인텐트에 실어보내서 projectDetailActivity 화면을 띄워준다
+     */
     public void showProjectDetail(int projectNumber) {
         Intent intent = new Intent(this,ProjectDetailActivity.class);
         intent.putExtra("projectNumber",projectNumber);
@@ -255,7 +282,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                     else if (findJobFrontFragment.fragmentIndex == findJobFrontFragment.FIND_JOB_MAP_FRAGMENT) {
                         //findJobFrontFragment.findJobMapFragment.mMapView.removePOIItems(findJobFrontFragment.findJobMapFragment.projectMarkers.toArray(new MapPOIItem[findJobFrontFragment.findJobMapFragment.projectMarkers.size()]));
                         findJobFrontFragment.findJobMapFragment.mMapView.removeAllPOIItems();
-                        findJobFrontFragment.findJobMapFragment.showMyLocation(null);
+                        findJobFrontFragment.findJobMapFragment.showMyLocation();
                         findJobFrontFragment.findJobMapFragment.requestProjectList();
                     }
                     break;

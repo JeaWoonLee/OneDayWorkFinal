@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -96,38 +95,25 @@ public class SeekerJobFilterPopupActivity extends AppCompatActivity {
         setSpinner(maxDistanceSpinner,maxDistanceFilter);
         setSpinner(jobRequirementSpinner,jobRequirementFilter);
         Button confirmFilterButton = findViewById(R.id.confirmFilterButton);
-        confirmFilterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                confirmFilter();
-            }
-        });
+        confirmFilterButton.setOnClickListener(v -> confirmFilter());
 
         Button selectTargetDateButton =findViewById(R.id.selectTargetDateButton);
-        selectTargetDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectTargetDate(F_targetDateFilter);
-            }
-        });
+        selectTargetDateButton.setOnClickListener(v -> selectTargetDate());
         setFilterSelected();
     }
 
-    private void selectTargetDate(String f_targetDateFilter) {
+    private void selectTargetDate() {
         Calendar calendar = Calendar.getInstance(Locale.KOREA);
-        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String date = year + "-" + (month+1) + "-" + dayOfMonth;
-                targetDate.setText(date);
-            }
-        },calendar.get(calendar.YEAR),calendar.get(calendar.MONTH),calendar.get(calendar.DAY_OF_MONTH));
+        DatePickerDialog dialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+            String date = year + "-" + (month+1) + "-" + dayOfMonth;
+            targetDate.setText(date);
+        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
         dialog.getDatePicker().setMinDate(new Date().getTime());
         dialog.show();
     }
 
     private void setSubjectSpinner(Spinner projectSubjectSpinner, String[] projectSubjectFilter) {
-        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item,projectSubjectFilter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_item,projectSubjectFilter);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         projectSubjectSpinner.setAdapter(adapter);
         projectSubjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -177,7 +163,7 @@ public class SeekerJobFilterPopupActivity extends AppCompatActivity {
     }
 
     private void setSpinner(Spinner spinner, String[] arrays) {
-        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item,arrays);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_item,arrays);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

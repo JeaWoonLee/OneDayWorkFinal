@@ -9,17 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
-    public ArrayList<T> items;
+    private ArrayList<T> items;
     public Context context;
 
     public BaseRecyclerViewAdapter (Context context) {
         this.context = context;
     }
 
-    public View inflateView(Context context, @LayoutRes int layoutRes, ViewGroup parent) {
+    protected View inflateView(Context context, @LayoutRes int layoutRes, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(layoutRes,parent,false);
     }
 
@@ -28,8 +30,8 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     public abstract BaseViewHolder onCreateViewHolder (@NonNull ViewGroup viewGroup, int i);
 
     @Override
-    public void onBindViewHolder (@NonNull BaseViewHolder baseViewHodler, int i) {
-        baseViewHodler.setItem(items.get(i));
+    public void onBindViewHolder (@NonNull BaseViewHolder baseViewHolder, int i) {
+        Objects.requireNonNull(baseViewHolder).setItem(items.get(i));
     }
 
     @Override

@@ -35,9 +35,6 @@ public class ManageJobFrontFragment extends Fragment {
     public final int MANAGE_JOB_MAP_FRAGMENT = 1;
     private int fragmentIndex = 0;
 
-    //리사이클러 뷰 / 맵 뷰 에서 사용되는 프로젝트 배열
-    static ArrayList<ProjectVO> items = null;
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -61,19 +58,9 @@ public class ManageJobFrontFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //필터 버튼 클릭
-        filterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFilter();
-            }
-        });
+        filterButton.setOnClickListener(v -> showFilter());
 
-        changeViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeView();
-            }
-        });
+        changeViewButton.setOnClickListener(v -> changeView());
 
         manageJobListFragment = new ManageJobListFragment();
         manageJobMapFragment = new ManageJobMapFragment();
@@ -85,12 +72,12 @@ public class ManageJobFrontFragment extends Fragment {
 
         switch (fragmentIndex) {
             case MANAGE_JOB_LIST_FRAGMENT :
-                fragmentIndex = MANAGE_JOB_LIST_FRAGMENT;
+                this.fragmentIndex = MANAGE_JOB_MAP_FRAGMENT;
                 changeViewButton.setText("리스트로 보기");
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,manageJobMapFragment).commit();
                 break;
             case MANAGE_JOB_MAP_FRAGMENT :
-                fragmentIndex = MANAGE_JOB_MAP_FRAGMENT;
+                this.fragmentIndex = MANAGE_JOB_LIST_FRAGMENT;
                 changeViewButton.setText("맵으로 보기");
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,manageJobListFragment).commit();
                 break;

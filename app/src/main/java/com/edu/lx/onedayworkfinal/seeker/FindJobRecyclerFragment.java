@@ -14,10 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerProjectListRecyclerViewAdapter;
@@ -28,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
 
@@ -72,21 +70,13 @@ public class FindJobRecyclerFragment extends Fragment {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse (String response) {
-                        processProjectResponse(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse (VolleyError error) {
+                this::processProjectResponse,
+                error -> {
 
-                    }
                 }
         ){
             @Override
-            protected Map<String, String> getParams () throws AuthFailureError {
+            protected Map<String, String> getParams () {
                 Location lastLocation = null;
 
                 //LocationService 로 부터 lastLocation 을 받아옴
@@ -98,7 +88,7 @@ public class FindJobRecyclerFragment extends Fragment {
                 }
                 //필터 정보를 담아서 보내기
                 Map<String,String> params = new HashMap<>();
-                params.put("myLat",String.valueOf(lastLocation.getLatitude()));
+                params.put("myLat",String.valueOf(Objects.requireNonNull(lastLocation).getLatitude()));
                 params.put("myLng",String.valueOf(lastLocation.getLongitude()));
                 params.put("projectSubjectFilter", SeekerMainActivity.F_projectSubjectFilter);
                 params.put("jobNameFilter", SeekerMainActivity.F_jobNameFilter);

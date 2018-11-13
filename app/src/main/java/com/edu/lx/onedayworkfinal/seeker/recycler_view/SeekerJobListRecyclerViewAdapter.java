@@ -31,7 +31,7 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Jo
         TextView jobDate;
 
 
-        public SeekerProjectListViewHolder (@NonNull View itemView) {
+        SeekerProjectListViewHolder(@NonNull View itemView) {
             super(itemView);
             jobName = itemView.findViewById(R.id.jobName);
             jobPay = itemView.findViewById(R.id.jobPay);
@@ -44,7 +44,7 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Jo
             jobName.setText(item.getJobName());
             //1000 단위 숫자로 콤마를 찍어서 보여준다
             jobPay.setText(Base.decimalFormat(item.getJobPay()));
-            jobDate.setText(item.getJobStartDate() + " - " + item.getJobEndDate());
+            jobDate.setText(String.format("%s - %s", item.getJobStartDate(), item.getJobEndDate()));
 
         }
 

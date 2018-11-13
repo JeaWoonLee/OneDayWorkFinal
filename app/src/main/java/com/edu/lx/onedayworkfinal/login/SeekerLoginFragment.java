@@ -14,16 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
+import com.edu.lx.onedayworkfinal.util.session.SessionManager;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.SeekerVO;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,12 +49,7 @@ public class SeekerLoginFragment extends Fragment {
 
         //로그인 버튼
         Button seekerLoginButton = rootView.findViewById(R.id.seekerLoginButton);
-        seekerLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginSeeker();
-            }
-        });
+        seekerLoginButton.setOnClickListener(v -> loginSeeker());
         return rootView;
     }
 
@@ -68,26 +62,18 @@ public class SeekerLoginFragment extends Fragment {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        SeekerVO seekerVO = Base.gson.fromJson(response,SeekerVO.class);
-                        if (seekerVO != null) {
-                            processSeekerLogin(seekerVO);
-                        }else {
-                            Toast.makeText(activity,"로그인에 실패했습니다",Toast.LENGTH_LONG).show();
-                        }
+                response -> {
+                    SeekerVO seekerVO = Base.gson.fromJson(response,SeekerVO.class);
+                    if (seekerVO != null) {
+                        processSeekerLogin(seekerVO);
+                    }else {
+                        Toast.makeText(activity,"로그인에 실패했습니다",Toast.LENGTH_LONG).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("error",error.getStackTrace().toString());
-                    }
-                }
+                error -> Log.i("error", Arrays.toString(error.getStackTrace()))
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("userId",seekerId);
                 params.put("userPw",seekerPw);
@@ -104,7 +90,7 @@ public class SeekerLoginFragment extends Fragment {
 
         //노동자 로그인 결과를 세션에 담음
         //Base.sessionSeeker = seekerVO;
-        Base.sessionManager.createLoginSession(seekerVO.getSeekerName(),seekerVO.getSeekerId(),Base.sessionManager.IS_SEEKER);
+        Base.sessionManager.createLoginSession(seekerVO.getSeekerName(),seekerVO.getSeekerId(), SessionManager.IS_SEEKER);
 
         //노동자 메인화면으로 이동
         Intent intent = new Intent(activity, SeekerMainActivity.class);

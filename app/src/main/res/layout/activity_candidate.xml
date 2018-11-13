@@ -10,7 +10,7 @@
     <!-- container -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".seeker.CandidateActivity"
         android:orientation="vertical">
 
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             style="@style/itemTextView"
-            android:text="모집 정보"/>
+            android:text="@string/activity_candidate1"/>
 
         <!-- 모집 정보 -->
         <LinearLayout
@@ -33,8 +33,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/seeker_border"
             android:layout_margin="10dp"
-            android:paddingRight="10dp"
-            android:orientation="vertical">
+            android:paddingEnd="10dp"
+            android:orientation="vertical"
+            tools:ignore="RtlSymmetry">
 
             <!-- 직군 -->
             <LinearLayout
@@ -44,7 +45,7 @@
 
                 <TextView
                     style="@style/itemTextView"
-                    android:text="직종" />
+                    android:text="@string/activity_candidate2" />
 
                 <View
                     android:layout_width="0dp"
@@ -55,7 +56,7 @@
                     android:id="@+id/jobName"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
-                    android:text="jobName"/>
+                    android:text="@string/activity_candidate3"/>
 
             </LinearLayout>
             <!-- //end 직군 -->
@@ -68,7 +69,7 @@
 
                 <TextView
                     style="@style/itemTextView"
-                    android:text="급여" />
+                    android:text="@string/activity_candidate4" />
 
                 <View
                     android:layout_width="0dp"
@@ -80,12 +81,12 @@
                     android:layout_width="wrap_content"
                     android:layout_margin="0dp"
                     style="@style/seekerItemText"
-                    android:text="jobPay"/>
+                    android:text="@string/activity_candidate5"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
-                    android:text="원"/>
+                    android:text="@string/activity_candidate6"/>
 
             </LinearLayout>
             <!-- //end 급여 -->
@@ -98,7 +99,7 @@
 
                 <TextView
                     style="@style/itemTextView"
-                    android:text="요구자격" />
+                    android:text="@string/activity_candidate7" />
 
                 <View
                     android:layout_width="0dp"
@@ -109,7 +110,7 @@
                     android:id="@+id/jobRequirement"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
-                    android:text="jobRequirement"/>
+                    android:text="@string/activity_candidate8"/>
 
             </LinearLayout>
             <!-- //end 요구자격 -->
@@ -120,7 +121,7 @@
         <TextView
             android:layout_width="wrap_content"
             style="@style/itemTextView"
-            android:text="날짜 선택"/>
+            android:text="@string/activity_candidate9"/>
 
         <com.applandeo.materialcalendarview.CalendarView
             android:id="@+id/calendar"
@@ -129,7 +130,7 @@
             android:layout_margin="10dp"
             app:selectionColor="@color/offer"
             app:selectionLabelColor="@color/seeker"
-            app:disabledDaysLabelsColor="@color/red"
+            app:disabledDaysLabelsColor="@color/danger"
             app:type="one_day_picker">
 
         </com.applandeo.materialcalendarview.CalendarView>
@@ -141,7 +142,9 @@
             android:orientation="vertical"
             android:background="@drawable/seeker_border"
             android:layout_marginHorizontal="10dp"
-            android:paddingEnd="30dp">
+            android:paddingEnd="30dp"
+            tools:targetApi="o"
+            tools:ignore="RtlSymmetry">
 
             <!-- 모집 인원 -->
             <LinearLayout
@@ -151,7 +154,7 @@
 
                 <TextView
                     style="@style/itemTextView"
-                    android:text="선택 날짜" />
+                    android:text="@string/activity_candidate10" />
 
                 <View
                     android:layout_width="0dp"
@@ -163,7 +166,7 @@
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
                     android:layout_margin="5dp"
-                    android:text="날짜를 선택하세요" />
+                    android:text="@string/activity_candidate11" />
 
             </LinearLayout>
             <!-- //end 모집 인원 -->
@@ -176,7 +179,7 @@
 
                 <TextView
                     style="@style/itemTextView"
-                    android:text="인원" />
+                    android:text="@string/activity_candidate12" />
 
                 <View
                     android:layout_width="0dp"
@@ -188,26 +191,26 @@
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
                     android:layout_margin="5dp"
-                    android:text="0" />
+                    android:text="@string/activity_candidate13" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
                     android:layout_margin="5dp"
-                    android:text="/" />
+                    android:text="@string/activity_candidate14" />
 
                 <TextView
                     android:id="@+id/limitCount"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
                     android:layout_margin="5dp"
-                    android:text="0" />
+                    android:text="@string/activity_candidate15" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
                     android:layout_margin="10dp"
-                    android:text="명" />
+                    android:text="@string/activity_candidate16" />
 
             </LinearLayout>
             <!-- //end 모집 인원 -->
@@ -219,7 +222,7 @@
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             style="@style/seekerButton"
-            android:text="신청하기"/>
+            android:text="@string/activity_candidate17"/>
 
     </LinearLayout>
     <!-- //end container -->

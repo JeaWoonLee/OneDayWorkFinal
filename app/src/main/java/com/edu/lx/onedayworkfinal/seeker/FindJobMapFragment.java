@@ -1,5 +1,6 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.location.Location;
@@ -13,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerJobListRecyclerViewAdapter;
@@ -41,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class FindJobMapFragment extends Fragment implements LocationListener,MapView.POIItemEventListener {
 
@@ -66,7 +66,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
     //ProjectList
     public ArrayList<ProjectVO> items;
     //JobList
-    public Map<Integer,ArrayList<JobVO>> jobListMap = new HashMap<>();
+    public SparseArray<ArrayList<JobVO>> jobListMap = new SparseArray<>();
 
     @Override
     public void onAttach(Context context) {
@@ -100,7 +100,8 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
     class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
         private final View mCalloutBalloon;
 
-        public CustomCalloutBalloonAdapter() {
+        @SuppressLint("InflateParams")
+        CustomCalloutBalloonAdapter() {
             mCalloutBalloon = getLayoutInflater().inflate(R.layout.custom_callout_balloon, null);
         }
 
@@ -109,7 +110,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
             if (poiItem.getUserObject() instanceof ProjectVO){
                 final ProjectVO item = (ProjectVO) poiItem.getUserObject();
                 ((TextView) mCalloutBalloon.findViewById(R.id.projectName)).setText(item.getProjectName());
-                ((TextView) mCalloutBalloon.findViewById(R.id.projectDate)).setText(item.getProjectStartDate() + " - " + item.getProjectEndDate());
+                ((TextView) mCalloutBalloon.findViewById(R.id.projectDate)).setText(String.format("%s - %s", item.getProjectStartDate(), item.getProjectEndDate()));
                 ((TextView) mCalloutBalloon.findViewById(R.id.projectSubject)).setText(item.getProjectSubject());
                 ((TextView) mCalloutBalloon.findViewById(R.id.projectEnrollDate)).setText(item.getProjectEnrollDate());
                 LinearLayoutManager layoutManager = new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
@@ -137,13 +138,8 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
         super.onViewCreated(view, savedInstanceState);
 
         //내 위치보기 플로팅 아이콘을 클릭했을 때
-        myLocationFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                traceMyLocation();
-            }
-        });
-        showMyLocation(null);
+        myLocationFab.setOnClickListener(v -> traceMyLocation());
+        showMyLocation();
 
     }
 
@@ -153,21 +149,13 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse (String response) {
-                        processProjectResponse(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse (VolleyError error) {
+                this::processProjectResponse,
+                error -> {
 
-                    }
                 }
         ){
             @Override
-            protected Map<String, String> getParams () throws AuthFailureError {
+            protected Map<String, String> getParams () {
                 Location lastLocation = null;
 
                 //LocationService 로 부터 lastLocation 을 받아옴
@@ -185,7 +173,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
                         mMapView.removeCircle(distanceBuffer);
                     }
                     distanceBuffer = new MapCircle(
-                            MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),
+                            MapPoint.mapPointWithGeoCoord(Objects.requireNonNull(lastLocation).getLatitude(),lastLocation.getLongitude()),
                             distance,
                             getResources().getColor(R.color.black,activity.getTheme()),
                             getResources().getColor(R.color.seeker50,activity.getTheme())
@@ -195,7 +183,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
                 }
                 //필터 정보를 담아서 보내기
                 Map<String,String> params = new HashMap<>();
-                params.put("myLat",String.valueOf(lastLocation.getLatitude()));
+                params.put("myLat",String.valueOf(Objects.requireNonNull(lastLocation).getLatitude()));
                 params.put("myLng",String.valueOf(lastLocation.getLongitude()));
                 params.put("projectSubjectFilter", SeekerMainActivity.F_projectSubjectFilter);
                 params.put("jobNameFilter", SeekerMainActivity.F_jobNameFilter);
@@ -222,23 +210,17 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse (String response) {
-                        JobVO[] jobsArray = Base.gson.fromJson(response, JobVO[].class);
-                        ArrayList<JobVO> items = new ArrayList<>(Arrays.asList(jobsArray));
-                        jobListMap.put(projectNumber,items);
-                    }
+                response -> {
+                    JobVO[] jobsArray = Base.gson.fromJson(response, JobVO[].class);
+                    ArrayList<JobVO> items = new ArrayList<>(Arrays.asList(jobsArray));
+                    jobListMap.put(projectNumber,items);
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse (VolleyError error) {
+                error -> {
 
-                    }
                 }
         ){
             @Override
-            protected Map<String, String> getParams () throws AuthFailureError {
+            protected Map<String, String> getParams () {
                 Map<String,String> params = new HashMap<>();
                 params.put("projectNumber",String.valueOf(projectNumber));
                 return params;
@@ -270,13 +252,13 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
             projectMarker.setUserObject(item);
             projectMarkers.add(projectMarker);
         }
-        mMapView.addPOIItems(projectMarkers.toArray(new MapPOIItem[projectMarkers.size()]));
+        mMapView.addPOIItems(projectMarkers.toArray(new MapPOIItem[0]));
 
     }
 
     //내 위치보기 플로팅 아이콘을 클릭했을 때
     private void traceMyLocation() {
-        if (isAim == false) {
+        if (!isAim) {
             //아이콘 배경 설정
             myLocationFab.setSupportBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.seeker,activity.getTheme())));
             //검색 최소 시간
@@ -290,7 +272,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
                 e.printStackTrace();
             }
 
-        } else if (isAim == true) {
+        } else {
             //아이콘 배경 설정
             myLocationFab.setSupportBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.white,activity.getTheme())));
             Base.locationManager.removeUpdates(this);
@@ -301,7 +283,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
     }
 
     //내 위치 보여주기
-    public void showMyLocation(Location location) {
+    public void showMyLocation() {
         Location lastLocation = null;
         //LocationService 로 부터 lastLocation 을 받아옴
         try {
@@ -311,41 +293,45 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
             Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
         }
         //DistanceFilter 에 따라 zoomLevel 이 바뀜
-        int zoomLivel = 4;
+        int zoomLevel = 0;
         if (TextUtils.equals(SeekerMainActivity.F_maxDistanceFilter,"없음")){
-            zoomLivel = 7;
+            zoomLevel = 7;
         } else if (Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter) == 500){
-            zoomLivel = 4;
+            zoomLevel = 4;
         } else if (Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter) == 1000){
-            zoomLivel = 5;
+            zoomLevel = 5;
         } else if (Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter) == 5000){
-            zoomLivel = 6;
+            zoomLevel = 6;
         } else if (Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter) == 10000){
-            zoomLivel = 7;
+            zoomLevel = 7;
         }
 
         //카메라를 현제 위치로 이동함
-            mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),zoomLivel,true);
-        //마커가 만들어 져 있지 않다면 마커를 새로 만듦
-        if (myLocationMarker == null){
-            myLocationMarker = new MapPOIItem();
-            myLocationMarker.setItemName("내 위치");
-            myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()));
-            myLocationMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-            myLocationMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-            mMapView.addPOIItem(myLocationMarker);
-        }else {
-            mMapView.removePOIItem(myLocationMarker);
-            myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()));
-            mMapView.addPOIItem(myLocationMarker);
+        if (lastLocation != null){
+            mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),zoomLevel,true);
+
+            //마커가 만들어 져 있지 않다면 마커를 새로 만듦
+            if (myLocationMarker == null){
+                myLocationMarker = new MapPOIItem();
+                myLocationMarker.setItemName("내 위치");
+                myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()));
+                myLocationMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+                myLocationMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+                mMapView.addPOIItem(myLocationMarker);
+            }else {
+                mMapView.removePOIItem(myLocationMarker);
+                myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()));
+                mMapView.addPOIItem(myLocationMarker);
+            }
         }
+
 
     }
 
     //LocationListener
     @Override
     public void onLocationChanged(Location location) {
-        showMyLocation(location);
+        showMyLocation();
     }
 
     @Override

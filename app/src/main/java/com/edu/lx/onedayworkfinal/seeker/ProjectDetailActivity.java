@@ -1,6 +1,5 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.location.Location;
@@ -12,15 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
@@ -109,12 +104,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
 
         //길 찾기 버튼
         Button findRouteButton = findViewById(R.id.findRouteButton);
-        findRouteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDaumMapFindRoute();
-            }
-        });
+        findRouteButton.setOnClickListener(v -> showDaumMapFindRoute());
 
     }
 
@@ -162,21 +152,13 @@ public class ProjectDetailActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        processProjectDetailResponse(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                this::processProjectDetailResponse,
+                error -> {
 
-                    }
                 }
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("projectNumber",String.valueOf(projectNumber));
                 return params;
@@ -197,7 +179,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
         //TextView 에 값 입력
         projectName.setText(projectVO.getProjectName());
         projectSubject.setText(projectVO.getProjectSubject());
-        projectDate.setText(projectVO.getProjectStartDate() + " - " + projectVO.getProjectEndDate());
+        projectDate.setText(String.format("%s - %s", projectVO.getProjectStartDate(), projectVO.getProjectEndDate()));
         projectEnrollDate.setText(projectVO.getProjectEnrollDate());
         projectComment.setText(projectVO.getProjectComment());
 
@@ -223,21 +205,13 @@ public class ProjectDetailActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        processProjectJobLIstResponse(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                this::processProjectJobLIstResponse,
+                error -> {
 
-                    }
                 }
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("projectNumber",String.valueOf(projectNumber));
                 return params;

@@ -1,5 +1,6 @@
 package com.edu.lx.onedayworkfinal.vo;
 
+@SuppressWarnings("ALL")
 public class JobCandidateVO {
 
 

@@ -16,11 +16,14 @@ import com.edu.lx.onedayworkfinal.join.JoinActivity;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
+import com.edu.lx.onedayworkfinal.util.session.SessionManager;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -68,12 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //회원가입 글씨를 클릭했을 때 회원가입 페이지로 보내기
         TextView joinUserTextView = findViewById(R.id.joinUserTextView);
-        joinUserTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showJoinActivity();
-            }
-        });
+        joinUserTextView.setOnClickListener(v -> showJoinActivity());
 
     }
 
@@ -88,10 +86,10 @@ public class LoginActivity extends AppCompatActivity {
         if (Base.sessionManager.isLoggedIn()) {
             String index = Base.sessionManager.getUserDetails().get("userIndex");
 
-            if (index.equals(Base.sessionManager.IS_SEEKER)) {
+            if (Objects.equals(index, SessionManager.IS_SEEKER)) {
                 Intent intent = new Intent(this,SeekerMainActivity.class);
                 startActivityForResult(intent,101);
-            } else if (index.equals(Base.sessionManager.IS_OFFER)) {
+            } else if (Objects.equals(index, SessionManager.IS_OFFER)) {
                 //TODO 구인자 페이지로 보내기(김동가 - 종료)
                 Intent intent = new Intent(this, OfferMainActivity.class);
                 startActivityForResult(intent,101);
@@ -155,8 +153,6 @@ public class LoginActivity extends AppCompatActivity {
             seekerLoginFrag.seekerIdInput.setText("");
             seekerLoginFrag.seekerPwInput.setText("");
 
-        } else if (requestCode == 102) {
-            //회원가입 화면에서 돌아온 경우
         }
 
         //로그인 세션 체크. 로그인이 되어 있다면 해당 액티비티로 보낸다

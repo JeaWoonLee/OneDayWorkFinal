@@ -20,6 +20,8 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.util.Objects;
+
 public class DaumMapFragment extends Fragment {
 
     SeekerMainActivity activity;
@@ -67,7 +69,7 @@ public class DaumMapFragment extends Fragment {
         //플로팅 아이콘을 클릭하여 LocationListener 를 통해 위치를 받았다면 해당 위치를 사용한다
 
         //카메라를 현제 위치로 이동함
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),2,true);
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(Objects.requireNonNull(lastLocation).getLatitude(),lastLocation.getLongitude()),2,true);
 
         myLocationMarkerOption = new MapPOIItem();
         myLocationMarkerOption.setItemName("내 위치");

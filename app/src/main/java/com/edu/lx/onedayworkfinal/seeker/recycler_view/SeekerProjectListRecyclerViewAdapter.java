@@ -9,10 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
@@ -50,16 +47,13 @@ public class SeekerProjectListRecyclerViewAdapter extends BaseRecyclerViewAdapte
         SeekerJobListRecyclerViewAdapter adapter;
 
         //SeekerProjectListViewHolder
-        public SeekerProjectListViewHolder (@NonNull View itemView) {
+        SeekerProjectListViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TextView projectNumber = v.findViewById(R.id.projectNumber);
-                    String projectNum = projectNumber.getText().toString();
-                    SeekerMainActivity activity = (SeekerMainActivity)context;
-                    activity.showProjectDetail(Integer.parseInt(projectNum));
-                }
+            itemView.setOnClickListener(v -> {
+                TextView projectNumber = v.findViewById(R.id.projectNumber);
+                String projectNum = projectNumber.getText().toString();
+                SeekerMainActivity activity = (SeekerMainActivity)context;
+                activity.showProjectDetail(Integer.parseInt(projectNum));
             });
             projectNumber = itemView.findViewById(R.id.projectNumber);
             projectName = itemView.findViewById(R.id.projectName);
@@ -86,7 +80,7 @@ public class SeekerProjectListRecyclerViewAdapter extends BaseRecyclerViewAdapte
 
                 projectName.setText(projectVO.getProjectName());
                 projectSubject.setText(projectVO.getProjectSubject());
-                projectDate.setText(projectVO.getProjectStartDate() + " - " + projectVO.getProjectEndDate());
+                projectDate.setText(String.format("%s - %s", projectVO.getProjectStartDate(), projectVO.getProjectEndDate()));
                 projectEnrollDate.setText(projectVO.getProjectEnrollDate());
                 projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
                 requestProjectJobList(projectVO.getProjectNumber());
@@ -106,21 +100,13 @@ public class SeekerProjectListRecyclerViewAdapter extends BaseRecyclerViewAdapte
             StringRequest request = new StringRequest(
                     Request.Method.POST,
                     url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse (String response) {
-                            processJobListResponse(response);
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse (VolleyError error) {
+                    this::processJobListResponse,
+                    error -> {
 
-                        }
                     }
             ){
                 @Override
-                protected Map<String, String> getParams () throws AuthFailureError {
+                protected Map<String, String> getParams () {
                     Map<String,String> params = new HashMap<>();
                     params.put("projectNumber",String.valueOf(projectNumber));
                     return params;

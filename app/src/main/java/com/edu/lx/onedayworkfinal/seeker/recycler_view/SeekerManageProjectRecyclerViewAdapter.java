@@ -7,20 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
@@ -51,16 +46,13 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
         SeekerManageProjectRecyclerViewAdapter adapter;
 
-        public SeekerManageProjectViewHolder(@NonNull View itemView) {
+        SeekerManageProjectViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TextView projectNumber = v.findViewById(R.id.projectNumber);
-                    String projectNum = projectNumber.getText().toString();
-                    SeekerMainActivity activity = (SeekerMainActivity) context;
-                    activity.showProjectDetail(Integer.parseInt(projectNum));
-                }
+            itemView.setOnClickListener(v -> {
+                TextView projectNumber = v.findViewById(R.id.projectNumber);
+                String projectNum = projectNumber.getText().toString();
+                SeekerMainActivity activity = (SeekerMainActivity) context;
+                activity.showProjectDetail(Integer.parseInt(projectNum));
             });
             projectNumber = itemView.findViewById(R.id.projectNumber);
             projectName = itemView.findViewById(R.id.projectName);
@@ -86,7 +78,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
                 projectName.setText(projectVO.getProjectName());
                 projectSubject.setText(projectVO.getProjectSubject());
-                projectDate.setText(projectVO.getProjectStartDate() + projectVO.getProjectEndDate());
+                projectDate.setText(String.format("%s%s", projectVO.getProjectStartDate(), projectVO.getProjectEndDate()));
                 projectEnrollDate.setText(projectVO.getProjectEnrollDate());
                 projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
                 //requestProjectJobList(projectVO.getProjectNumber());
@@ -104,24 +96,15 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
             StringRequest request = new StringRequest(
                     Request.Method.POST,
                     url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            processJobListResponse(response);
-                        }
-                    },
+                    this::processJobListResponse,
+                    error -> {
 
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                        }
                     }
 
 
             ) {
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
+                protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("projectNumber", String.valueOf(projectNumber));
                     return params;

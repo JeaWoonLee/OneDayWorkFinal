@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+@SuppressWarnings("ALL")
 public class Base extends MultiDexApplication {
 
     //Volley

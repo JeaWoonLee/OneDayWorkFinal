@@ -14,16 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
+import com.edu.lx.onedayworkfinal.util.session.SessionManager;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferVO;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,12 +47,7 @@ public class OfferLoginFragment extends Fragment {
         offerPwInput = rootView.findViewById(R.id.offerPwInput);
 
         Button seekerLoginButton = rootView.findViewById(R.id.offerLoginButton);
-        seekerLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginOffer();
-            }
-        });
+        seekerLoginButton.setOnClickListener(v -> loginOffer());
         return rootView;
     }
 
@@ -65,26 +59,18 @@ public class OfferLoginFragment extends Fragment {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        OfferVO offerVO = Base.gson.fromJson(response,OfferVO.class);
-                        if (offerVO != null) {
-                            processOfferLogin(offerVO);
-                        }else {
-                            Toast.makeText(activity,"로그인에 실패하였습니다",Toast.LENGTH_LONG).show();
-                        }
+                response -> {
+                    OfferVO offerVO = Base.gson.fromJson(response,OfferVO.class);
+                    if (offerVO != null) {
+                        processOfferLogin(offerVO);
+                    }else {
+                        Toast.makeText(activity,"로그인에 실패하였습니다",Toast.LENGTH_LONG).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("error",error.getStackTrace().toString());
-                    }
-                }
+                error -> Log.i("error", Arrays.toString(error.getStackTrace()))
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("userId",offerId);
                 params.put("userPw",offerPw);
@@ -101,7 +87,7 @@ public class OfferLoginFragment extends Fragment {
         Toast.makeText(activity,"로그인에 성공하였습니다",Toast.LENGTH_LONG).show();
         //TODO 사업자 로그인 구현하기(윤정민 - 종료)
         // 사업자 로그인 정보를 세션에 담기
-        Base.sessionManager.createLoginSession(offerVO.getOfferName(),offerVO.getOfferId(),Base.sessionManager.IS_OFFER);
+        Base.sessionManager.createLoginSession(offerVO.getOfferName(),offerVO.getOfferId(), SessionManager.IS_OFFER);
 
         Intent intent = new Intent(activity, OfferMainActivity.class);
         activity.startActivityForResult(intent,101);

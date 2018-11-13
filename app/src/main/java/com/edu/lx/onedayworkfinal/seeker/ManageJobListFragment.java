@@ -10,18 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageProjectRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
-import com.edu.lx.onedayworkfinal.vo.SeekerVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,21 +69,13 @@ public class ManageJobListFragment extends Fragment {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse (String response) {
-                        processProjectResponse(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse (VolleyError error) {
+                this::processProjectResponse,
+                error -> {
 
-                    }
                 }
         ){
             @Override
-            protected Map<String, String> getParams () throws AuthFailureError {
+            protected Map<String, String> getParams () {
                 //TODO ID로 결과값 가져오기
                 Map<String, String> params = new HashMap<>();
                 params.put("seekerId", String.valueOf(seekerId));

@@ -19,5 +19,5 @@
     <!-- 회색 -->
     <color name="dark_gray">#808080</color>
     <!-- 빨강 -->
-    <color name="red">#ff3333</color>
+    <color name="danger">#ff3333</color>
 </resources>

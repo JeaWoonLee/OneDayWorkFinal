@@ -37,7 +37,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     FrontFragment frontFragment;
     public FindJobFrontFragment findJobFrontFragment;
     public ManageJobFrontFragment manageJobFrontFragment;
-    DaumMapFragment daumMapFragment;
+    MyInfoFragment myInfoFragment;
 
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
@@ -120,7 +120,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         //프래그먼트 초기 설정
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
-        daumMapFragment = new DaumMapFragment();
+        myInfoFragment = new MyInfoFragment();
         manageJobFrontFragment = new ManageJobFrontFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
@@ -193,7 +193,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
                 //내 계정 정보 프래그먼트로 이동
             case R.id.my_account_info :
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,daumMapFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, myInfoFragment).commit();
                 break;
 
                 //로그 아웃

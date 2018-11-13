@@ -5,7 +5,8 @@
     <string name="app_name">하루일감</string>
     <string name="url">http://192.168.40.160/odw/</string>
 
-    <!-- Calendar -->
+
+    <!-- activity_candidate -->
     <string name="material_calendar_monday">월</string>
     <string name="material_calendar_tuesday">화</string>
     <string name="material_calendar_wednesday">수</string>
@@ -13,7 +14,9 @@
     <string name="material_calendar_friday">금</string>
     <string name="material_calendar_saturday">토</string>
     <string name="material_calendar_sunday">일</string>
+    <!--//end activity_candidate-->
 
+    <!-- Calendar -->
     <array name="material_calendar_months_array">
         <item>1월</item>
         <item>2월</item>
@@ -97,6 +100,23 @@
     <string name="join_offer_fragment16">회사명</string>
     <string name="navigation_drawer_open1">열기</string>
     <string name="navigation_drawer_close1">닫기</string>
+    <string name="activity_candidate1">모집정보</string>
+    <string name="activity_candidate2">직종</string>
+    <string name="activity_candidate3">jobName</string>
+    <string name="activity_candidate4">급여</string>
+    <string name="activity_candidate5">jobPay</string>
+    <string name="activity_candidate6">원</string>
+    <string name="activity_candidate7">요구자격</string>
+    <string name="activity_candidate8">jobRequirement</string>
+    <string name="activity_candidate9">날짜선택</string>
+    <string name="activity_candidate10">선택날짜</string>
+    <string name="activity_candidate11">날짜를 선택하세요</string>
+    <string name="activity_candidate12">인원</string>
+    <string name="activity_candidate13">0</string>
+    <string name="activity_candidate14">/</string>
+    <string name="activity_candidate15">0</string>
+    <string name="activity_candidate16">명</string>
+    <string name="activity_candidate17">신청하기</string>
     <!-- //end join_seeker_fragment -->
 
     <string name=""

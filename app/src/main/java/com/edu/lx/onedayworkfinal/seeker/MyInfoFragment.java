@@ -22,7 +22,7 @@ import net.daum.mf.map.api.MapView;
 
 import java.util.Objects;
 
-public class DaumMapFragment extends Fragment {
+public class MyInfoFragment extends Fragment {
 
     SeekerMainActivity activity;
     MapView mapView;
@@ -38,7 +38,7 @@ public class DaumMapFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.daum_map_framgent,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.my_info_fragment,container,false);
 
         //다음이 제공하는 MapView객체 생성 및 API Key 설정
         mapView = new MapView(activity);

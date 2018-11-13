@@ -86,10 +86,10 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
                 projectName.setText(projectVO.getProjectName());
                 projectSubject.setText(projectVO.getProjectSubject());
-                projectDate.setText(projectVO.getProjectStartDate() + projectVO.getProjectEndDate());
+                projectDate.setText(projectVO.getProjectStartDate() + "~" + projectVO.getProjectEndDate());
                 projectEnrollDate.setText(projectVO.getProjectEnrollDate());
                 projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
-                //requestProjectJobList(projectVO.getProjectNumber());
+                requestProjectJobList(projectVO.getProjectNumber());
 
             } else {
 
@@ -99,7 +99,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
 
         private void requestProjectJobList(final int projectNumber) {
-            String url = context.getResources().getString(R.string.url) + "manageJobList.do";
+            String url = context.getResources().getString(R.string.url) + "";
 
             StringRequest request = new StringRequest(
                     Request.Method.POST,

@@ -3,7 +3,7 @@
     <!-- 아카데미 서버 http://192.168.40.20/odw/-->
     <!-- 로컬 서버 http://10.0.2.2/odw/-->
     <string name="app_name">하루일감</string>
-    <string name="url">http://192.168.40.11:9000/odw/</string>
+    <string name="url">http://192.168.40.30/odw/</string>
 
 
     <!-- activity_candidate -->
@@ -100,8 +100,6 @@
     <string name="join_offer_fragment16">회사명</string>
     <string name="navigation_drawer_open1">열기</string>
     <string name="navigation_drawer_close1">닫기</string>
-    <!-- //end join_seeker_fragment -->
-
     <string name="activity_candidate1">모집정보</string>
     <string name="activity_candidate2">직종</string>
     <string name="activity_candidate3">jobName</string>
@@ -119,6 +117,6 @@
     <string name="activity_candidate15">0</string>
     <string name="activity_candidate16">명</string>
     <string name="activity_candidate17">신청하기</string>
-
+    <!-- //end join_seeker_fragment -->
 
 </resources>

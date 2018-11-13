@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
+import static com.edu.lx.onedayworkfinal.seeker.find.FindJobFrontFragment.items;
 
 //신청 일감 관리 RecyclerViewFragment 윤정민 (진행중)
 public class ManageJobListFragment extends Fragment {

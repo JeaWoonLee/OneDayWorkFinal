@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.vo.ProjectVO;
-
-import java.util.ArrayList;
+import com.edu.lx.onedayworkfinal.seeker.find.SeekerJobFilterPopupActivity;
 
 //신청 일감 관리 FrontFragment 윤정민(진행중)
 public class ManageJobFrontFragment extends Fragment {

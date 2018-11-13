@@ -5,7 +5,6 @@
     <string name="app_name">하루일감</string>
     <string name="url">http://192.168.40.30/odw/</string>
 
-
     <!-- activity_candidate -->
     <string name="material_calendar_monday">월</string>
     <string name="material_calendar_tuesday">화</string>

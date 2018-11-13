@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.find.FindJobFrontFragment;
+import com.edu.lx.onedayworkfinal.seeker.find.ProjectDetailActivity;
+import com.edu.lx.onedayworkfinal.seeker.info.MyInfoFragment;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.pedro.library.AutoPermissions;
@@ -56,17 +59,17 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     //FindJobFragment(일 찾기) 에서 사용되는 필터 설정
     //프로젝트 대분류
-    static String F_projectSubjectFilter;
+    public static String F_projectSubjectFilter;
     //프로젝트 거리
-    static String F_maxDistanceFilter;
+    public static String F_maxDistanceFilter;
     //직군 중분류
-    static String F_jobNameFilter;
+    public static String F_jobNameFilter;
     //일당
-    static String F_jobPayFilter;
+    public static String F_jobPayFilter;
     //요구 조건
-    static String F_jobRequirementFilter;
+    public static String F_jobRequirementFilter;
     //대상 날짜
-    static String F_targetDateFilter;
+    public static String F_targetDateFilter;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {

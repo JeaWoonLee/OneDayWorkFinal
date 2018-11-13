@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.seeker.ProjectDetailActivity;
+import com.edu.lx.onedayworkfinal.seeker.find.ProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;

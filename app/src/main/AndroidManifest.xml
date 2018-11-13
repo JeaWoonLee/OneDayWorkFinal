@@ -47,11 +47,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".join.JoinActivity" />
-        <activity android:name=".seeker.ProjectDetailActivity" />
+        <activity android:name=".seeker.find.ProjectDetailActivity" />
         <activity android:name=".seeker.CandidateActivity" />
         <activity android:name=".offer.OfferMainActivity" />
 
-        <activity android:name=".seeker.SeekerJobFilterPopupActivity"
+        <activity android:name=".seeker.find.SeekerJobFilterPopupActivity"
             android:theme="@style/PopupTheme"></activity>
         <!-- 다음 맵-->
         <meta-data

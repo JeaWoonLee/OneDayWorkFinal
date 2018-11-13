@@ -34,12 +34,15 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     //Fragment
     FrontFragment frontFragment;
     public FindJobFrontFragment findJobFrontFragment;
+    public ManageJobFrontFragment manageJobFrontFragment;
     DaumMapFragment daumMapFragment;
+
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
     //Fragment Index
     public final static int FRONT_FRAGMENT = 0;
     public final static int FIND_JOB_FRAGMENT = 1;
+    public final static int MANAGE_JOB_FRAGEMENT = 2;
     //네비게이션 뷰
     NavigationView navigationView;
 
@@ -112,6 +115,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
         daumMapFragment = new DaumMapFragment();
+        manageJobFrontFragment = new ManageJobFrontFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //필터 설정 init
@@ -139,7 +143,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         F_jobNameFilter = getResources().getStringArray(R.array.noneFilter)[0];
         F_jobPayFilter = getResources().getStringArray(R.array.jobPayFilter)[0];
         F_jobRequirementFilter = getResources().getStringArray(R.array.jobRequirementFilter)[0];
-        F_targetDateFilter = Base.simpleDateFormat.format(new Date());
+        F_targetDateFilter = "없음";
     }
 
     //네비게이션 뷰 아이템 클릭 리스너
@@ -158,6 +162,12 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
             case R.id.find_job :
                 //일 찾기 프래그먼트로 이동
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
+                break;
+
+                //일 관리
+            case R.id.manage_job :
+                //일 관리 프래그먼트로 이동
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, manageJobFrontFragment).commit();
                 break;
 
                 //내 계정 정보 프래그먼트로 이동
@@ -205,6 +215,10 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 navigationView.getMenu().findItem(R.id.find_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
+            case MANAGE_JOB_FRAGEMENT :
+                navigationView.getMenu().findItem(R.id.manage_job).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,manageJobFrontFragment).commit();
+                break;
 
         }
     }
@@ -241,6 +255,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                     else if (findJobFrontFragment.fragmentIndex == findJobFrontFragment.FIND_JOB_MAP_FRAGMENT) {
                         //findJobFrontFragment.findJobMapFragment.mMapView.removePOIItems(findJobFrontFragment.findJobMapFragment.projectMarkers.toArray(new MapPOIItem[findJobFrontFragment.findJobMapFragment.projectMarkers.size()]));
                         findJobFrontFragment.findJobMapFragment.mMapView.removeAllPOIItems();
+                        findJobFrontFragment.findJobMapFragment.showMyLocation(null);
                         findJobFrontFragment.findJobMapFragment.requestProjectList();
                     }
                     break;

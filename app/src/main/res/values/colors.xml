@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <!-- 찐노랑 -->
     <color name="seeker">#f7b417</color>
+    <color name="seeker50">#7FF7b417</color>
     <!-- 옥수수꽃파랑 -->
     <color name="blue1">#6495ed</color>
     <!-- 코랄(산호빛) -->
@@ -17,4 +18,6 @@
     <color name="gray">#E2E2E2</color>
     <!-- 회색 -->
     <color name="dark_gray">#808080</color>
+    <!-- 빨강 -->
+    <color name="red">#ff3333</color>
 </resources>

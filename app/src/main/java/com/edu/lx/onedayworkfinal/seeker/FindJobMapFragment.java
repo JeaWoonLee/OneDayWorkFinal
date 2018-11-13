@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
+import net.daum.mf.map.api.MapCircle;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -53,6 +55,8 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
     public MapPOIItem myLocationMarker;
     boolean isAim = false;
 
+    //필터 버퍼
+    MapCircle distanceBuffer;
     //일감 마커
     public ArrayList<MapPOIItem> projectMarkers;
 
@@ -164,8 +168,35 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
         ){
             @Override
             protected Map<String, String> getParams () throws AuthFailureError {
+                Location lastLocation = null;
+
+                //LocationService 로 부터 lastLocation 을 받아옴
+                try {
+                    lastLocation = Base.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                }
+                catch (SecurityException e) {
+                    Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
+                }
+
+                //거리를 검색할 때, 버퍼 써클 추가
+                if(!TextUtils.equals(SeekerMainActivity.F_maxDistanceFilter,"없음")){
+                    int distance = Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter);
+                    if (distanceBuffer != null) {
+                        mMapView.removeCircle(distanceBuffer);
+                    }
+                    distanceBuffer = new MapCircle(
+                            MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),
+                            distance,
+                            getResources().getColor(R.color.black,activity.getTheme()),
+                            getResources().getColor(R.color.seeker50,activity.getTheme())
+                    );
+                    distanceBuffer.setTag(distance);
+                    mMapView.addCircle(distanceBuffer);
+                }
                 //필터 정보를 담아서 보내기
                 Map<String,String> params = new HashMap<>();
+                params.put("myLat",String.valueOf(lastLocation.getLatitude()));
+                params.put("myLng",String.valueOf(lastLocation.getLongitude()));
                 params.put("projectSubjectFilter", SeekerMainActivity.F_projectSubjectFilter);
                 params.put("jobNameFilter", SeekerMainActivity.F_jobNameFilter);
                 params.put("jobPayFilter",SeekerMainActivity.F_jobPayFilter);
@@ -270,9 +301,8 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
     }
 
     //내 위치 보여주기
-    private void showMyLocation(Location location) {
+    public void showMyLocation(Location location) {
         Location lastLocation = null;
-
         //LocationService 로 부터 lastLocation 을 받아옴
         try {
             lastLocation = Base.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -280,10 +310,22 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
         catch (SecurityException e) {
             Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
         }
+        //DistanceFilter 에 따라 zoomLevel 이 바뀜
+        int zoomLivel = 4;
+        if (TextUtils.equals(SeekerMainActivity.F_maxDistanceFilter,"없음")){
+            zoomLivel = 7;
+        } else if (Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter) == 500){
+            zoomLivel = 4;
+        } else if (Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter) == 1000){
+            zoomLivel = 5;
+        } else if (Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter) == 5000){
+            zoomLivel = 6;
+        } else if (Integer.valueOf(SeekerMainActivity.F_maxDistanceFilter) == 10000){
+            zoomLivel = 7;
+        }
 
         //카메라를 현제 위치로 이동함
-        mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),2,true);
-
+            mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()),zoomLivel,true);
         //마커가 만들어 져 있지 않다면 마커를 새로 만듦
         if (myLocationMarker == null){
             myLocationMarker = new MapPOIItem();

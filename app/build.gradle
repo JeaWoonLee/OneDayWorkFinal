@@ -23,6 +23,12 @@ android {
         }
     }
 
+    //Material-Calendar-View
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -54,11 +60,13 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     //DaumMap
     implementation files('libs/libDaumMapAndroid.jar')
+    //Material-Calendar-View
+    compile 'com.applandeo:material-calendar-view:1.5.0'
 }
 //AspectJ Plugin
 apply plugin: 'com.jakewharton.hugo'
 //GoogleFireBase
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
 
 //AspectJ Another Plugin
 //apply plugin: 'com.uphyca.android-aspectj'

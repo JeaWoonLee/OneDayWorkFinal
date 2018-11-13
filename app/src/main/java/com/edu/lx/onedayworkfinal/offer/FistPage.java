@@ -18,7 +18,7 @@ public class FistPage extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.regist_work,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_regist_work,container,false);
         return rootView;
     }
 }

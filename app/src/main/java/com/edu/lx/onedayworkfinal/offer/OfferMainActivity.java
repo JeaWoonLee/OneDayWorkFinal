@@ -23,9 +23,11 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
     ReqManageFrontFragment reqManageFrontFragment;
     FindLaborFrontFragment findLaborFrontFragment;
     RegistWorkFrontFragment registWorkFrontFragment;
+    FistPage fistPage;
+    WorkManageFrontFragment workManageFrontFragment;
 
     public final static int ANOTHER_FRAGMENT = 0;
-    public final static int REQ_MANAGE_FRAGMENT = 1;
+    public final static int WORK_MANAGE_FRAGMENT = 1;
     public final static int REC_LABOR_FRAGMENT = 2;
 
     NavigationView navigationView2;
@@ -45,11 +47,11 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar2 = findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar2);
 
         drawerLayout2 = findViewById(R.id.drawer_layout2);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout2,toolbar,R.string.navigation_drawer_open1,R.string.navigation_drawer_close1);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout2,toolbar2,R.string.navigation_drawer_open1,R.string.navigation_drawer_close1);
         drawerLayout2.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -89,7 +91,7 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.regist_work:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container2,registWorkFrontFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,fistPage).commit();
                 Toast.makeText(this,"옜다 일자리다.", Toast.LENGTH_LONG).show();
                 break;
 
@@ -128,6 +130,10 @@ public class OfferMainActivity extends AppCompatActivity implements NavigationVi
             case ANOTHER_FRAGMENT:
                 navigationView2.getMenu().findItem(R.id.front2).setChecked(true);
                 break;
+
+            case WORK_MANAGE_FRAGMENT:
+                navigationView2.getMenu().findItem(R.id.work_manage).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container2,workManageFrontFragment).commit();
 
             case REC_LABOR_FRAGMENT:
                 navigationView2.getMenu().findItem(R.id.rec_labor).setChecked(true);

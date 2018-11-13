@@ -47,8 +47,7 @@ public class AnotherFrontFragment extends Fragment {
         work_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity,WorkManageFrontFragment.class);
-                startActivityForResult(intent,305);
+                activity.changeFragment(activity.WORK_MANAGE_FRAGMENT);
             }
         });
 

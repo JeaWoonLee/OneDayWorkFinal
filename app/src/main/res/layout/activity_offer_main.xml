@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <!--TODO 사업자 네비게이션 바 화면(김동가 - 구현완료- )-->
+    <!--TODO 2 사업자 네비게이션 바 화면(김동가 - 구현완료- )-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -22,7 +22,7 @@ public class ReqManageFrontFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.req_manager_front_fragment,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.work_manager_front_fragment,container,false);
 
         return rootView;
     }

@@ -15,14 +15,14 @@ public class ReqManageFrontFragment extends Fragment {
     //TODO 신청관리 (김동가 - 진행중)
     OfferMainActivity activity;
 
-    FindLaborFrontFragment findLaborFrontFragment;
+
 
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.work_manager_front_fragment,container,false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.req_manager_fragment,container,false);
 
         return rootView;
     }

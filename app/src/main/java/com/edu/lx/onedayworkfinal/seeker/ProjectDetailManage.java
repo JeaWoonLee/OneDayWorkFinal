@@ -1,6 +1,7 @@
-package com.edu.lx.onedayworkfinal.seeker.find;
+package com.edu.lx.onedayworkfinal.seeker;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
@@ -11,14 +12,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.app.AlertDialog;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.seeker.CandidateActivity;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.JobVO;
@@ -34,7 +38,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ProjectDetailActivity extends AppCompatActivity {
+// Managedetail 가져옴 .... 일감 신청하기 recycler view 없음
+public class ProjectDetailManage extends AppCompatActivity {
 
     //이전 액티비티로 부터 받아온 엑스트라 데이터
     int projectNumber;
@@ -57,6 +62,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
     //프로젝트 위치 마커
     MapPOIItem projectMarker;
 
+
     //모집 직군 RecyclerView
     RecyclerView jobListRecyclerView;
 
@@ -68,7 +74,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_detail);
+        setContentView(R.layout.activity_project_detail_manage);
 
         //로그인 체크
         Base.sessionManager.checkLogin();
@@ -76,10 +82,8 @@ public class ProjectDetailActivity extends AppCompatActivity {
         //이전 액티비티로 부터 받아온 인텐트 처리
         Intent intent = getIntent();
         projectNumber = intent.getIntExtra("projectNumber",0);
-
-
         requestProjectDetail();
-        requestProjectJobList();
+        //requestProjectJobList();
 
         //툴바 설정
         toolbar = findViewById(R.id.toolbar);
@@ -95,10 +99,10 @@ public class ProjectDetailActivity extends AppCompatActivity {
         projectComment = findViewById(R.id.projectComment);
 
         //모집 직군 RecyclerView
-        jobListRecyclerView = findViewById(R.id.jobListRecyclerView);
+       // jobListRecyclerView = findViewById(R.id.jobListRecyclerView);
         //RecyclerView 의 layoutManager 세팅
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
-        jobListRecyclerView.setLayoutManager(layoutManager);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+        //jobListRecyclerView.setLayoutManager(layoutManager);
 
         //프로젝트 위치 MapView
         mapContainer = findViewById(R.id.map_view);
@@ -109,8 +113,37 @@ public class ProjectDetailActivity extends AppCompatActivity {
         Button findRouteButton = findViewById(R.id.findRouteButton);
         findRouteButton.setOnClickListener(v -> showDaumMapFindRoute());
 
+        //일감 취소 버튼
+        Button cancelButton = findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show();
+            }
+        });
+
     }
 
+    private void show() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("일감 취소");
+        builder.setMessage("정말로 일을 취소하시겠습니까 ? ");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"일감을 취소하였습니다..",Toast.LENGTH_LONG).show();
+                        //cancelProject();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
+                    }
+                });
+        builder.show();
+     }
     private void showDaumMapFindRoute() {
         Location myLocation = null;
         try{
@@ -201,22 +234,23 @@ public class ProjectDetailActivity extends AppCompatActivity {
         mapView.addPOIItem(projectMarker);
     }
 
-
-    //직군 상세정보 요청
-    private void requestProjectJobList() {
-        String url = getResources().getString(R.string.url) + "requestProjectJobListByProjectNumber.do";
+    //일감 취소
+    private void cancelProject() {
+        String url = getResources().getString(R.string.url) + "cancelProject.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                this::processProjectJobLIstResponse,
+                this::processProjectDetailResponse,
                 error -> {
 
-                }
+            }
+
         ){
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("projectNumber",String.valueOf(projectNumber));
+                params.put("projectNumber", String.valueOf(projectNumber));
+
                 return params;
             }
         };
@@ -224,20 +258,42 @@ public class ProjectDetailActivity extends AppCompatActivity {
         Base.requestQueue.add(request);
     }
 
-    //직군 상세정보 처리
-    private void processProjectJobLIstResponse(String response) {
-        JobVO[] projectJobListVOS = Base.gson.fromJson(response, JobVO[].class);
-        jobList = new ArrayList<>(Arrays.asList(projectJobListVOS));
-        adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
-        adapter.setItems(jobList);
-        jobListRecyclerView.setAdapter(adapter);
-    }
-
-    //지원하기 창 띄우기
-    public void showCandidate(int jobNumber) {
-        Intent intent = new Intent(this,CandidateActivity.class);
-        intent.putExtra("jobNumber",jobNumber);
-        startActivityForResult(intent,301);
-    }
+    //직군 상세정보 요청
+//    private void requestProjectJobList() {
+//        String url = getResources().getString(R.string.url) + "requestProjectJobListByProjectNumber.do";
+//        StringRequest request = new StringRequest(
+//                Request.Method.POST,
+//                url,
+//                this::processProjectJobLIstResponse,
+//                error -> {
+//
+//                }
+//       ){
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("projectNumber",String.valueOf(projectNumber));
+//                return params;
+//            }
+//        };
+//        request.setShouldCache(false);
+//        Base.requestQueue.add(request);
+//    }
+//
+//    //직군 상세정보 처리
+//    private void processProjectJobLIstResponse(String response) {
+//        JobVO[] projectJobListVOS = Base.gson.fromJson(response, JobVO[].class);
+//        jobList = new ArrayList<>(Arrays.asList(projectJobListVOS));
+//        adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
+//        adapter.setItems(jobList);
+//        jobListRecyclerView.setAdapter(adapter);
+//    }
+//
+//    //지원하기 창 띄우기
+//    public void showCandidate(int jobNumber) {
+//        Intent intent = new Intent(this,CandidateActivity.class);
+//        intent.putExtra("jobNumber",jobNumber);
+//        startActivityForResult(intent,301);
+//    }
 
 }

@@ -261,6 +261,12 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         startActivityForResult(intent,201);
     }
 
+    public void showProjectDetailManage(int projectNumber) {
+        Intent intent = new Intent(this,ProjectDetailManage.class);
+        intent.putExtra("projectNumber",projectNumber);
+        startActivityForResult(intent,202);
+    }
+
     @Override
     protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

@@ -59,7 +59,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
                     TextView projectNumber = v.findViewById(R.id.projectNumber);
                     String projectNum = projectNumber.getText().toString();
                     SeekerMainActivity activity = (SeekerMainActivity) context;
-                    activity.showProjectDetail(Integer.parseInt(projectNum));
+                    activity.showProjectDetailManage(Integer.parseInt(projectNum));
                 }
             });
             projectNumber = itemView.findViewById(R.id.projectNumber);
@@ -86,7 +86,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
                 projectName.setText(projectVO.getProjectName());
                 projectSubject.setText(projectVO.getProjectSubject());
-                projectDate.setText(projectVO.getProjectStartDate() + projectVO.getProjectEndDate());
+                projectDate.setText(projectVO.getProjectStartDate() + "~" +projectVO.getProjectEndDate());
                 projectEnrollDate.setText(projectVO.getProjectEnrollDate());
                 projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
                 //requestProjectJobList(projectVO.getProjectNumber());
@@ -97,7 +97,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
             }
         }
 
-
+        //날짜로 구분 진행해야함 . 181113. new .do 생성, jobVO를 포함한 새로운 VO 생성
         private void requestProjectJobList(final int projectNumber) {
             String url = context.getResources().getString(R.string.url) + "manageJobList.do";
 

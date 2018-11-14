@@ -1,6 +1,7 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
@@ -11,10 +12,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.app.AlertDialog;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
@@ -56,6 +61,7 @@ public class ProjectDetailManage extends AppCompatActivity {
 
     //프로젝트 위치 마커
     MapPOIItem projectMarker;
+
 
     //모집 직군 RecyclerView
     RecyclerView jobListRecyclerView;
@@ -107,8 +113,37 @@ public class ProjectDetailManage extends AppCompatActivity {
         Button findRouteButton = findViewById(R.id.findRouteButton);
         findRouteButton.setOnClickListener(v -> showDaumMapFindRoute());
 
+        //일감 취소 버튼
+        Button cancelButton = findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show();
+            }
+        });
+
     }
 
+    private void show() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("일감 취소");
+        builder.setMessage("정말로 일을 취소하시겠습니까 ? ");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"일감을 취소하였습니다..",Toast.LENGTH_LONG).show();
+                        cancelProject();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
+                    }
+                });
+        builder.show();
+     }
     private void showDaumMapFindRoute() {
         Location myLocation = null;
         try{
@@ -199,6 +234,29 @@ public class ProjectDetailManage extends AppCompatActivity {
         mapView.addPOIItem(projectMarker);
     }
 
+    //일감 취소
+    private void cancelProject() {
+        String url = getResources().getString(R.string.url) + "cancelProject.do";
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url,
+                this::processProjectDetailResponse,
+                error -> {
+
+            }
+
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("projectNumber", String.valueOf(projectNumber));
+
+                return params;
+            }
+        };
+        request.setShouldCache(false);
+        Base.requestQueue.add(request);
+    }
 
     //직군 상세정보 요청
 //    private void requestProjectJobList() {
@@ -210,7 +268,7 @@ public class ProjectDetailManage extends AppCompatActivity {
 //                error -> {
 //
 //                }
-//        ){
+//       ){
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String,String> params = new HashMap<>();
@@ -221,7 +279,7 @@ public class ProjectDetailManage extends AppCompatActivity {
 //        request.setShouldCache(false);
 //        Base.requestQueue.add(request);
 //    }
-
+//
 //    //직군 상세정보 처리
 //    private void processProjectJobLIstResponse(String response) {
 //        JobVO[] projectJobListVOS = Base.gson.fromJson(response, JobVO[].class);

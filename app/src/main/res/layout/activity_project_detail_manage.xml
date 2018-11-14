@@ -171,7 +171,14 @@
 
             </RelativeLayout>
         </FrameLayout>
-
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="일감 취소"
+            style="@style/seekerButton"
+            android:layout_marginEnd="20dp"
+            />
     </LinearLayout>
     <!-- Container -->
 

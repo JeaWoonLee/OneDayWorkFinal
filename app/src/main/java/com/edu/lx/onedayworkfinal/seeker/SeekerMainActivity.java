@@ -26,6 +26,7 @@ import com.edu.lx.onedayworkfinal.seeker.find.ProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.seeker.info.MyInfoFragment;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
+import com.edu.lx.onedayworkfinal.vo.CertificationVO;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
@@ -40,7 +41,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     FrontFragment frontFragment;
     public FindJobFrontFragment findJobFrontFragment;
     public ManageJobFrontFragment manageJobFrontFragment;
-    MyInfoFragment myInfoFragment;
+    public MyInfoFragment myInfoFragment;
 
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
@@ -289,8 +290,31 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                         findJobFrontFragment.findJobMapFragment.requestProjectList();
                     }
                     break;
+                case 401:
+                    myInfoFragment.item.setSeekerLatitude(intent.getDoubleExtra("lat",0));
+                    myInfoFragment.item.setSeekerLongitude(intent.getDoubleExtra("lng",0));
+                    myInfoFragment.showMapView(myInfoFragment.item);
+                    break;
+                case 402:
+                    String certificateNumber = intent.getStringExtra("certificateNumber");
+                    String certificate = intent.getStringExtra("certificate");
+                    CertificationVO item = new CertificationVO();
+                    item.setSeekerCertificateNumber(certificateNumber);
+                    item.setCertificateName(certificate);
+                    item.setSeekerId(Base.sessionManager.getUserDetails().get("id"));
+
+                    myInfoFragment.items.add(item);
+                    myInfoFragment.adapter.notifyDataSetChanged();
+                    break;
+                case 403:
+                    myInfoFragment.showPicture(null);
+                    break;
             }
+        }else if (requestCode == 403){
+            myInfoFragment.showPicture(null);
+
         }
 
     }
+
 }

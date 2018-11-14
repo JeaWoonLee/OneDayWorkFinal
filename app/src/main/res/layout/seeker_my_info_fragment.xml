@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Basic Info -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/blackTextView"
+            android:text="기본 정보"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <!-- seekerId -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="아이디"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/seekerId"
+                    style="@style/seekerItemText"
+                    android:text="seekerId"/>
+
+            </LinearLayout>
+
+            <!-- seekerName -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="이름"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/seekerName"
+                    style="@style/seekerItemText"
+                    android:text="seekerName"/>
+
+            </LinearLayout>
+
+            <!-- seekerSex -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="성별"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/seekerSex"
+                    style="@style/seekerItemText"
+                    android:text="seekerSex"/>
+
+            </LinearLayout>
+
+            <!-- seekerBirth -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="생년월일"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/seekerBirth"
+                    style="@style/seekerItemText"
+                    android:text="seekerBirth"/>
+
+            </LinearLayout>
+
+            <!-- seekerEmail -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="이메일"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/seekerEmail"
+                    style="@style/seekerItemText"
+                    android:text="seekerEmail"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- //end Basic Info -->
+
+        <!-- //seekerInfo-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="소개글"
+            style="@style/blackTextView"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/seeker_border"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/seekerInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </FrameLayout>
+        <!-- //end seekerInfo -->
+        <!-- Account Info -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/blackTextView"
+            android:text="계좌 정보"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <!-- Account Info -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="계좌정보"/>
+
+                <Spinner
+                    android:id="@+id/bankSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
+
+                </Spinner>
+
+                <EditText
+                    android:id="@+id/seekerAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/seekerEditText"
+                    android:layout_marginEnd="20dp"
+                    android:inputType="number"
+                    android:hint="계좌번호를 입력하세요"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+            <!-- seekerCash -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="소지금"/>
+
+                <TextView
+                    android:id="@+id/seekerCash"
+                    android:layout_width="wrap_content"
+                    android:text="seekerCash"
+                    style="@style/seekerItemText"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- //end Account Info -->
+
+        <!-- LocationInfo -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/blackTextView"
+            android:text="활동위치 설정"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/seeker_border">
+
+            <FrameLayout
+                android:id="@+id/mapContainer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="10dp">
+            </FrameLayout>
+
+        </LinearLayout>
+        <!-- //end LocationInfo -->
+
+        <!-- certificate Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/blackTextView"
+                android:layout_width="wrap_content"
+                android:text="자격증"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/addCertificateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                style="@style/seekerButton"
+                android:text="+ 추가"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/certificateRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <!-- //end certificate Info -->
+
+        <!-- AdditionalInfo -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/blackTextView"
+            android:text="추가정보"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="사진 여부"/>
+
+                <TextView
+                    android:id="@+id/seekerIsPicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="없음"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/showPictureButton"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerButton"
+                    android:text="사진 보기"
+                    android:layout_marginEnd="10dp"/>
+
+                <Button
+                    android:id="@+id/takePictureButton"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerButton"
+                    android:text="사진 찍기"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- //end AdditionalInfo -->
+
+        <Button
+            android:id="@+id/updateMyInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/seekerButton"
+            android:layout_margin="10dp"
+            android:text="내 정보 수정"/>
+    </LinearLayout>
+    <!-- //end Container -->
+</ScrollView>

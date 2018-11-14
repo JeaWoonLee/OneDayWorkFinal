@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.find.SeekerJobFilterPopupActivity;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;

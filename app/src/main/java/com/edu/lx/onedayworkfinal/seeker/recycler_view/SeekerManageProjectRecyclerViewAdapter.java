@@ -32,7 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-//recycler view 해제 
+//recycler view 해제
 public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ManageVO> {
 
     public SeekerManageProjectRecyclerViewAdapter(Context context) {

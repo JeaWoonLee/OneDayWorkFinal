@@ -260,6 +260,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         startActivityForResult(intent,201);
     }
 
+    //candidate number로 바꾸기
     public void showProjectDetailManage(int projectNumber) {
         Intent intent = new Intent(this,ProjectDetailManage.class);
         intent.putExtra("projectNumber",projectNumber);

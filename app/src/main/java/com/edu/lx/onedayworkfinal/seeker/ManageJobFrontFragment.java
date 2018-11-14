@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.vo.ManageVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
@@ -33,7 +34,9 @@ public class ManageJobFrontFragment extends Fragment {
     //리사이클러 뷰 / 맵 뷰 인덱스
     public final int MANAGE_JOB_LIST_FRAGMENT = 0;
     public final int MANAGE_JOB_MAP_FRAGMENT = 1;
-    private int fragmentIndex = 0;
+    private int fragmentIndex = 2;
+
+    static ArrayList<ManageVO> items = null;
 
     @Override
     public void onAttach(Context context) {

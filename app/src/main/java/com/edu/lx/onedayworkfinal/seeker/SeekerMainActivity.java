@@ -257,9 +257,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         startActivityForResult(intent,201);
     }
 
-    public void showProjectDetailManage(int projectNumber) {
-        Intent intent = new Intent(this,ProjectDetailManage.class);
-        intent.putExtra("projectNumber",projectNumber);
+    public void showProjectDetailManage(int candidateNumber) {
+        Intent intent = new Intent(this,ManageProjectDetailFragment.class);
+        intent.putExtra("candidateNumber",candidateNumber);
         startActivityForResult(intent,202);
     }
 
@@ -292,6 +292,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                         findJobFrontFragment.findJobMapFragment.requestProjectList();
                     }
                     break;
+                    case 401 :
+                        manageJobFrontFragment.manageJobListFragment.requestManageList(Base.sessionManager.getUserDetails().get("id"));
+                        break;
             }
         }
 

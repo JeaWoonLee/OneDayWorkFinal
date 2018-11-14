@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -21,14 +22,18 @@ import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.JobVO;
+import com.edu.lx.onedayworkfinal.vo.ManageVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ProjectVO> {
+//recycler view 해제 
+public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ManageVO> {
 
     public SeekerManageProjectRecyclerViewAdapter(Context context) {
         super(context);
@@ -37,17 +42,18 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SeekerManageProjectViewHolder(inflateView(super.context, R.layout.seeker_find_project_item, viewGroup));
+        return new SeekerManageProjectViewHolder(inflateView(super.context, R.layout.seeker_manage_project_item, viewGroup));
     }
 
-    class SeekerManageProjectViewHolder extends BaseViewHolder<ProjectVO> {
+    class SeekerManageProjectViewHolder extends BaseViewHolder<ManageVO> {
 
         TextView projectName;
         TextView projectDate;
         TextView projectSubject;
-        TextView projectEnrollDate;
+        TextView targetDate;
         TextView projectNumber;
-        RecyclerView jobListRecyclerView;
+        TextView candidateNumber;
+        //RecyclerView ManageListRecyclerView;
 
         SeekerManageProjectRecyclerViewAdapter adapter;
 
@@ -56,22 +62,23 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TextView projectNumber = v.findViewById(R.id.projectNumber);
-                    String projectNum = projectNumber.getText().toString();
+                    String candidateNum = candidateNumber.getText().toString();
                     SeekerMainActivity activity = (SeekerMainActivity) context;
-                    activity.showProjectDetailManage(Integer.parseInt(projectNum));
+                    Toast.makeText(activity.getApplicationContext(),"candidateNum" + candidateNum,Toast.LENGTH_LONG).show();
+                    activity.showProjectDetailManage(Integer.parseInt(candidateNum));
                 }
             });
             projectNumber = itemView.findViewById(R.id.projectNumber);
             projectName = itemView.findViewById(R.id.projectName);
             projectDate = itemView.findViewById(R.id.projectDate);
-            projectEnrollDate = itemView.findViewById(R.id.projectEnrollDate);
+            targetDate = itemView.findViewById(R.id.targetDate);
             projectSubject = itemView.findViewById(R.id.projectSubject);
+            candidateNumber = itemView.findViewById(R.id.candidateNumber);
 
-            jobListRecyclerView = itemView.findViewById(R.id.jobListRecyclerView);
+            //ManageListRecyclerView = itemView.findViewById(R.id.ManageListRecyclerView);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(context.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-            jobListRecyclerView.setLayoutManager(layoutManager);
+            //ManageListRecyclerView.setLayoutManager(layoutManager);
 
             adapter = new SeekerManageProjectRecyclerViewAdapter(context);
 
@@ -80,16 +87,17 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
 
         @Override
-        public void setItem(ProjectVO projectVO) {
+        public void setItem(ManageVO manageVO) {
 
-            if (projectVO != null) {
-
-                projectName.setText(projectVO.getProjectName());
-                projectSubject.setText(projectVO.getProjectSubject());
-                projectDate.setText(projectVO.getProjectStartDate() + "~" +projectVO.getProjectEndDate());
-                projectEnrollDate.setText(projectVO.getProjectEnrollDate());
-                projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
-                //requestProjectJobList(projectVO.getProjectNumber());
+            if (manageVO != null) {
+                Log.d("manageVO",manageVO.toString());
+                projectName.setText(manageVO.getProjectName());
+                projectSubject.setText(manageVO.getProjectSubject());
+                projectDate.setText(manageVO.getProjectStartDate() + "~" +manageVO.getProjectEndDate());
+                targetDate.setText(manageVO.getTargetDate());
+                projectNumber.setText(String.valueOf(manageVO.getProjectNumber()));
+                candidateNumber.setText(String.valueOf(manageVO.getCandidateNumber()));
+                //requestProjectJobListCanNum(manageVO.getCandidateNumber());
 
             } else {
 
@@ -98,48 +106,48 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
         }
 
         //날짜로 구분 진행해야함 . 181113. new .do 생성, jobVO를 포함한 새로운 VO 생성
-        private void requestProjectJobList(final int projectNumber) {
-            String url = context.getResources().getString(R.string.url) + "manageJobList.do";
-
-            StringRequest request = new StringRequest(
-                    Request.Method.POST,
-                    url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            processJobListResponse(response);
-                        }
-                    },
-
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                        }
-                    }
-
-
-            ) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("projectNumber", String.valueOf(projectNumber));
-                    return params;
-                }
-            };
-
-            request.setShouldCache(false);
-            Base.requestQueue.add(request);
-
-        }
-
-        private void processJobListResponse(String response) {
-            ProjectVO[] jobsArray = Base.gson.fromJson(response, ProjectVO[].class);
-            ArrayList<ProjectVO> items = new ArrayList<>(Arrays.asList(jobsArray));
-
-            adapter.setItems(items);
-            jobListRecyclerView.setAdapter(adapter);
-        }
+//        private void requestProjectJobListCanNum(final int candidateNumber) {
+//            String url = context.getResources().getString(R.string.url) + "requestProjectJobListCanNum.do";
+//
+//            StringRequest request = new StringRequest(
+//                    Request.Method.POST,
+//                    url,
+//                    new Response.Listener<String>() {
+//                        @Override
+//                        public void onResponse(String response) {
+//                            processJobListResponse(response);
+//                        }
+//                    },
+//
+//                    new Response.ErrorListener() {
+//                        @Override
+//                        public void onErrorResponse(VolleyError error) {
+//
+//                        }
+//                    }
+//
+//
+//            ) {
+//                @Override
+//                protected Map<String, String> getParams() throws AuthFailureError {
+//                    Map<String, String> params = new HashMap<>();
+//                    params.put("candidateNumber", String.valueOf(candidateNumber));
+//                    return params;
+//                }
+//            };
+//
+//            request.setShouldCache(false);
+//            Base.requestQueue.add(request);
+//
+//        }
+//
+//        private void processJobListResponse(String response) {
+//            ManageVO[] ManageArray = Base.gson.fromJson(response, ManageVO[].class);
+//            ArrayList<ManageVO> items = new ArrayList<>(Arrays.asList(ManageArray));
+//
+//            adapter.setItems(items);
+//            ManageListRecyclerView.setAdapter(adapter);
+//        }
     }
 
 

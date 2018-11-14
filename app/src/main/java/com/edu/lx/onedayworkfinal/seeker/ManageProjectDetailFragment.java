@@ -1,5 +1,6 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.JobVO;
+import com.edu.lx.onedayworkfinal.vo.ManageVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import net.daum.mf.map.api.MapPOIItem;
@@ -39,12 +41,12 @@ import java.util.Map;
 import java.util.Objects;
 
 // Managedetail 가져옴 .... 일감 신청하기 recycler view 없음
-public class ProjectDetailManage extends AppCompatActivity {
+public class ManageProjectDetailFragment extends AppCompatActivity {
 
     //이전 액티비티로 부터 받아온 엑스트라 데이터
-    int projectNumber;
-    //projectNumber 로 서버로 부터 받아온 프로젝트의 상세정보
-    ProjectVO projectVO;
+    int candidateNumber;
+    //candidateNUmber 로 서버로 부터 받아온 프로젝트의 상세정보
+    ManageVO manageVO;
 
     Toolbar toolbar;
 
@@ -81,8 +83,13 @@ public class ProjectDetailManage extends AppCompatActivity {
 
         //이전 액티비티로 부터 받아온 인텐트 처리
         Intent intent = getIntent();
-        projectNumber = intent.getIntExtra("projectNumber",0);
-        requestProjectDetail();
+        candidateNumber = intent.getIntExtra("candidateNumber",0);
+        requestManageProjectDetail();
+
+        //test
+//        Intent intent1 = getIntent();
+//        candidateNumber = intent1.getIntExtra("candidateNumber", 0);
+//        cancelProject();
         //requestProjectJobList();
 
         //툴바 설정
@@ -124,6 +131,7 @@ public class ProjectDetailManage extends AppCompatActivity {
 
     }
 
+    //cancel Button 클릭 시 AlertDialog 호출
     private void show() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -133,7 +141,8 @@ public class ProjectDetailManage extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(),"일감을 취소하였습니다..",Toast.LENGTH_LONG).show();
-                        //cancelProject();
+                        // 일감 취소 실행
+                        cancelProject();
                     }
                 });
         builder.setNegativeButton("아니오",
@@ -183,8 +192,8 @@ public class ProjectDetailManage extends AppCompatActivity {
 
 
     //프로젝트 상세정보 요청
-    private void requestProjectDetail() {
-        String url = getResources().getString(R.string.url) + "requestProjectDetail.do";
+    private void requestManageProjectDetail() {
+        String url = getResources().getString(R.string.url) + "requestManageProjectDetail.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
@@ -196,7 +205,7 @@ public class ProjectDetailManage extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
-                params.put("projectNumber",String.valueOf(projectNumber));
+                params.put("candidateNumber",String.valueOf(candidateNumber));
                 return params;
             }
         };
@@ -207,20 +216,23 @@ public class ProjectDetailManage extends AppCompatActivity {
 
     //프로젝트 상세정보 처리
     private void processProjectDetailResponse(String response) {
-        projectVO = Base.gson.fromJson(response,ProjectVO.class);
+        manageVO = Base.gson.fromJson(response,ManageVO.class);
 
+        if (manageVO == null) {
+            return;
+        }
         //Toolbar Title 입력
-        toolbar.setTitle(projectVO.getProjectName());
+        toolbar.setTitle(manageVO.getProjectName());
 
         //TextView 에 값 입력
-        projectName.setText(projectVO.getProjectName());
-        projectSubject.setText(projectVO.getProjectSubject());
-        projectDate.setText(String.format("%s - %s", projectVO.getProjectStartDate(), projectVO.getProjectEndDate()));
-        projectEnrollDate.setText(projectVO.getProjectEnrollDate());
-        projectComment.setText(projectVO.getProjectComment());
+        projectName.setText(manageVO.getProjectName());
+        projectSubject.setText(manageVO.getProjectSubject());
+        projectDate.setText(String.format("%s - %s", manageVO.getProjectStartDate(), manageVO.getProjectEndDate()));
+        projectEnrollDate.setText(manageVO.getProjectEnrollDate());
+        projectComment.setText(manageVO.getProjectComment());
 
         mapView.setDaumMapApiKey(getResources().getString(R.string.kakao_app_key));
-        showProjectLocation(projectVO.getProjectLat(),projectVO.getProjectLng());
+        showProjectLocation(manageVO.getProjectLat(),manageVO.getProjectLng());
     }
 
     //프로젝트 위치로 이동하기
@@ -240,7 +252,7 @@ public class ProjectDetailManage extends AppCompatActivity {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                this::processProjectDetailResponse,
+                this::processCancelProjectResponse,
                 error -> {
 
             }
@@ -249,7 +261,7 @@ public class ProjectDetailManage extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("projectNumber", String.valueOf(projectNumber));
+                params.put("candidateNumber", String.valueOf(candidateNumber));
 
                 return params;
             }
@@ -257,43 +269,18 @@ public class ProjectDetailManage extends AppCompatActivity {
         request.setShouldCache(false);
         Base.requestQueue.add(request);
     }
+    // projectCancel response process
+    private void processCancelProjectResponse(String response) {
+        int cancelResult = Integer.parseInt(response);
 
-    //직군 상세정보 요청
-//    private void requestProjectJobList() {
-//        String url = getResources().getString(R.string.url) + "requestProjectJobListByProjectNumber.do";
-//        StringRequest request = new StringRequest(
-//                Request.Method.POST,
-//                url,
-//                this::processProjectJobLIstResponse,
-//                error -> {
-//
-//                }
-//       ){
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String,String> params = new HashMap<>();
-//                params.put("projectNumber",String.valueOf(projectNumber));
-//                return params;
-//            }
-//        };
-//        request.setShouldCache(false);
-//        Base.requestQueue.add(request);
-//    }
-//
-//    //직군 상세정보 처리
-//    private void processProjectJobLIstResponse(String response) {
-//        JobVO[] projectJobListVOS = Base.gson.fromJson(response, JobVO[].class);
-//        jobList = new ArrayList<>(Arrays.asList(projectJobListVOS));
-//        adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
-//        adapter.setItems(jobList);
-//        jobListRecyclerView.setAdapter(adapter);
-//    }
-//
-//    //지원하기 창 띄우기
-//    public void showCandidate(int jobNumber) {
-//        Intent intent = new Intent(this,CandidateActivity.class);
-//        intent.putExtra("jobNumber",jobNumber);
-//        startActivityForResult(intent,301);
-//    }
+        if (cancelResult == 0) {
+            Toast.makeText(this,"신청 취소에 실패했습니다",Toast.LENGTH_LONG).show();
+        }else if (cancelResult == 1) {
+            setResult(Activity.RESULT_OK);
+            finish();
+        }
+    }
+
+
 
 }

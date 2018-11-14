@@ -78,12 +78,9 @@ public class SeekerJoinFragment extends Fragment {
         checkIdOverlapButton = rootView.findViewById(R.id.checkIdOverlapButton);
 
         //성별 선택 라디오 버튼
-        sexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int radioId = group.getCheckedRadioButtonId();
-                selectedRadio = rootView.findViewById(radioId);
-            }
+        sexGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            int radioId = group.getCheckedRadioButtonId();
+            selectedRadio = rootView.findViewById(radioId);
         });
         return rootView;
     }
@@ -93,20 +90,10 @@ public class SeekerJoinFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //중복확인 체크 버튼
-        checkIdOverlapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestCheckOverlap();
-            }
-        });
+        checkIdOverlapButton.setOnClickListener(v -> requestCheckOverlap());
 
         //구직자 회원가입 버튼
-        seekerJoinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestJoinSeeker();
-            }
-        });
+        seekerJoinButton.setOnClickListener(v -> requestJoinSeeker());
 
     }
 
@@ -124,22 +111,13 @@ public class SeekerJoinFragment extends Fragment {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        processOverlapResult(response);
+                this::processOverlapResult,
+                error -> {
 
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
                 }
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("userId",userId);
                 return params;
@@ -167,21 +145,13 @@ public class SeekerJoinFragment extends Fragment {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        processJoinResponse(response);
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                this::processJoinResponse,
+                error -> {
 
-                    }
                 }
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("seekerId",seekerId);
                 params.put("seekerPw",seekerPw);

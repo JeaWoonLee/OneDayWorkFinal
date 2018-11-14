@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 은행 필터  -->
+    <string-array name="banks">
+        <item>신한</item>
+        <item>농협</item>
+        <item>우리</item>
+        <item>기업</item>
+        <item>카카오</item>
+    </string-array>
     <!--프로잭트 필터-->
-
     <!-- 프로젝트 대분류 -->
     <string-array name="projectSubjectFilter">
         <item>없음</item>
@@ -135,5 +142,8 @@
         <item>건설안전교육이수증</item>
     </string-array>
 
+    <string-array name="certificate">
+        <item>건설안전교육이수증</item>
+    </string-array>
 
 </resources>

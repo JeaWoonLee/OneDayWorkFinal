@@ -1,4 +1,4 @@
-package com.edu.lx.onedayworkfinal.seeker;
+package com.edu.lx.onedayworkfinal.seeker.find;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.CandidateActivity;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.JobVO;

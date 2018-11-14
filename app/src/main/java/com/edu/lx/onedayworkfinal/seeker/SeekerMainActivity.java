@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.find.FindJobFrontFragment;
+import com.edu.lx.onedayworkfinal.seeker.find.ProjectDetailActivity;
+import com.edu.lx.onedayworkfinal.seeker.info.MyInfoFragment;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.pedro.library.AutoPermissions;
@@ -257,9 +260,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         startActivityForResult(intent,201);
     }
 
-    public void showProjectDetailManage(int candidateNumber) {
-        Intent intent = new Intent(this,ManageProjectDetailFragment.class);
-        intent.putExtra("candidateNumber",candidateNumber);
+    public void showProjectDetailManage(int projectNumber) {
+        Intent intent = new Intent(this,ProjectDetailManage.class);
+        intent.putExtra("projectNumber",projectNumber);
         startActivityForResult(intent,202);
     }
 
@@ -292,9 +295,6 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                         findJobFrontFragment.findJobMapFragment.requestProjectList();
                     }
                     break;
-                    case 401 :
-                        manageJobFrontFragment.manageJobListFragment.requestManageList(Base.sessionManager.getUserDetails().get("id"));
-                        break;
             }
         }
 

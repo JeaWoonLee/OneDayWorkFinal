@@ -1,4 +1,4 @@
-package com.edu.lx.onedayworkfinal.seeker;
+package com.edu.lx.onedayworkfinal.seeker.find;
 
 import android.content.Context;
 import android.location.Location;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerProjectListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
@@ -27,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.edu.lx.onedayworkfinal.seeker.FindJobFrontFragment.items;
+import static com.edu.lx.onedayworkfinal.seeker.find.FindJobFrontFragment.items;
 
 //일감 구하기 Fragment
 public class FindJobRecyclerFragment extends Fragment {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.edu.lx.onedayworkfinal">
 
     <permission
@@ -11,10 +12,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-
+    
     <application
         android:name=".util.volley.Base"
         android:allowBackup="true"
@@ -22,7 +27,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <!-- 각 앱간 파일 공유시 필요(카메라) -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.edu.lx.onedayworkfinal"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
         <activity android:name=".seeker.SeekerMainActivity" />
         <!-- googleMaps Library -->
         <uses-library android:name="com.google.android.maps" />
@@ -33,7 +51,7 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAgQnQTrVIG7rNPGo1L6nDQoVkEqCCzlQE" />
-        
+
         <!-- GoogleMapService Version -->
         <meta-data
             android:name="com.google.android.gms.version"
@@ -49,16 +67,24 @@
         <!-- detailManage Activity-->
         <activity android:name=".seeker.ManageProjectDetailFragment"/>
         <activity android:name=".join.JoinActivity" />
-        <activity android:name=".seeker.ProjectDetailActivity" />
+        <activity android:name=".seeker.find.ProjectDetailActivity" />
         <activity android:name=".seeker.CandidateActivity" />
         <activity android:name=".offer.OfferMainActivity" />
-
-        <activity android:name=".seeker.SeekerJobFilterPopupActivity"
-            android:theme="@style/PopupTheme"></activity>
-        <!-- 다음 맵-->
+        <activity
+            android:name=".seeker.find.SeekerJobFilterPopupActivity"
+            android:theme="@style/PopupTheme" />
+        <!-- 다음 맵 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key"/>
+            android:value="@string/kakao_app_key" />
+
+        <activity android:name=".seeker.info.SelectLocationActivity" />
+        <activity
+            android:name=".seeker.info.AddCertificateActivity"
+            android:theme="@style/PopupTheme"/>
+        <activity android:name=".seeker.info.SeekerShowPictureActivity">
+
+        </activity>
     </application>
 
 </manifest>

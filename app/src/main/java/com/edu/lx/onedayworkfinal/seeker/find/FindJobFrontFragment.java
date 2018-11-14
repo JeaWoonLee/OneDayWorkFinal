@@ -1,4 +1,4 @@
-package com.edu.lx.onedayworkfinal.seeker;
+package com.edu.lx.onedayworkfinal.seeker.find;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class FindJobFrontFragment extends Fragment {
     public int fragmentIndex = 0;
 
     //리사이클러 뷰 / 맵 뷰 에서 사용되는 프로젝트 배열
-    static ArrayList<ProjectVO> items = null;
+    public static ArrayList<ProjectVO> items = null;
 
     @Override
     public void onAttach(Context context) {

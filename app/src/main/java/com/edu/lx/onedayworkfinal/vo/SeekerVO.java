@@ -22,6 +22,15 @@ public class SeekerVO {
     String seekerSex;
     double seekerLatitude;
     double seekerLongitude;
+    String seekerPicture;
+
+    public String getSeekerPicture() {
+        return seekerPicture;
+    }
+
+    public void setSeekerPicture(String seekerPicture) {
+        this.seekerPicture = seekerPicture;
+    }
 
     public String getSeekerSex() {
         return seekerSex;

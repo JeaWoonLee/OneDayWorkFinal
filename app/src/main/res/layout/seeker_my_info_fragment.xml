@@ -204,14 +204,20 @@
             style="@style/blackTextView"
             android:text="활동위치 설정"/>
 
-        <FrameLayout
-            android:id="@+id/mapContainer"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@drawable/seeker_border"
-            android:layout_margin="10dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/seeker_border">
 
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/mapContainer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="10dp">
+            </FrameLayout>
+
+        </LinearLayout>
         <!-- //end LocationInfo -->
 
         <!-- certificate Info -->
@@ -279,19 +285,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/blackTextView"
-                    android:text="프로필 사진"/>
+                    android:text="사진 여부"/>
 
+                <TextView
+                    android:id="@+id/seekerIsPicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="없음"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
 
                 <Button
+                    android:id="@+id/showPictureButton"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerButton"
+                    android:text="사진 보기"
+                    android:layout_marginEnd="10dp"/>
+
+                <Button
+                    android:id="@+id/takePictureButton"
                     android:layout_width="wrap_content"
                     style="@style/seekerButton"
                     android:text="사진 찍기"/>
-
-
             </LinearLayout>
 
         </LinearLayout>
         <!-- //end AdditionalInfo -->
+
+        <Button
+            android:id="@+id/updateMyInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/seekerButton"
+            android:layout_margin="10dp"
+            android:text="내 정보 수정"/>
     </LinearLayout>
     <!-- //end Container -->
 </ScrollView>

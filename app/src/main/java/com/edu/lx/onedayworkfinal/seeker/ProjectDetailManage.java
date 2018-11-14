@@ -133,7 +133,7 @@ public class ProjectDetailManage extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(),"일감을 취소하였습니다..",Toast.LENGTH_LONG).show();
-                        cancelProject();
+                        //cancelProject();
                     }
                 });
         builder.setNegativeButton("아니오",

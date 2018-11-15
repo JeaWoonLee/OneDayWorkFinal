@@ -148,7 +148,6 @@ public class ManageProjectDetailActivity extends AppCompatActivity {
      }
     private void showDaumMapFindRoute1() {
         Location myLocation = null;
-        projectMarker = new MapPOIItem();
 
         try{
             myLocation = Base.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);

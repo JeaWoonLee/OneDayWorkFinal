@@ -90,10 +90,9 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,SeekerMainActivity.class);
                 startActivityForResult(intent,101);
             } else if (Objects.equals(index, SessionManager.IS_OFFER)) {
-                //TODO 구인자 페이지로 보내기(김동가 - 종료)
+                //구인자 페이지로 보내기(김동가 - 종료)
                 Intent intent = new Intent(this, OfferMainActivity.class);
                 startActivityForResult(intent,101);
-                Toast.makeText(this,"구인자 세션 로그인",Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this,"로그인세션은 존재하지만 구분이 되어있지 않은 오류",Toast.LENGTH_LONG).show();
             }

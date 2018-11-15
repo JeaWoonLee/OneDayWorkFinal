@@ -48,8 +48,6 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     public MyInfoFragment myInfoFragment;
     public TodayWorkFragment todayWorkFragment;
 
-
-    //TODO 프래그먼트 추가될 때마다 index 추가하기
     //Fragment Index
     public final static int FRONT_FRAGMENT = 0;
     public final static int FIND_JOB_FRAGMENT = 1;
@@ -117,7 +115,6 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        //TODO 네비게이션 바 추가하기
         navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -131,19 +128,16 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
         myInfoFragment = new MyInfoFragment();
+        //오늘의 일감 구현하기
         todayWorkFragment = new TodayWorkFragment();
+        //신청 일감 관리 구현하기
         manageJobListFragment = new ManageJobListFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //필터 설정 init
         filterInit();
 
-        //TODO 신청 일감 관리 구현하기
-        // 수정 181107 yjm
-
         //TODO 일감 관리 구현하기
-
-        //TODO 오늘의 일감 구현하기
 
         //TODO 이력 관리 구현하기
 

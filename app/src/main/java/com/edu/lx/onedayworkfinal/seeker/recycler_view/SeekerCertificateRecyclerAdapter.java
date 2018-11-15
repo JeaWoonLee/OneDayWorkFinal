@@ -27,7 +27,7 @@ public class SeekerCertificateRecyclerAdapter extends BaseRecyclerViewAdapter<Ce
         TextView certificateName;
         TextView certificateNumber;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             certificateName = itemView.findViewById(R.id.certificateName);
             certificateNumber = itemView.findViewById(R.id.certificateNumber);

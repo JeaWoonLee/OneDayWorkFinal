@@ -1,9 +1,7 @@
 package com.edu.lx.onedayworkfinal.seeker.recycler_view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.seeker.ManageJobListFragment;
-import com.edu.lx.onedayworkfinal.seeker.ManageProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
+import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
-
-import java.text.DecimalFormat;
 
 //recycler view 해제
 public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ManageVO> {
@@ -43,24 +38,12 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
         TextView job_name;
         TextView job_pay;
 
-
-        SeekerManageProjectRecyclerViewAdapter adapter;
-
-        public SeekerManageProjectViewHolder(@NonNull View itemView) {
+        SeekerManageProjectViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String candidateNum = candidateNumber.getText().toString();
-                    SeekerMainActivity activity = (SeekerMainActivity) context;
-                    Toast.makeText(activity.getApplicationContext(), "candidateNum" + candidateNum, Toast.LENGTH_LONG).show();
-                    activity.showProjectDetailManage(Integer.parseInt(candidateNum));
-
-
-                    Log.d("나와라", String.valueOf(candidateNum));
-
-
-                }
+            itemView.setOnClickListener(v -> {
+                String candidateNum = candidateNumber.getText().toString();
+                SeekerMainActivity activity = (SeekerMainActivity) context;
+                activity.showProjectDetailManage(Integer.parseInt(candidateNum));
             });
             projectNumber = itemView.findViewById(R.id.projectNumber);
             projectName = itemView.findViewById(R.id.projectName);
@@ -70,17 +53,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
             projectSubject = itemView.findViewById(R.id.projectSubject);
             candidateNumber = itemView.findViewById(R.id.candidateNumber);
 
-
-            LinearLayoutManager layoutManager = new LinearLayoutManager(context.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-            //ManageListRecyclerView.setLayoutManager(layoutManager);
-
-            adapter = new SeekerManageProjectRecyclerViewAdapter(context);
-
-
-
-
         }
-
 
         @Override
         public void setItem(ManageVO manageVO) {
@@ -92,21 +65,17 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
                 targetDate.setText(manageVO.getTargetDate());
                 projectNumber.setText(String.valueOf(manageVO.getProjectNumber()));
                 candidateNumber.setText(String.valueOf(manageVO.getCandidateNumber()));
-                job_pay.setText(String.valueOf(manageVO.getJobPay() + "원"));
+
+                String pay = Base.decimalFormat(manageVO.getJobPay()) + "원";
+                job_pay.setText(pay);
                 job_name.setText(String.valueOf(manageVO.getJobName()));
 
-
-
-
             } else {
-
                 Log.d(this.getClass().getSimpleName(), "item 이 null 입니다.");
             }
         }
 
-
     }
-
 
 }
 

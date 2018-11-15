@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 
-public class AnotherFrontFragment extends Fragment {
+public class OfferFrontFragment extends Fragment {
 
     OfferMainActivity activity;
 
@@ -25,7 +25,6 @@ public class AnotherFrontFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         activity = (OfferMainActivity) getActivity();
     }
 
@@ -47,14 +46,14 @@ public class AnotherFrontFragment extends Fragment {
         work_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.changeFragment(OfferMainActivity.WORK_MANAGE_FRAGMENT);
+                //activity.changeFragment(OfferMainActivity.WORK_MANAGE_FRAGMENT);
             }
         });
 
         rec_labor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.changeFragment(OfferMainActivity.REC_LABOR_FRAGMENT);
+                //activity.changeFragment(OfferMainActivity.REC_LABOR_FRAGMENT);
             }
         });
     }

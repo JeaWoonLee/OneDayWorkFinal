@@ -66,7 +66,6 @@ public class FindJobRecyclerFragment extends Fragment {
 
     //projectList 요청
     public void requestProjectList() {
-        //TODO 거리기반으로 요청이 가도록 구현
         String url = getResources().getString(R.string.url) + "getProjectList.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,

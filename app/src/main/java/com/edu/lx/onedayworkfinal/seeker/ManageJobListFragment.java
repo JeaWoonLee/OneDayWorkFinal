@@ -17,7 +17,6 @@ import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageProjectRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
-import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,7 +77,6 @@ public class ManageJobListFragment extends Fragment {
         ){
             @Override
             protected Map<String, String> getParams () {
-                //TODO ID로 결과값 가져오기
                 Map<String, String> params = new HashMap<>();
                 params.put("seekerId", String.valueOf(seekerId));
                 return params;

@@ -1,46 +1,33 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
-import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageDetailProjectAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
-import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -115,12 +102,7 @@ public class ManageProjectDetailActivity extends AppCompatActivity {
 
         //일감 취소 버튼
         Button cancelButton = findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                show();
-            }
-        });
+        cancelButton.setOnClickListener(v -> show());
 
     }
 
@@ -131,19 +113,13 @@ public class ManageProjectDetailActivity extends AppCompatActivity {
         builder.setTitle("일감 취소");
         builder.setMessage("정말로 일을 취소하시겠습니까 ? ");
         builder.setPositiveButton("예",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"일감을 취소하였습니다..",Toast.LENGTH_LONG).show();
-                        // 일감 취소 실행
-                        cancelProject(candidateNumber);
-                    }
+                (dialog, which) -> {
+                    Toast.makeText(getApplicationContext(),"일감을 취소하였습니다..",Toast.LENGTH_LONG).show();
+                    // 일감 취소 실행
+                    cancelProject(candidateNumber);
                 });
         builder.setNegativeButton("아니오",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
-                    }
-                });
+                (dialog, which) -> Toast.makeText(getApplicationContext(),"아니오를 선택했습니다.",Toast.LENGTH_LONG).show());
         builder.show();
      }
     private void showDaumMapFindRoute1() {
@@ -158,14 +134,12 @@ public class ManageProjectDetailActivity extends AppCompatActivity {
 
         }
 
-
         if (myLocation != null) {
 
             double projectLat = projectMarker.getMapPoint().getMapPointGeoCoord().latitude;
             double projectLng = projectMarker.getMapPoint().getMapPointGeoCoord().longitude;
             double myLat = myLocation.getLatitude();
             double myLng = myLocation.getLongitude();
-
 
             try{
                 //다음 맵 길찾기 띄워주기
@@ -179,10 +153,9 @@ public class ManageProjectDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
                 startActivity(intent);
             }
-            Toast.makeText(this,"오류오류오루오루",Toast.LENGTH_LONG).show();
 
         } else {
-            Toast.makeText(this,"살려줘어 ㅓㅓ어ㅓ어",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"내 위치 정보를 불러올 수 없습니다! GPS 정보를 확인하세요",Toast.LENGTH_LONG).show();
         }
 
     }
@@ -234,12 +207,10 @@ public class ManageProjectDetailActivity extends AppCompatActivity {
         projectName.setText(manageVO.getProjectName());
         jobName.setText(manageVO.getJobName());
         targetDate.setText(String.valueOf(manageVO.getTargetDate()));
-        jobPay.setText(decimalFormat.format(manageVO.getJobPay()) + "원");
+        String pay = decimalFormat.format(manageVO.getJobPay()) + "원";
+        jobPay.setText(pay);
         jobRequirement.setText(manageVO.getJobRequirement());
         projectCommnet.setText(String.valueOf(manageVO.getProjectComment()));
-
-
-        mapView.setDaumMapApiKey(getResources().getString(R.string.kakao_app_key));
         showProjectLocation(manageVO.getProjectLat(),manageVO.getProjectLng());
 
     }
@@ -268,7 +239,7 @@ public class ManageProjectDetailActivity extends AppCompatActivity {
 
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("candidateNumber", String.valueOf(candidateNumber));
 

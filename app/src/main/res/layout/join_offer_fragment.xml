@@ -6,14 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <!-- //TODO 사업자 회원가입 화면 구현하기 (김동가 - 회원가입 종료)-->
     <!-- 아이디 입력 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
-ㅉ
         <TextView
             style="@style/blackTextView"
             android:text="@string/join_offer_fragment2" />

@@ -1,7 +1,6 @@
 package com.edu.lx.onedayworkfinal.offer;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,12 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.vo.ProjectVO;
-
-import java.util.ArrayList;
+import com.edu.lx.onedayworkfinal.seeker.manage.TodayWorkFragment;
 
 public class WorkManageFrontFragment extends Fragment {
 

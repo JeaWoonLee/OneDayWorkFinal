@@ -41,9 +41,7 @@ public class FrontFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        today_work.setOnClickListener(v -> {
-
-        });
+        today_work.setOnClickListener(v -> activity.changeFragment(SeekerMainActivity.TODAY_WORK_FRAGMENT));
 
         find_job.setOnClickListener(v -> activity.changeFragment(SeekerMainActivity.FIND_JOB_FRAGMENT));
     }

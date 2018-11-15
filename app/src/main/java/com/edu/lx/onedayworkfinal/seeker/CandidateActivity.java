@@ -2,6 +2,7 @@ package com.edu.lx.onedayworkfinal.seeker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -71,7 +72,6 @@ public class CandidateActivity extends AppCompatActivity{
         //인텐트로부터 검색할 jobNumber 를 가져옴
         Intent intent = getIntent();
         jobNumber = intent.getIntExtra("jobNumber",0);
-        requestJobDetail(jobNumber);
 
         jobName = findViewById(R.id.jobName);
         jobPay = findViewById(R.id.jobPay);
@@ -87,6 +87,8 @@ public class CandidateActivity extends AppCompatActivity{
 
         candidateButton = findViewById(R.id.candidateButton);
         candidateButton.setOnClickListener(v -> candidate());
+
+        requestJobDetail(jobNumber);
     }
 
     /**
@@ -130,12 +132,33 @@ public class CandidateActivity extends AppCompatActivity{
         currentCount.setText("0");
         limitCount.setText(String.valueOf(item.getJobLimitCount()));
 
+        Calendar now = Calendar.getInstance();
+        java.util.Date date = new java.util.Date();
+        now.setTime(date);
+        String cutTime = now.get(Calendar.YEAR)+ "-" + (now.get(Calendar.MONTH)+1) + "-" + (now.get(Calendar.DAY_OF_MONTH));
+        Date date1 = Date.valueOf(cutTime);
+        now.setTime(date1);
+        long curTime = now.getTime().getTime();
+
         Calendar minDate = Calendar.getInstance();
         minDate.setTime(Date.valueOf(item.getJobStartDate()));
         Calendar maxDate = Calendar.getInstance();
         maxDate.setTime(Date.valueOf(item.getJobEndDate()));
-        calendar.setMinimumDate(minDate);
+
+        long minTime = minDate.getTime().getTime();
+
+        if ((curTime-minTime)>0) {
+            calendar.setMinimumDate(now);
+            try {
+                calendar.setDate(Date.valueOf(cutTime));
+            } catch (OutOfDateRangeException e) {
+                e.printStackTrace();
+            }
+        }else {
+            calendar.setMinimumDate(minDate);
+        }
         calendar.setMaximumDate(maxDate);
+
 
         requestDisableDays(jobNumber);
     }
@@ -214,6 +237,7 @@ public class CandidateActivity extends AppCompatActivity{
             e.printStackTrace();
         }
         selectDay.setText(date);
+        date = clickedDayCalendar.get(Calendar.YEAR)+"-"+(clickedDayCalendar.get(Calendar.MONTH)+2)+"-"+clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
         requestTargetDateCount(date,jobNumber);
     }
 

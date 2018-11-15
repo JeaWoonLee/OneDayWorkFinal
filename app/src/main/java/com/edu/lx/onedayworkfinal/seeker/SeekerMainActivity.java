@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.manage.TodayWorkFragment;
 import com.edu.lx.onedayworkfinal.seeker.find.FindJobFrontFragment;
 import com.edu.lx.onedayworkfinal.seeker.find.ProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.seeker.info.MyInfoFragment;
@@ -42,6 +43,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     public FindJobFrontFragment findJobFrontFragment;
     public ManageJobFrontFragment manageJobFrontFragment;
     public MyInfoFragment myInfoFragment;
+    public TodayWorkFragment todayWorkFragment;
 
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
@@ -49,6 +51,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     public final static int FRONT_FRAGMENT = 0;
     public final static int FIND_JOB_FRAGMENT = 1;
     public final static int MANAGE_JOB_FRAGMENT = 2;
+    public final static int TODAY_WORK_FRAGMENT = 3;
     //네비게이션 뷰
     NavigationView navigationView;
 
@@ -126,6 +129,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         findJobFrontFragment = new FindJobFrontFragment();
         myInfoFragment = new MyInfoFragment();
         manageJobFrontFragment = new ManageJobFrontFragment();
+        todayWorkFragment = new TodayWorkFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //필터 설정 init
@@ -194,7 +198,10 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 //일 관리 프래그먼트로 이동
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, manageJobFrontFragment).commit();
                 break;
-
+            case R.id.today_work :
+                //오늘의 일감 프래그먼트로 이동
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, todayWorkFragment).commit();
+                break;
                 //내 계정 정보 프래그먼트로 이동
             case R.id.my_account_info :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, myInfoFragment).commit();
@@ -243,6 +250,10 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
             case MANAGE_JOB_FRAGMENT:
                 navigationView.getMenu().findItem(R.id.manage_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,manageJobFrontFragment).commit();
+                break;
+            case TODAY_WORK_FRAGMENT:
+                navigationView.getMenu().findItem(R.id.today_work).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,todayWorkFragment).commit();
                 break;
 
         }

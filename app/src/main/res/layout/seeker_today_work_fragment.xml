@@ -10,17 +10,8 @@
     <!-- Container -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="title"
-            android:background="@color/seeker">
-
-        </android.support.v7.widget.Toolbar>
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +62,7 @@
 
             </LinearLayout>
 
-            <!-- 프로젝트 기간 -->
+            <!-- 직군 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,17 +70,16 @@
 
                 <TextView
                     style="@style/blackTextView"
-                    android:text="기간"/>
+                    android:text="직군"/>
 
                 <TextView
-                    android:id="@+id/projectDate"
+                    android:id="@+id/jobName"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
-                    android:text="projectDate"/>
-
+                    android:text="jobName"/>
             </LinearLayout>
 
-            <!-- 등록 날짜 -->
+            <!-- 임금 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,17 +87,48 @@
 
                 <TextView
                     style="@style/blackTextView"
-                    android:text="등록 날짜"/>
+                    android:text="임금"/>
 
                 <TextView
-                    android:id="@+id/projectEnrollDate"
+                    android:id="@+id/jobPay"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
-                    android:text="projectEnrollDate"/>
+                    android:text="jobPay"/>
 
             </LinearLayout>
 
         </LinearLayout>
+
+        <!-- 출근정보 -->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="출근 정보"/>
+
+            <TextView
+                android:id="@+id/candidateStatus"
+                android:layout_width="wrap_content"
+                style="@style/seekerItemText"
+                android:text="candidateStatus"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/commuteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            style="@style/seekerButton"
+            android:visibility="gone"
+            android:text="출근"/>
 
         <!-- 코멘트 -->
         <TextView
@@ -130,8 +151,7 @@
 
         </LinearLayout>
 
-
-            <!-- 맵 뷰 -->
+        <!-- 맵 뷰 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -156,45 +176,23 @@
                 android:layout_marginEnd="20dp"/>
 
         </LinearLayout>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/seeker_border">
 
-                <RelativeLayout
-                    android:id="@+id/map_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </RelativeLayout>
-            </FrameLayout>
-
-        <!-- 일감 목록 -->
-        <TextView
-            android:layout_width="wrap_content"
-            style="@style/blackTextView"
-            android:text="일감 목록"/>
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="200dp"
+            android:padding="10dp"
             android:layout_margin="10dp"
-            android:background="@drawable/seeker_border"
-            android:padding="10dp">
-            
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/jobListRecyclerView"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/seeker_border">
+
+            <RelativeLayout
+                android:id="@+id/map_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-            </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
 
-        </LinearLayout>
-        <!-- 일감 목록 -->
+        </FrameLayout>
 
     </LinearLayout>
     <!-- Container -->

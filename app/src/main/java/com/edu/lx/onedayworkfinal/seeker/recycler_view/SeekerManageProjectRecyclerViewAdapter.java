@@ -12,11 +12,13 @@ import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.ManageJobListFragment;
-import com.edu.lx.onedayworkfinal.seeker.ManageProjectDetailFragment;
+import com.edu.lx.onedayworkfinal.seeker.ManageProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
+
+import java.text.DecimalFormat;
 
 //recycler view 해제
 public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ManageVO> {
@@ -34,7 +36,6 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
     class SeekerManageProjectViewHolder extends BaseViewHolder<ManageVO> {
 
         TextView projectName;
-//        TextView projectDate;
         TextView projectSubject;
         TextView targetDate;
         TextView projectNumber;
@@ -57,23 +58,18 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
 
                     Log.d("나와라", String.valueOf(candidateNum));
-//                    Intent intent = new Intent();
-//                    intent.putExtra("candidateNumber", String.valueOf(candidateNum));
-
 
 
                 }
             });
             projectNumber = itemView.findViewById(R.id.projectNumber);
             projectName = itemView.findViewById(R.id.projectName);
-//            projectDate = itemView.findViewById(R.id.projectDate);
             job_name = itemView.findViewById(R.id.job_name);
             job_pay = itemView.findViewById(R.id.job_pay);
             targetDate = itemView.findViewById(R.id.targetDate);
             projectSubject = itemView.findViewById(R.id.projectSubject);
             candidateNumber = itemView.findViewById(R.id.candidateNumber);
 
-            //ManageListRecyclerView = itemView.findViewById(R.id.ManageListRecyclerView);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(context.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             //ManageListRecyclerView.setLayoutManager(layoutManager);
@@ -93,13 +89,12 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
                 Log.d("manageVO", manageVO.toString());
                 projectName.setText(manageVO.getProjectName());
                 projectSubject.setText(manageVO.getProjectSubject());
-//                projectDate.setText(manageVO.getProjectStartDate() + "~" + manageVO.getProjectEndDate());
                 targetDate.setText(manageVO.getTargetDate());
                 projectNumber.setText(String.valueOf(manageVO.getProjectNumber()));
                 candidateNumber.setText(String.valueOf(manageVO.getCandidateNumber()));
-                job_pay.setText(String.valueOf(manageVO.getJobPay()));
+                job_pay.setText(String.valueOf(manageVO.getJobPay() + "원"));
                 job_name.setText(String.valueOf(manageVO.getJobName()));
-                //requestProjectJobListCanNum(manageVO.getCandidateNumber());
+
 
 
 

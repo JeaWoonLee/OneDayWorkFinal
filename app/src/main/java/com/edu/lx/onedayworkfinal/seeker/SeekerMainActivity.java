@@ -26,20 +26,23 @@ import com.edu.lx.onedayworkfinal.seeker.find.ProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.seeker.info.MyInfoFragment;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
+import com.edu.lx.onedayworkfinal.vo.ManageVO;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.security.MessageDigest;
+import java.util.ArrayList;
 
 
 public class SeekerMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static ArrayList<ManageVO> items = null;
     //Fragment
     FrontFragment frontFragment;
     public FindJobFrontFragment findJobFrontFragment;
-    public ManageJobFrontFragment manageJobFrontFragment;
+    public ManageJobListFragment manageJobFrontFragment;
     public MyInfoFragment myInfoFragment;
 
 
@@ -124,7 +127,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
         myInfoFragment = new MyInfoFragment();
-        manageJobFrontFragment = new ManageJobFrontFragment();
+        manageJobFrontFragment = new ManageJobListFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //필터 설정 init
@@ -261,9 +264,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     }
 
     //candidate number로 바꾸기
-    public void showProjectDetailManage(int projectNumber) {
-        Intent intent = new Intent(this,ManageProjectDetailFragment.class);
-        intent.putExtra("projectNumber",projectNumber);
+    public void showProjectDetailManage(int candidateNumber) {
+        Intent intent = new Intent(this,ManageProjectDetailActivity.class);
+        intent.putExtra("candidateNumber",candidateNumber);
         startActivityForResult(intent,202);
     }
 
@@ -275,6 +278,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
             switch (requestCode) {
                 //프로젝트 디테일 액티비티
                 case  201 :
+                    break;
+                case 202 :
+                    manageJobFrontFragment.requestManageList(Base.sessionManager.getUserDetails().get("id"));
                     break;
                 //필터 팝업 액티비티
                 case 301 :

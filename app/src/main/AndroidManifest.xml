@@ -65,7 +65,7 @@
             </intent-filter>
         </activity>
         <!-- detailManage Activity-->
-        <activity android:name=".seeker.ManageProjectDetailFragment"/>
+        <activity android:name=".seeker.ManageProjectDetailActivity"/>
         <activity android:name=".join.JoinActivity" />
         <activity android:name=".seeker.find.ProjectDetailActivity" />
         <activity android:name=".seeker.CandidateActivity" />

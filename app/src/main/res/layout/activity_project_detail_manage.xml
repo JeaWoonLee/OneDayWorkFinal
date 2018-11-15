@@ -64,10 +64,10 @@
                     android:text="일감 분류"/>
 
                 <TextView
-                    android:id="@+id/projectSubject"
+                    android:id="@+id/job_name"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
-                    android:text="projectSubject"/>
+                    android:text="jobName"/>
 
             </LinearLayout>
 
@@ -82,10 +82,10 @@
                     android:text="기간"/>
 
                 <TextView
-                    android:id="@+id/projectDate"
+                    android:id="@+id/projectTargetDate"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
-                    android:text="projectDate"/>
+                    android:text="TargetDate"/>
 
             </LinearLayout>
 
@@ -97,13 +97,30 @@
 
                 <TextView
                     style="@style/blackTextView"
-                    android:text="등록 날짜"/>
+                    android:text="임금"/>
 
                 <TextView
-                    android:id="@+id/projectEnrollDate"
+                    android:id="@+id/job_pay"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
-                    android:text="projectEnrollDate"/>
+                    android:text="jobPay"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="우대 조건"/>
+
+                <TextView
+                    android:id="@+id/job_Requirement"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="jobRequirement"/>
 
             </LinearLayout>
 
@@ -126,7 +143,7 @@
                 android:id="@+id/projectComment"
                 android:layout_width="wrap_content"
                 style="@style/seekerItemText"
-                android:text="projectComment"/>
+                android:text="Comment"/>
 
         </LinearLayout>
 
@@ -148,7 +165,7 @@
                 android:layout_weight="1"/>
 
             <Button
-                android:id="@+id/findRouteButton"
+                android:id="@+id/findRouteButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="길 찾기"
@@ -171,14 +188,13 @@
 
             </RelativeLayout>
         </FrameLayout>
+
         <Button
             android:id="@+id/cancelButton"
+            style="@style/seekerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="일감 취소"
-            style="@style/seekerButton"
-            android:layout_marginEnd="20dp"
-            />
+            android:text="일감 취소" />
     </LinearLayout>
     <!-- Container -->
 

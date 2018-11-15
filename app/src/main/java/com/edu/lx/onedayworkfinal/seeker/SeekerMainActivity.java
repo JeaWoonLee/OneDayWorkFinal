@@ -40,7 +40,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     FrontFragment frontFragment;
     public FindJobFrontFragment findJobFrontFragment;
     public ManageJobFrontFragment manageJobFrontFragment;
-    MyInfoFragment myInfoFragment;
+    public MyInfoFragment myInfoFragment;
 
 
     //TODO 프래그먼트 추가될 때마다 index 추가하기
@@ -59,17 +59,17 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     //FindJobFragment(일 찾기) 에서 사용되는 필터 설정
     //프로젝트 대분류
-    static String F_projectSubjectFilter;
+    public static String F_projectSubjectFilter;
     //프로젝트 거리
-    static String F_maxDistanceFilter;
+    public static String F_maxDistanceFilter;
     //직군 중분류
-    static String F_jobNameFilter;
+    public static String F_jobNameFilter;
     //일당
-    static String F_jobPayFilter;
+    public static String F_jobPayFilter;
     //요구 조건
-    static String F_jobRequirementFilter;
+    public static String F_jobRequirementFilter;
     //대상 날짜
-    static String F_targetDateFilter;
+    public static String F_targetDateFilter;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -262,7 +262,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     //candidate number로 바꾸기
     public void showProjectDetailManage(int projectNumber) {
-        Intent intent = new Intent(this,ProjectDetailManage.class);
+        Intent intent = new Intent(this,ManageProjectDetailFragment.class);
         intent.putExtra("projectNumber",projectNumber);
         startActivityForResult(intent,202);
     }

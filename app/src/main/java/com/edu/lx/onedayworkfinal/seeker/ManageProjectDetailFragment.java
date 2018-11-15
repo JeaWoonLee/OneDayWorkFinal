@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerDetailJobListRecyclerViewAdapter;
+import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageDetailProjectAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
@@ -40,12 +42,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-// Managedetail 가져옴 .... 일감 신청하기 recycler view 없음
+
 public class ManageProjectDetailFragment extends AppCompatActivity {
 
     //이전 액티비티로 부터 받아온 엑스트라 데이터
     int candidateNumber;
-    //candidateNUmber 로 서버로 부터 받아온 프로젝트의 상세정보
+    //candidateNumber 로 서버로 부터 받아온 프로젝트의 상세정보
     ManageVO manageVO;
 
     Toolbar toolbar;
@@ -65,14 +67,14 @@ public class ManageProjectDetailFragment extends AppCompatActivity {
     MapPOIItem projectMarker;
 
 
-    //모집 직군 RecyclerView
-    RecyclerView jobListRecyclerView;
-
-    //모집 직군 ArrayList
-    ArrayList<JobVO> jobList;
-
-    //리사이클러 뷰 어뎁터
-    SeekerDetailJobListRecyclerViewAdapter adapter;
+//    //모집 직군 RecyclerView
+//    RecyclerView jobListRecyclerView;
+//
+//    //모집 직군 ArrayList
+//    ArrayList<ManageVO> jobList;
+//
+//    //리사이클러 뷰 어뎁터
+//    SeekerManageDetailProjectAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,15 +84,9 @@ public class ManageProjectDetailFragment extends AppCompatActivity {
         Base.sessionManager.checkLogin();
 
         //이전 액티비티로 부터 받아온 인텐트 처리
-        Intent intent = getIntent();
-        candidateNumber = intent.getIntExtra("candidateNumber",0);
-        requestManageProjectDetail();
-
-        //test
-//        Intent intent1 = getIntent();
-//        candidateNumber = intent1.getIntExtra("candidateNumber", 0);
-//        cancelProject();
-        //requestProjectJobList();
+//        Intent intent = getIntent();
+//        candidateNumber = Integer.parseInt(intent.getStringExtra("candidateNumber"));
+        requestManageProjectDetail(candidateNumber);
 
         //툴바 설정
         toolbar = findViewById(R.id.toolbar);
@@ -142,7 +138,7 @@ public class ManageProjectDetailFragment extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(),"일감을 취소하였습니다..",Toast.LENGTH_LONG).show();
                         // 일감 취소 실행
-                        cancelProject();
+                        cancelProject(candidateNumber);
                     }
                 });
         builder.setNegativeButton("아니오",
@@ -192,8 +188,13 @@ public class ManageProjectDetailFragment extends AppCompatActivity {
 
 
     //프로젝트 상세정보 요청
-    private void requestManageProjectDetail() {
+    private void requestManageProjectDetail(final int candidateNumber) {
+
+        //final int candidate_number = candidateNumber;
+
+
         String url = getResources().getString(R.string.url) + "requestManageProjectDetail.do";
+        Log.d("this", String.valueOf(candidateNumber));
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
@@ -218,6 +219,11 @@ public class ManageProjectDetailFragment extends AppCompatActivity {
     private void processProjectDetailResponse(String response) {
         manageVO = Base.gson.fromJson(response,ManageVO.class);
 
+//        jobList = new ArrayList<>(Arrays.asList(manageVO));
+//        adapter = new SeekerManageDetailProjectAdapter(this);
+//        adapter.setItems(jobList);
+//        jobListRecyclerView.setAdapter(adapter);
+
         if (manageVO == null) {
             return;
         }
@@ -233,6 +239,7 @@ public class ManageProjectDetailFragment extends AppCompatActivity {
 
         mapView.setDaumMapApiKey(getResources().getString(R.string.kakao_app_key));
         showProjectLocation(manageVO.getProjectLat(),manageVO.getProjectLng());
+
     }
 
     //프로젝트 위치로 이동하기
@@ -247,7 +254,7 @@ public class ManageProjectDetailFragment extends AppCompatActivity {
     }
 
     //일감 취소
-    private void cancelProject() {
+    private void cancelProject(final int candidateNumber) {
         String url = getResources().getString(R.string.url) + "cancelProject.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -280,6 +287,7 @@ public class ManageProjectDetailFragment extends AppCompatActivity {
             finish();
         }
     }
+
 
 
 

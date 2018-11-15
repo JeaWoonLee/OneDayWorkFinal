@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.find.SeekerJobFilterPopupActivity;
+import com.edu.lx.onedayworkfinal.vo.ManageVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ public class ManageJobFrontFragment extends Fragment {
     public final int MANAGE_JOB_LIST_FRAGMENT = 0;
     public final int MANAGE_JOB_MAP_FRAGMENT = 1;
     private int fragmentIndex = 0;
+
+    //리사이클러 뷰 / 맵 뷰 에서 사용되는 프로젝트 배열
+    public static ArrayList<ManageVO> items = null;
 
     @Override
     public void onAttach(Context context) {

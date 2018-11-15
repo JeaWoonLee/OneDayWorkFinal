@@ -47,10 +47,15 @@
                 />
 
             <TextView
-                android:id="@+id/projectDate"
+                style="@style/blackTextView"
+                android:text="출근 날짜"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                android:id="@+id/targetDate"
                 style="@style/itemTextView"
                 android:layout_width="wrap_content"
-                android:text="일감 기간"/>
+                android:text="출근 날짜"/>
 
         </LinearLayout>
         <!-- //end Header -->
@@ -80,17 +85,23 @@
                         android:gravity="start"
                         android:text="직종"/>
 
+                    <TextView
+                        android:id="@+id/job_name"
+                        style="@style/seekerItemText"
+                        android:gravity="start"
+                        android:text="직군"/>
+
 
                     <TextView
                         style="@style/blackTextView"
-                        android:text="일하는 날짜"
+                        android:text="일당"
                         android:layout_width="wrap_content"/>
 
                     <TextView
-                        android:id="@+id/targetDate"
+                        android:id="@+id/job_pay"
                         style="@style/seekerItemText"
                         android:gravity="start"
-                        android:text="일하는 날짜"/>
+                        android:text="일당"/>
 
                     <View
                         android:layout_width="0dp"

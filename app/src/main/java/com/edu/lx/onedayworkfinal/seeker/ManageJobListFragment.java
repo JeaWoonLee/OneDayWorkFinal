@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageProjectRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
+import com.edu.lx.onedayworkfinal.vo.ManageVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.edu.lx.onedayworkfinal.seeker.find.FindJobFrontFragment.items;
+import static com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity.items;
 
 //신청 일감 관리 RecyclerViewFragment 윤정민
 public class ManageJobListFragment extends Fragment {
@@ -56,6 +57,8 @@ public class ManageJobListFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         ManageJobRecylerView.setLayoutManager(layoutManager);
         seekerId = Base.sessionManager.getUserDetails().get("id");
+        adapter = new SeekerManageProjectRecyclerViewAdapter(activity);
+        ManageJobRecylerView.setAdapter(adapter);
         //신청 일감 요청
 
         requestManageList(seekerId);
@@ -63,7 +66,7 @@ public class ManageJobListFragment extends Fragment {
     }
 
     //신청 일감 요청
-    private void requestManageList (final String seekerId) {
+    public void requestManageList (final String seekerId) {
         String url = getResources().getString(R.string.url) + "manageJobList.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -88,14 +91,13 @@ public class ManageJobListFragment extends Fragment {
 
     //서버로부터 받아온 projectList 를 RecyclerView 에 뿌려줌
     private void processProjectResponse (String response) {
-        ProjectVO[] projectArray = Base.gson.fromJson(response,ProjectVO[].class);
+        ManageVO[] manageArray = Base.gson.fromJson(response,ManageVO[].class);
 
-        items = new ArrayList<>(Arrays.asList(projectArray));
+        items = new ArrayList<>(Arrays.asList(manageArray));
 
         //Adapter 할당
-        adapter = new SeekerManageProjectRecyclerViewAdapter(activity);
         adapter.setItems(items);
-        ManageJobRecylerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 

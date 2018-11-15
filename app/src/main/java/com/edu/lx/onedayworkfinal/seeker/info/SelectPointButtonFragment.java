@@ -16,7 +16,7 @@ import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 public class SelectPointButtonFragment extends Fragment {
 
     SeekerMainActivity activity;
-    MyInfoFragment myInfoFragment;
+    public MyInfoFragment myInfoFragment;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

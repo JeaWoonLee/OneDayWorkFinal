@@ -1,34 +1,27 @@
 package com.edu.lx.onedayworkfinal.seeker.recycler_view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.ManageJobListFragment;
+import com.edu.lx.onedayworkfinal.seeker.ManageProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
-import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.JobVO;
-import com.edu.lx.onedayworkfinal.vo.ProjectVO;
+import com.edu.lx.onedayworkfinal.vo.ManageVO;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.DecimalFormat;
 
-public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ProjectVO> {
+//recycler view 해제
+public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ManageVO> {
 
     public SeekerManageProjectRecyclerViewAdapter(Context context) {
         super(context);
@@ -37,17 +30,19 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SeekerManageProjectViewHolder(inflateView(super.context, R.layout.seeker_find_project_item, viewGroup));
+        return new SeekerManageProjectViewHolder(inflateView(super.context, R.layout.seeker_manage_project_item, viewGroup));
     }
 
-    class SeekerManageProjectViewHolder extends BaseViewHolder<ProjectVO> {
+    class SeekerManageProjectViewHolder extends BaseViewHolder<ManageVO> {
 
         TextView projectName;
-        TextView projectDate;
         TextView projectSubject;
-        TextView projectEnrollDate;
+        TextView targetDate;
         TextView projectNumber;
-        RecyclerView jobListRecyclerView;
+        TextView candidateNumber;
+        TextView job_name;
+        TextView job_pay;
+
 
         SeekerManageProjectRecyclerViewAdapter adapter;
 
@@ -56,40 +51,52 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TextView projectNumber = v.findViewById(R.id.projectNumber);
-                    String projectNum = projectNumber.getText().toString();
+                    String candidateNum = candidateNumber.getText().toString();
                     SeekerMainActivity activity = (SeekerMainActivity) context;
-                    activity.showProjectDetailManage(Integer.parseInt(projectNum));
+                    Toast.makeText(activity.getApplicationContext(), "candidateNum" + candidateNum, Toast.LENGTH_LONG).show();
+                    activity.showProjectDetailManage(Integer.parseInt(candidateNum));
+
+
+                    Log.d("나와라", String.valueOf(candidateNum));
+
+
                 }
             });
             projectNumber = itemView.findViewById(R.id.projectNumber);
             projectName = itemView.findViewById(R.id.projectName);
-            projectDate = itemView.findViewById(R.id.projectDate);
-            projectEnrollDate = itemView.findViewById(R.id.projectEnrollDate);
+            job_name = itemView.findViewById(R.id.job_name);
+            job_pay = itemView.findViewById(R.id.job_pay);
+            targetDate = itemView.findViewById(R.id.targetDate);
             projectSubject = itemView.findViewById(R.id.projectSubject);
+            candidateNumber = itemView.findViewById(R.id.candidateNumber);
 
-            jobListRecyclerView = itemView.findViewById(R.id.jobListRecyclerView);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(context.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-            jobListRecyclerView.setLayoutManager(layoutManager);
+            //ManageListRecyclerView.setLayoutManager(layoutManager);
 
             adapter = new SeekerManageProjectRecyclerViewAdapter(context);
+
+
 
 
         }
 
 
         @Override
-        public void setItem(ProjectVO projectVO) {
+        public void setItem(ManageVO manageVO) {
 
-            if (projectVO != null) {
+            if (manageVO != null) {
+                Log.d("manageVO", manageVO.toString());
+                projectName.setText(manageVO.getProjectName());
+                projectSubject.setText(manageVO.getProjectSubject());
+                targetDate.setText(manageVO.getTargetDate());
+                projectNumber.setText(String.valueOf(manageVO.getProjectNumber()));
+                candidateNumber.setText(String.valueOf(manageVO.getCandidateNumber()));
+                job_pay.setText(String.valueOf(manageVO.getJobPay() + "원"));
+                job_name.setText(String.valueOf(manageVO.getJobName()));
 
-                projectName.setText(projectVO.getProjectName());
-                projectSubject.setText(projectVO.getProjectSubject());
-                projectDate.setText(projectVO.getProjectStartDate() + "~" +projectVO.getProjectEndDate());
-                projectEnrollDate.setText(projectVO.getProjectEnrollDate());
-                projectNumber.setText(String.valueOf(projectVO.getProjectNumber()));
-                //requestProjectJobList(projectVO.getProjectNumber());
+
+
 
             } else {
 
@@ -97,49 +104,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
             }
         }
 
-        //날짜로 구분 진행해야함 . 181113. new .do 생성, jobVO를 포함한 새로운 VO 생성
-        private void requestProjectJobList(final int projectNumber) {
-            String url = context.getResources().getString(R.string.url) + "manageJobList.do";
 
-            StringRequest request = new StringRequest(
-                    Request.Method.POST,
-                    url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            processJobListResponse(response);
-                        }
-                    },
-
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                        }
-                    }
-
-
-            ) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("projectNumber", String.valueOf(projectNumber));
-                    return params;
-                }
-            };
-
-            request.setShouldCache(false);
-            Base.requestQueue.add(request);
-
-        }
-
-        private void processJobListResponse(String response) {
-            ProjectVO[] jobsArray = Base.gson.fromJson(response, ProjectVO[].class);
-            ArrayList<ProjectVO> items = new ArrayList<>(Arrays.asList(jobsArray));
-
-            adapter.setItems(items);
-            jobListRecyclerView.setAdapter(adapter);
-        }
     }
 
 

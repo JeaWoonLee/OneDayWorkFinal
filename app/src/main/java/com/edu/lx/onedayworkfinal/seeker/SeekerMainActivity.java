@@ -44,7 +44,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     //Fragment
     FrontFragment frontFragment;
     public FindJobFrontFragment findJobFrontFragment;
-    public ManageJobListFragment manageJobFrontFragment;
+    public ManageJobListFragment manageJobListFragment;
     public MyInfoFragment myInfoFragment;
     public TodayWorkFragment todayWorkFragment;
 
@@ -131,9 +131,8 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         frontFragment = new FrontFragment();
         findJobFrontFragment = new FindJobFrontFragment();
         myInfoFragment = new MyInfoFragment();
-        manageJobFrontFragment = new ManageJobFrontFragment();
         todayWorkFragment = new TodayWorkFragment();
-        manageJobFrontFragment = new ManageJobListFragment();
+        manageJobListFragment = new ManageJobListFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
 
         //필터 설정 init
@@ -200,7 +199,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 //일 관리
             case R.id.manage_job :
                 //일 관리 프래그먼트로 이동
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, manageJobFrontFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, manageJobListFragment).commit();
                 break;
             case R.id.today_work :
                 //오늘의 일감 프래그먼트로 이동
@@ -253,7 +252,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 break;
             case MANAGE_JOB_FRAGMENT:
                 navigationView.getMenu().findItem(R.id.manage_job).setChecked(true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,manageJobFrontFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, manageJobListFragment).commit();
                 break;
             case TODAY_WORK_FRAGMENT:
                 navigationView.getMenu().findItem(R.id.today_work).setChecked(true);
@@ -293,7 +292,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 case  201 :
                     break;
                 case 202 :
-                    manageJobFrontFragment.requestManageList(Base.sessionManager.getUserDetails().get("id"));
+                    manageJobListFragment.requestManageList(Base.sessionManager.getUserDetails().get("id"));
                     break;
                 //필터 팝업 액티비티
                 case 301 :

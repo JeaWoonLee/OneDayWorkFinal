@@ -33,7 +33,6 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
         TextView projectName;
         TextView projectSubject;
         TextView targetDate;
-        TextView projectNumber;
         TextView candidateNumber;
         TextView job_name;
         TextView job_pay;
@@ -45,7 +44,6 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
                 SeekerMainActivity activity = (SeekerMainActivity) context;
                 activity.showProjectDetailManage(Integer.parseInt(candidateNum));
             });
-            projectNumber = itemView.findViewById(R.id.projectNumber);
             projectName = itemView.findViewById(R.id.projectName);
             job_name = itemView.findViewById(R.id.job_name);
             job_pay = itemView.findViewById(R.id.job_pay);
@@ -59,11 +57,12 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
         public void setItem(ManageVO manageVO) {
 
             if (manageVO != null) {
+                //projectName.setTextColor(context.getColor(R.color.blue1));
+
                 Log.d("manageVO", manageVO.toString());
                 projectName.setText(manageVO.getProjectName());
                 projectSubject.setText(manageVO.getProjectSubject());
                 targetDate.setText(manageVO.getTargetDate());
-                projectNumber.setText(String.valueOf(manageVO.getProjectNumber()));
                 candidateNumber.setText(String.valueOf(manageVO.getCandidateNumber()));
 
                 String pay = Base.decimalFormat(manageVO.getJobPay()) + "원";

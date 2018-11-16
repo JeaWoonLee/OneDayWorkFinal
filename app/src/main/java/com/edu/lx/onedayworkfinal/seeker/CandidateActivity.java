@@ -17,7 +17,7 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.JobCandidate;
+import com.edu.lx.onedayworkfinal.vo.JobCandidateVO;
 import com.edu.lx.onedayworkfinal.vo.JobVO;
 
 import java.sql.Date;
@@ -191,7 +191,7 @@ public class CandidateActivity extends AppCompatActivity{
      *  초기 선택 날짜를 선택한다. disable 된 날짜를 선택한다면 다음 날짜를 기본적으로 선택하도록 한다.
      */
     private void processDisableDaysResponse(String response) {
-        JobCandidate[] targetDateArrays = Base.gson.fromJson(response,JobCandidate[].class);
+        JobCandidateVO[] targetDateArrays = Base.gson.fromJson(response,JobCandidateVO[].class);
 
         if (targetDateArrays != null){
             Calendar[] days = new Calendar[targetDateArrays.length];

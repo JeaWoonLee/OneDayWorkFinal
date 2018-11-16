@@ -286,7 +286,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 case  201 :
                     break;
                 case 202 :
-                    manageJobListFragment.requestManageList(Base.sessionManager.getUserDetails().get("id"));
+                    manageJobListFragment.requestCandidateDateList(Base.sessionManager.getUserDetails().get("id"));
                     break;
                 //필터 팝업 액티비티
                 case 301 :

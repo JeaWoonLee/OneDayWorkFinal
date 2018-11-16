@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 @SuppressWarnings("ALL")
-public class JobCandidate {
+public class JobCandidateVO {
     int candidateNumber;
     String seekerId;
     int jobNumber;

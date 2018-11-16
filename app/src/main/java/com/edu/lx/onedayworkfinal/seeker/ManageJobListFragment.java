@@ -11,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageProjectRecyclerViewAdapter;
+import com.edu.lx.onedayworkfinal.seeker.recycler_view.TargetDateRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
+import com.edu.lx.onedayworkfinal.vo.JobCandidateVO;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
 
 import java.util.ArrayList;
@@ -31,8 +34,8 @@ public class ManageJobListFragment extends Fragment {
     SeekerMainActivity activity;
     String seekerId;
     RecyclerView ManageJobRecylerView;
-    SeekerManageProjectRecyclerViewAdapter adapter;
-
+    //SeekerManageProjectRecyclerViewAdapter adapter;
+    TargetDateRecyclerViewAdapter adapter;
     @Override
     public void onAttach (Context context) {
         super.onAttach(context);
@@ -56,47 +59,41 @@ public class ManageJobListFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         ManageJobRecylerView.setLayoutManager(layoutManager);
         seekerId = Base.sessionManager.getUserDetails().get("id");
-        adapter = new SeekerManageProjectRecyclerViewAdapter(activity);
-        ManageJobRecylerView.setAdapter(adapter);
+        //adapter = new SeekerManageProjectRecyclerViewAdapter(activity);
+        //ManageJobRecylerView.setAdapter(adapter);
         //신청 일감 요청
 
-        requestManageList(seekerId);
+        requestCandidateDateList(seekerId);
 
     }
 
-    //신청 일감 요청
-    public void requestManageList (final String seekerId) {
-        String url = getResources().getString(R.string.url) + "manageJobList.do";
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                url,
-                this::processProjectResponse,
-                error -> {
+    public void requestCandidateDateList(String seekerId){
+        String url = getResources().getString(R.string.url) + "requestCandidateDateList.do";
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                this::processCandidateDateResponse, error -> {
 
-                }
-        ){
+                }){
             @Override
-            protected Map<String, String> getParams () {
-                Map<String, String> params = new HashMap<>();
-                params.put("seekerId", String.valueOf(seekerId));
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("seekerId",seekerId);
                 return params;
             }
         };
-
         request.setShouldCache(false);
         Base.requestQueue.add(request);
     }
 
-    //서버로부터 받아온 projectList 를 RecyclerView 에 뿌려줌
-    private void processProjectResponse (String response) {
-        ManageVO[] manageArray = Base.gson.fromJson(response,ManageVO[].class);
-
-        items = new ArrayList<>(Arrays.asList(manageArray));
-
-        //Adapter 할당
+    /**
+     * processCandidateDateResponse
+     * @param response 서버로부터 targetDate 만 받아온 결과
+     */
+    private void processCandidateDateResponse(String response) {
+        JobCandidateVO[] vo = Base.gson.fromJson(response,JobCandidateVO[].class);
+        ArrayList<JobCandidateVO> items = new ArrayList<>(Arrays.asList(vo));
+        adapter = new TargetDateRecyclerViewAdapter(activity);
         adapter.setItems(items);
-        adapter.notifyDataSetChanged();
+        ManageJobRecylerView.setAdapter(adapter);
     }
-
 
 }

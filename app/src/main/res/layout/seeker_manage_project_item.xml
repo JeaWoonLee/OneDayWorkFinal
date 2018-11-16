@@ -29,11 +29,6 @@
                 android:text="일감 이름"/>
 
             <TextView
-                android:id="@+id/projectNumber"
-                android:layout_width="0dp"
-                android:layout_height="0dp"/>
-
-            <TextView
                 android:id="@+id/candidateNumber"
                 android:layout_width="0dp"
                 android:layout_height="0dp"/>
@@ -111,15 +106,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
 
-
-
                 </LinearLayout>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/ManageListRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
             <!-- //end Contents-->

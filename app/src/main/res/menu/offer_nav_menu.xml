@@ -4,21 +4,18 @@
     <!-- 현제 어디 화면을 표시하고 있는가-->
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/front2"
+            android:id="@+id/front"
             android:checked="true"
             android:title="선택 화면"/>
         <item
-            android:id="@+id/regist_work"
-            android:title="일감 등록"/>
+            android:id="@+id/manage_work"
+            android:title="일감 관리"/>
 
         <item
-            android:id="@+id/req_manage"
-            android:title="신청 관리"/>
+            android:id="@+id/manage_commute"
+            android:title="출퇴근 관리"/>
 
-        <item
-            android:id="@+id/rec_labor"
-            android:title="추천근로자"
-            />
+
     </group>
 
 
@@ -29,7 +26,7 @@
 
         <menu>
             <item
-                android:id="@+id/my_account_info2"
+                android:id="@+id/my_info"
                 android:title="내 계정 관리"/>
 
             <item

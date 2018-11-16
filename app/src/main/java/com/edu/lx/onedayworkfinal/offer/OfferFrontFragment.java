@@ -19,8 +19,9 @@ public class OfferFrontFragment extends Fragment {
 
     OfferMainActivity activity;
 
-    LinearLayout work_manage;
-    LinearLayout rec_labor;
+    LinearLayout manage_work;
+    LinearLayout manage_commute;
+    LinearLayout my_info;
 
     @Override
     public void onAttach(Context context) {
@@ -33,8 +34,9 @@ public class OfferFrontFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.offer_front_fragment,container,false);
 
-        work_manage = rootView.findViewById(R.id.work_manage);
-        rec_labor = rootView.findViewById(R.id.rec_labor);
+        manage_work = rootView.findViewById(R.id.work_manage);
+        manage_commute = rootView.findViewById(R.id.manage_commute);
+        my_info = rootView.findViewById(R.id.my_info);
 
         return rootView;
     }
@@ -42,19 +44,9 @@ public class OfferFrontFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        work_manage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //activity.changeFragment(OfferMainActivity.WORK_MANAGE_FRAGMENT);
-            }
-        });
-
-        rec_labor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //activity.changeFragment(OfferMainActivity.REC_LABOR_FRAGMENT);
-            }
-        });
+        manage_work.setOnClickListener(v -> activity.changeFragment(OfferMainActivity.MANAGE_WORK_FRAGMENT));
+        manage_commute.setOnClickListener(v -> activity.changeFragment(OfferMainActivity.MANAGE_COMMUTE_FRAGMENT));
+        my_info.setOnClickListener(v -> activity.changeFragment(OfferMainActivity.MY_INFO_FRAGMENT));
     }
+
 }

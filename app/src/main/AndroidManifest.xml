@@ -19,7 +19,7 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-    
+
     <application
         android:name=".util.volley.Base"
         android:allowBackup="true"
@@ -38,7 +38,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity android:name=".seeker.SeekerMainActivity" />
@@ -64,8 +64,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- detailManage Activity-->
-        <activity android:name=".seeker.ManageProjectDetailActivity"/>
+        <!-- detailManage Activity -->
+        <activity android:name=".seeker.ManageProjectDetailActivity" />
         <activity android:name=".join.JoinActivity" />
         <activity android:name=".seeker.find.ProjectDetailActivity" />
         <activity android:name=".seeker.CandidateActivity" />
@@ -81,10 +81,9 @@
         <activity android:name=".seeker.info.SelectLocationActivity" />
         <activity
             android:name=".seeker.info.AddCertificateActivity"
-            android:theme="@style/PopupTheme"/>
-        <activity android:name=".seeker.info.SeekerShowPictureActivity">
-
-        </activity>
+            android:theme="@style/PopupTheme" />
+        <activity android:name=".seeker.info.SeekerShowPictureActivity"></activity>
+        <activity android:name=".offer.manage_commute.OfferManageCommuteDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -15,7 +15,6 @@ import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
 
-//recycler view 해제
 public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<ManageVO> {
 
     public SeekerManageProjectRecyclerViewAdapter(Context context) {
@@ -36,6 +35,8 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
         TextView candidateNumber;
         TextView job_name;
         TextView job_pay;
+        TextView candidateStatus;
+
 
         SeekerManageProjectViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -50,6 +51,7 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
             targetDate = itemView.findViewById(R.id.targetDate);
             projectSubject = itemView.findViewById(R.id.projectSubject);
             candidateNumber = itemView.findViewById(R.id.candidateNumber);
+            candidateStatus = itemView.findViewById(R.id.candidateStatus);
 
         }
 
@@ -57,17 +59,33 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
         public void setItem(ManageVO manageVO) {
 
             if (manageVO != null) {
-                //projectName.setTextColor(context.getColor(R.color.blue1));
+
+                //                projectName.setTextColor(context.getColor(R.color.blue1));
+                // 181118 수정필요
+                if(candidateStatus.equals("0")) {
+                    projectName.setBackgroundColor(context.getColor(R.color.blue1));
+                    projectName.setText(manageVO.getProjectName());
+                } else if (candidateStatus.equals("1")) {
+                    projectName.setBackgroundColor(context.getColor(R.color.seeker50));
+                    projectName.setText(manageVO.getProjectName());
+                }
+                else if(candidateStatus.equals("7")) {
+                    projectName.setBackgroundColor(context.getColor(R.color.dark_gray));
+                    projectName.setText(manageVO.getProjectName());
+                }
 
                 Log.d("manageVO", manageVO.toString());
-                projectName.setText(manageVO.getProjectName());
+
                 projectSubject.setText(manageVO.getProjectSubject());
                 targetDate.setText(manageVO.getTargetDate());
                 candidateNumber.setText(String.valueOf(manageVO.getCandidateNumber()));
+                candidateStatus.setText(String.valueOf(manageVO.getCandidateStatus()));
 
                 String pay = Base.decimalFormat(manageVO.getJobPay()) + "원";
                 job_pay.setText(pay);
                 job_name.setText(String.valueOf(manageVO.getJobName()));
+
+
 
             } else {
                 Log.d(this.getClass().getSimpleName(), "item 이 null 입니다.");

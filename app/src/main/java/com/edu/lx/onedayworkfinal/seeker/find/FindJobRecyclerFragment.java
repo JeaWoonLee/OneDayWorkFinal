@@ -87,9 +87,16 @@ public class FindJobRecyclerFragment extends Fragment {
                     Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
                 }
                 //필터 정보를 담아서 보내기
+                //TODO 위치정보가 null 이라면 위경도 값을 공간정보 아카데미 위치로 설정해 둠
                 Map<String,String> params = new HashMap<>();
-                params.put("myLat",String.valueOf(Objects.requireNonNull(lastLocation).getLatitude()));
-                params.put("myLng",String.valueOf(lastLocation.getLongitude()));
+                if(lastLocation == null) {
+                    params.put("myLat",String.valueOf(37.5157941));
+                    params.put("myLng",String.valueOf(127.0344488));
+                } else {
+                    params.put("myLat",String.valueOf(lastLocation.getLatitude()));
+                    params.put("myLng",String.valueOf(lastLocation.getLongitude()));
+                }
+
                 params.put("projectSubjectFilter", SeekerMainActivity.F_projectSubjectFilter);
                 params.put("jobNameFilter", SeekerMainActivity.F_jobNameFilter);
                 params.put("jobPayFilter",SeekerMainActivity.F_jobPayFilter);

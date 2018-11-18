@@ -24,20 +24,20 @@ public class FrontFindFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_front_find,container,false);
-        Button findIDButton = rootView.findViewById(R.id.findIdTextView);
+        Button findIDButton = rootView.findViewById(R.id.findIDButton);
         Button findPWButton = rootView.findViewById(R.id.findPWButton);
 
         findIDButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.changeTabs(activity.FIND_ID_FRAGMENT);
+                activity.changeTabs(activity.FIND_ID_ACT);
             }
         });
 
         findPWButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.changeTabs(activity.FIND_PW_FRAGNENT);
+                activity.changeTabs(activity.FIND_PW_ACT);
             }
         });
 

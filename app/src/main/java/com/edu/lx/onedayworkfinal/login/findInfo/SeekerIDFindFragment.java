@@ -10,24 +10,18 @@ import android.view.ViewGroup;
 
 import com.edu.lx.onedayworkfinal.R;
 
-public class FindPWFragment extends Fragment {
-
+public class SeekerIDFindFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_find_pw,container,false);
-        return rootView;
+
+        return inflater.inflate(R.layout.fragment_seeker_idfind, container, false);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
 }

@@ -74,7 +74,6 @@ public class OfferLoginFragment extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 params.put("userId",offerId);
                 params.put("userPw",offerPw);
-
                 return params;
             }
         };

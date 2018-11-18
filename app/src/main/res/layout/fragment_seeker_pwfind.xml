@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login.findInfo.SeekerPWFindFragment">
+
+    <EditText
+        android:id="@+id/seekerIDInput"
+        android:layout_width="match_parent"
+        style="@style/seekerEditText"
+        android:theme="@style/seekerEditText"
+        android:hint="@string/find_seeker_fragment3" />
+
+    <EditText
+        android:layout_marginVertical="10dp"
+        android:id="@+id/seekerEmInput"
+        android:layout_width="match_parent"
+        style="@style/seekerEditText"
+        android:theme="@style/seekerEditText"
+        android:hint="@string/find_offer_fragment1"/>
+
+    <Button
+        android:id="@+id/seekerFindButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:text="@string/find_front_fragment2"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:background="@color/seeker"/>
+
+
+</LinearLayout>

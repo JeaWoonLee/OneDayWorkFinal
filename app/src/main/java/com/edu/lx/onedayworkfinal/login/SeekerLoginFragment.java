@@ -87,7 +87,6 @@ public class SeekerLoginFragment extends Fragment {
 
     //로그인 결과 처리
     private void processSeekerLogin(SeekerVO seekerVO) {
-
         //노동자 로그인 결과를 세션에 담음
         //Base.sessionSeeker = seekerVO;
         Base.sessionManager.createLoginSession(seekerVO.getSeekerName(),seekerVO.getSeekerId(), SessionManager.IS_SEEKER);
@@ -95,8 +94,5 @@ public class SeekerLoginFragment extends Fragment {
         //노동자 메인화면으로 이동
         Intent intent = new Intent(activity, SeekerMainActivity.class);
         activity.startActivityForResult(intent,101);
-
     }
-
-
 }

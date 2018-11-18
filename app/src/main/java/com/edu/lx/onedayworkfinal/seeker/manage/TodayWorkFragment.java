@@ -169,12 +169,12 @@ public class TodayWorkFragment extends Fragment {
                 candidateStatus.setTextColor(getResources().getColor(R.color.blue1,activity.getTheme()));
                 commuteButton.setVisibility(View.GONE);
                 break;
-            case 5:
+            case 6:
                 candidateStatus.setText("결근");
                 candidateStatus.setTextColor(getResources().getColor(R.color.danger,activity.getTheme()));
                 commuteButton.setVisibility(View.GONE);
                 break;
-            case 6:
+            case 5:
                 candidateStatus.setText("무단 이탈");
                 candidateStatus.setTextColor(getResources().getColor(R.color.danger,activity.getTheme()));
                 commuteButton.setVisibility(View.GONE);

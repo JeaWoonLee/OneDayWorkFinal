@@ -90,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,SeekerMainActivity.class);
                 startActivityForResult(intent,101);
             } else if (Objects.equals(index, SessionManager.IS_OFFER)) {
-                //구인자 페이지로 보내기(김동가 - 종료)
                 Intent intent = new Intent(this, OfferMainActivity.class);
                 startActivityForResult(intent,101);
             } else {

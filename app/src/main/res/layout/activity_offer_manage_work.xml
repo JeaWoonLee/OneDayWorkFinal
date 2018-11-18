@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".offer.manage_work.OfferManageWorkActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/offer"
+            app:title="일감 상세정보"
+            app:titleTextColor="@color/white">
+
+        </android.support.v7.widget.Toolbar>
+        <!-- 프로젝트 기본정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="일감 기본 정보"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/showOfferBasicInfoButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:text="-"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/offerBasicInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="일감 이름"
+                    style="@style/blackTextView"/>
+
+                <TextView
+                    android:id="@+id/projectName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="projectName"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="일감 분류"
+                    style="@style/blackTextView"/>
+
+                <TextView
+                    android:id="@+id/projectSubject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="projectSubject"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="일감 기간"
+                    style="@style/blackTextView"/>
+
+                <TextView
+                    android:id="@+id/projectDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="projectDate"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="근무 시간"
+                    style="@style/blackTextView"/>
+
+                <TextView
+                    android:id="@+id/projectWorkTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="projectWorkTime"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="요구사항"
+                    style="@style/blackTextView"/>
+
+                <TextView
+                    android:id="@+id/projectRequirement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="projectRequirement"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="제공사항"
+                    style="@style/blackTextView"/>
+
+                <TextView
+                    android:id="@+id/projectOffering"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="projectOffering"/>
+            </LinearLayout>
+            <TextView
+                android:layout_height="wrap_content"
+                style="@style/blackTextView"
+                android:text="모집 직군"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/jobListRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <!-- //end 프로젝트 기본정보 -->
+
+        <!-- 프로젝트 장소 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="일감 위치"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/showOfferProjectLocation"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/mapViewLayout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/offer_border"
+            android:visibility="gone">
+
+            <FrameLayout
+                android:layout_margin="10dp"
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+
+        </FrameLayout>
+        <!-- //end 프로젝트 장소-->
+
+        <!-- 신청관리 / 인력관리 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <Button
+                android:id="@+id/manageCandidateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/offerButton"
+                android:text="신청 관리"
+                android:layout_marginEnd="10dp"/>
+
+            <Button
+                android:id="@+id/manageHumanResourcesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/offerButton"
+                android:text="인력 관리"/>
+        </LinearLayout>
+        <!-- //end 신청관리 인력관리 -->
+    </LinearLayout>
+</ScrollView>

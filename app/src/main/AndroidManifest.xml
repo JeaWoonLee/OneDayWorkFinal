@@ -82,8 +82,14 @@
         <activity
             android:name=".seeker.info.AddCertificateActivity"
             android:theme="@style/PopupTheme" />
-        <activity android:name=".seeker.info.SeekerShowPictureActivity"></activity>
-        <activity android:name=".offer.manage_commute.OfferManageCommuteDetailActivity"></activity>
+        <activity android:name=".seeker.info.SeekerShowPictureActivity" />
+        <activity android:name=".offer.manage_commute.OfferManageCommuteDetailActivity" />
+        <activity
+            android:name=".offer.SeekerInfoPopupActivity"
+            android:theme="@style/PopupTheme" />
+        <activity android:name=".offer.manage_work.OfferManageWorkActivity" />
+        <activity android:name=".offer.manage_work.OfferManageCandidateActivity" />
+        <activity android:name=".offer.manage_work.OfferManageHumanResourcesActivity"></activity>
     </application>
 
 </manifest>

@@ -6,7 +6,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @SuppressWarnings("ALL")
 public class SeekerVO {
 
-
     String seekerId;
     String seekerPw;
     String jobId;
@@ -16,13 +15,31 @@ public class SeekerVO {
     String seekerBirth;
     int seekerCash;
     String seekerEmail;
+    String seekerSex;
     String seekerInfo;
     String seekerHeight;
     String seekerWeight;
-    String seekerSex;
     double seekerLatitude;
     double seekerLongitude;
     String seekerPicture;
+    String openPictureInfo;
+    String openLocationInfo;
+
+    public String getOpenPictureInfo() {
+        return openPictureInfo;
+    }
+
+    public void setOpenPictureInfo(String openPictureInfo) {
+        this.openPictureInfo = openPictureInfo;
+    }
+
+    public String getOpenLocationInfo() {
+        return openLocationInfo;
+    }
+
+    public void setOpenLocationInfo(String openLocationInfo) {
+        this.openLocationInfo = openLocationInfo;
+    }
 
     public String getSeekerPicture() {
         return seekerPicture;
@@ -39,7 +56,6 @@ public class SeekerVO {
     public void setSeekerSex(String seekerSex) {
         this.seekerSex = seekerSex;
     }
-
     public String getSeekerId() {
         return seekerId;
     }

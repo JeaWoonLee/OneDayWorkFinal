@@ -18,7 +18,7 @@
 
             <TextView
                 android:id="@+id/certificateName"
-                style="@style/blackTextView"
+                style="@style/whiteTextView"
                 android:text="자격증 명"/>
 
             <View
@@ -29,7 +29,7 @@
             <TextView
                 android:id="@+id/certificateNumber"
                 android:layout_width="wrap_content"
-                style="@style/blackTextView"
+                style="@style/whiteTextView"
                 android:text="자격증 번호"/>
         </LinearLayout>
 

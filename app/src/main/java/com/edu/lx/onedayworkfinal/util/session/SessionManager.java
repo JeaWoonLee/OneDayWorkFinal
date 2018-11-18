@@ -93,7 +93,6 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<>();
         // user name
         user.put(KEY_NAME, preferences.getString(KEY_NAME, null));
-
         // user id
         user.put(KEY_ID, preferences.getString(KEY_ID, null));
 

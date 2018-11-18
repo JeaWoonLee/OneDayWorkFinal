@@ -15,8 +15,8 @@
         android:hint="@string/find_offer_fragment3" />
 
     <EditText
-        android:layout_marginVertical="10dp"
         android:id="@+id/offerEmInput"
+        android:layout_marginVertical="10dp"
         android:layout_width="match_parent"
         style="@style/offerEditText"
         android:theme="@style/offerEditText"

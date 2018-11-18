@@ -33,7 +33,6 @@ public class FindInfoActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         frontFindFragment = new FrontFindFragment();
-
         getSupportFragmentManager().beginTransaction().add(R.id.container2,frontFindFragment).commit();
     }
 

@@ -33,4 +33,21 @@
         android:textStyle="bold"
         android:background="@color/offer"/>
 
+    <TextView
+        android:id="@+id/offerPwCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/offerPwAlterButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:background="@color/ClientPw"
+        android:text="@string/client_pw_alter" />
+
 </LinearLayout>

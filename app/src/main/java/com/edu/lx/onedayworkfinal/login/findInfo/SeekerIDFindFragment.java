@@ -32,7 +32,12 @@ public class SeekerIDFindFragment extends Fragment {
         seekerEmInput = rootView.findViewById(R.id.seekerEmInput);
 
         Button seekerFindButton = rootView.findViewById(R.id.seekerFindButton);
-        seekerFindButton.setOnClickListener(v -> SeekerIDFind());
+        seekerFindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SeekerIDFind();
+            }
+        });
 
         return rootView;
     }

@@ -141,6 +141,12 @@
     <string name="activity_candidate16">명</string>
     <string name="activity_candidate17">신청하기</string>
 
+    <!--Client_Pw_alter -->
+    <string name="client_pw_alter">비밀번호 변경</string>
+    <string name="client_pw_alter_check">비밀번호 변경 확인</string>
+
+    <!--//Client_Pw_alter-->
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- //end join_seeker_fragment -->

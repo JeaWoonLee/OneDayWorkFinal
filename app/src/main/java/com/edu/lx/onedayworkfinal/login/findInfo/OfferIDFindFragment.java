@@ -32,7 +32,12 @@ public class OfferIDFindFragment extends Fragment {
        offerEmInput =  rootView.findViewById(R.id.offerEmInput);
 
         Button offerFindButton = rootView.findViewById(R.id.offerFindButton);
-        offerFindButton.setOnClickListener(v -> OfferIDFind());
+        offerFindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OfferIDFind();
+            }
+        });
 
         return rootView;
     }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.edu.lx.onedayworkfinal.R;
 
@@ -19,7 +20,7 @@ public class OfferPWFindFragment extends Fragment {
     FindPWActivity activity;
     EditText offerIDInput;
     EditText offerEmInput;
-
+    TextView offerPwCheck;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -32,6 +33,7 @@ public class OfferPWFindFragment extends Fragment {
 
         offerIDInput = rootView.findViewById(R.id.offerIDInput);
         offerEmInput = rootView.findViewById(R.id.offerEmInput);
+        offerPwCheck = rootView.findViewById(R.id.offerPwCheck);
 
         Button offerFindButton = rootView.findViewById(R.id.offerFindButton);
         offerFindButton.setOnClickListener(new View.OnClickListener() {

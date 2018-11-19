@@ -3,7 +3,7 @@
     <!-- 아카데미 서버 http://192.168.40.20/odw/-->
     <!-- 로컬 서버 http://10.0.2.2/odw/-->
     <string name="app_name">하루일감</string>
-    <string name="url">http://192.168.40.20/odw/</string>
+    <string name="url">http://192.168.40.160/odw/</string>
 
     <!-- activity_candidate -->
     <string name="material_calendar_monday">월</string>
@@ -59,12 +59,6 @@
     <string name="join_front_fragment1">일용직 회원 가입</string>
     <string name="join_front_fragment2">사업자 회원 가입</string>
     <!-- //end join_front_fragment -->
-
-
-    <!--fragment_find_Client-->
-    <string name="fragment_find_tabItem1">구직자</string>
-    <string name="fragment_find_tabItem2">구인자</string>
-    <!--//end fragment_find-->
 
     <!--find_front_fragment-->
     <string name="find_front_fragment1">아이디 찾기</string>

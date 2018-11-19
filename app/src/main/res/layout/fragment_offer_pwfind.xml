@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login.findInfo.OfferPWFindFragment">
+
+    <EditText
+        android:id="@+id/offerIDInput"
+        android:layout_width="match_parent"
+        style="@style/offerEditText"
+        android:theme="@style/offerEditText"
+        android:hint="@string/find_offer_fragment3" />
+
+    <EditText
+        android:id="@+id/offerEmInput"
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        style="@style/offerEditText"
+        android:theme="@style/offerEditText"
+        android:hint="@string/find_offer_fragment1"/>
+
+    <Button
+        android:id="@+id/offerFindButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:text="@string/find_front_fragment2"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:background="@color/offer"/>
+
+</LinearLayout>

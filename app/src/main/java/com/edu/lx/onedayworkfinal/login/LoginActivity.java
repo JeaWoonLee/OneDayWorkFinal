@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.join.JoinActivity;
+import com.edu.lx.onedayworkfinal.login.findInfo.FindInfoActivity;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
@@ -69,6 +70,10 @@ public class LoginActivity extends AppCompatActivity {
         });
         // end 탭이 눌렸을 떄 콜백함수
 
+        TextView findInfoTextView = findViewById(R.id.findInfoTextView);
+        findInfoTextView.setOnClickListener(v -> showFindActivity());
+
+
         //회원가입 글씨를 클릭했을 때 회원가입 페이지로 보내기
         TextView joinUserTextView = findViewById(R.id.joinUserTextView);
         joinUserTextView.setOnClickListener(v -> showJoinActivity());
@@ -90,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,SeekerMainActivity.class);
                 startActivityForResult(intent,101);
             } else if (Objects.equals(index, SessionManager.IS_OFFER)) {
-                //구인자 페이지로 보내기(김동가 - 종료)
                 Intent intent = new Intent(this, OfferMainActivity.class);
                 startActivityForResult(intent,101);
             } else {
@@ -98,6 +102,11 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    private void showFindActivity(){
+        Intent intent = new Intent(this,FindInfoActivity.class);
+        startActivityForResult(intent,104);
     }
 
     private void showJoinActivity() {

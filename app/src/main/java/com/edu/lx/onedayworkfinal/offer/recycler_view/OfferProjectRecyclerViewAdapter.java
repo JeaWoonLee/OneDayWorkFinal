@@ -96,7 +96,7 @@ public class OfferProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<Off
             String recruitmentRateStr = "모집률 : ( "+vo.getRecruit() + " / " + vo.getTotal() +" )";
             recruitmentRate.setText(recruitmentRateStr);
 
-            String attendanceRateStr = "출석률 : ( "+(vo.getRecruit()-vo.getAbsent())+" / " + vo.getRecruit() + " )";
+            String attendanceRateStr = "출석률 : ( "+ vo.getCommute()+" / " + vo.getRecruit() + " )";
             attendanceRate.setText(attendanceRateStr);
         }
 

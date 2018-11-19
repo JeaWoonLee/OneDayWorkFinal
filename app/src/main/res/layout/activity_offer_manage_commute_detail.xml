@@ -1,15 +1,425 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".offer.manage_commute.OfferManageCommuteDetailActivity"
-    android:orientation="vertical">
+    android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/projectNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="projectName"
+            android:background="@color/offer"
+            app:titleTextColor="@color/white">
+
+        </android.support.v7.widget.Toolbar>
+
+        <!-- 프로젝트 정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="모집률"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/recruitmentRate"
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="모집/총원" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="출석률"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/attendanceRate"
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="출석/모집" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="근무 시간"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/workTime"
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="시작시간 - 종료시간" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/blackTextView"
+                android:text="직종별 출석 현황"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/commuteInfoForJobRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- //end 프로젝트 정보 -->
+
+        <!-- 퇴근자 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="퇴근자 목록"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/showOffWorkButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/offWorkLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/offWorkRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+        <!-- //end 퇴근자 목록 -->
+
+        <!-- 근무중 인원 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="근무중 인원 목록"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/showWorkingButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/workingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/workingRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/allOffWorkButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/offerButton"
+                android:background="@color/blue1"
+                android:text="일괄 퇴근"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+        <!-- //end 근무중 인원 목록 -->
+
+        <!-- 출근 인원 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="출근 인원 목록"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/showCommuteButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/commuteLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/commuteRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/allWorkingButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/offerButton"
+                android:text="일괄 근무"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+        <!-- //end 출근 민원 목록 -->
+
+        <!-- 미출근 인원 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="미출근 인원 목록"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/showNotCommuteButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/notCommuteLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/notCommuteRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/allAbsentButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/offerButton"
+                android:background="@color/danger"
+                android:text="일괄 결근"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+        <!-- //end 미출근 인원 목록 -->
+
+        <!-- 결근 인원 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="결근 인원 목록"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/absentButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/absentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/absentRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <!-- //end 결근 인원 목록 -->
+
+        <!-- 무단이탈 인원 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="무단 이탈 인원 목록"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/runButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/runLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/runRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <!-- //end 무단 이탈 인원 목록 -->
+    </LinearLayout>
+
+</ScrollView>

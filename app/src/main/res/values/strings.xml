@@ -60,6 +60,11 @@
     <string name="join_front_fragment2">사업자 회원 가입</string>
     <!-- //end join_front_fragment -->
 
+    <!--find_select_fragment-->
+    <string name="fragment_find_tabItem1">구직자</string>
+    <string name="fragment_find_tabItem2">구인자</string>
+    <!--//end find_select_fragment-->
+
     <!--find_front_fragment-->
     <string name="find_front_fragment1">아이디 찾기</string>
     <string name="find_front_fragment2">비밀번호 찾기</string>

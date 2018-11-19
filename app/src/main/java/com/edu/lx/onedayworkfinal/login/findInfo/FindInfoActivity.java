@@ -20,6 +20,7 @@ public class FindInfoActivity extends AppCompatActivity {
     final int FIND_PW_ACT = 2;
 
     int fragdex = FRONT_FIND_FRAGMENT;
+
     Toolbar toolbar2;
 
     @Override
@@ -45,21 +46,21 @@ public class FindInfoActivity extends AppCompatActivity {
                 toolbar2.setTitle("회원 정보 찾기");
                 break;
 
-            case FIND_ID_ACT:
-                Intent intent = new Intent(this,FindIDActivity.class);
-                startActivityForResult(intent,105);
-                fragdex = FIND_ID_ACT;
-                toolbar2.setBackgroundColor(getResources().getColor(R.color.seeker,this.getTheme()));
-                toolbar2.setTitle("아이디 찾기");
-                break;
-
-            case FIND_PW_ACT:
-                Intent intent1 = new Intent(this, FindPWActivity.class);
-                startActivityForResult(intent1,106);
-                fragdex = FIND_PW_ACT;
-                toolbar2.setBackgroundColor(getResources().getColor(R.color.offer,this.getTheme()));
-                toolbar2.setTitle("비밀번호 찾기");
-                break;
+//            case FIND_ID_ACT:
+//                Intent intent = new Intent(this,FindIDActivity.class);
+//                startActivityForResult(intent,105);
+//                fragdex = FIND_ID_ACT;
+//                toolbar2.setBackgroundColor(getResources().getColor(R.color.seeker,this.getTheme()));
+//                toolbar2.setTitle("아이디 찾기");
+//                break;
+//
+//            case FIND_PW_ACT:
+//                Intent intent1 = new Intent(this, FindPWActivity.class);
+//                startActivityForResult(intent1,106);
+//                fragdex = FIND_PW_ACT;
+//                toolbar2.setBackgroundColor(getResources().getColor(R.color.offer,this.getTheme()));
+//                toolbar2.setTitle("비밀번호 찾기");
+//                break;
 
         }
     }
@@ -71,13 +72,13 @@ public class FindInfoActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
 
-            case FIND_ID_ACT:
-                changeTabs(FRONT_FIND_FRAGMENT);
-                break;
-
-            case FIND_PW_ACT:
-                changeTabs(FRONT_FIND_FRAGMENT);
-                break;
+//            case FIND_ID_ACT:
+//                changeTabs(FRONT_FIND_FRAGMENT);
+//                break;
+//
+//            case FIND_PW_ACT:
+//                changeTabs(FRONT_FIND_FRAGMENT);
+//                break;
         }
 
         return true;

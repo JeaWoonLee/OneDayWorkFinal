@@ -9,15 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.edu.lx.onedayworkfinal.R;
 
 public class OfferPWFindFragment extends Fragment {
 
+    OfferPwAlterFragment offerPwAlterFragment;
+
     FindPWActivity activity;
     EditText offerIDInput;
     EditText offerEmInput;
-
+    TextView offerPwCheck;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -25,20 +28,39 @@ public class OfferPWFindFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_offer_pwfind,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container2, Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_offer_pwfind,container2,false);
 
         offerIDInput = rootView.findViewById(R.id.offerIDInput);
         offerEmInput = rootView.findViewById(R.id.offerEmInput);
+        offerPwCheck = rootView.findViewById(R.id.offerPwCheck);
 
         Button offerFindButton = rootView.findViewById(R.id.offerFindButton);
-        offerFindButton.setOnClickListener(v -> OfferPWFind());
+        offerFindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OfferPWFind();
+            }
+        });
 
+        Button offerPwAlterButton = rootView.findViewById(R.id.offerPwAlterButton);
+        offerPwAlterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                offerPwAlter();
+            }
+        });
         return rootView;
     }
 
     private void OfferPWFind(){
 
+
+    }
+
+    private void offerPwAlter(){
+
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.container2,offerPwAlterFragment).commit();
     }
 
 }

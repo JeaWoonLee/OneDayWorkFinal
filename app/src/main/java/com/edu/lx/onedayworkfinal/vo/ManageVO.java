@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class ManageVO {
 
     int projectNumber;
-    int candidateStatus;
+    String candidateStatus;
     int jobNumber;
     int jobPay;
     int jobLimitCount;
@@ -38,11 +38,11 @@ public class ManageVO {
         this.projectNumber = projectNumber;
     }
 
-    public int getCandidateStatus() {
+    public String getCandidateStatus() {
         return candidateStatus;
     }
 
-    public void setCandidateStatus(int candidateStatus) {
+    public void setCandidateStatus(String candidateStatus) {
         this.candidateStatus = candidateStatus;
     }
 

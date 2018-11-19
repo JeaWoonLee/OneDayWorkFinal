@@ -41,6 +41,7 @@ public class TargetDateRecyclerViewAdapter extends BaseRecyclerViewAdapter<JobCa
     class ViewHolder extends BaseViewHolder<JobCandidateVO>{
 
         TextView targetDate;
+
         RecyclerView recyclerView;
         SeekerManageProjectRecyclerViewAdapter adapter;
 
@@ -80,6 +81,7 @@ public class TargetDateRecyclerViewAdapter extends BaseRecyclerViewAdapter<JobCa
                     Map<String, String> params = new HashMap<>();
                     params.put("seekerId", String.valueOf(seekerId));
                     params.put("targetDate",targetDate);
+
                     return params;
                 }
             };

@@ -55,7 +55,6 @@ public class OfferManageWorkActivity extends AppCompatActivity {
     int offerMapViewVisible = 0;
     FrameLayout mapView;
     MapView daumMap;
-    Button manageCandidateButton;
     Button manageHumanResourcesButton;
 
     @Override
@@ -177,19 +176,17 @@ public class OfferManageWorkActivity extends AppCompatActivity {
 
         mapView = findViewById(R.id.mapView);
 
-        manageCandidateButton = findViewById(R.id.manageCandidateButton);
-        manageCandidateButton.setOnClickListener(v -> showManageCandidateActivity(projectVO.getProjectNumber()));
         manageHumanResourcesButton = findViewById(R.id.manageHumanResourcesButton);
         manageHumanResourcesButton.setOnClickListener(v -> showManageHumanResourcesActivity(projectVO.getProjectNumber()));
     }
 
     /**
      * showManageCandidateActivity
-     * @param projectNumber 신청 관리 액티비티 보여주기
+     * @param jobNumber 신청 관리 액티비티 보여주기
      */
-    private void showManageCandidateActivity(int projectNumber) {
+    public void showManageCandidateActivity(int jobNumber) {
         Intent intent = new Intent(this,OfferManageCandidateActivity.class);
-        intent.putExtra("projectNumber",String.valueOf(projectNumber));
+        intent.putExtra("jobNumber",jobNumber);
         startActivity(intent);
     }
 

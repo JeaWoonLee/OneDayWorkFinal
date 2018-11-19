@@ -214,15 +214,6 @@
             android:layout_margin="10dp">
 
             <Button
-                android:id="@+id/manageCandidateButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/offerButton"
-                android:text="신청 관리"
-                android:layout_marginEnd="10dp"/>
-
-            <Button
                 android:id="@+id/manageHumanResourcesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

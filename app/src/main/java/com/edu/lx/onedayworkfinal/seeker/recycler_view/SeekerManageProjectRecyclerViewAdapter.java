@@ -2,9 +2,14 @@ package com.edu.lx.onedayworkfinal.seeker.recycler_view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +36,12 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
         TextView projectName;
         TextView projectSubject;
-        TextView targetDate;
+
         TextView candidateNumber;
         TextView job_name;
         TextView job_pay;
-        TextView candidateStatus;
+        LinearLayout SeekerListcardView;
+
 
 
         SeekerManageProjectViewHolder(@NonNull View itemView) {
@@ -48,10 +54,12 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
             projectName = itemView.findViewById(R.id.projectName);
             job_name = itemView.findViewById(R.id.job_name);
             job_pay = itemView.findViewById(R.id.job_pay);
-            targetDate = itemView.findViewById(R.id.targetDate);
+
             projectSubject = itemView.findViewById(R.id.projectSubject);
             candidateNumber = itemView.findViewById(R.id.candidateNumber);
-            candidateStatus = itemView.findViewById(R.id.candidateStatus);
+            SeekerListcardView = itemView.findViewById(R.id.SeekerListcardView);
+
+
 
         }
 
@@ -60,26 +68,26 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
 
             if (manageVO != null) {
 
-                //                projectName.setTextColor(context.getColor(R.color.blue1));
-                // 181118 수정필요
-                if(candidateStatus.equals("0")) {
-                    projectName.setBackgroundColor(context.getColor(R.color.blue1));
-                    projectName.setText(manageVO.getProjectName());
-                } else if (candidateStatus.equals("1")) {
-                    projectName.setBackgroundColor(context.getColor(R.color.seeker50));
-                    projectName.setText(manageVO.getProjectName());
+                //projectName.setTextColor(context.getColor(R.color.blue1));
+
+                if(String.valueOf(manageVO.getCandidateStatus()).equals("0")) {
+                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.blue1));
+                } else if (String.valueOf(manageVO.getCandidateStatus()).equals("1")) {
+                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.black));
                 }
-                else if(candidateStatus.equals("7")) {
-                    projectName.setBackgroundColor(context.getColor(R.color.dark_gray));
-                    projectName.setText(manageVO.getProjectName());
+                else if(String.valueOf(manageVO.getCandidateStatus()).equals("7")) {
+                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.dark_gray));
                 }
+
 
                 Log.d("manageVO", manageVO.toString());
 
+//                projectName.setBackgroundColor(context.getColor(R.color.blue1));
+
+                projectName.setText(manageVO.getProjectName());
                 projectSubject.setText(manageVO.getProjectSubject());
-                targetDate.setText(manageVO.getTargetDate());
                 candidateNumber.setText(String.valueOf(manageVO.getCandidateNumber()));
-                candidateStatus.setText(String.valueOf(manageVO.getCandidateStatus()));
+
 
                 String pay = Base.decimalFormat(manageVO.getJobPay()) + "원";
                 job_pay.setText(pay);

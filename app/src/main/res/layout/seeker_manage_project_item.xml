@@ -17,45 +17,37 @@
 
         <!-- Header -->
         <LinearLayout
+            android:id="@+id/SeekerListcardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/seeker">
+            android:background="@color/seeker"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/projectName"
-                style="@style/itemTextView"
+                style="@style/whiteTextView"
                 android:layout_width="wrap_content"
-                android:text="일감 이름"/>
+                android:text="일감 이름" />
 
             <TextView
                 android:id="@+id/candidateNumber"
                 android:layout_width="0dp"
-                android:layout_height="0dp"/>
-
-            <TextView
-                android:id="@+id/candidateStatus"
-                android:layout_width="0dp"
-                android:layout_height="0dp"/>
+                android:layout_height="0dp" />
 
 
             <!-- 가운데 공간 -->
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1" />
+
 
             <TextView
-                style="@style/blackTextView"
-                android:text="신청 날짜"
-                android:layout_width="wrap_content"/>
-
-            <TextView
-                android:id="@+id/targetDate"
-                style="@style/itemTextView"
-                android:layout_width="wrap_content"
-                android:text="신청 날짜"/>
+                android:id="@+id/projectSubject"
+                style="@style/whiteTextView"
+                android:layout_width="55dp"
+                android:gravity="start"
+                android:text="직종" />
 
         </LinearLayout>
         <!-- //end Header -->
@@ -70,8 +62,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="3">
+                android:layout_weight="3"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -79,12 +71,6 @@
                     android:orientation="horizontal">
 
                     <!-- project Subject -->
-                    <TextView
-                        android:id="@+id/projectSubject"
-                        style="@style/seekerItemText"
-                        android:layout_width="70dp"
-                        android:gravity="start"
-                        android:text="직종" />
 
                     <TextView
                         android:id="@+id/job_name"
@@ -94,22 +80,23 @@
                         android:text="직군" />
 
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
                     <TextView
                         style="@style/blackTextView"
-                        android:layout_width="40dp"
+                        android:layout_width="30dp"
                         android:text="일당" />
 
                     <TextView
                         android:id="@+id/job_pay"
                         style="@style/seekerItemText"
-                        android:layout_marginRight="20dp"
+                        android:layout_width="73dp"
+                        android:layout_marginRight="5dp"
                         android:gravity="start"
                         android:text="일당" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
 
                 </LinearLayout>
 

@@ -53,7 +53,7 @@ public class OfferManageWorkFragment extends Fragment {
     }
 
     /**
-     * requestOfferProjectList
+     * requestOfferProjectLis
      * @param offerId 해당 사업자의 프로젝트 목록을 가져온다
      */
     private void requestOfferProjectList(String offerId) {

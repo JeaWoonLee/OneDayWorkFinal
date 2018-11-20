@@ -9,15 +9,15 @@
 
 
     <EditText
-        android:id="@+id/offerNmInput"
-        android:layout_width="match_parent"
+        android:id="@+id/offerNAme"
         style="@style/offerEditText"
-        android:theme="@style/offerEditText"
-        android:hint="@string/find_offer_fragment2" />
+        android:layout_width="match_parent"
+        android:hint="@string/find_offer_fragment2"
+        android:theme="@style/offerEditText" />
 
     <EditText
         android:layout_marginVertical="10dp"
-        android:id="@+id/offerEmInput"
+        android:id="@+id/offerEMail"
         android:layout_width="match_parent"
         style="@style/offerEditText"
         android:theme="@style/offerEditText"
@@ -25,7 +25,7 @@
 
 
     <TextView
-        android:id="@+id/offerIdCheck"
+        android:id="@+id/offerID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

@@ -8,7 +8,7 @@
     tools:context=".login.findInfo.SeekerPWFindFragment">
 
     <EditText
-        android:id="@+id/seekerIDInput"
+        android:id="@+id/seekerID"
         android:layout_width="match_parent"
         style="@style/seekerEditText"
         android:theme="@style/seekerEditText"
@@ -16,7 +16,7 @@
 
     <EditText
         android:layout_marginVertical="10dp"
-        android:id="@+id/seekerEmInput"
+        android:id="@+id/seekerEMail"
         android:layout_width="match_parent"
         style="@style/seekerEditText"
         android:theme="@style/seekerEditText"
@@ -34,7 +34,7 @@
         android:background="@color/seeker"/>
 
     <TextView
-        android:id="@+id/seekerPwCheck"
+        android:id="@+id/seekerPW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

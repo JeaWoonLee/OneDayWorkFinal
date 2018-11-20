@@ -3,6 +3,8 @@ package com.edu.lx.onedayworkfinal.login.findInfo;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,9 +28,10 @@ import java.util.Map;
 public class OfferIDFindFragment extends Fragment {
 
     FindIDActivity activity;
-    EditText offerNmInput;
-    EditText offerEmInput;
-    TextView offerIdCheck;
+
+    EditText offerNAme;
+    EditText offerEMail;
+    TextView offerID;
 
     @Override
     public void onAttach(Context context) {
@@ -40,29 +43,27 @@ public class OfferIDFindFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_offer_idfind,container,false);
 
-       offerNmInput = rootView.findViewById(R.id.offerNmInput);
-       offerEmInput =  rootView.findViewById(R.id.offerEmInput);
-       offerIdCheck = rootView.findViewById(R.id.offerIdCheck);
+        offerNAme = rootView.findViewById(R.id.offerNAme);
+        offerEMail =  rootView.findViewById(R.id.offerEMail);
+        offerID = rootView.findViewById(R.id.offerID);
 
         Button offerFindButton = rootView.findViewById(R.id.offerFindButton);
+
         offerFindButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OfferIDFind();
+                responseId();
             }
         });
-
         return rootView;
     }
 
-    private void OfferIDFind(){
-        final String offerEm = offerNmInput.getText().toString();
-        final String offerNm = offerEmInput.getText().toString();
+    private void responseId(){
+        final String offerEmail = offerEMail.getText().toString();
+        final String offerName = offerNAme.getText().toString();
 
         String url = getResources().getString(R.string.url)+"offerIdFind.do";
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                url,
+        StringRequest request = new StringRequest(Request.Method.POST, url,
                 response -> {
                     OfferVO offerVO = Base.gson.fromJson(response,OfferVO.class);
                     if (offerVO != null){
@@ -76,8 +77,8 @@ public class OfferIDFindFragment extends Fragment {
             @Override
             protected Map<String, String> getParams(){
                 Map<String,String> params = new HashMap<>();
-                params.put("userEm",offerEm);
-                params.put("userNm",offerNm);
+                params.put("offerEmail",String.valueOf(offerEmail));
+                params.put("offerName",String.valueOf(offerName));
                 return params;
             }
         };
@@ -87,8 +88,7 @@ public class OfferIDFindFragment extends Fragment {
 
     private void processOfferIdFind(OfferVO offerVO){
         Toast.makeText(activity,"아이디를 찾았습니다.",Toast.LENGTH_LONG).show();
-
-        offerIdCheck.setText(offerVO.getOfferId());
+        offerID.setText(offerVO.getOfferId());
     }
 
 

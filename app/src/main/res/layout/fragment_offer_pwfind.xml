@@ -8,14 +8,14 @@
     tools:context=".login.findInfo.OfferPWFindFragment">
 
     <EditText
-        android:id="@+id/offerIDInput"
+        android:id="@+id/offerID"
         android:layout_width="match_parent"
         style="@style/offerEditText"
         android:theme="@style/offerEditText"
         android:hint="@string/find_offer_fragment3" />
 
     <EditText
-        android:id="@+id/offerEmInput"
+        android:id="@+id/offerEMail"
         android:layout_marginVertical="10dp"
         android:layout_width="match_parent"
         style="@style/offerEditText"
@@ -34,7 +34,7 @@
         android:background="@color/offer"/>
 
     <TextView
-        android:id="@+id/offerPwCheck"
+        android:id="@+id/offerPW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

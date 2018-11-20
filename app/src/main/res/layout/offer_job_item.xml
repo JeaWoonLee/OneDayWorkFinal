@@ -8,75 +8,105 @@
     android:elevation="15dp"
     android:layout_margin="10dp">
 
+    <!-- Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
+        <!-- JobInfo -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/offer_header_border">
+            android:orientation="vertical"
+            android:layout_weight="4">
 
-            <TextView
-                android:id="@+id/jobName"
-                android:layout_width="wrap_content"
-                style="@style/whiteTextView"
-                android:text="jobName"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/offer_header_border_top_left">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/jobName"
+                    android:layout_width="wrap_content"
+                    style="@style/whiteTextView"
+                    android:text="jobName"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                style="@style/whiteTextView"
-                android:text="모집 정원"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
 
-            <TextView
-                android:id="@+id/jobLimitCount"
-                android:layout_width="wrap_content"
-                style="@style/whiteTextView"
-                android:text="jobLimitCount"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/whiteTextView"
+                    android:text="모집 정원"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                style="@style/whiteTextView"
-                android:text="명"/>
+                <TextView
+                    android:id="@+id/jobLimitCount"
+                    android:layout_width="wrap_content"
+                    style="@style/whiteTextView"
+                    android:text="jobLimitCount"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/whiteTextView"
+                    android:text="명"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/jobDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="jobDate"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="요구 자격"/>
+
+                <TextView
+                    android:id="@+id/jobRequirement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="jobRequirement"/>
+
+            </LinearLayout>
         </LinearLayout>
-
+        <!--//end JobInfo-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:background="@drawable/offer_header_border_right"
+            >
 
-            <TextView
-                android:id="@+id/jobDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/offerItemText"
-                android:text="jobDate"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                style="@style/offerItemText"
-                android:text="요구 자격"/>
-
-            <TextView
-                android:id="@+id/jobRequirement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/offerItemText"
-                android:text="jobRequirement"/>
-
+            <Button
+                android:id="@+id/manageCandidateButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/offerButton"
+                android:text="신청관리"
+                android:layout_gravity="center_vertical"
+                android:layout_marginVertical="15dp"
+                android:textSize="12dp"
+                />
         </LinearLayout>
     </LinearLayout>
+    <!--//end Container-->
 
 </android.support.v7.widget.CardView>

@@ -18,6 +18,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.util.session.SessionManager;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferVO;
 
@@ -54,13 +55,6 @@ public class OfferPWFindFragment extends Fragment {
             }
         });
 
-        Button offerPwAlterButton = rootView.findViewById(R.id.offerPwAlterButton);
-        offerPwAlterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                offerPwAlter();
-            }
-        });
         return rootView;
     }
 
@@ -79,8 +73,6 @@ public class OfferPWFindFragment extends Fragment {
                     }
                 },error -> Log.d("erroer", Arrays.toString(error.getStackTrace()))
 
-
-
         ){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -98,11 +90,9 @@ public class OfferPWFindFragment extends Fragment {
         Toast.makeText(activity,"비밀번호를 찾았습니다.",Toast.LENGTH_LONG).show();
         offerPW.setText(offerVO.getOfferPw());
 
-    }
-
-    private void offerPwAlter(){
         Intent intent = new Intent(activity,OfferPwAlterActivity.class);
         startActivityForResult(intent,409);
     }
+
 
 }

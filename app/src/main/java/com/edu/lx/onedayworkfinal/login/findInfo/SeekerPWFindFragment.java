@@ -56,14 +56,6 @@ public class SeekerPWFindFragment extends Fragment {
             }
         });
 
-        Button seekerPwAlterButton = rootView.findViewById(R.id.seekerPwAlterButton);
-        seekerPwAlterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                seekerPwAlter();
-            }
-        });
-
         return rootView;
     }
 
@@ -97,10 +89,9 @@ public class SeekerPWFindFragment extends Fragment {
     private void processSeekerPwFind(SeekerVO seekerVO){
         Toast.makeText(activity,"비밀번호를 확인하였습니다",Toast.LENGTH_LONG).show();
         seekerPW.setText(seekerVO.getSeekerPw());
-    }
 
-    private void seekerPwAlter(){
         Intent intent = new Intent(activity,SeekerPwAlterActivity.class);
         startActivityForResult(intent,408);
     }
+
 }

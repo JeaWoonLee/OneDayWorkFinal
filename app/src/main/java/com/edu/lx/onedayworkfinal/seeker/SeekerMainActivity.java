@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +52,8 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     public MyInfoFragment myInfoFragment;
     public TodayWorkFragment todayWorkFragment;
 
-    MenuItem todayjobmanage;
+
+
 
     //Fragment Index
     public final static int FRONT_FRAGMENT = 0;
@@ -87,6 +89,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_main);
+        getIntent();
 
 
         //AutoPermission
@@ -142,9 +145,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         manageJobListFragment = new ManageJobListFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
         //일감 관리
-
-
-
+//        todayJobManageFragment = new TodayJobManageFragment();
 
 
 
@@ -216,9 +217,11 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
             case R.id.my_account_info :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, myInfoFragment).commit();
                 break;
+                //일감 관리 activity 전환
             case R.id.today_job_manage :
-                Intent intent = new Intent(SeekerMainActivity.this, TodayjobManageActivity.class);
+                Intent intent = new Intent(getApplicationContext(), TodayJobManageActivity.class);
                 startActivity(intent);
+                break;
 
 
             //로그 아웃

@@ -1,6 +1,7 @@
 package com.edu.lx.onedayworkfinal.seeker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ public class FrontFragment extends Fragment {
     LinearLayout today_work;
     LinearLayout find_job;
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -34,6 +36,7 @@ public class FrontFragment extends Fragment {
         today_work = rootView.findViewById(R.id.today_work);
         find_job = rootView.findViewById(R.id.find_job);
 
+
         return rootView;
     }
 
@@ -44,5 +47,7 @@ public class FrontFragment extends Fragment {
         today_work.setOnClickListener(v -> activity.changeFragment(SeekerMainActivity.TODAY_WORK_FRAGMENT));
 
         find_job.setOnClickListener(v -> activity.changeFragment(SeekerMainActivity.FIND_JOB_FRAGMENT));
+
+
     }
 }

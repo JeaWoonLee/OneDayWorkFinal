@@ -90,6 +90,8 @@ public class OfferPWFindFragment extends Fragment {
         Toast.makeText(activity,"비밀번호를 찾았습니다.",Toast.LENGTH_LONG).show();
         offerPW.setText(offerVO.getOfferPw());
 
+
+
         Intent intent = new Intent(activity,OfferPwAlterActivity.class);
         startActivityForResult(intent,409);
     }

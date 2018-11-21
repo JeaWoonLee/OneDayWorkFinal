@@ -3,30 +3,19 @@ package com.edu.lx.onedayworkfinal.offer.recycler_view;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.offer.manage_work.OfferManageWorkActivity;
-import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerJobListRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
-import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ProjectVO;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class OfferProjectListRecyclerViewAdapter extends BaseRecyclerViewAdapter<ProjectVO> {
 

@@ -17,8 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.ImageRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.SeekerRecordRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerCertificateRecyclerAdapter;
@@ -269,12 +271,9 @@ public class SeekerInfoPopupActivity extends AppCompatActivity {
 
     private void showSeekerPictureImage(String seekerPictureURL) {
         String url = getResources().getString(R.string.url) + seekerPictureURL;
-        ImageRequest request = new ImageRequest(url,
-                response -> seekerPicture.setImageBitmap(response),
-                100, 100, ImageView.ScaleType.CENTER_CROP, Bitmap.Config.RGB_565,
-                error -> {
-                    Toast.makeText(getApplicationContext(),"사진정보를 불러오는데 실패했습니다",Toast.LENGTH_LONG).show();
-                });
+        ImageRequest request = new ImageRequest(url, getResources(), getContentResolver(), response -> seekerPicture.setImageBitmap(response), 100, 100, ImageView.ScaleType.CENTER_CROP, Bitmap.Config.RGB_565, error -> {
+
+        });
         Base.requestQueue.add(request);
     }
 

@@ -20,7 +20,8 @@
     <color name="dark_gray">#808080</color>
     <!-- 빨강 -->
     <color name="danger">#ff3333</color>
-
+    <!-- 투명-->
+    <color name="invisible">#00ffffff</color>
     <color name="ClientId">#FAAC58</color>
     <color name="ClientPw">#5882FA</color>
 </resources>

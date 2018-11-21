@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class OfferJobRecyclerViewAdapter extends BaseRecyclerViewAdapter<JobVO> 
         TextView jobDate;
         TextView jobRequirement;
 
-        Button manageCandidateButton;
+        LinearLayout manageCandidateButton;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -51,22 +52,19 @@ public class OfferJobRecyclerViewAdapter extends BaseRecyclerViewAdapter<JobVO> 
             String date = jobVO.getJobStartDate() + " ~ " + jobVO.getJobEndDate();
             jobDate.setText(date);
             String requirement = jobVO.getJobRequirement();
-            if (requirement == null) {
+            if (requirement.length() == 0) {
                 requirement = "없음";
             }
             jobRequirement.setText(requirement);
-            manageCandidateButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (context instanceof  OfferManageWorkActivity) {
-                        OfferManageWorkActivity activity = (OfferManageWorkActivity) context;
-                        activity.showManageCandidateActivity(jobVO.getJobNumber());
+            manageCandidateButton.setOnClickListener(v -> {
+                if (context instanceof  OfferManageWorkActivity) {
+                    OfferManageWorkActivity activity = (OfferManageWorkActivity) context;
+                    activity.showManageCandidateActivity(jobVO.getJobNumber());
 
-                    } else {
-                        Toast.makeText(context,"해당 일감관리 액티비티 정보를 불러올 수 없습니다!",Toast.LENGTH_LONG).show();
-                    }
-
+                } else {
+                    Toast.makeText(context,"해당 일감관리 액티비티 정보를 불러올 수 없습니다!",Toast.LENGTH_LONG).show();
                 }
+
             });
 
         }

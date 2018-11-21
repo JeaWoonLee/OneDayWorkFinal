@@ -10,72 +10,103 @@
     android:layout_marginHorizontal="3dp">
 
     <LinearLayout
+        android:id="@+id/seekerInfoLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/seekerInfoLayout">
-
-        <TextView
-            android:id="@+id/seekerId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/blackTextView"
-            android:text="seekerId"/>
-
-        <TextView
-            android:id="@+id/seekerSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/blackTextView"
-            android:text="성"
-            android:layout_margin="0dp"/>
-
-        <TextView
-            android:id="@+id/seekerAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/blackTextView"
-            android:text="나이 세"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/blackTextView"
-            android:text="신뢰도 "
-            android:layout_margin="0dp"/>
-
-        <TextView
-            android:id="@+id/reliability"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/blackTextView"
-            android:text="n%(a/b) "
-            android:layout_margin="0dp"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/black"/>
+        android:layout_height="77dp"
+        android:orientation="horizontal">
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/seekerId"
+                    style="@style/blackTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="seekerId" />
+
+                <TextView
+                    android:id="@+id/seekerSex"
+                    style="@style/blackTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:text="성" />
+
+                <TextView
+                    android:id="@+id/seekerAge"
+                    style="@style/blackTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나이 세" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="신뢰도 " />
+
+                <TextView
+                    android:id="@+id/reliability"
+                    style="@style/blackTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:text="n%(a/b) " />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/refuseCandidateButton"
             android:layout_width="90dp"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:id="@+id/acceptCandidateButton"
-            android:background="@drawable/offer_header_border_right">
+            android:background="@color/danger"
+            android:gravity="center">
 
             <TextView
+                style="@style/whiteTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:text="신청 거절" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="0dp" />
+
+        <LinearLayout
+            android:id="@+id/acceptCandidateButton"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/offer_header_border_right"
+            android:gravity="center">
+
+            <TextView
                 style="@style/whiteTextView"
-                android:text="신청 수락"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="신청 수락" />
 
         </LinearLayout>
     </LinearLayout>

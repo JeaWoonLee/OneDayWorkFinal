@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.offer.manage_commute.OfferManageCommuteDetailActivity;
@@ -46,9 +46,11 @@ public class OfferProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<Off
         TextView attendanceRate;
 
         OfferWorkVO offerWorkVO;
+
+        View view;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            view = itemView;
             projectName = itemView.findViewById(R.id.projectName);
             recruitmentRate = itemView.findViewById(R.id.recruitmentRate);
             workTime = itemView.findViewById(R.id.workTime);
@@ -89,15 +91,20 @@ public class OfferProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<Off
         private void processProjectCommuteInfo(String response) {
             OfferWorkVO vo = Base.gson.fromJson(response,OfferWorkVO.class);
             this.offerWorkVO = vo;
-            projectName.setText(vo.getProjectName());
-            String workTimeStr = vo.getWorkStartTime() + " ~ " + vo.getWorkEndTime();
-            workTime.setText(workTimeStr);
+            if (vo != null) {
+                projectName.setText(vo.getProjectName());
+                String workTimeStr = vo.getWorkStartTime() + " ~ " + vo.getWorkEndTime();
+                workTime.setText(workTimeStr);
 
-            String recruitmentRateStr = "모집률 : ( "+vo.getRecruit() + " / " + vo.getTotal() +" )";
-            recruitmentRate.setText(recruitmentRateStr);
+                String recruitmentRateStr = "모집률 : ( "+vo.getRecruit() + " / " + vo.getTotal() +" )";
+                recruitmentRate.setText(recruitmentRateStr);
 
-            String attendanceRateStr = "출석률 : ( "+ vo.getCommute()+" / " + vo.getRecruit() + " )";
-            attendanceRate.setText(attendanceRateStr);
+                String attendanceRateStr = "출석률 : ( "+ vo.getCommute()+" / " + vo.getRecruit() + " )";
+                attendanceRate.setText(attendanceRateStr);
+            } else {
+                view.setVisibility(View.GONE);
+            }
+
         }
 
     }

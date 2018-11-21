@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.OfferJobRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
@@ -197,6 +197,8 @@ public class OfferManageWorkActivity extends AppCompatActivity {
     private void showManageHumanResourcesActivity(int projectNumber) {
         Intent intent = new Intent(this,OfferManageHumanResourcesActivity.class);
         intent.putExtra("projectNumber",String.valueOf(projectNumber));
+        intent.putExtra("projectStartDate",projectVO.getProjectStartDate());
+        intent.putExtra("projectEndDate",projectVO.getProjectEndDate());
         startActivity(intent);
     }
 

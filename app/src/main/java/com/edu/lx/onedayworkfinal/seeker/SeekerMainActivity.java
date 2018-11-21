@@ -14,12 +14,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.manage.TodayWorkFragment;
 import com.edu.lx.onedayworkfinal.seeker.find.FindJobFrontFragment;
@@ -29,6 +32,7 @@ import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.CertificationVO;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
+import com.edu.lx.onedayworkfinal.vo.WorkVO;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
@@ -36,11 +40,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SeekerMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static ArrayList<ManageVO> items = null;
+    public WorkVO todayWorkItem;
     //Fragment
     FrontFragment frontFragment;
     public FindJobFrontFragment findJobFrontFragment;
@@ -53,6 +60,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     public final static int FIND_JOB_FRAGMENT = 1;
     public final static int MANAGE_JOB_FRAGMENT = 2;
     public final static int TODAY_WORK_FRAGMENT = 3;
+    public final static int MY_INFO_FRAGMENT = 4;
+
+    public int fragmentIndex = 0;
     //네비게이션 뷰
     NavigationView navigationView;
 
@@ -76,6 +86,8 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     //대상 날짜
     public static String F_targetDateFilter;
 
+    //툴바
+    Toolbar toolbar;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +117,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         //툴바 설정
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //툴바 햄버거 버튼 추가하기
@@ -143,6 +155,35 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
         //TODO 일감 초대 구현하기
 
+        //오늘의 일감 정보를 가지고 온다
+        requestTodayWorkDetail(seekerId.getText().toString());
+    }
+
+    /**
+     * requestTodayWorkDetail
+     * @param id seekerId 를 이용하여 오늘의 수락된 일감에 대한 정보를 가져온다
+     *           job_candidate, job, project 에서 필요한 정보를 모두 가져온다
+     */
+    public void requestTodayWorkDetail(String id) {
+        String url = getResources().getString(R.string.url) + "requestTodayWorkDetail.do";
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                this::processTodayDetail, error -> {}){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("seekerId",id);
+                return params;
+            }
+        };
+        request.setShouldCache(false);
+        Base.requestQueue.add(request);
+    }
+
+    private void processTodayDetail(String response) {
+        todayWorkItem = Base.gson.fromJson(response,WorkVO.class);
+        if (fragmentIndex == TODAY_WORK_FRAGMENT) {
+            todayWorkFragment.processTodayDetail(todayWorkItem);
+        }
     }
 
     // AutoPermission CallBack
@@ -181,27 +222,25 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
                 //프론트 페이지
             case R.id.front :
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,frontFragment).commit();
+                changeFragment(FRONT_FRAGMENT);
                 break;
-
                 //일 찾기
             case R.id.find_job :
                 //일 찾기 프래그먼트로 이동
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
+                changeFragment(FIND_JOB_FRAGMENT);
                 break;
-
                 //일 관리
             case R.id.manage_job :
                 //일 관리 프래그먼트로 이동
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, manageJobListFragment).commit();
+                changeFragment(MANAGE_JOB_FRAGMENT);
                 break;
             case R.id.today_work :
                 //오늘의 일감 프래그먼트로 이동
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, todayWorkFragment).commit();
+                changeFragment(TODAY_WORK_FRAGMENT);
                 break;
                 //내 계정 정보 프래그먼트로 이동
             case R.id.my_account_info :
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, myInfoFragment).commit();
+                changeFragment(MY_INFO_FRAGMENT);
                 break;
 
                 //로그 아웃
@@ -218,7 +257,11 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        backPressCloseHandler.onBackPressed();
+        if (fragmentIndex == FRONT_FRAGMENT) {
+            backPressCloseHandler.onBackPressed();
+        } else {
+            changeFragment(FRONT_FRAGMENT);
+        }
     }
 
     @Override
@@ -235,25 +278,40 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
 
     //프래그먼트 바꾸기
     public void changeFragment(int fragmentIndex1) {
-
         switch (fragmentIndex1) {
             case FRONT_FRAGMENT :
+                toolbar.setTitle("일용직 노동자 메인화면");
                 navigationView.getMenu().findItem(R.id.front).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,frontFragment).commit();
                 break;
             case FIND_JOB_FRAGMENT :
+                toolbar.setTitle("일감 찾기");
                 navigationView.getMenu().findItem(R.id.find_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
             case MANAGE_JOB_FRAGMENT:
+                toolbar.setTitle("일감 관리");
                 navigationView.getMenu().findItem(R.id.manage_job).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, manageJobListFragment).commit();
                 break;
             case TODAY_WORK_FRAGMENT:
+                if (todayWorkItem == null) {
+                    Toast.makeText(getApplicationContext(),"오늘 날짜의 수락된 일감이 존재하지 않습니다!",Toast.LENGTH_LONG).show();
+                    changeFragment(fragmentIndex);
+                    return;
+                }
+                toolbar.setTitle("오늘의 일감");
                 navigationView.getMenu().findItem(R.id.today_work).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,todayWorkFragment).commit();
                 break;
+            case MY_INFO_FRAGMENT:
+                toolbar.setTitle("내 계정 정보");
+                navigationView.getMenu().findItem(R.id.my_account_info).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,myInfoFragment).commit();
+                break;
 
         }
+        fragmentIndex = fragmentIndex1;
     }
 
     //프로젝트 디테일 보여주기
@@ -326,6 +384,12 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                     break;
                 case 403:
                     myInfoFragment.showPicture(null);
+                    break;
+                case 601:
+                    String signResult = intent.getStringExtra("signResult");
+                    if (TextUtils.equals(signResult,"resultOK")){
+                        todayWorkFragment.requestCommute(Base.sessionManager.getUserDetails().get("id"));
+                    }
                     break;
             }
         }else if (requestCode == 403){

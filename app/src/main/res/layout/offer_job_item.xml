@@ -88,6 +88,7 @@
         </LinearLayout>
         <!--//end JobInfo-->
         <LinearLayout
+            android:id="@+id/manageCandidateButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -95,11 +96,10 @@
             android:background="@drawable/offer_header_border_right"
             >
 
-            <Button
-                android:id="@+id/manageCandidateButton"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/offerButton"
+                style="@style/whiteTextView"
                 android:text="신청관리"
                 android:layout_gravity="center_vertical"
                 android:layout_marginVertical="15dp"

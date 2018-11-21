@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.SeekerInfoPopupActivity;
 import com.edu.lx.onedayworkfinal.offer.manage_work.OfferManageCandidateActivity;
@@ -45,6 +45,7 @@ public class OfferManageCandidateRecyclerViewAdapter extends BaseRecyclerViewAda
 
         LinearLayout seekerInfoLayout;
         LinearLayout acceptCandidateButton;
+        LinearLayout refuseCandidateButton;
 
         JobCandidateVO vo;
         public ViewHolder(@NonNull View itemView) {
@@ -56,6 +57,7 @@ public class OfferManageCandidateRecyclerViewAdapter extends BaseRecyclerViewAda
 
             seekerInfoLayout = itemView.findViewById(R.id.seekerInfoLayout);
             acceptCandidateButton = itemView.findViewById(R.id.acceptCandidateButton);
+            refuseCandidateButton = itemView.findViewById(R.id.refuseCandidateButton);
         }
 
         @Override
@@ -77,11 +79,11 @@ public class OfferManageCandidateRecyclerViewAdapter extends BaseRecyclerViewAda
                 seekerAge.setText(String.valueOf(old));
 
                 //신뢰도 설정
-                int workOffCount = jobCandidateVO.getOffWork();
-                int total = jobCandidateVO.getTotal();
+                double workOffCount = jobCandidateVO.getOffWork();
+                double total = jobCandidateVO.getTotal();
                 if (total != 0) {
-                    int reliability = (workOffCount/total) * 100;
-                    String reliabilityStr = reliability + "% ("+workOffCount + "/" + total + ")";
+                    int reliability = (int)((workOffCount/total) * 100);
+                    String reliabilityStr = reliability + "% ("+(int)workOffCount + "/" + (int)total + ")";
                     if (reliability < 80) {
                         reliabilityView.setTextColor(context.getResources().getColor(R.color.danger,context.getTheme()));
                     } else if (reliability < 90){
@@ -102,6 +104,45 @@ public class OfferManageCandidateRecyclerViewAdapter extends BaseRecyclerViewAda
 
                 //신청 수락 설정
                 acceptCandidateButton.setOnClickListener(v -> requestAcceptCandidateByCandidateNumber(vo.getCandidateNumber()));
+
+                //신청 거절 설정
+                refuseCandidateButton.setOnClickListener(v -> requestRefuseCandidateByCandidateNumber(vo.getCandidateNumber()));
+            }
+        }
+
+        private void requestRefuseCandidateByCandidateNumber(int candidateNumber) {
+            String url = context.getResources().getString(R.string.url) + "requestRefuseCandidateByCandidateNumber.do";
+            StringRequest request = new StringRequest(Request.Method.POST, url,
+                    this::processRefuseCandidateResponse,
+                    error -> {
+
+                    }){
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String,String> params = new HashMap<>();
+                    params.put("candidateNumber",String.valueOf(candidateNumber));
+                    return params;
+                }
+            };
+            request.setShouldCache(false);
+            Base.requestQueue.add(request);
+        }
+
+        private void processRefuseCandidateResponse(String response) {
+            int updateResult = Integer.parseInt(response);
+            switch (updateResult) {
+                case 0:
+                    Toast.makeText(context,"신청 거절 요청에 실패하였습니다.",Toast.LENGTH_LONG).show();
+                    break;
+                case 1:
+                    if (context instanceof OfferManageCandidateActivity){
+                        OfferManageCandidateActivity activity = (OfferManageCandidateActivity) context;
+                        Snackbar.make(activity.getWindow().getDecorView().getRootView(),"성공적으로 거절되었습니다.",Snackbar.LENGTH_LONG).show();
+                        activity.requestCandidateListByJobNumber(vo.getJobNumber());
+                    } else {
+                        Toast.makeText(context,"신청관리 액티비티 정보를 불러오는데 실패하였습니다",Toast.LENGTH_LONG).show();
+                    }
+                    break;
             }
         }
 

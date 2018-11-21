@@ -17,7 +17,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,12 +25,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.ImageRequest;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerCertificateRecyclerAdapter;
@@ -64,7 +66,7 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
     TextView seekerEmail;
     TextView seekerIsPicture;
     TextView seekerCash;
-
+    ImageView seekerPicture;
     Spinner bankSpinner;
 
     FrameLayout mapContainer;
@@ -102,7 +104,7 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
         seekerCash = rootView.findViewById(R.id.seekerCash);
         seekerAccount = rootView.findViewById(R.id.seekerAccount);
         seekerInfo = rootView.findViewById(R.id.seekerInfo);
-
+        seekerPicture = rootView.findViewById(R.id.seekerPicture);
         //Button
         Button showPictureButton = rootView.findViewById(R.id.showPictureButton);
         showPictureButton.setOnClickListener(v -> showPicture(item));
@@ -112,7 +114,7 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
         addCertificateButton.setOnClickListener(v -> addCertificate());
         Button updateMyInfo = rootView.findViewById(R.id.updateMyInfo);
         updateMyInfo.setOnClickListener(v -> {
-            updateMyInfo(item,picture);
+            updateMyInfo(item);
         });
         //Spinner 설정
         bankSpinner = rootView.findViewById(R.id.bankSpinner);
@@ -142,36 +144,30 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
      * updateMyInfo
      * @param item seekerVO 를 update 함
      */
-    private void updateMyInfo(SeekerVO item, Bitmap picture) {
+    private void updateMyInfo(SeekerVO item) {
         String url = getResources().getString(R.string.url) + "updateSeeker.do";
-
-        StringRequest request = new StringRequest(Request.Method.POST, url,
+        SimpleMultiPartRequest request = new SimpleMultiPartRequest(
+                Request.Method.POST, url,
                 this::processUpdateResult,
-                error -> {}){
+                error -> {
+
+                }
+        ){
             @Override
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 item.setBank(bankSpinner.getSelectedItem().toString());
                 params.put("seekerVO",item.toString());
-
-                if (picture != null) {
-                    params.put("seekerPicture",getStringImage(picture));
-                }
-
                 return params;
             }
         };
+        Log.d("imageUri",image.getPath());
+        Log.d("imageUri",image.getAbsolutePath());
+        request.addFile("seekerPhoto",image.getAbsolutePath());
+        request.addMultipartParam("seekerVO","text/plain",item.toString());
         request.setShouldCache(false);
         Base.requestQueue.add(request);
 
-    }
-
-    private String getStringImage(Bitmap picture) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        picture.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
     }
 
     /**
@@ -259,6 +255,9 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
         seekerAccount.setText(item.getSeekerAccount());
         seekerInfo.setText(item.getSeekerInfo());
 
+        if (item.getSeekerPicture() != null) {
+            showPicture(item);
+        }
         //사진 존재 유무
         if (item.getSeekerPicture().length() > 0) {
             seekerIsPicture.setText("사진 있음");
@@ -318,7 +317,7 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
                 File photoFile = null;
                 try{
                     photoFile = createImageFile();
-                }catch (IOException e) {
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
                 if (photoFile != null) {
@@ -340,7 +339,7 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
      * 카메라로 촬영한 이미지 생성하기
      * @return 카메라로 촬영된 이미지 파일
      */
-    private File createImageFile() throws IOException{
+    private File createImageFile() {
         String imgFileName = System.currentTimeMillis()+".jpg";
         File imageFile = null;
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/Pictures","gyeom");
@@ -361,19 +360,18 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
      * @param item seekerVO 의 이미지 정보를 가져온다
      */
     public void showPicture(SeekerVO item) {
+
         if (item == null){
-            Bitmap bitmap = null;
+            Bitmap bitmap;
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;
             bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),options);
-            //bitmap = Bitmap.createScaledBitmap(bitmap,200,200,true);
 
             //이미지를 상황에 맞게 회전시킨다
             try {
                 ExifInterface exif = new ExifInterface(image.getAbsolutePath());
                 int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
                 int exifDegree = exifOrientationToDegrees(exifOrientation);
-                bitmap = rotate(bitmap,exifDegree);
+                //bitmap = rotate(bitmap,exifDegree);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -383,20 +381,24 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
                 bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
 
                 picture = bitmap;
-                byte[] imageBytes = byteArrayOutputStream.toByteArray();
-                String temp = Base64.encodeToString(imageBytes,Base64.NO_WRAP);
-
-                Intent intent = new Intent(activity,SeekerShowPictureActivity.class);
-                intent.putExtra("bitmap",temp);
-                activity.startActivityForResult(intent,404);
+                seekerPicture.setImageBitmap(bitmap);
             }
 
         }else {
-            Intent intent = new Intent(activity,SeekerShowPictureActivity.class);
-            intent.putExtra("imgUrl",item.getSeekerPicture());
-            activity.startActivityForResult(intent,404);
-        }
+            String url = getResources().getString(R.string.url) + item.getSeekerPicture();
+            ImageRequest request = new ImageRequest(url, activity.getResources(), activity.getContentResolver(),
+                    response -> setServerImage(response),
+                    0, 0, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888,
+                    error -> {
 
+                    });
+            Base.requestQueue.add(request);
+        }
+    }
+
+    private void setServerImage(Bitmap response) {
+        seekerPicture.setRotation(90);
+        seekerPicture.setImageBitmap(response);
     }
 
     /**

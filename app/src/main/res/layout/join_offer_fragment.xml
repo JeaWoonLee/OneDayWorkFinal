@@ -9,9 +9,10 @@
     <!-- 아이디 입력 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:padding="10dp">
+
         <TextView
             style="@style/blackTextView"
             android:text="@string/join_offer_fragment2" />
@@ -19,16 +20,16 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/offerIdInput"
             style="@style/offerEditText"
-            app:theme="@style/offerEditText"
+            android:layout_weight="2"
             android:hint="@string/join_offer_fragment1"
             android:inputType="text"
-            android:layout_weight="2"/>
+            app:theme="@style/offerEditText" />
 
         <Button
             android:id="@+id/checkIdOverlapButton1"
+            style="@style/offerButton"
             android:layout_width="0dp"
             android:layout_marginStart="10dp"
-            style="@style/offerButton"
             android:layout_weight="1"
             android:text="@string/join_offer_fragment14" />
     </LinearLayout>
@@ -36,7 +37,7 @@
     <!-- 패스워드 입력 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -47,15 +48,15 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/offerPwInput"
             style="@style/offerEditText"
-            app:theme="@style/offerEditText"
             android:hint="@string/join_offer_fragment4"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            app:theme="@style/offerEditText" />
     </LinearLayout>
 
     <!-- 패스워드 재입력 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -66,20 +67,20 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/offerPwReInput"
             style="@style/offerEditText"
-            app:theme="@style/offerEditText"
             android:hint="@string/join_offer_fragment15"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            app:theme="@style/offerEditText" />
     </LinearLayout>
     <!-- 이름 입력 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <TextView
             style="@style/blackTextView"
-            android:text="@string/join_offer_fragment6"/>
+            android:text="@string/join_offer_fragment6" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/offerNameInput"
@@ -92,7 +93,7 @@
     <!-- offer_account 입력 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -113,27 +114,27 @@
     <!-- 이메일 입력 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <TextView
             style="@style/blackTextView"
-            android:text="@string/join_offer_fragment10"/>
+            android:text="@string/join_offer_fragment10" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/offerEmailInput"
             style="@style/offerEditText"
-            app:theme="@style/offerEditText"
             android:hint="@string/join_offer_fragment11"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            app:theme="@style/offerEditText" />
 
     </LinearLayout>
 
     <!-- 회사명-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:padding="10dp">
 

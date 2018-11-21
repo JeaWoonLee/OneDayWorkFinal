@@ -67,7 +67,7 @@
 
     <!--find_front_fragment-->
     <string name="find_front_fragment1">아이디 찾기</string>
-    <string name="find_front_fragment2">비밀번호 찾기</string>
+    <string name="find_front_fragment2">비밀번호 변경</string>
     <!--//end find_front_fragment-->
 
     <!--find_seeker_fragment-->

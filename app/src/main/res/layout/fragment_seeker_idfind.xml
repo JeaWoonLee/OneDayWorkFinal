@@ -8,7 +8,7 @@
     tools:context=".login.findInfo.SeekerIDFindFragment">
 
     <EditText
-        android:id="@+id/seekerNmInput"
+        android:id="@+id/seekerNAme"
         android:layout_width="match_parent"
         style="@style/seekerEditText"
         android:theme="@style/seekerEditText"
@@ -16,14 +16,14 @@
 
     <EditText
         android:layout_marginVertical="10dp"
-        android:id="@+id/seekerEmInput"
+        android:id="@+id/seekerEMail"
         android:layout_width="match_parent"
         style="@style/seekerEditText"
         android:theme="@style/seekerEditText"
         android:hint="@string/find_offer_fragment1"/>
 
     <TextView
-        android:id="@+id/seekerIdCheck"
+        android:id="@+id/seekerID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

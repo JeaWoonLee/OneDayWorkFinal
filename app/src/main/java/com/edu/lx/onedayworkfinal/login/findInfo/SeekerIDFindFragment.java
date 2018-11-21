@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,8 +26,10 @@ import java.util.Map;
 public class SeekerIDFindFragment extends Fragment {
 
     FindIDActivity activity;
-    EditText seekerNmInput;
-    EditText seekerEmInput;
+
+    EditText seekerNAme;
+    EditText seekerEMail;
+    TextView seekerID;
 
     @Override
     public void onAttach(Context context) {
@@ -38,8 +41,9 @@ public class SeekerIDFindFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_seeker_idfind,container,false);
 
-        seekerNmInput = rootView.findViewById(R.id.seekerNmInput);
-        seekerEmInput = rootView.findViewById(R.id.seekerEmInput);
+        seekerNAme = rootView.findViewById(R.id.seekerNAme);
+        seekerEMail = rootView.findViewById(R.id.seekerEMail);
+        seekerID = rootView.findViewById(R.id.seekerID);
 
         Button seekerFindButton = rootView.findViewById(R.id.seekerFindButton);
         seekerFindButton.setOnClickListener(new View.OnClickListener() {
@@ -53,18 +57,17 @@ public class SeekerIDFindFragment extends Fragment {
     }
 
     private void SeekerIDFind(){
+        final String seekerEmail = seekerEMail.getText().toString();
+        final String seekerName = seekerNAme.getText().toString();
 
-        final String seekerEm = seekerEmInput.getText().toString();
-        final String seekerNm = seekerNmInput.getText().toString();
-
-        String url = getResources().getString(R.string.url)+"seekerIdFind.do";
+        String url = getResources().getString(R.string.url)+"seekrIdFind.do";
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
                 response -> {
                     SeekerVO seekerVO = Base.gson.fromJson(response,SeekerVO.class);
                     if (seekerVO != null){
-                        ProcessSeekerIdFind();
+                        ProcessSeekerIdFind(seekerVO);
                     }else {
                         Toast.makeText(activity,"고객님의 아이디를 찾을 수 없습니다",Toast.LENGTH_LONG).show();
                     }
@@ -74,8 +77,8 @@ public class SeekerIDFindFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String,String> params= new HashMap<>();
-                params.put("userEm",seekerEm);
-                params.put("userNm",seekerNm);
+                params.put("seekerEmail",String.valueOf(seekerEmail));
+                params.put("seekerName",String.valueOf(seekerName));
                 return params;
             }
         };
@@ -83,7 +86,8 @@ public class SeekerIDFindFragment extends Fragment {
         Base.requestQueue.add(request);
     }
 
-    private void ProcessSeekerIdFind(){
+    private void ProcessSeekerIdFind(SeekerVO seekerVO){
         Toast.makeText(activity,"고객님의 아이디를 찾았습니다.",Toast.LENGTH_LONG).show();
+        seekerID.setText(seekerVO.getSeekerId());
     }
 }

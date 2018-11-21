@@ -19,12 +19,10 @@ public class SeekerManageAcceptJobAdapter extends BaseRecyclerViewAdapter<Manage
     public SeekerManageAcceptJobAdapter (Context context) {
         super(context);
     }
-
-
     @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder (@NonNull ViewGroup viewGroup, int i) {
-        return new SeekerManageAcceptListViewHolder(inflateView(super.context, R.layout.seeker_accept_job_manage,viewGroup));
+    public SeekerManageAcceptListViewHolder onCreateViewHolder (@NonNull ViewGroup viewGroup, int i) {
+        return new SeekerManageAcceptListViewHolder(inflateView(context, R.layout.seeker_accept_job_manage,viewGroup));
     }
 
     class SeekerManageAcceptListViewHolder extends BaseViewHolder<ManageVO> {

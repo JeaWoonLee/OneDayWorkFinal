@@ -21,8 +21,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:title="일용직 노동자 메인 화면"/>ad
+            android:background="@color/seeker"
+            app:titleTextColor="@color/black"
+            app:title="일용직 노동자 메인 화면"/>
         <!-- //end Toolbar -->
 
         <!-- Fragment Container -->

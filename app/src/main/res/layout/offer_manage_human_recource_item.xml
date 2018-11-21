@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    android:elevation="15dp"
+    android:layout_margin="10dp">
+
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- info -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/seekerId"
+                android:layout_height="wrap_content"
+                style="@style/offerItemText"
+                android:text="seekerId"/>
+
+            <TextView
+                android:id="@+id/seekerAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/offerItemText"
+                android:text="00"
+                />
+
+            <TextView
+                android:id="@+id/seekerSex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/offerItemText"
+                android:text=" 남"
+                />
+
+            <TextView
+                android:id="@+id/reliability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/offerItemText"
+                android:text="reliability"/>
+
+        </LinearLayout>
+        <!-- //end Info-->
+        <!-- Button -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+        <LinearLayout
+            android:id="@+id/showSeekerDetailButtonLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_header_border_right">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/whiteTextView"
+                android:text="상세 정보"/>
+        </LinearLayout>
+        <!-- //end Button -->
+    </LinearLayout>
+</android.support.v7.widget.CardView>

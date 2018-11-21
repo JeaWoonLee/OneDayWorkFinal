@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.CommuteInfoForJobRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.WorkerRecyclerViewAdapter;
@@ -118,6 +119,7 @@ public class OfferManageCommuteDetailActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(projectName);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //모집 총원
         recruitmentRate = findViewById(R.id.recruitmentRate);
@@ -520,4 +522,9 @@ public class OfferManageCommuteDetailActivity extends AppCompatActivity {
     }
     //end 각 레이아웃 보이기 숨기기
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
+    }
 }

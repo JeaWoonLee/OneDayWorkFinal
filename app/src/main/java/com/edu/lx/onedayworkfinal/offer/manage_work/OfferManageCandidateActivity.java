@@ -1,30 +1,24 @@
 package com.edu.lx.onedayworkfinal.offer.manage_work;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.OfferManageCandidateTargetDateRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.CandidateMapResponseModel;
 import com.edu.lx.onedayworkfinal.vo.JobCandidateVO;
-import com.edu.lx.onedayworkfinal.vo.JobVO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -51,7 +45,6 @@ public class OfferManageCandidateActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         jobNumber = intent.getIntExtra("jobNumber",0);
-        Toast.makeText(getApplicationContext(),"jobNumber : " + jobNumber,Toast.LENGTH_LONG).show();
         requestCandidateListByJobNumber(jobNumber);
     }
 

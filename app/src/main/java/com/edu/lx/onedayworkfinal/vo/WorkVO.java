@@ -14,6 +14,24 @@ public class WorkVO {
     String jobName;
     String jobPay;
     int candidateStatus;
+    int candidateNumber;
+    String seekerSign;
+
+
+    public String getSeekerSign() {
+        return seekerSign;
+    }
+
+    public void setSeekerSign(String seekerSign) {
+        this.seekerSign = seekerSign;
+    }
+    public int getCandidateNumber() {
+        return candidateNumber;
+    }
+
+    public void setCandidateNumber(int candidateNumber) {
+        this.candidateNumber = candidateNumber;
+    }
 
     public String getProjectName() {
         return projectName;

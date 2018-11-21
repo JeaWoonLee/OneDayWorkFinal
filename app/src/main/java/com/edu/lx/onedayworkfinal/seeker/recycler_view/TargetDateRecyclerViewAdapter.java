@@ -9,15 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.JobCandidateVO;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
-import com.edu.lx.onedayworkfinal.vo.SeekerVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;

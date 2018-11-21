@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerJobListRecyclerViewAdapter;
@@ -83,8 +83,6 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
         myLocationFab = rootView.findViewById(R.id.myLocationFab);
         mapContainer = rootView.findViewById(R.id.map_view);
         mMapView = new MapView(activity);
-        mMapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
-        mMapView.setDaumMapApiKey(getResources().getString(R.string.kakao_app_key));
         mMapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
 
         //다른 액티비티에서 사용할 것
@@ -245,8 +243,10 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
             projectMarker.setItemName(item.getProjectName());
             projectMarker.setTag(i);
             projectMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(item.getProjectLat(),item.getProjectLng()));
-            projectMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-            projectMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+            projectMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+            projectMarker.setCustomImageResourceId(R.drawable.select_loctaion);
+            projectMarker.setSelectedMarkerType(MapPOIItem.MarkerType.CustomImage);
+            projectMarker.setCustomSelectedImageResourceId(R.drawable.mylocation);
 
             //각 마커를 생성할 때 직업 목록을 조회해서 map 에 담아둔다
             requestProjectJobList(item.getProjectNumber());
@@ -259,8 +259,9 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
 
     //내 위치보기 플로팅 아이콘을 클릭했을 때
     private void traceMyLocation() {
-        if (!isAim) {
+        if (isAim == false) {
             //아이콘 배경 설정
+            isAim = true;
             myLocationFab.setSupportBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.seeker,activity.getTheme())));
             //검색 최소 시간
             long minTime = 1000;
@@ -269,18 +270,18 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
 
             try{
                 Base.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,minTime,minDistance,this);
+                showMyLocation();
             } catch (SecurityException e) {
                 e.printStackTrace();
             }
 
         } else {
             //아이콘 배경 설정
+            isAim = false;
             myLocationFab.setSupportBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.white,activity.getTheme())));
             Base.locationManager.removeUpdates(this);
         }
 
-        //에임 여부가 바뀐다
-        isAim = !isAim;
     }
 
     //내 위치 보여주기
@@ -316,8 +317,10 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
                 myLocationMarker = new MapPOIItem();
                 myLocationMarker.setItemName("내 위치");
                 myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lastLocation.getLatitude(),lastLocation.getLongitude()));
-                myLocationMarker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-                myLocationMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+                myLocationMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+                myLocationMarker.setCustomImageResourceId(R.drawable.mylocation);
+                myLocationMarker.setCustomImageAutoscale(false);
+                myLocationMarker.setCustomImageAnchor(0.5f,1.0f);
                 mMapView.addPOIItem(myLocationMarker);
             }else {
                 mMapView.removePOIItem(myLocationMarker);
@@ -332,7 +335,11 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
     //LocationListener
     @Override
     public void onLocationChanged(Location location) {
-        showMyLocation();
+        if (isAim == false) {
+            return;
+        } else if (isAim == true) {
+            showMyLocation();
+        }
     }
 
     @Override

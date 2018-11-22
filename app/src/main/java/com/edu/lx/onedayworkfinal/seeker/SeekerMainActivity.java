@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +35,6 @@ import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -219,7 +217,7 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 break;
                 //일감 관리 activity 전환
             case R.id.today_job_manage :
-                Intent intent = new Intent(getApplicationContext(), TodayJobManageActivity.class);
+                Intent intent = new Intent(getApplicationContext(), JobManageActivity.class);
                 startActivity(intent);
                 break;
 

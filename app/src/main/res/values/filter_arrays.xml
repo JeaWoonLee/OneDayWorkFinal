@@ -161,7 +161,6 @@
 
     <string-array name="certificate">
         <item>거푸집 기능사</item>
-        <item>건설안전교육이수증</item>
         <item>건축목공기능사</item>
         <item>건축일반시공기능장</item>
         <item>도배기능사</item>
@@ -180,7 +179,6 @@
         <item>일식조리기능사</item>
         <item>전산응용토목제도기능사</item>
         <item>전산응용건축제도기능사</item>
-        <item>지적기능사</item>
         <item>자기비파괴검사기능사</item>
         <item>조리기능장</item>
         <item>조적기능사</item>
@@ -188,14 +186,11 @@
         <item>중식조리기능사</item>
         <item>조경기능사</item>
         <item>철근기능사</item>
-        <item>철도토목기능사</item>
         <item>초음파비파괴검사기능사</item>
         <item>침투비파괴검사기능사</item>
         <item>콘크리트기능사</item>
         <item>타일기능사</item>
         <item>특수용접기능사</item>
-        <item>항공사진기능사</item>
-        <item>항로표지기능사</item>
         <item>한식조리기능사</item>
 
     </string-array>

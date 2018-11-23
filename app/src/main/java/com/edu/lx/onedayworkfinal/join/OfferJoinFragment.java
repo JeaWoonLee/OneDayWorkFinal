@@ -18,10 +18,10 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.error.AuthFailureError;
-import com.android.volley.error.VolleyError;
 import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
+import com.edu.lx.onedayworkfinal.vo.OfferVO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +29,8 @@ import java.util.Map;
 public class OfferJoinFragment extends Fragment {
 
     JoinActivity activity;
+
+    public OfferVO item;
 
     //아이디입력
     AppCompatEditText offerIdInput;
@@ -44,6 +46,8 @@ public class OfferJoinFragment extends Fragment {
     Spinner accountSpinner;
     //회사명 입력
     AppCompatEditText companyNameInput;
+
+
 
     //중복 확인
     Button checkIdOverlapButton1;
@@ -72,14 +76,18 @@ public class OfferJoinFragment extends Fragment {
         offerNameInput = rootView.findViewById(R.id.offerNameInput);
         offerJoinButton = rootView.findViewById(R.id.offerJoinButton);
         offerAccountInput = rootView.findViewById(R.id.offerAccountInput);
-        accountSpinner = rootView.findViewById(R.id.accountSpinner);
         companyNameInput = rootView.findViewById(R.id.companyNameInput);
         checkIdOverlapButton1 = rootView.findViewById(R.id.checkIdOverlapButton1);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.account,android.R.layout.simple_spinner_item);
+        accountSpinner = rootView.findViewById(R.id.accountSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity.getApplicationContext(),android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.account));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        accountSpinner.setPrompt("은행");
         accountSpinner.setAdapter(adapter);
+
+        checkIdOverlapButton1.setOnClickListener(v -> requestCheckOverlap());
+
+
+        offerJoinButton.setOnClickListener(v -> requestJoinOffer());
 
         return rootView;
     }
@@ -87,21 +95,6 @@ public class OfferJoinFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        checkIdOverlapButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestCheckOverlap();
-
-            }
-        });
-
-        offerJoinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestJoinOffer();
-            }
-        });
 
     }
 
@@ -117,17 +110,9 @@ public class OfferJoinFragment extends Fragment {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new com.android.volley.Response.Listener<String>(){
-                    @Override
-                    public void onResponse(String response) {
-                        processOverlapResult(response);
-                    }
-                },
-                new com.android.volley.Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                response -> processOverlapResult(response),
+                error -> {
 
-                    }
                 }
         ){
             @Override
@@ -152,23 +137,15 @@ public class OfferJoinFragment extends Fragment {
         final String offerEmail = offerEmailInput.getText().toString();
         final String offerAccount = offerAccountInput.getText().toString();
         final String companyName = companyNameInput.getText().toString();
+        final String bank = accountSpinner.getSelectedItem().toString();
 
         String url = getResources().getString(R.string.url) + "joinOffer.do";
-
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        processJoinResponse(response);
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                response -> processJoinResponse(response),
+                error -> {
 
-                    }
                 }
         ){
             @Override
@@ -180,11 +157,13 @@ public class OfferJoinFragment extends Fragment {
                 params.put("offerEmail",offerEmail);
                 params.put("offerAccount",offerAccount);
                 params.put("companyName",companyName);
+                params.put("bank",bank);
                 return params;
             }
         };
         request.setShouldCache(false);
         Base.requestQueue.add(request);
+
     }
 
     private void processJoinResponse (String response) {

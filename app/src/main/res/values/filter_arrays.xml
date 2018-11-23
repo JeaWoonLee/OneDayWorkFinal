@@ -34,6 +34,7 @@
 
     <!-- 직군 필터 -->
     <!-- 직군 중분류 -->
+
     <!-- 건설현장-->
     <string-array name="constructionSiteFilter">
         <item>없음</item>
@@ -150,6 +151,7 @@
         <item>농협</item>
         <item>수협</item>
         <item>씨티</item>
+        <item>카카오</item>
         <item>SC제일</item>
         <item>전북</item>
         <item>대구</item>
@@ -158,7 +160,44 @@
     </string-array>
 
     <string-array name="certificate">
+        <item>거푸집 기능사</item>
         <item>건설안전교육이수증</item>
+        <item>건축목공기능사</item>
+        <item>건축일반시공기능장</item>
+        <item>도배기능사</item>
+        <item>미장기능사</item>
+        <item>방수기능사</item>
+        <item>배관기능사</item>
+        <item>복어조리기능사</item>
+        <item>비계기능사</item>
+        <item>석공기능사</item>
+        <item>세탁기능사</item>
+        <item>식품가공기능사</item>
+        <item>양식조리기능사</item>
+        <item>유리시공기능사</item>
+        <item>온수온돌기능사</item>
+        <item>용접기능사</item>
+        <item>일식조리기능사</item>
+        <item>전산응용토목제도기능사</item>
+        <item>전산응용건축제도기능사</item>
+        <item>지적기능사</item>
+        <item>자기비파괴검사기능사</item>
+        <item>조리기능장</item>
+        <item>조적기능사</item>
+        <item>조주기능사</item>
+        <item>중식조리기능사</item>
+        <item>조경기능사</item>
+        <item>철근기능사</item>
+        <item>철도토목기능사</item>
+        <item>초음파비파괴검사기능사</item>
+        <item>침투비파괴검사기능사</item>
+        <item>콘크리트기능사</item>
+        <item>타일기능사</item>
+        <item>특수용접기능사</item>
+        <item>항공사진기능사</item>
+        <item>항로표지기능사</item>
+        <item>한식조리기능사</item>
+
     </string-array>
 
 </resources>

@@ -101,6 +101,16 @@
             style="@style/blackTextView"
             android:text="@string/join_offer_fragment7" />
 
+        <Spinner
+            android:id="@+id/accountSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="20dp"
+            >
+
+        </Spinner>
+
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/offerAccountInput"
             style="@style/offerEditText"

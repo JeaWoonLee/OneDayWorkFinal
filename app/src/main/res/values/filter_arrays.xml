@@ -142,6 +142,21 @@
         <item>건설안전교육이수증</item>
     </string-array>
 
+    <string-array name="account">
+        <item>신한</item>
+        <item>하나</item>
+        <item>국민</item>
+        <item>우리</item>
+        <item>농협</item>
+        <item>수협</item>
+        <item>씨티</item>
+        <item>SC제일</item>
+        <item>전북</item>
+        <item>대구</item>
+        <item>제주</item>
+        <item>부산</item>
+    </string-array>
+
     <string-array name="certificate">
         <item>건설안전교육이수증</item>
     </string-array>

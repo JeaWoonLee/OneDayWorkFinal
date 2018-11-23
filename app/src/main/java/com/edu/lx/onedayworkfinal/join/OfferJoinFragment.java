@@ -11,7 +11,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,6 +41,7 @@ public class OfferJoinFragment extends Fragment {
     AppCompatEditText offerEmailInput;
     //계좌 입력
     AppCompatEditText offerAccountInput;
+    Spinner accountSpinner;
     //회사명 입력
     AppCompatEditText companyNameInput;
 
@@ -69,9 +72,14 @@ public class OfferJoinFragment extends Fragment {
         offerNameInput = rootView.findViewById(R.id.offerNameInput);
         offerJoinButton = rootView.findViewById(R.id.offerJoinButton);
         offerAccountInput = rootView.findViewById(R.id.offerAccountInput);
+        accountSpinner = rootView.findViewById(R.id.accountSpinner);
         companyNameInput = rootView.findViewById(R.id.companyNameInput);
         checkIdOverlapButton1 = rootView.findViewById(R.id.checkIdOverlapButton1);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.account,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        accountSpinner.setPrompt("은행");
+        accountSpinner.setAdapter(adapter);
 
         return rootView;
     }

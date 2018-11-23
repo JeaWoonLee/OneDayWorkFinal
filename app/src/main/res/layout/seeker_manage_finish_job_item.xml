@@ -63,12 +63,12 @@
                 android:text="모집기간" />
 
             <!--<android.support.design.button.MaterialButton-->
-                <!--android:id="@+id/todayJobButton"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="50pt"-->
-                <!--android:text="오늘의 일감"-->
-                <!--android:visibility="gone"/>-->
+            <!--android:id="@+id/todayJobButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="50pt"-->
+            <!--android:text="오늘의 일감"-->
+            <!--android:visibility="gone"/>-->
 
         </LinearLayout>
 

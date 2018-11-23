@@ -12,12 +12,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.text.SimpleDateFormat;
 
+import java.util.Date;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.WorkerRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageAcceptJobAdapter;
+import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageFinishJobAdapter;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageProjectRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.TargetDateRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
@@ -30,24 +35,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
 public class JobManageActivity extends Activity {
 
-    SeekerMainActivity activity;
+
     String seekerId;
+    ManageVO manageVO;
     //intent 로 받아오는 정보
     public int projectNumber;
 
     //서버에서 받아오는 응답 정보들
-    ArrayList<ManageVO> items;
+
 
     //수락한 일감, 종료된 일감 목록
-    ArrayList<ManageVO> accpetJob;
+    ArrayList<ManageVO> items;
     ArrayList<ManageVO> finishJobList;
 
     SeekerManageAcceptJobAdapter adapter;
+    SeekerManageFinishJobAdapter FinishAdapter;
 
     //Toolbar
     Toolbar toolbar;
@@ -65,6 +73,9 @@ public class JobManageActivity extends Activity {
     LinearLayout finishJobView;
     Button showFinishButton;
     RecyclerView finishJobViewRecyclerView;
+    //오늘의일감 버튼
+    int todayJobVisible = 0;
+    Button todayJobButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +85,7 @@ public class JobManageActivity extends Activity {
         initUI();
 
         requestAcceptJobList(seekerId);
+        requestFinishJobList(seekerId);
     }
 
     //UI 세팅
@@ -106,6 +118,7 @@ public class JobManageActivity extends Activity {
 
     }
 
+    //수락한 일감 조회
     public void requestAcceptJobList(String seekerId){
         String url = getResources().getString(R.string.url) + "requestAcceptJobList.do";
         StringRequest request = new StringRequest(Request.Method.POST, url,
@@ -133,9 +146,10 @@ public class JobManageActivity extends Activity {
         adapter = new SeekerManageAcceptJobAdapter(this);
         adapter.setItems(items);
         acceptJobRecyclerView.setAdapter(adapter);
+
     }
 
-
+    //수락한 일감 보여주기, 숨기기
     public void showAcceptJob(int acceptJobVisible) {
         switch (acceptJobVisible) {
             case 0:
@@ -144,7 +158,6 @@ public class JobManageActivity extends Activity {
                 }
                 this.acceptJobVisible = 1;
                 showAcceptButton.setText("-");
-//                if (accpetJob.size()>0)
                 acceptJobView.setVisibility(View.VISIBLE);
                 break;
             case 1:
@@ -155,12 +168,38 @@ public class JobManageActivity extends Activity {
         }
     }
 
+    public void requestFinishJobList(String seekerId) {
+        String url = getResources().getString(R.string.url) + "requestFinishJobList.do";
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                    this::processFinishJobJobList, error -> {
+
+
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("seekerId", seekerId);
+                return params;
+            }
+        };
+        request.setShouldCache(false);
+        Base.requestQueue.add(request);
+
+    }
+
+    public void processFinishJobJobList(String response) {
+        ManageVO[] vo = Base.gson.fromJson(response,ManageVO[].class);
+        finishJobList = new ArrayList<>(Arrays.asList(vo));
+        FinishAdapter = new SeekerManageFinishJobAdapter(this);
+        FinishAdapter.setItems(finishJobList);
+        finishJobViewRecyclerView.setAdapter(FinishAdapter);
+
+    }
     public void showFinishJob(int finishJobVisible) {
         switch (finishJobVisible) {
             case 0:
                 this.finishJobVisible = 1;
                 showFinishButton.setText("-");
-//                   if(finishJobList.size()>0)
                 finishJobView.setVisibility(View.VISIBLE);
                 break;
             case 1:
@@ -170,5 +209,29 @@ public class JobManageActivity extends Activity {
                 break;
         }
     }
+
+//    public String getDateString() {
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+//        String str_date = df.format(new Date());
+//
+//        return str_date;
+//    }
+//
+//
+//    public void showTodayjobButton(int todayJobVisible) {
+//
+//        if(manageVO.getJobStartDate().equals(getDateString())) {
+//            switch(todayJobVisible) {
+//                case 0:
+//
+//                    this.todayJobVisible = 1;
+//
+//                    todayJobButton.setVisibility(View.VISIBLE);
+//                    break;
+//            }
+//
+//        }
+//
+//    }
 
 }

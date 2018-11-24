@@ -5,60 +5,371 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- 오늘의 일감 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/blackTextView"
+        android:text="오늘의 일감"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:id="@+id/today_work_empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/seeker"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="오늘 날짜의 수락된 일감이 없습니다"
+            style="@style/whiteTextView"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/today_work_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/seeker_rectangle_border"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="4">
+
+            <!-- 오늘의 일감 헤더 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/seeker">
+
+                <TextView
+                    android:id="@+id/projectName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="projectName"
+                    style="@style/whiteTextView"/>
+
+                <TextView
+                    android:id="@+id/jobName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="jobName"
+                    style="@style/whiteTextView"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/jobPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/whiteTextView"
+                    android:text="jobPay"/>
+            </LinearLayout>
+            <!-- //end 오늘의 일감 헤더 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="근무시간"
+                    style="@style/blackTextView"/>
+
+                <TextView
+                    android:id="@+id/workTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="workTime"
+                    style="@style/blackTextView"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="상태"
+                    style="@style/blackTextView"/>
+
+                <TextView
+                    android:id="@+id/candidateStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="candidateStatus"
+                    style="@style/blackTextView"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/today_work"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/seeker"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="바로가기"
+                style="@style/whiteTextView"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         style="@style/blackTextView"
         android:text="하루일감 메뉴"
         android:layout_gravity="center_horizontal"
-        android:textSize="35sp"/>
-    <TableLayout
+        android:textSize="25sp"/>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/seeker_rectangle_border">
 
-        <TableRow
-            android:layout_marginVertical="10dp"
-            android:gravity="center">
+        <LinearLayout
+            android:id="@+id/find_job"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_weight="1">
 
-            <LinearLayout
-                android:id="@+id/today_work"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:padding="10dp"
-                android:layout_marginEnd="20dp">
+                android:src="@drawable/find_job"/>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/main_icon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                style="@style/blackTextView"
+                android:text="일감 찾기"/>
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    style="@style/blackTextView"
-                    android:text="오늘의 일감"/>
-            </LinearLayout>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@color/seeker"/>
 
-            <LinearLayout
-                android:id="@+id/find_job"
+        <LinearLayout
+            android:id="@+id/manage_work"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:src="@drawable/work_list"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="신청 관리"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@color/seeker"/>
+
+        <LinearLayout
+            android:id="@+id/my_work"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:padding="10dp"
+                android:src="@drawable/calendar"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="일감 관리"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 이력 정보 메뉴 -->
+    <TextView
+        android:layout_width="wrap_content"
+        style="@style/blackTextView"
+        android:text="내 이력 정보"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"/>
+
+    <LinearLayout
+        android:id="@+id/record_empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/seeker"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="이력정보가 존재하지 않습니다"
+            style="@style/whiteTextView"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/record_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/seeker_rectangle_border"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/seeker"
+            android:paddingEnd="20dp">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:text="총 근무 일자"
+                style="@style/whiteTextView"/>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/main_icon"/>
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="total"
+                style="@style/whiteTextView"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신뢰도"
+                style="@style/whiteTextView"/>
+
+            <TextView
+                android:id="@+id/reliability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="n%"
+                style="@style/whiteTextView"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
                     style="@style/blackTextView"
-                    android:text="일감 찾기"/>
+                    android:text="퇴근"/>
+
+                <TextView
+                    android:id="@+id/offWorkCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="n"/>
 
             </LinearLayout>
 
-        </TableRow>
+            <View
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:background="@color/seeker"/>
 
-    </TableLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="결근"/>
+
+                <TextView
+                    android:id="@+id/absentCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="n"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:background="@color/seeker"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="무단이탈"/>
+
+                <TextView
+                    android:id="@+id/runCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="n"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

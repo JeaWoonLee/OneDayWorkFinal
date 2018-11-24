@@ -2,7 +2,6 @@ package com.edu.lx.onedayworkfinal.login.findInfo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,11 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.error.AuthFailureError;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.util.session.SessionManager;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferVO;
 
@@ -75,7 +73,7 @@ public class OfferPWFindFragment extends Fragment {
 
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("offerId",String.valueOf(offerId));
                 params.put("offerEmail",String.valueOf(offerEmail));

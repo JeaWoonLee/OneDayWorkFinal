@@ -45,6 +45,7 @@ public class TodayWorkFragment extends Fragment {
 
     Button commuteButton;
     Button findRouteButton;
+    Button refreshButton;
 
     RelativeLayout map_view;
 
@@ -72,18 +73,20 @@ public class TodayWorkFragment extends Fragment {
         candidateStatus = rootView.findViewById(R.id.candidateStatus);
         projectComment = rootView.findViewById(R.id.projectComment);
         commuteButton = rootView.findViewById(R.id.commuteButton);
-        commuteButton.setOnClickListener(v -> signStatement());
+        commuteButton.setOnClickListener(v -> showUnsignedContract(activity.todayWorkItem));
         findRouteButton = rootView.findViewById(R.id.findRouteButton);
         findRouteButton.setOnClickListener(v -> showDaumMapFindRoute());
+        refreshButton = rootView.findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(v -> activity.requestTodayWorkDetail(Base.sessionManager.getUserDetails().get("id")));
         map_view = rootView.findViewById(R.id.map_view);
         return rootView;
     }
 
-    private void signStatement() {
-        Intent intent = new Intent(activity,DrawSignActivity.class);
-        intent.putExtra("workVO",activity.todayWorkItem.toString());
+    private void showUnsignedContract(WorkVO todayWorkItem) {
+        Intent intent = new Intent(activity,ShowContractActivity.class);
+        intent.putExtra("workVO",todayWorkItem.toString());
         activity.startActivityForResult(intent,601);
-        //requestCommute(seekerId);
+
     }
 
     @Override
@@ -119,13 +122,12 @@ public class TodayWorkFragment extends Fragment {
         daumMap.addPOIItem(myLocationMarker);
     }
 
-
-
     /**
      * processTodayDetail
      * @param item 아이템으로 오늘의 일감 화면 보여주기
      */
     public void processTodayDetail(WorkVO item) {
+        if (item == null) return;
         projectName.setText(item.getProjectName());
         projectSubject.setText(item.getProjectSubject());
         jobName.setText(item.getJobName());

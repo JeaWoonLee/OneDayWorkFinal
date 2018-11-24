@@ -2,7 +2,6 @@ package com.edu.lx.onedayworkfinal.login.findInfo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,9 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.SeekerVO;
@@ -49,12 +47,7 @@ public class SeekerPWFindFragment extends Fragment {
         seekerPW = rootView.findViewById(R.id.seekerPW);
 
         Button seekerFindButton = rootView.findViewById(R.id.seekerFindButton);
-        seekerFindButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SeekerPWFind();
-            }
-        });
+        seekerFindButton.setOnClickListener(v -> SeekerPWFind());
 
         return rootView;
     }
@@ -75,7 +68,7 @@ public class SeekerPWFindFragment extends Fragment {
                 },error -> Log.d("error", Arrays.toString(error.getStackTrace()))
                 ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String > params = new HashMap<>();
                 params.put("seekerId",String.valueOf(seekerId));
                 params.put("seekerEmail",String.valueOf(seekerEmail));

@@ -7,16 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -41,7 +38,6 @@ public class DrawSignActivity extends AppCompatActivity {
 
     public static int mStrokeColor = Color.BLACK;
 
-    public static int mBackColor = Color.WHITE;
     Bitmap bitmap;
     LinearLayout llCanvas;
     WorkVO workVO;
@@ -99,7 +95,7 @@ public class DrawSignActivity extends AppCompatActivity {
         String fileName = id + "_sign.png";
         String stringPath = exStorage + folderName;
 
-        File filePath = null;
+        File filePath;
         String imagePath = stringPath + fileName;
         try {
             filePath = new File(stringPath);
@@ -144,7 +140,6 @@ public class DrawSignActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"서명 정보 업데이트에 실패하였습니다",Toast.LENGTH_LONG).show();
                 break;
             case 1:
-                Snackbar.make(getWindow().getDecorView().getRootView(),"성공적으로 서명 정보가 업데이트 되었습니다",Snackbar.LENGTH_LONG).show();
                 Intent intent = new Intent();
                 intent.putExtra("signResult","resultOK");
                 setResult(Activity.RESULT_OK,intent);

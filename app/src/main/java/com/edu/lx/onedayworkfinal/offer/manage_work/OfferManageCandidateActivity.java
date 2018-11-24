@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -77,20 +78,29 @@ public class OfferManageCandidateActivity extends AppCompatActivity {
     private void processCandidateList(String response) {
         CandidateMapResponseModel result = Base.gson.fromJson(response,CandidateMapResponseModel.class);
         map = result.getResult();
-        Set key = map.keySet();
         List<JobCandidateVO> headerList = result.getTargetDateList();
+        List<JobCandidateVO> headArray = new ArrayList<>();
+        String targetDate = "";
         for (JobCandidateVO header : headerList) {
-            List<JobCandidateVO> list = map.get(header.getTargetDate());
-            if (list.get(0) != null) {
-                header.setJobLimitCount(list.get(0).getJobLimitCount());
-                header.setRecruit(list.get(0).getRecruit());
-                header.setTargetDate(list.get(0).getTargetDate());
+            if (TextUtils.equals(targetDate,header.getTargetDate())){
+                break;
+            }else {
+                targetDate = header.getTargetDate();
+
+                List<JobCandidateVO> list = map.get(header.getTargetDate());
+                if (list.get(0) != null) {
+                    header.setJobLimitCount(list.get(0).getJobLimitCount());
+                    header.setRecruit(list.get(0).getRecruit());
+                    header.setTargetDate(list.get(0).getTargetDate());
+                    headArray.add(header);
+                }
             }
+
 
         }
 
         OfferManageCandidateTargetDateRecyclerViewAdapter adapter = new OfferManageCandidateTargetDateRecyclerViewAdapter(this);
-        adapter.setItems((ArrayList<JobCandidateVO>) headerList);
+        adapter.setItems((ArrayList<JobCandidateVO>) headArray);
         recyclerView.setAdapter(adapter);
 
     }

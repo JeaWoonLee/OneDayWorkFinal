@@ -40,12 +40,11 @@ public class OfferMyInfoFragment extends Fragment {
     TextView companyName;
     TextView offerCash;
     TextView offerIsSign;
-    Spinner accountSpinner;
 
     EditText offerAccount;
     EditText offerInfo;
 
-
+    Spinner accountSpinner;
 
     @Override
     public void onAttach(Context context) {

@@ -48,6 +48,7 @@ public class OfferDrawSignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_draw_sign);
         llCanvas = findViewById(R.id.llCanvas);
+
         if (savedInstanceState!=null){
             mDrawView.pointList = (ArrayList<OfferDrawSignActivity.DrawView.Point>) savedInstanceState.getSerializable("list");
         }
@@ -97,6 +98,7 @@ public class OfferDrawSignActivity extends AppCompatActivity {
             FileOutputStream out = new FileOutputStream(imagePath);
             bitmap.compress(Bitmap.CompressFormat.PNG,100,out);
             out.close();
+
         }catch (FileNotFoundException exception){
             Log.d("FileNotFoundException",exception.getMessage());
         }catch (IOException exception){
@@ -117,7 +119,6 @@ public class OfferDrawSignActivity extends AppCompatActivity {
                 });
         request.addFile("offerSign",path);
         request.addMultipartParam("offer","application/text",offerVO.toString());
-
         request.setShouldCache(false);
         Base.requestQueue.add(request);
     }

@@ -96,7 +96,7 @@ public class OfferMyInfoFragment extends Fragment {
 
     public void requestOfferDetail(String id){
         Intent intent = new Intent(activity,OfferDrawSignActivity.class);
-        startActivityForResult(intent,411);
+        startActivityForResult(intent,412);
 
     }
 

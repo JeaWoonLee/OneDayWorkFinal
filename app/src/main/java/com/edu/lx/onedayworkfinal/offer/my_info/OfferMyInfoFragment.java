@@ -1,6 +1,7 @@
 package com.edu.lx.onedayworkfinal.offer.my_info;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -63,7 +64,7 @@ public class OfferMyInfoFragment extends Fragment {
         Button showSignButton = rootView.findViewById(R.id.showSignButton);
         showSignButton.setOnClickListener(v -> { });
         Button signRegistButton = rootView.findViewById(R.id.signRegistButton);
-        signRegistButton.setOnClickListener(v -> { });
+        signRegistButton.setOnClickListener(v -> registSign() );
         Button updateMyInfo = rootView.findViewById(R.id.updateMyInfo);
         updateMyInfo.setOnClickListener(v -> updateMyInfo(item));
 
@@ -74,6 +75,12 @@ public class OfferMyInfoFragment extends Fragment {
 
         return rootView;
     }
+
+    public void registSign(){
+        Intent intent = new Intent(activity,OfferDrawSignActivity.class);
+        startActivityForResult(intent,411);
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -88,7 +95,10 @@ public class OfferMyInfoFragment extends Fragment {
     }
 
     public void requestOfferDetail(String id){
+        Intent intent = new Intent(activity,OfferDrawSignActivity.class);
+        startActivityForResult(intent,411);
 
     }
+
 
 }

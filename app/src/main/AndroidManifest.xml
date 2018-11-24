@@ -90,12 +90,12 @@
         <activity android:name=".offer.manage_work.OfferManageWorkActivity" />
         <activity android:name=".offer.manage_work.OfferManageCandidateActivity" />
         <activity android:name=".offer.manage_work.OfferManageHumanResourcesActivity" />
-        <activity android:name=".seeker.info.SeekerShowPictureActivity" />
         <activity android:name=".offer.manage_commute.OfferManageCommuteDetailActivity" />
         <activity android:name=".login.findInfo.FindInfoActivity" />
         <activity android:name=".login.findInfo.FindIDActivity" />
         <activity android:name=".login.findInfo.FindPWActivity" />
-        <activity android:name=".offer.my_info.OfferDrawSignActivity"></activity>
+        <activity android:name=".offer.my_info.OfferDrawSignActivity"
+                  android:theme="@style/PopupTheme" ></activity>
     </application>
 
 </manifest>

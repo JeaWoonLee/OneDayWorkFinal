@@ -159,7 +159,7 @@
                     android:text="계좌정보"/>
 
                 <Spinner
-                    android:id="@+id/bankSpinner"
+                    android:id="@+id/accountSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical">
@@ -217,10 +217,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/blackTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/blackTextView"
-                    android:text="서명 등록란"/>
+                    android:text="서명" />
 
                 <TextView
                     android:id="@+id/offerIsSign"
@@ -243,9 +243,9 @@
 
                 <Button
                     android:id="@+id/signRegistButton"
-                    android:layout_width="wrap_content"
                     style="@style/offerButton"
-                    android:text="서명 등록"/>
+                    android:layout_width="wrap_content"
+                    android:text="서명하기" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

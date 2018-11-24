@@ -15,7 +15,14 @@ public class OfferVO {
     String companyNo;
     String companyName;
     int offerCash;
+    String offerSign;
 
+    public String getOfferSign(){
+        return offerSign;
+    }
+    public void setOfferSign(String offerSign){
+        this.offerSign = offerSign;
+    }
     public String getOfferId() {
         return offerId;
     }

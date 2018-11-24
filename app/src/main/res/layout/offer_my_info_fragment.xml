@@ -1,7 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Basic Info -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/blackTextView"
+            android:text="기본 정보"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp">
+
+            <!-- seekerId -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="아이디"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/offerId"
+                    style="@style/offerItemText"
+                    android:text="offerId"/>
+
+            </LinearLayout>
+
+            <!-- seekerName -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="이름"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/offerName"
+                    style="@style/offerItemText"
+                    android:text="offerName"/>
+
+            </LinearLayout>
+
+            <!-- seekerSex -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="이메일"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/offerEmail"
+                    style="@style/offerItemText"
+                    android:text="offerEmail"/>
+
+            </LinearLayout>
+
+            <!-- seekerBirth -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="회사 번호"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/companyNo"
+                    style="@style/offerItemText"
+                    android:text="companyNo"/>
+
+            </LinearLayout>
+
+            <!-- seekerEmail -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="회사명"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/companyName"
+                    style="@style/offerItemText"
+                    android:text="companyName"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- //end Basic Info -->
+
+        <!-- //seekerInfo-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="소개글"
+            style="@style/blackTextView"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/offer_border"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/offerInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </FrameLayout>
+        <!-- //end seekerInfo -->
+        <!-- Account Info -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/blackTextView"
+            android:text="계좌 정보"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp">
+
+            <!-- Account Info -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="계좌정보"/>
+
+                <Spinner
+                    android:id="@+id/bankSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
+
+                </Spinner>
+
+                <EditText
+                    android:id="@+id/offerAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/offerEditText"
+                    android:layout_marginEnd="20dp"
+                    android:inputType="number"
+                    android:hint="계좌번호를 입력하세요"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+            <!-- seekerCash -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="소지금"/>
+
+                <TextView
+                    android:id="@+id/offerCash"
+                    android:layout_width="wrap_content"
+                    android:text="offerCash"
+                    style="@style/offerItemText"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- //end Account Info -->
+
+        <!-- AdditionalInfo -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/blackTextView"
+            android:text="추가정보"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_border"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="서명 등록란"/>
+
+                <TextView
+                    android:id="@+id/offerIsSign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/offerItemText"
+                    android:text="없음"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/showSignButton"
+                    android:layout_width="wrap_content"
+                    style="@style/offerButton"
+                    android:text="서명 보기"
+                    android:layout_marginEnd="10dp"/>
+
+                <Button
+                    android:id="@+id/signRegistButton"
+                    android:layout_width="wrap_content"
+                    style="@style/offerButton"
+                    android:text="서명 등록"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- //end AdditionalInfo -->
+
+        <Button
+            android:id="@+id/updateMyInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/offerButton"
+            android:layout_margin="10dp"
+            android:text="내 정보 수정"/>
+    </LinearLayout>
+    <!-- //end Container -->
+
+</ScrollView>

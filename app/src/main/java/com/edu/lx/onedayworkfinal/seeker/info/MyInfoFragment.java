@@ -118,7 +118,7 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
         });
         //Spinner 설정
         bankSpinner = rootView.findViewById(R.id.bankSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity.getApplicationContext(),android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.banks));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity.getApplicationContext(),android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.account));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bankSpinner.setAdapter(adapter);
 

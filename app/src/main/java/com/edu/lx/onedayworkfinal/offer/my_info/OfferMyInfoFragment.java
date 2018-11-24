@@ -14,11 +14,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.error.AuthFailureError;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferVO;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class OfferMyInfoFragment extends Fragment {
     OfferMainActivity activity;
@@ -90,15 +98,63 @@ public class OfferMyInfoFragment extends Fragment {
     }
 
     public void updateMyInfo(OfferVO item){
+        String url = getResources().getString(R.string.url)+"updateOffer.do";
+        SimpleMultiPartRequest request = new SimpleMultiPartRequest(Request.Method.POST,url,
+                this::processUpdateOfferResult,
+                error -> {
 
+                })
+        {
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String,String> params = new HashMap<>();
+                item.setBank(accountSpinner.getSelectedItem().toString());
+                params.put("offerVO",item.toString());
+                return params;
+            }
+        };
+        request.addMultipartParam("offerVO","text/plain",item.toString());
+        request.setShouldCache(false);
+        Base.requestQueue.add(request);
+    }
 
+    private void processUpdateOfferResult(String response){
+        int updateOfferResult = Integer.parseInt(response);
+        if (updateOfferResult == 1){
+            Toast.makeText(activity.getApplicationContext(),"정보가 성공적으로 변경 되었습니다.",Toast.LENGTH_LONG).show();
+
+        }
     }
 
     public void requestOfferDetail(String id){
         Intent intent = new Intent(activity,OfferDrawSignActivity.class);
         startActivityForResult(intent,412);
 
+        String url = getResources().getString(R.string.url)+"requestOfferDetail.do";
+        StringRequest request = new StringRequest(Request.Method.POST,url,
+                this::processOfferDetailResponse,
+                error -> {}){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("offerId",id);
+                return params;
+            }
+        };
+        request.setShouldCache(false);
+        Base.requestQueue.add(request);
     }
 
+    private void processOfferDetailResponse(String response){
+        item = Base.gson.fromJson(response,OfferVO.class);
+        offerId.setText(item.getOfferId());
+        offerName.setText(item.getOfferName());
+        offerEmail.setText(item.getOfferEmail());
+        offerInfo.setText(item.getOfferInfo());
+        companyName.setText(item.getCompanyName());
+        companyNo.setText(item.getCompanyNo());
+        offerCash.setText(item.getOfferCash());
+        offerAccount.setText(item.getOfferAccount());
+    }
 
 }

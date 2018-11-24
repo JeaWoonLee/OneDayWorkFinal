@@ -72,6 +72,7 @@ public class OfferDrawSignActivity extends AppCompatActivity {
     public void commitSign(){
         String path = saveBitmap();
         requestUpdateCandidateSign(path);
+
     }
 
     private String saveBitmap(){
@@ -108,7 +109,7 @@ public class OfferDrawSignActivity extends AppCompatActivity {
         String offerId = Base.sessionManager.getUserDetails().get("id");
         offerVO.setCompanyName(offerId);
         Log.d("offerVO",offerVO.toString());
-        String url = getResources().getString(R.string.url)+"";
+        String url = getResources().getString(R.string.url)+"updateOfferSign";
         SimpleMultiPartRequest request = new SimpleMultiPartRequest(Request.Method.POST,url,
                 this::processUpdateResult,
                 error -> {

@@ -97,6 +97,8 @@
         <activity android:name=".login.findInfo.FindIDActivity" />
         <activity android:name=".login.findInfo.FindPWActivity" />
         <activity android:name=".seeker.manage.ShowContractActivity"></activity>
+        <activity android:name=".offer.my_info.OfferDrawSignActivity"
+                  android:theme="@style/PopupTheme" ></activity>
     </application>
 
 </manifest>

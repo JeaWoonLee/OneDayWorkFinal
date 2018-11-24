@@ -36,6 +36,7 @@ public class SessionManager {
     private static final String KEY_INDEX = "userIndex";
     public static final String IS_SEEKER = "0";
     public static final String IS_OFFER = "1";
+
     //Constructor
     @SuppressLint("CommitPrefEdits")
     public SessionManager (Context context) {
@@ -64,6 +65,7 @@ public class SessionManager {
         editor.commit();
     }
 
+
     /**
      * check login method will check user login status
      * if false it will redirect user to login page
@@ -85,6 +87,7 @@ public class SessionManager {
 
         }
     }
+
 
     /**
      * Get stored session data

@@ -28,9 +28,11 @@ public class OfferPWFindFragment extends Fragment {
 
 
     FindPWActivity activity;
+
     EditText offerID;
     EditText offerEMail;
     TextView offerPW;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -82,14 +84,21 @@ public class OfferPWFindFragment extends Fragment {
         };
         request.setShouldCache(false);
         Base.requestQueue.add(request);
+
+
+
+        Intent intent = new Intent(activity,OfferPwAlterActivity.class);
+        startActivityForResult(intent,409);
     }
 
     private void processOfferPwFind(OfferVO offerVO){
         Toast.makeText(activity,"비밀번호를 찾았습니다.",Toast.LENGTH_LONG).show();
         offerPW.setText(offerVO.getOfferPw());
 
-        Intent intent = new Intent(activity,OfferPwAlterActivity.class);
-        startActivityForResult(intent,409);
+//        activity.getSupportFragmentManager().beginTransaction().
+
+//        Intent intent = new Intent(activity,OfferPwAlterActivity.class);
+//        startActivityForResult(intent,409);
     }
 
 

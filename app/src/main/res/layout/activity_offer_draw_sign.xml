@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/offer_rectangle_border"
+    android:padding="3dp"
+    tools:context=".offer.my_info.OfferDrawSignActivity">
+
+
+    <LinearLayout
+        android:id="@+id/llMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/offer"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/whiteTextView"
+            android:text="근로계약 서명 입력"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llCanvas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#ffffffff"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/commitSignButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/offerButton"
+        android:text="입력"/>
+
+
+
+</LinearLayout>

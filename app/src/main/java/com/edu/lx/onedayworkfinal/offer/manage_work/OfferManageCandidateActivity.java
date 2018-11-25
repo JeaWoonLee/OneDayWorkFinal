@@ -8,7 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.request.StringRequest;
@@ -23,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class OfferManageCandidateActivity extends AppCompatActivity {
 
@@ -31,6 +31,9 @@ public class OfferManageCandidateActivity extends AppCompatActivity {
     public HashMap<String,List<JobCandidateVO>> map;
 
     RecyclerView recyclerView;
+
+    LinearLayout emptyLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class OfferManageCandidateActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        emptyLayout = findViewById(R.id.emptyLayout);
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
@@ -79,29 +83,41 @@ public class OfferManageCandidateActivity extends AppCompatActivity {
         CandidateMapResponseModel result = Base.gson.fromJson(response,CandidateMapResponseModel.class);
         map = result.getResult();
         List<JobCandidateVO> headerList = result.getTargetDateList();
-        List<JobCandidateVO> headArray = new ArrayList<>();
-        String targetDate = "";
-        for (JobCandidateVO header : headerList) {
-            if (TextUtils.equals(targetDate,header.getTargetDate())){
-                break;
-            }else {
-                targetDate = header.getTargetDate();
 
-                List<JobCandidateVO> list = map.get(header.getTargetDate());
-                if (list.get(0) != null) {
-                    header.setJobLimitCount(list.get(0).getJobLimitCount());
-                    header.setRecruit(list.get(0).getRecruit());
-                    header.setTargetDate(list.get(0).getTargetDate());
-                    headArray.add(header);
+        if (headerList.size() > 0) {
+            emptyLayout.setVisibility(View.GONE);
+
+            List<JobCandidateVO> headArray = new ArrayList<>();
+            String targetDate = "";
+            for (JobCandidateVO header : headerList) {
+                if (TextUtils.equals(targetDate,header.getTargetDate())){
+                    break;
+                }else {
+                    targetDate = header.getTargetDate();
+
+                    List<JobCandidateVO> list = map.get(header.getTargetDate());
+                    if (list != null) {
+                        if (list.get(0) != null) {
+                            header.setJobLimitCount(list.get(0).getJobLimitCount());
+                            header.setRecruit(list.get(0).getRecruit());
+                            header.setTargetDate(list.get(0).getTargetDate());
+                            headArray.add(header);
+                        }
+                    }
+
                 }
+
+
             }
 
+            OfferManageCandidateTargetDateRecyclerViewAdapter adapter = new OfferManageCandidateTargetDateRecyclerViewAdapter(this);
+            adapter.setItems((ArrayList<JobCandidateVO>) headArray);
+            recyclerView.setAdapter(adapter);
 
+        } else {
+            emptyLayout.setVisibility(View.VISIBLE);
         }
 
-        OfferManageCandidateTargetDateRecyclerViewAdapter adapter = new OfferManageCandidateTargetDateRecyclerViewAdapter(this);
-        adapter.setItems((ArrayList<JobCandidateVO>) headArray);
-        recyclerView.setAdapter(adapter);
 
     }
 

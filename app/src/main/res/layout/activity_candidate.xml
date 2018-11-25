@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".seeker.find.CandidateActivity">
+    tools:context=".seeker.find.CandidateActivity"
+    android:background="@drawable/seeker_rectangle_border">
 
     <!-- container -->
     <LinearLayout
@@ -23,6 +24,8 @@
 
         </android.support.v7.widget.Toolbar>
         <TextView
+            android:textSize="25sp"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             style="@style/itemTextView"
             android:text="@string/activity_candidate1"/>
@@ -31,8 +34,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/seeker_border"
-            android:layout_margin="10dp"
+            android:background="@drawable/seeker_rectangle_border"
             android:paddingEnd="10dp"
             android:orientation="vertical"
             tools:ignore="RtlSymmetry">
@@ -119,19 +121,21 @@
         <!-- //end 모집정보 -->
 
         <TextView
+            android:textSize="25sp"
             android:layout_width="wrap_content"
             style="@style/itemTextView"
+            android:layout_gravity="center"
             android:text="@string/activity_candidate9"/>
 
         <com.applandeo.materialcalendarview.CalendarView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             app:selectionColor="@color/offer"
             app:selectionLabelColor="@color/seeker"
             app:disabledDaysLabelsColor="@color/danger"
             app:type="one_day_picker"
+            android:layout_marginHorizontal="3dp"
             app:eventsEnabled="true">
 
         </com.applandeo.materialcalendarview.CalendarView>
@@ -141,9 +145,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/seeker_border"
-            android:layout_marginHorizontal="10dp"
-            android:paddingEnd="30dp"
+            android:background="@drawable/seeker_rectangle_border"
+            android:paddingEnd="10dp"
             tools:targetApi="o"
             tools:ignore="RtlSymmetry">
 
@@ -220,7 +223,6 @@
 
         <Button
             android:id="@+id/candidateButton"
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             style="@style/seekerButton"
             android:text="@string/activity_candidate17"/>

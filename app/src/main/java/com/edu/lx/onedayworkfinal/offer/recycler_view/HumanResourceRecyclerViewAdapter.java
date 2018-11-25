@@ -65,7 +65,7 @@ class HumanResourceRecyclerViewAdapter extends BaseRecyclerViewAdapter<ManageHum
             double total = manageHumanResourceModel.getTotal();
             if (total != 0) {
                 int reliability = (int) ((workOffCount/total) * 100);
-                String reliabilityStr = reliability + "% ("+workOffCount + "/" + total + ")";
+                String reliabilityStr = reliability + "% ("+(int)workOffCount + "/" + (int)total + ")";
                 if (reliability < 80) {
                     reliabilityView.setTextColor(context.getResources().getColor(R.color.danger,context.getTheme()));
                 } else if (reliability < 90){

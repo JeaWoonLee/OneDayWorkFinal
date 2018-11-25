@@ -4,18 +4,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".seeker.info.AddCertificateActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/seeker_rectangle_border">
 
     <!-- Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/seeker_border"
-        android:layout_margin="10dp">
+        >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/seeker"
+            android:paddingEnd="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="자격 정보 추가"
+                android:textSize="20sp"
+                style="@style/blackTextView"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                style="@style/seekerButton"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:text="X" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,29 +88,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginVertical="20dp">
+            android:layout_marginTop="10dp"
+            >
 
             <Button
                 android:id="@+id/addCertificateButton"
-                android:layout_width="120dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/seekerButton"
                 android:text="추가"
-                android:layout_marginStart="20dp"/>
+                />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                style="@style/seekerButton"
-                android:background="@color/gray"
-                android:text="취소"
-                android:layout_marginEnd="20dp"/>
         </LinearLayout>
 
     </LinearLayout>

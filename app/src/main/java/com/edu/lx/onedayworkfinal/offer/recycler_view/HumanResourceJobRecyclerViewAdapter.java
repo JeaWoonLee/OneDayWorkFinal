@@ -60,10 +60,7 @@ public class HumanResourceJobRecyclerViewAdapter extends BaseRecyclerViewAdapter
                 List<ManageHumanResourceModel> list = recruitMap.get(jobCandidateVO.getJobNumber());
                 HumanResourceRecyclerViewAdapter adapter = new HumanResourceRecyclerViewAdapter(activity);
                 adapter.setItems((ArrayList<ManageHumanResourceModel>) list);
-//                activity.container.setMinimumHeight(list.size() * 104);
-//                activity.recyclerViewContainerLayout.setMinimumHeight(list.size() * 104);
-//                activity.recyclerView.setMinimumHeight(list.size() * 104);
-                recyclerView.setMinimumHeight(list.size() * 104);
+                if (list != null) recyclerView.setMinimumHeight(list.size() * 104);
                 recyclerView.setAdapter(adapter);
             }
 

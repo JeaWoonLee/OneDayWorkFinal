@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.error.AuthFailureError;
 import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
@@ -35,22 +34,15 @@ public class MyWorkFragment extends Fragment {
     SeekerMainActivity activity;
 
     String seekerId;
-    ManageVO manageVO;
     TextView receivedPayView;
     TextView predictPayView;
 
     //수락한 일감, 종료된 일감 목록
     ArrayList<ManageVO> acceptedItems;
     ArrayList<ManageVO> finishJobList;
-    int nowPayData;
 
     SeekerManageAcceptJobAdapter adapter;
     SeekerManageFinishJobAdapter FinishAdapter;
-
-    //현재까지 수령한 총액
-    TextView nowPay;
-    //수령총액
-    TextView expectaionReceipt;
 
     //수락 일감
     int acceptJobVisible = 1;
@@ -62,10 +54,6 @@ public class MyWorkFragment extends Fragment {
     LinearLayout finishJobView;
     Button showFinishButton;
     RecyclerView finishJobViewRecyclerView;
-    //오늘의일감 버튼
-    int todayJobVisible = 0;
-    Button todayJobButton;
-
 
     @Override
     public void onAttach(Context context) {
@@ -227,8 +215,11 @@ public class MyWorkFragment extends Fragment {
         for (ManageVO item : acceptedItems) predictPay += item.getJobPay();
         for (ManageVO item : finishJobList) if (TextUtils.equals(item.getCandidateStatus(),"4")) receivedPay += item.getJobPay();
 
-        receivedPayView.setText(String.valueOf(Base.decimalFormat(receivedPay))+" 원");
-        predictPayView.setText(String.valueOf(Base.decimalFormat(predictPay))+" 원");
+        String received = String.valueOf(Base.decimalFormat(receivedPay))+" 원";
+        String predict = String.valueOf(Base.decimalFormat(predictPay))+" 원";
+
+        receivedPayView.setText(received);
+        predictPayView.setText(predict);
     }
 
 

@@ -57,8 +57,11 @@ public class SelectLocationActivity extends AppCompatActivity implements MapView
             }catch (SecurityException e) {
                 e.printStackTrace();
             }
-            myLat = Objects.requireNonNull(lastLocation).getLatitude();
-            myLng = lastLocation.getLongitude();
+            if (lastLocation != null) {
+                myLat = lastLocation.getLatitude();
+                myLng = lastLocation.getLongitude();
+            }
+
         }else {
             addPoint(MapPoint.mapPointWithGeoCoord(myLat,myLng));
         }

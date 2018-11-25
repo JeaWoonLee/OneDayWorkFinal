@@ -250,7 +250,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
             case R.id.my_account_info :
                 changeFragment(MY_INFO_FRAGMENT);
                 break;
-
+            case R.id.my_work :
+                changeFragment(MY_WORK_FRAGMENT);
+                break;
                 //로그 아웃
             case R.id.logout :
                 //세션 정보를 null 로 삭제하고 finish 해준다

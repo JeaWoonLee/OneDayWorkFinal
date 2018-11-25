@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".seeker.ManageProjectDetailActivity">
+    tools:context=".seeker.candidate.ManageProjectDetailActivity"
+    android:background="@drawable/seeker_rectangle_border">
 
     <!-- Container -->
     <LinearLayout
@@ -18,11 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="title"
-            android:background="@color/seeker">
+            android:background="@color/seeker"
+            android:layout_marginBottom="5dp">
 
         </android.support.v7.widget.Toolbar>
 
         <TextView
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             style="@style/itemTextView"
             android:text="기본 정보"/>
@@ -32,8 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/seeker_border"
-            android:layout_margin="10dp">
+            android:background="@drawable/seeker_rectangle_border"
+            android:layout_marginVertical="5dp">
 
             <!-- 프로젝트 이름-->
             <LinearLayout
@@ -128,6 +133,9 @@
 
         <!-- 코멘트 -->
         <TextView
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             style="@style/blackTextView"
             android:text="설명"/>
@@ -136,8 +144,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/seeker_border"
-            android:layout_margin="10dp">
+            android:background="@drawable/seeker_rectangle_border"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:id="@+id/projectComment"
@@ -154,32 +162,43 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                style="@style/blackTextView"
-                android:text="위치"
-                android:layout_width="wrap_content"/>
-
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
+            <TextView
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                style="@style/blackTextView"
+                android:text="위치"
+                android:layout_width="wrap_content"/>
 
-            <Button
-                android:id="@+id/findRouteButton1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="길 찾기"
-                style="@style/seekerButton"
-                android:layout_marginEnd="20dp"/>
+                android:layout_weight="1"
+                android:gravity="right">
+
+                <Button
+                    android:id="@+id/findRouteButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="길 찾기"
+                    style="@style/seekerButton"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginEnd="10dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:padding="10dp"
-            android:layout_margin="10dp"
+            android:padding="3dp"
+            android:layout_marginVertical="5dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/seeker_border">
+            android:background="@drawable/seeker_rectangle_border">
 
             <RelativeLayout
                 android:id="@+id/map_view"

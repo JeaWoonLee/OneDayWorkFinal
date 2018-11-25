@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.request.StringRequest;
@@ -25,9 +26,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OfferManageWorkFragment extends Fragment {
+
     OfferMainActivity activity;
     RecyclerView projectListRecyclerView;
     OfferProjectListRecyclerViewAdapter adapter;
+    LinearLayout emptyLayout;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -38,6 +42,7 @@ public class OfferManageWorkFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.offer_manage_work_fragment,container,false);
+        emptyLayout = rootView.findViewById(R.id.emptyLayout);
         projectListRecyclerView = rootView.findViewById(R.id.projectListRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         projectListRecyclerView.setLayoutManager(layoutManager);
@@ -77,8 +82,14 @@ public class OfferManageWorkFragment extends Fragment {
     private void processOfferProjectListResponse(String response) {
         ProjectVO[] result = Base.gson.fromJson(response,ProjectVO[].class);
         ArrayList<ProjectVO> items = new ArrayList<>(Arrays.asList(result));
-        adapter = new OfferProjectListRecyclerViewAdapter(activity);
-        adapter.setItems(items);
-        projectListRecyclerView.setAdapter(adapter);
+        if (items.size() > 0){
+            emptyLayout.setVisibility(View.GONE);
+            adapter = new OfferProjectListRecyclerViewAdapter(activity);
+            adapter.setItems(items);
+            projectListRecyclerView.setAdapter(adapter);
+        } else {
+            emptyLayout.setVisibility(View.VISIBLE);
+        }
+
     }
 }

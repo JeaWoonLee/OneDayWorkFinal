@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:elevation="10dp"
-    app:cardCornerRadius="10dp"
+    android:elevation="15dp"
+    app:cardCornerRadius="15dp"
     android:padding="10dp"
     android:layout_margin="10dp">
 
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/seeker">
+            android:background="@drawable/seeker_header_border">
 
             <TextView
                 android:id="@+id/projectName"

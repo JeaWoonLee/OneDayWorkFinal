@@ -106,8 +106,6 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
         seekerInfo = rootView.findViewById(R.id.seekerInfo);
         seekerPicture = rootView.findViewById(R.id.seekerPicture);
         //Button
-        Button showPictureButton = rootView.findViewById(R.id.showPictureButton);
-        showPictureButton.setOnClickListener(v -> showPicture(item));
         Button takePictureButton = rootView.findViewById(R.id.takePictureButton);
         takePictureButton.setOnClickListener(v -> takePicture());
         Button addCertificateButton = rootView.findViewById(R.id.addCertificateButton);
@@ -161,9 +159,11 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
                 return params;
             }
         };
-        Log.d("imageUri",image.getPath());
-        Log.d("imageUri",image.getAbsolutePath());
-        request.addFile("seekerPhoto",image.getAbsolutePath());
+        if (image != null) {
+            Log.d("imageUri",image.getPath());
+            Log.d("imageUri",image.getAbsolutePath());
+            request.addFile("seekerPhoto",image.getAbsolutePath());
+        }
         request.addMultipartParam("seekerVO","text/plain",item.toString());
         request.setShouldCache(false);
         Base.requestQueue.add(request);
@@ -179,6 +179,7 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
         if (updateReulst == 1) {
             Toast.makeText(activity.getApplicationContext(),"정보가 성공적으로 업데이트 되었습니다",Toast.LENGTH_LONG).show();
         }
+
     }
 
     /**
@@ -298,6 +299,7 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
      */
     private void addCertificate() {
         Intent intent = new Intent(activity,AddCertificateActivity.class);
+        intent.putExtra("seekerId",item.getSeekerId());
         activity.startActivityForResult(intent,402);
     }
 

@@ -25,12 +25,58 @@
         </android.support.v7.widget.Toolbar>
 
         <!-- 프로젝트 정보 -->
+        <!-- 기본정보 타이틀 레이아웃-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp"
+            >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                style="@style/blackTextView"
+                android:text="기본정보"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/showBasicInfoButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="-"
+                    style="@style/offerButton"
+                    android:layout_marginEnd="10dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        <!-- //end 기본정보 타이틀 레이아웃-->
+
+        <LinearLayout
+            android:id="@+id/basicInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
-            android:layout_margin="10dp">
+            android:background="@drawable/offer_rectangle_border"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="10dp"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -113,8 +159,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/commuteInfoForJobRecyclerView"
@@ -133,7 +178,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -147,8 +193,8 @@
 
             <Button
                 android:id="@+id/showOffWorkButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 style="@style/offerButton"
                 android:layout_gravity="center_vertical"
                 android:text="+"
@@ -159,15 +205,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
-            android:layout_margin="10dp"
+            android:background="@drawable/offer_rectangle_border"
+            android:layout_marginHorizontal="10dp"
             android:visibility="gone">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/offWorkRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -178,7 +223,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -192,8 +238,8 @@
 
             <Button
                 android:id="@+id/showWorkingButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 style="@style/offerButton"
                 android:layout_gravity="center_vertical"
                 android:text="+"
@@ -204,15 +250,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
-            android:layout_margin="10dp"
+            android:background="@drawable/offer_rectangle_border"
+            android:layout_marginHorizontal="10dp"
             android:visibility="gone">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/workingRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -223,7 +268,7 @@
                 style="@style/offerButton"
                 android:background="@color/blue1"
                 android:text="일괄 퇴근"
-                android:layout_margin="10dp"/>
+                android:layout_margin="3dp"/>
         </LinearLayout>
         <!-- //end 근무중 인원 목록 -->
 
@@ -231,7 +276,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -245,8 +291,8 @@
 
             <Button
                 android:id="@+id/showCommuteButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 style="@style/offerButton"
                 android:layout_gravity="center_vertical"
                 android:text="+"
@@ -258,15 +304,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
-            android:layout_margin="10dp"
+            android:background="@drawable/offer_rectangle_border"
+            android:layout_marginHorizontal="10dp"
             android:visibility="gone">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/commuteRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -276,7 +321,7 @@
                 android:layout_height="wrap_content"
                 style="@style/offerButton"
                 android:text="일괄 근무"
-                android:layout_margin="10dp"/>
+                android:layout_margin="3dp"/>
         </LinearLayout>
         <!-- //end 출근 민원 목록 -->
 
@@ -284,7 +329,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -298,8 +344,8 @@
 
             <Button
                 android:id="@+id/showNotCommuteButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 style="@style/offerButton"
                 android:layout_gravity="center_vertical"
                 android:text="+"
@@ -310,15 +356,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
-            android:layout_margin="10dp"
+            android:background="@drawable/offer_rectangle_border"
+            android:layout_marginHorizontal="10dp"
             android:visibility="gone">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/notCommuteRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_height="match_parent">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -329,7 +374,7 @@
                 style="@style/offerButton"
                 android:background="@color/danger"
                 android:text="일괄 결근"
-                android:layout_margin="10dp"/>
+                android:layout_margin="3dp"/>
         </LinearLayout>
         <!-- //end 미출근 인원 목록 -->
 
@@ -337,7 +382,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -351,8 +397,8 @@
 
             <Button
                 android:id="@+id/absentButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 style="@style/offerButton"
                 android:layout_gravity="center_vertical"
                 android:text="+"
@@ -364,15 +410,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
-            android:layout_margin="10dp"
+            android:background="@drawable/offer_rectangle_border"
+            android:layout_marginHorizontal="10dp"
             android:visibility="gone">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/absentRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
@@ -382,7 +427,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -396,8 +442,8 @@
 
             <Button
                 android:id="@+id/runButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 style="@style/offerButton"
                 android:layout_gravity="center_vertical"
                 android:text="+"
@@ -408,15 +454,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
-            android:layout_margin="10dp"
+            android:background="@drawable/offer_rectangle_border"
+            android:layout_marginHorizontal="10dp"
             android:visibility="gone">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/runRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>

@@ -237,11 +237,11 @@ public class FrontFragment extends Fragment {
             int reliable = ((int)(((double) offCnt / (double) totalCnt)*100));
 
             if (reliable < 80) {
-                reliability.setTextColor(getResources().getColor(R.color.danger,activity.getTheme()));
+                reliability.setTextColor(activity.getResources().getColor(R.color.danger,activity.getTheme()));
             } else if (reliable < 90){
-                reliability.setTextColor(getResources().getColor(R.color.black,activity.getTheme()));
+                reliability.setTextColor(activity.getResources().getColor(R.color.black,activity.getTheme()));
             } else  {
-                reliability.setTextColor(getResources().getColor(R.color.blue1,activity.getTheme()));
+                reliability.setTextColor(activity.getResources().getColor(R.color.blue1,activity.getTheme()));
             }
             String reliableStr = String.valueOf(reliable);
             reliability.setText(reliableStr + "%");

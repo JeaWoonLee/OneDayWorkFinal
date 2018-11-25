@@ -26,7 +26,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:layout_height="wrap_content"
@@ -40,8 +41,8 @@
 
             <Button
                 android:id="@+id/showSelectDayButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="20dp"
                 android:text="-"
                 style="@style/offerButton"
@@ -55,7 +56,7 @@
             android:orientation="vertical"
             android:background="@drawable/offer_rectangle_border"
             android:padding="3dp"
-            android:layout_margin="10dp">
+            android:layout_marginHorizontal="10dp">
 
             <com.applandeo.materialcalendarview.CalendarView
                 android:id="@+id/calendarView"
@@ -76,7 +77,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
 
             <TextView
                 android:layout_height="wrap_content"
@@ -90,26 +92,25 @@
 
             <Button
                 android:id="@+id/showRecyclerViewContainerButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:text="-"
                 style="@style/offerButton"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginEnd="20dp"
+                />
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/recyclerViewContainerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/offer_border">
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/offer_rectangle_border">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
             </android.support.v7.widget.RecyclerView>
         </FrameLayout>

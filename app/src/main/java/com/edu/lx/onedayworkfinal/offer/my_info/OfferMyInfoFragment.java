@@ -53,8 +53,7 @@ public class OfferMyInfoFragment extends Fragment {
 
     Spinner accountSpinner;
 
-    Button showSignButton;
-    int offerSignVisible = 0;
+
 
     @Override
     public void onAttach(Context context) {
@@ -80,7 +79,6 @@ public class OfferMyInfoFragment extends Fragment {
         offerSignLayout= rootView.findViewById(R.id.offerSignLayout);
         offerSign = rootView.findViewById(R.id.offerSign);
 
-        showSignButton = rootView.findViewById(R.id.showSignButton);
         Button signRegistButton = rootView.findViewById(R.id.signRegistButton);
         signRegistButton.setOnClickListener(v -> registSign() );
         Button updateMyInfo = rootView.findViewById(R.id.updateMyInfo);
@@ -162,31 +160,15 @@ public class OfferMyInfoFragment extends Fragment {
         companyNo.setText(item.getCompanyNo());
         offerCash.setText(String.valueOf(item.getOfferCash()));
         offerAccount.setText(item.getOfferAccount());
-        if (item.getOfferSign() != null) {
-            showSignButton.setOnClickListener(v -> {
-                switch (offerSignVisible) {
-                    case 0:
-                        offerSignVisible = 1;
-                        offerSignLayout.setVisibility(View.VISIBLE);
-                        break;
-                    case 1:
-                        offerSignVisible = 0;
-                        offerSignLayout.setVisibility(View.GONE);
-                        break;
-                }
-            });
 
-            offerIsSign.setText("등록됨");
-            String url = getResources().getString(R.string.url) + item.getOfferSign();
-            ImageRequest request = new ImageRequest(url, activity.getResources(), activity.getContentResolver(),
-                    response1 -> offerSign.setImageBitmap(response1), 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.ARGB_8888,
-                    error -> {
+        offerIsSign.setText("등록됨");
+        String url = getResources().getString(R.string.url) + item.getOfferSign();
+        ImageRequest request = new ImageRequest(url, activity.getResources(), activity.getContentResolver(),
+                response1 -> offerSign.setImageBitmap(response1), 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.ARGB_8888,
+                error -> {
 
-                    });
-            Base.requestQueue.add(request);
-        }else {
-            showSignButton.setVisibility(View.GONE);
-        }
+                });
+        Base.requestQueue.add(request);
+
     }
-
 }

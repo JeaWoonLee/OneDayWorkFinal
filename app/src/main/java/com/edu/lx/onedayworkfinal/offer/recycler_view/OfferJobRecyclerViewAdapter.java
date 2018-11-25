@@ -52,8 +52,10 @@ public class OfferJobRecyclerViewAdapter extends BaseRecyclerViewAdapter<JobVO> 
             String date = jobVO.getJobStartDate() + " ~ " + jobVO.getJobEndDate();
             jobDate.setText(date);
             String requirement = jobVO.getJobRequirement();
-            if (requirement.length() == 0) {
-                requirement = "없음";
+            if (requirement != null) {
+                if (requirement.length() == 0) {
+                    requirement = "없음";
+                }
             }
             jobRequirement.setText(requirement);
             manageCandidateButton.setOnClickListener(v -> {

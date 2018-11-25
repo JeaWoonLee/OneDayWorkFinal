@@ -205,6 +205,12 @@ public class OfferManageHumanResourcesActivity extends AppCompatActivity {
         jobNumberList = model.getJobNumberList();
         recruitMap = model.getRecruitMap();
 
+        int size = 0;
+        for (JobCandidateVO item : jobNumberList) {
+            List<ManageHumanResourceModel> list = recruitMap.get(item.getJobNumber());
+            size += list.size();
+        }
+        recyclerView.setMinimumHeight(size * 104);
         HumanResourceJobRecyclerViewAdapter adapter = new HumanResourceJobRecyclerViewAdapter(this);
         adapter.setItems((ArrayList<JobCandidateVO>) jobNumberList);
         recyclerView.setAdapter(adapter);
@@ -222,7 +228,7 @@ public class OfferManageHumanResourcesActivity extends AppCompatActivity {
             case 1:
                 this.selectDayLayoutVisible = 0;
                 selectDayLayout.setVisibility(View.GONE);
-                showRecyclerViewContainerButton.setText("+");
+                showSelectDayButton.setText("+");
                 break;
         }
     }
@@ -232,10 +238,12 @@ public class OfferManageHumanResourcesActivity extends AppCompatActivity {
             case 0 :
                 this.recyclerViewContainerVisible = 1;
                 recyclerViewContainerLayout.setVisibility(View.VISIBLE);
+                showRecyclerViewContainerButton.setText("-");
                 break;
             case 1:
                 this.recyclerViewContainerVisible = 0;
                 recyclerViewContainerLayout.setVisibility(View.GONE);
+                showRecyclerViewContainerButton.setText("+");
                 break;
         }
     }

@@ -58,6 +58,11 @@ public class OfferManageCommuteDetailActivity extends AppCompatActivity {
 
     //Toolbar
     Toolbar toolbar;
+
+    //기본정보 타이틀
+    LinearLayout basicInfoLayout;
+    Button showBasicInfoButton;
+    int basicInfoVisible = 1;
     //모집/총원
     TextView recruitmentRate;
     //츨석/모집
@@ -121,6 +126,9 @@ public class OfferManageCommuteDetailActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle(projectName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        basicInfoLayout = findViewById(R.id.basicInfoLayout);
+        showBasicInfoButton = findViewById(R.id.showBasicInfoButton);
+        showBasicInfoButton.setOnClickListener(v -> showBasicInfo(basicInfoVisible));
         //모집 총원
         recruitmentRate = findViewById(R.id.recruitmentRate);
         //출석 / 모집
@@ -181,6 +189,8 @@ public class OfferManageCommuteDetailActivity extends AppCompatActivity {
         runRecyclerView.setLayoutManager(layoutManager6);
 
     }
+
+
 
     // 일괄처리 요청 버튼 처리
     /**
@@ -431,6 +441,19 @@ public class OfferManageCommuteDetailActivity extends AppCompatActivity {
     }
 
     //각 레이아웃 보이기 숨기기
+    private void showBasicInfo(int basicInfoVisible) {
+        switch (basicInfoVisible) {
+            case 0:
+                this.basicInfoVisible = 1;
+                basicInfoLayout.setVisibility(View.VISIBLE);
+                break;
+            case 1:
+                this.basicInfoVisible = 0;
+                basicInfoLayout.setVisibility(View.GONE);
+                break;
+        }
+    }
+
     private void showRun(int runVisible) {
         switch (runVisible){
             case 0:

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "480768235513-nagat3r2d5rmln2o5dhtu3u94urskunr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.lx.onedayworkfinal",
+            "certificate_hash": "2b54076727169c5a74dcf18f73ff09044144ffa4"
+          }
+        },
+        {
           "client_id": "480768235513-p1hr44b2i5u3tqfnc4rinni0d6vb9itv.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480768235513-p1hr44b2i5u3tqfnc4rinni0d6vb9itv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

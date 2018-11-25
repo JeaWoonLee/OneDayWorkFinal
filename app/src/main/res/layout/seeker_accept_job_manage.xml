@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp"
+    android:elevation="15dp">
 
     <!-- Container -->
     <LinearLayout
@@ -12,13 +14,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray"
-            android:orientation="horizontal">
+            android:background="@drawable/seeker_header_border"
+            android:orientation="horizontal"
+            android:paddingEnd="10dp">
 
             <TextView
                 android:id="@+id/projectName"
@@ -45,7 +47,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingEnd="10dp">
 
             <TextView
                 style="@style/blackTextView"
@@ -63,6 +66,11 @@
                 style="@style/itemTextView"
                 android:layout_width="wrap_content"
                 android:text="일당" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <TextView
                 style="@style/itemTextView"

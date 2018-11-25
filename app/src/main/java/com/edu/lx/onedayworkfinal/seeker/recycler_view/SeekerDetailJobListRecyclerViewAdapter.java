@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.edu.lx.onedayworkfinal.R;
@@ -32,7 +33,7 @@ public class SeekerDetailJobListRecyclerViewAdapter extends BaseRecyclerViewAdap
         TextView jobPay;
         TextView jobDate;
 
-        Button candidateButton;
+        LinearLayout candidateButton;
 
         SeekerProjectListViewHolder(@NonNull View itemView) {
             super(itemView);

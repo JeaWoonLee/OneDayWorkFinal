@@ -31,7 +31,7 @@ public class OfferProjectRecyclerViewAdapter extends BaseRecyclerViewAdapter<Off
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(inflateView(context, R.layout.offer_project_item,viewGroup));
+        return new ViewHolder(inflateView(context, R.layout.offer_project_today_item,viewGroup));
     }
 
     class ViewHolder extends BaseViewHolder<OfferWorkVO> {

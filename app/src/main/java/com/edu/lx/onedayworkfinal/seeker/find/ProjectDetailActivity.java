@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -57,6 +58,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
     MapPOIItem projectMarker;
 
     //모집 직군 RecyclerView
+    LinearLayout recyclerViewContainerLayout;
     RecyclerView jobListRecyclerView;
 
     //모집 직군 ArrayList
@@ -94,6 +96,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
         projectComment = findViewById(R.id.projectComment);
 
         //모집 직군 RecyclerView
+        recyclerViewContainerLayout = findViewById(R.id.recyclerViewContainerLayout);
         jobListRecyclerView = findViewById(R.id.jobListRecyclerView);
         //RecyclerView 의 layoutManager 세팅
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
@@ -230,6 +233,10 @@ public class ProjectDetailActivity extends AppCompatActivity {
         adapter = new SeekerDetailJobListRecyclerViewAdapter(this);
         adapter.setItems(jobList);
         jobListRecyclerView.setAdapter(adapter);
+        jobListRecyclerView.setMinimumHeight(jobList.size() * 170);
+        recyclerViewContainerLayout.setMinimumHeight(jobList.size() * 170);
+
+
     }
 
     //지원하기 창 띄우기

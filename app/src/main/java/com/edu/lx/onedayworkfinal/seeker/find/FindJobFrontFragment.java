@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
@@ -34,6 +35,8 @@ public class FindJobFrontFragment extends Fragment {
     public final int FIND_JOB_MAP_FRAGMENT = 1;
     public int fragmentIndex = 0;
 
+    TextView showStyle;
+
     //리사이클러 뷰 / 맵 뷰 에서 사용되는 프로젝트 배열
     public static ArrayList<ProjectVO> items = null;
 
@@ -51,6 +54,7 @@ public class FindJobFrontFragment extends Fragment {
 
         filterButton = rootView.findViewById(R.id.filterButton);
         changeViewButton = rootView.findViewById(R.id.changeViewButton);
+        showStyle =rootView.findViewById(R.id.showStyle);
 
         return rootView;
     }
@@ -76,11 +80,13 @@ public class FindJobFrontFragment extends Fragment {
             case FIND_JOB_RECYCLER_FRAGMENT :
                 fragmentIndex = FIND_JOB_MAP_FRAGMENT;
                 changeViewButton.setText("리스트로 보기");
+                showStyle.setText("맵으로 보기");
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,findJobMapFragment).commit();
                 break;
             case FIND_JOB_MAP_FRAGMENT :
                 fragmentIndex = FIND_JOB_RECYCLER_FRAGMENT;
                 changeViewButton.setText("맵으로 보기");
+                showStyle.setText("리스트로 보기");
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,findJobRecyclerFragment).commit();
                 break;
         }

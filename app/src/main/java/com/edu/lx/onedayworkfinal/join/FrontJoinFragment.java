@@ -30,21 +30,11 @@ public class FrontJoinFragment extends Fragment {
 
         //일용직 노동자 회원가입
         Button joinSeekerButton = rootView.findViewById(R.id.joinSeekerButton);
-        joinSeekerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.changeTab(activity.SEEKER_JOIN_FRAGMENT);
-            }
-        });
+        joinSeekerButton.setOnClickListener(v -> activity.changeTab(activity.SEEKER_JOIN_FRAGMENT));
 
         //사업자 회원가입
         Button joinOfferButton = rootView.findViewById(R.id.joinOfferButton);
-        joinOfferButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.changeTab(activity.OFFER_JOIN_FRAGMENT);
-            }
-        });
+        joinOfferButton.setOnClickListener(v -> activity.changeTab(activity.OFFER_JOIN_FRAGMENT));
 
         return rootView;
     }

@@ -5,19 +5,19 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/seeker_border"
-        android:layout_margin="10dp">
+        android:paddingBottom="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/targetDate"
             style="@style/blackTextView"
-            android:text="targetDate"/>
+            android:text="targetDate"
+            android:textSize="15sp"/>
+
                 <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -25,5 +25,8 @@
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/seeker"/>
 </LinearLayout>

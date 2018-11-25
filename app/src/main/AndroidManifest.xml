@@ -42,7 +42,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".seeker.SeekerMainActivity" />
         <!-- googleMaps Library -->
         <uses-library android:name="com.google.android.maps" />
         <uses-library
@@ -57,7 +56,12 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <!-- 다음 맵 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
         <!-- Activity -->
+        <activity android:name=".seeker.SeekerMainActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,11 +78,6 @@
         <activity
             android:name=".seeker.find.SeekerJobFilterPopupActivity"
             android:theme="@style/PopupTheme" />
-        <!-- 다음 맵 -->
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
-
         <activity android:name=".seeker.info.SelectLocationActivity" />
         <activity
             android:name=".seeker.info.AddCertificateActivity"
@@ -97,6 +96,8 @@
                   android:theme="@style/PopupTheme" />
         <activity android:name=".seeker.info.ShowContractActivity"/>
         <activity android:name=".seeker.my_work.JobManageDetailActivity"/>
+        <activity android:name=".seeker.info.DrawSignActivity"
+            android:theme="@style/PopupTheme"/>
     </application>
 
 </manifest>

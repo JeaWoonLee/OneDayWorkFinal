@@ -118,9 +118,10 @@ public class TodayWorkFragment extends Fragment {
             myLocationMarker.setItemName("내 위치");
             myLocationMarker.setTag(1);
             myLocationMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(myLocation.getLatitude(),myLocation.getLongitude()));
+            daumMap.addPOIItem(myLocationMarker);
         }
 
-        daumMap.addPOIItem(myLocationMarker);
+
     }
 
     /**

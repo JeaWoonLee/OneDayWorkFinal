@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.error.AuthFailureError;
 import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.login.LoginActivity;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferVO;
 
@@ -32,6 +33,7 @@ public class OfferPWFindFragment extends Fragment {
     EditText offerID;
     EditText offerEMail;
     TextView offerPW;
+    Button loginButton;
 
     @Override
     public void onAttach(Context context) {
@@ -54,6 +56,8 @@ public class OfferPWFindFragment extends Fragment {
                 OfferPWFind();
             }
         });
+
+        loginButton.setOnClickListener(v -> gotoLoginPage());
 
         return rootView;
     }
@@ -85,21 +89,19 @@ public class OfferPWFindFragment extends Fragment {
         request.setShouldCache(false);
         Base.requestQueue.add(request);
 
-
-
-        Intent intent = new Intent(activity,OfferPwAlterActivity.class);
-        startActivityForResult(intent,409);
     }
 
     private void processOfferPwFind(OfferVO offerVO){
         Toast.makeText(activity,"비밀번호를 찾았습니다.",Toast.LENGTH_LONG).show();
         offerPW.setText(offerVO.getOfferPw());
-
 //        activity.getSupportFragmentManager().beginTransaction().
-
 //        Intent intent = new Intent(activity,OfferPwAlterActivity.class);
 //        startActivityForResult(intent,409);
     }
 
+    private void gotoLoginPage(){
+        Intent intent = new Intent(activity.getApplicationContext(),LoginActivity.class);
+        startActivityForResult(intent,411);
+    }
 
 }

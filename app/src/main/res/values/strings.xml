@@ -55,6 +55,8 @@
     <string name="login_offer_fragment3">로그인</string>
     <!-- //end login_offer_fragment -->
 
+    <string name="go_to_login">로그인 페이지로 가기</string>
+
     <!-- join_front_fragment -->
     <string name="join_front_fragment1">일용직 회원 가입</string>
     <string name="join_front_fragment2">사업자 회원 가입</string>

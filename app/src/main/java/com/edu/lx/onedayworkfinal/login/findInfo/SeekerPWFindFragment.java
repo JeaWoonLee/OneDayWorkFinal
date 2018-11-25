@@ -84,8 +84,6 @@ public class SeekerPWFindFragment extends Fragment {
         Toast.makeText(activity,"비밀번호를 확인하였습니다",Toast.LENGTH_LONG).show();
         seekerPW.setText(seekerVO.getSeekerPw());
 
-        Intent intent = new Intent(activity,SeekerPwAlterActivity.class);
-        startActivityForResult(intent,408);
     }
 
 }

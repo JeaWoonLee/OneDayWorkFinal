@@ -95,7 +95,9 @@
         <activity android:name=".login.findInfo.FindInfoActivity" />
         <activity android:name=".login.findInfo.FindIDActivity" />
         <activity android:name=".login.findInfo.FindPWActivity"></activity>
+        <!--일관리-->
         <activity android:name=".seeker.JobManageActivity"/>
+        <activity android:name=".seeker.JobManageDetailActivity"/>
 
     </application>
 

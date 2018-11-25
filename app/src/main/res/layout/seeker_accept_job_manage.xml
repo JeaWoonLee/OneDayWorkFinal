@@ -21,26 +21,27 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/jobName"
+                android:id="@+id/projectName"
                 style="@style/itemTextView"
                 android:layout_width="wrap_content"
-                android:text="직종" />
+                android:text="프로젝트명" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+            <TextView
+                android:id="@+id/candidateNumber"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/jobPay"
+                android:id="@+id/jobName"
                 style="@style/itemTextView"
                 android:layout_width="wrap_content"
-                android:text="일당" />
+                android:text="직종" />
 
-            <TextView
-                style="@style/itemTextView"
-                android:layout_width="wrap_content"
-                android:text="원" />
 
         </LinearLayout>
         <!-- //end Header -->
@@ -54,13 +55,24 @@
             <TextView
                 style="@style/blackTextView"
                 android:layout_width="wrap_content"
-                android:text="모집기간" />
+                android:text="신청 일자" />
 
             <TextView
-                android:id="@+id/jobDate"
+                android:id="@+id/targetDate"
                 style="@style/blackTextView"
                 android:layout_width="wrap_content"
-                android:text="모집기간" />
+                android:text="신청 일자" />
+
+            <TextView
+                android:id="@+id/jobPay"
+                style="@style/itemTextView"
+                android:layout_width="wrap_content"
+                android:text="일당" />
+
+            <TextView
+                style="@style/itemTextView"
+                android:layout_width="wrap_content"
+                android:text="원" />
 
             <!--<android.support.design.button.MaterialButton-->
                 <!--android:id="@+id/todayJobButton"-->

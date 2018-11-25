@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".seeker.JobManageDetailActivity">
+
+    <!-- Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="title"
+            android:background="@color/seeker">
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/itemTextView"
+            android:text="기본 정보"/>
+
+        <!-- 프로젝트 영역 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <!-- 프로젝트 이름-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="공사명"/>
+
+                <TextView
+                    android:id="@+id/projectName"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="projectName"/>
+
+            </LinearLayout>
+
+            <!-- 프로젝트 종류 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="일감 분류"/>
+
+                <TextView
+                    android:id="@+id/job_name"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="jobName"/>
+
+            </LinearLayout>
+
+            <!-- 프로젝트 기간 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="기간"/>
+
+                <TextView
+                    android:id="@+id/projectTargetDate"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="TargetDate"/>
+
+            </LinearLayout>
+
+            <!-- 등록 날짜 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="임금"/>
+
+                <TextView
+                    android:id="@+id/job_pay"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="jobPay"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/blackTextView"
+                    android:text="우대 조건"/>
+
+                <TextView
+                    android:id="@+id/job_Requirement"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="jobRequirement"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- 코멘트 -->
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/blackTextView"
+            android:text="설명"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/projectComment"
+                android:layout_width="wrap_content"
+                style="@style/seekerItemText"
+                android:text="Comment"/>
+
+        </LinearLayout>
+
+
+        <!-- 맵 뷰 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/blackTextView"
+                android:text="위치"
+                android:layout_width="wrap_content"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/findRouteButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="길 찾기"
+                style="@style/seekerButton"
+                android:layout_marginEnd="20dp"/>
+
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/seeker_border">
+
+            <RelativeLayout
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </RelativeLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
+    <!-- Container -->
+
+</ScrollView>

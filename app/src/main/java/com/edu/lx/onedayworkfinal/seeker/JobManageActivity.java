@@ -21,6 +21,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.WorkerRecyclerViewAdapter;
+import com.edu.lx.onedayworkfinal.seeker.manageRequest.ManageProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageAcceptJobAdapter;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageFinishJobAdapter;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageProjectRecyclerViewAdapter;
@@ -47,12 +48,13 @@ public class JobManageActivity extends Activity {
     //intent 로 받아오는 정보
     public int projectNumber;
 
-    //서버에서 받아오는 응답 정보들
 
+    //서버에서 받아오는 응답 정보들
 
     //수락한 일감, 종료된 일감 목록
     ArrayList<ManageVO> items;
     ArrayList<ManageVO> finishJobList;
+    int nowPayData;
 
     SeekerManageAcceptJobAdapter adapter;
     SeekerManageFinishJobAdapter FinishAdapter;
@@ -60,6 +62,8 @@ public class JobManageActivity extends Activity {
     //Toolbar
     Toolbar toolbar;
 
+    //현재까지 수령한 총액
+    TextView nowPay;
     //수령총액
     TextView expectaionReceipt;
 
@@ -82,10 +86,14 @@ public class JobManageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_job_manage);
         seekerId = Base.sessionManager.getUserDetails().get("id");
+
+
         initUI();
 
         requestAcceptJobList(seekerId);
         requestFinishJobList(seekerId);
+        //요청액 호출 하는즁
+//        requestNowPay(seekerId);
     }
 
     //UI 세팅
@@ -98,8 +106,11 @@ public class JobManageActivity extends Activity {
 //        setSupportActionBar(toolbar);
 //        Objects.requireNonNull(getSupportActionBar()).setTitle(projectName);
 
+        //현재까지 수령 총액
+        nowPay = findViewById(R.id.nowPay);
         //수령할 총액
-        expectaionReceipt = findViewById(R.id.expectaionReceipt);
+        expectaionReceipt = findViewById(R.id.expectaionPay);
+
         //수락한 일감
         acceptJobView = findViewById(R.id.acceptJobView);
         showAcceptButton = findViewById(R.id.showAcceptButton);
@@ -117,6 +128,7 @@ public class JobManageActivity extends Activity {
 
 
     }
+
 
     //수락한 일감 조회
     public void requestAcceptJobList(String seekerId){
@@ -167,7 +179,7 @@ public class JobManageActivity extends Activity {
                 break;
         }
     }
-
+    //finishjob List 요청
     public void requestFinishJobList(String seekerId) {
         String url = getResources().getString(R.string.url) + "requestFinishJobList.do";
         StringRequest request = new StringRequest(Request.Method.POST, url,
@@ -186,7 +198,7 @@ public class JobManageActivity extends Activity {
         Base.requestQueue.add(request);
 
     }
-
+    //finishjob List
     public void processFinishJobJobList(String response) {
         ManageVO[] vo = Base.gson.fromJson(response,ManageVO[].class);
         finishJobList = new ArrayList<>(Arrays.asList(vo));
@@ -195,6 +207,8 @@ public class JobManageActivity extends Activity {
         finishJobViewRecyclerView.setAdapter(FinishAdapter);
 
     }
+
+    //FinishJob 닫기 ,펼치리
     public void showFinishJob(int finishJobVisible) {
         switch (finishJobVisible) {
             case 0:
@@ -210,28 +224,35 @@ public class JobManageActivity extends Activity {
         }
     }
 
-//    public String getDateString() {
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
-//        String str_date = df.format(new Date());
+    public void showJobDetailActivity(int candidateNumber) {
+        Intent intent = new Intent(this,JobManageDetailActivity.class);
+        intent.putExtra("candidateNumber",candidateNumber);
+        startActivityForResult(intent,500);
+    }
+
+    //요청액 하는중임
+//    public void requestNowPay(String seekerId) {
+//        String url = getResources().getString(R.string.url) + "requestNowPay.do";
+//        StringRequest request = new StringRequest(Request.Method.POST, url,
+//                this::processNowPay, error -> {
 //
-//        return str_date;
-//    }
 //
-//
-//    public void showTodayjobButton(int todayJobVisible) {
-//
-//        if(manageVO.getJobStartDate().equals(getDateString())) {
-//            switch(todayJobVisible) {
-//                case 0:
-//
-//                    this.todayJobVisible = 1;
-//
-//                    todayJobButton.setVisibility(View.VISIBLE);
-//                    break;
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<>();
+//                params.put("seekerId", seekerId);
+//                return params;
 //            }
-//
-//        }
+//        };
+//        request.setShouldCache(false);
+//        Base.requestQueue.add(request);
 //
 //    }
+//
+//    private void processNowPay(String response) {
+//
+//    }
+
 
 }

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="일감 관리"
-            android:background="@color/offer"
+            android:background="@color/seeker"
             app:titleTextColor="@color/white">
 
         </android.support.v7.widget.Toolbar>
@@ -28,8 +28,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
+            android:background="@drawable/seeker_border"
             android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="현재 수령액"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/nowPay"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="수령액" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,12 +72,13 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/expectaionReceipt"
+                    android:id="@+id/expectaionPay"
                     android:layout_width="wrap_content"
-                    style="@style/offerItemText"
+                    style="@style/seekerItemText"
                     android:text="수령액" />
 
             </LinearLayout>
+
 
             <!--&lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;-->
                     <!--&lt;!&ndash;android:id="@+id/commuteInfoForJobRecyclerView"&ndash;&gt;-->
@@ -85,7 +110,7 @@
                 android:id="@+id/showAcceptButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                style="@style/offerButton"
+                style="@style/seekerButton"
                 android:layout_gravity="center_vertical"
                 android:text="-"
                 android:layout_marginEnd="20dp"/>
@@ -95,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
+            android:background="@drawable/seeker_border"
             android:layout_margin="10dp"
             android:visibility="visible">
 
@@ -130,7 +155,7 @@
                 android:id="@+id/showFinishButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                style="@style/offerButton"
+                style="@style/seekerButton"
                 android:layout_gravity="center_vertical"
                 android:text="+"
                 android:layout_marginEnd="20dp"/>
@@ -140,7 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/offer_border"
+            android:background="@drawable/seeker_border"
             android:layout_margin="10dp"
             android:visibility="gone">
 

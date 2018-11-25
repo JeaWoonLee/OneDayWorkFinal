@@ -7,12 +7,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.JobManageActivity;
+import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 
 import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
+
+import org.w3c.dom.Text;
 
 public class SeekerManageAcceptJobAdapter extends BaseRecyclerViewAdapter<ManageVO> {
 
@@ -26,16 +30,26 @@ public class SeekerManageAcceptJobAdapter extends BaseRecyclerViewAdapter<Manage
     }
 
     class SeekerManageAcceptListViewHolder extends BaseViewHolder<ManageVO> {
+        TextView candidateNumber;
+        TextView projectName;
         TextView jobName;
         TextView jobPay;
-        TextView jobDate;
+        TextView targetDate;
 
 
         SeekerManageAcceptListViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(v -> {
+                String candidateNum = candidateNumber.getText().toString();
+                JobManageActivity activity = (JobManageActivity) context;
+                activity.showJobDetailActivity(Integer.parseInt(candidateNum));
+
+            });
+            projectName = itemView.findViewById(R.id.projectName);
             jobName = itemView.findViewById(R.id.jobName);
             jobPay = itemView.findViewById(R.id.jobPay);
-            jobDate = itemView.findViewById(R.id.jobDate);
+            targetDate = itemView.findViewById(R.id.targetDate);
+            candidateNumber = itemView.findViewById(R.id.candidateNumber);
         }
 
         @Override
@@ -44,7 +58,9 @@ public class SeekerManageAcceptJobAdapter extends BaseRecyclerViewAdapter<Manage
             jobName.setText(item.getJobName());
             //1000 단위 숫자로 콤마를 찍어서 보여준다
             jobPay.setText(Base.decimalFormat(item.getJobPay()));
-            jobDate.setText(String.format("%s - %s", item.getJobStartDate(), item.getJobEndDate()));
+            targetDate.setText(item.getTargetDate());
+            projectName.setText(String.valueOf(item.getProjectName()));
+            candidateNumber.setText(String.valueOf(item.getCandidateNumber()));
 
         }
 

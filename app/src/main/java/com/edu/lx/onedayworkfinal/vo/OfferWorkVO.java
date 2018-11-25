@@ -14,25 +14,6 @@ public class OfferWorkVO {
     String workStartTime;
     String workEndTime;
 
-
-    public int getCommute() {
-        return commute;
-    }
-
-    public void setCommute(int commute) {
-        this.commute = commute;
-    }
-
-    public int getJobLimitCount() {
-        return jobLimitCount;
-    }
-
-
-    public void setJobLimitCount(int jobLimitCount) {
-        this.jobLimitCount = jobLimitCount;
-    }
-
-
     public int getTotal() {
         return total;
     }
@@ -53,13 +34,23 @@ public class OfferWorkVO {
     }
 
 
-    public int getAbsent() {
+    public int getCommute() {
         return commute;
     }
 
 
-    public void setAbsent(int absent) {
-        this.commute = absent;
+    public void setCommute(int commute) {
+        this.commute = commute;
+    }
+
+
+    public int getJobLimitCount() {
+        return jobLimitCount;
+    }
+
+
+    public void setJobLimitCount(int jobLimitCount) {
+        this.jobLimitCount = jobLimitCount;
     }
 
 

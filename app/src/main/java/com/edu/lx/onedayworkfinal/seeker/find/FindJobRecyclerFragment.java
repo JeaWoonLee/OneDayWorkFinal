@@ -88,14 +88,8 @@ public class FindJobRecyclerFragment extends Fragment {
                 }
                 //필터 정보를 담아서 보내기
                 Map<String,String> params = new HashMap<>();
-                if(lastLocation == null) {
-                    params.put("myLat",String.valueOf(37.5157941));
-                    params.put("myLng",String.valueOf(127.0344488));
-                } else {
-                    params.put("myLat",String.valueOf(lastLocation.getLatitude()));
-                    params.put("myLng",String.valueOf(lastLocation.getLongitude()));
-                }
-
+                params.put("myLat",String.valueOf(Objects.requireNonNull(lastLocation).getLatitude()));
+                params.put("myLng",String.valueOf(lastLocation.getLongitude()));
                 params.put("projectSubjectFilter", SeekerMainActivity.F_projectSubjectFilter);
                 params.put("jobNameFilter", SeekerMainActivity.F_jobNameFilter);
                 params.put("jobPayFilter",SeekerMainActivity.F_jobPayFilter);

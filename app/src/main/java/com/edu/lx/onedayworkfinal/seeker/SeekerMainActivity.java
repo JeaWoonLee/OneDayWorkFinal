@@ -25,8 +25,6 @@ import com.edu.lx.onedayworkfinal.seeker.manage.TodayWorkFragment;
 import com.edu.lx.onedayworkfinal.seeker.find.FindJobFrontFragment;
 import com.edu.lx.onedayworkfinal.seeker.find.ProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.seeker.info.MyInfoFragment;
-import com.edu.lx.onedayworkfinal.seeker.manageRequest.ManageJobListFragment;
-import com.edu.lx.onedayworkfinal.seeker.manageRequest.ManageProjectDetailActivity;
 import com.edu.lx.onedayworkfinal.util.handler.BackPressCloseHandler;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.CertificationVO;
@@ -50,16 +48,11 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     public MyInfoFragment myInfoFragment;
     public TodayWorkFragment todayWorkFragment;
 
-
-
-
     //Fragment Index
     public final static int FRONT_FRAGMENT = 0;
     public final static int FIND_JOB_FRAGMENT = 1;
     public final static int MANAGE_JOB_FRAGMENT = 2;
     public final static int TODAY_WORK_FRAGMENT = 3;
-    public final static int TODAY_JOB_MANAGE_ACTIVITY = 4;
-
     //네비게이션 뷰
     NavigationView navigationView;
 
@@ -87,8 +80,6 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_main);
-        getIntent();
-
 
         //AutoPermission
         AutoPermissions.Companion.loadAllPermissions(this,101);
@@ -139,13 +130,9 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
         myInfoFragment = new MyInfoFragment();
         //오늘의 일감 구현하기
         todayWorkFragment = new TodayWorkFragment();
-        //신청 관리 구현하기
+        //신청 일감 관리 구현하기
         manageJobListFragment = new ManageJobListFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container,frontFragment).commit();
-        //일감 관리
-//        todayJobManageFragment = new TodayJobManageFragment();
-
-
 
         //필터 설정 init
         filterInit();
@@ -202,9 +189,10 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
                 //일 찾기 프래그먼트로 이동
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,findJobFrontFragment).commit();
                 break;
-                //신청 일감 관리
+
+                //일 관리
             case R.id.manage_job :
-                //신청 일감 관리 프래그먼트로 이동
+                //일 관리 프래그먼트로 이동
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, manageJobListFragment).commit();
                 break;
             case R.id.today_work :
@@ -215,14 +203,8 @@ public class SeekerMainActivity extends AppCompatActivity implements NavigationV
             case R.id.my_account_info :
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, myInfoFragment).commit();
                 break;
-                //일감 관리 activity 전환
-            case R.id.today_job_manage :
-                Intent intent = new Intent(getApplicationContext(), JobManageActivity.class);
-                startActivity(intent);
-                break;
 
-
-            //로그 아웃
+                //로그 아웃
             case R.id.logout :
                 //세션 정보를 null 로 삭제하고 finish 해준다
                 Toast.makeText(this,"정상적으로 로그아웃 되었습니다",Toast.LENGTH_LONG).show();

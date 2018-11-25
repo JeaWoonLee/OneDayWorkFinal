@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.OfferJobRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
@@ -55,7 +55,6 @@ public class OfferManageWorkActivity extends AppCompatActivity {
     int offerMapViewVisible = 0;
     FrameLayout mapView;
     MapView daumMap;
-    Button manageCandidateButton;
     Button manageHumanResourcesButton;
 
     @Override
@@ -177,19 +176,17 @@ public class OfferManageWorkActivity extends AppCompatActivity {
 
         mapView = findViewById(R.id.mapView);
 
-        manageCandidateButton = findViewById(R.id.manageCandidateButton);
-        manageCandidateButton.setOnClickListener(v -> showManageCandidateActivity(projectVO.getProjectNumber()));
         manageHumanResourcesButton = findViewById(R.id.manageHumanResourcesButton);
         manageHumanResourcesButton.setOnClickListener(v -> showManageHumanResourcesActivity(projectVO.getProjectNumber()));
     }
 
     /**
      * showManageCandidateActivity
-     * @param projectNumber 신청 관리 액티비티 보여주기
+     * @param jobNumber 신청 관리 액티비티 보여주기
      */
-    private void showManageCandidateActivity(int projectNumber) {
+    public void showManageCandidateActivity(int jobNumber) {
         Intent intent = new Intent(this,OfferManageCandidateActivity.class);
-        intent.putExtra("projectNumber",String.valueOf(projectNumber));
+        intent.putExtra("jobNumber",jobNumber);
         startActivity(intent);
     }
 
@@ -200,6 +197,8 @@ public class OfferManageWorkActivity extends AppCompatActivity {
     private void showManageHumanResourcesActivity(int projectNumber) {
         Intent intent = new Intent(this,OfferManageHumanResourcesActivity.class);
         intent.putExtra("projectNumber",String.valueOf(projectNumber));
+        intent.putExtra("projectStartDate",projectVO.getProjectStartDate());
+        intent.putExtra("projectEndDate",projectVO.getProjectEndDate());
         startActivity(intent);
     }
 

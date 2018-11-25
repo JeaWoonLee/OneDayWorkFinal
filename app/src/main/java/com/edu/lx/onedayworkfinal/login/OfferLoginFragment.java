@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.util.session.SessionManager;
@@ -46,8 +46,8 @@ public class OfferLoginFragment extends Fragment {
         offerIdInput = rootView.findViewById(R.id.offerIdInput);
         offerPwInput = rootView.findViewById(R.id.offerPwInput);
 
-        Button seekerLoginButton = rootView.findViewById(R.id.offerLoginButton);
-        seekerLoginButton.setOnClickListener(v -> loginOffer());
+        Button offerLoginButton = rootView.findViewById(R.id.offerLoginButton);
+        offerLoginButton.setOnClickListener(v -> loginOffer());
         return rootView;
     }
 

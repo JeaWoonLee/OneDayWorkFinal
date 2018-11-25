@@ -74,6 +74,7 @@ public class SeekerJobFilterPopupActivity extends AppCompatActivity {
     //대상 날짜
     String F_targetDateFilter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +100,10 @@ public class SeekerJobFilterPopupActivity extends AppCompatActivity {
 
         Button selectTargetDateButton =findViewById(R.id.selectTargetDateButton);
         selectTargetDateButton.setOnClickListener(v -> selectTargetDate());
+
+        Button closeButton = findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(v -> finish());
+
         setFilterSelected();
     }
 

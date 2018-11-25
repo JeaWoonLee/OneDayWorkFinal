@@ -16,10 +16,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 
@@ -42,6 +41,8 @@ public class SeekerJoinFragment extends Fragment {
 
     //이름 입력
     AppCompatEditText seekerNameInput;
+
+    AppCompatEditText seekerAddressInput;
 
     //성별 체크 라디오 버튼
     RadioGroup sexGroup;
@@ -74,8 +75,10 @@ public class SeekerJoinFragment extends Fragment {
         sexGroup = rootView.findViewById(R.id.sexGroup);
         seekerEmailInput = rootView.findViewById(R.id.seekerEmailInput);
         seekerNameInput = rootView.findViewById(R.id.seekerNameInput);
+        seekerAddressInput = rootView.findViewById(R.id.seekerAddressInput);
         seekerJoinButton = rootView.findViewById(R.id.seekerJoinButton);
         checkIdOverlapButton = rootView.findViewById(R.id.checkIdOverlapButton);
+
 
         //성별 선택 라디오 버튼
         sexGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -139,6 +142,7 @@ public class SeekerJoinFragment extends Fragment {
         final String seekerName = seekerNameInput.getText().toString();
         final String seekerEmail = seekerEmailInput.getText().toString();
         final String seekerSex = selectedRadio.getText().toString();
+        final String seekerAddress = seekerAddressInput.getText().toString();
 
         String url = getResources().getString(R.string.url) + "joinSeeker.do";
 
@@ -158,6 +162,7 @@ public class SeekerJoinFragment extends Fragment {
                 params.put("seekerName",seekerName);
                 params.put("seekerEmail",seekerEmail);
                 params.put("seekerSex",seekerSex);
+                params.put("seekerAddress",seekerAddress);
                 return params;
             }
         };
@@ -253,6 +258,9 @@ public class SeekerJoinFragment extends Fragment {
             seekerEmailInput.setError("이메일을 입력해야 합니다!");
             return true;
 
+        } else if (TextUtils.isEmpty(seekerAddressInput.getText())){
+            seekerAddressInput.setError("거주지를 입력해주시길 바랍니다.");
+            return true;
             //성별 체크
         } else if (sexGroup.getCheckedRadioButtonId() == -1) {
             Toast.makeText(activity, "성별을 체크해야 합니다!", Toast.LENGTH_LONG).show();

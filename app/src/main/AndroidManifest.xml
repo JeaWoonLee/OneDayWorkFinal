@@ -65,7 +65,7 @@
             </intent-filter>
         </activity>
         <!-- detailManage Activity -->
-        <activity android:name=".seeker.manageRequest.ManageProjectDetailActivity" />
+        <activity android:name=".seeker.ManageProjectDetailActivity" />
         <activity android:name=".join.JoinActivity" />
         <activity android:name=".seeker.find.ProjectDetailActivity" />
         <activity android:name=".seeker.CandidateActivity" />
@@ -95,10 +95,6 @@
         <activity android:name=".login.findInfo.FindInfoActivity" />
         <activity android:name=".login.findInfo.FindIDActivity" />
         <activity android:name=".login.findInfo.FindPWActivity"></activity>
-        <!--일관리-->
-        <activity android:name=".seeker.JobManageActivity"/>
-        <activity android:name=".seeker.JobManageDetailActivity"/>
-
     </application>
 
 </manifest>

@@ -7,18 +7,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.OfferProjectRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferWorkVO;
-import com.edu.lx.onedayworkfinal.vo.ProjectVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,6 +83,7 @@ public class OfferManageCommuteFragment extends Fragment {
     private void processRequestOfferProjectListResponse(String response) {
         OfferWorkVO[] projects = Base.gson.fromJson(response,OfferWorkVO[].class);
         ArrayList<OfferWorkVO> items = new ArrayList<>(Arrays.asList(projects));
+        Log.d("items",items.toString());
         adapter = new OfferProjectRecyclerViewAdapter(activity);
         adapter.setItems(items);
         myProjectRecyclerView.setAdapter(adapter);

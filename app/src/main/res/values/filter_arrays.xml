@@ -34,6 +34,7 @@
 
     <!-- 직군 필터 -->
     <!-- 직군 중분류 -->
+
     <!-- 건설현장-->
     <string-array name="constructionSiteFilter">
         <item>없음</item>
@@ -142,8 +143,36 @@
         <item>건설안전교육이수증</item>
     </string-array>
 
+    <string-array name="account">
+        <item>신한</item>
+        <item>하나</item>
+        <item>국민</item>
+        <item>우리</item>
+        <item>농협</item>
+        <item>수협</item>
+        <item>씨티</item>
+        <item>카카오</item>
+        <item>SC제일</item>
+        <item>전북</item>
+        <item>대구</item>
+        <item>제주</item>
+        <item>부산</item>
+    </string-array>
+
     <string-array name="certificate">
-        <item>건설안전교육이수증</item>
+        <item>거푸집 기능사</item>
+        <item>건축목공기능사</item>
+        <item>건축일반시공기능장</item>
+        <item>도배기능사</item>
+        <item>미장기능사</item>
+        <item>배관기능사</item>
+        <item>비계기능사</item>
+        <item>석공기능사</item>
+        <item>용접기능사</item>
+        <item>조적기능사</item>
+        <item>철근기능사</item>
+        <item>콘크리트기능사</item>
+        <item>타일기능사</item>
     </string-array>
 
 </resources>

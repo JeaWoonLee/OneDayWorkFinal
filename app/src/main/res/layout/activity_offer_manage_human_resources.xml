@@ -1,9 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".offer.manage_work.OfferManageHumanResourcesActivity">
+    <!-- Container -->
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="인력 관리"
+            app:titleTextColor="@color/white"
+            android:background="@color/offer">
+
+        </android.support.v7.widget.Toolbar>
+        <!-- 날짜 선택 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_height="wrap_content"
+                style="@style/blackTextView"
+                android:text="날짜 선택" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/showSelectDayButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:text="-"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/selectDayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/offer_rectangle_border"
+            android:padding="3dp"
+            android:layout_margin="10dp">
+
+            <com.applandeo.materialcalendarview.CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:selectionColor="@color/offer"
+                app:selectionLabelColor="@color/seeker"
+                app:disabledDaysLabelsColor="@color/danger"
+                app:type="one_day_picker"
+                app:headerColor="@color/offer"
+                app:eventsEnabled="true">
+
+            </com.applandeo.materialcalendarview.CalendarView>
+
+        </LinearLayout>
+        <!-- //end 날짜 선택 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_height="wrap_content"
+                style="@style/blackTextView"
+                android:text="모집 현황" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/showRecyclerViewContainerButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:text="-"
+                style="@style/offerButton"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/recyclerViewContainerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/offer_border">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
+    </LinearLayout>
+    <!-- //end Container -->
+</ScrollView>

@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.offer.OfferMainActivity;
 import com.edu.lx.onedayworkfinal.offer.recycler_view.OfferProjectListRecyclerViewAdapter;
@@ -53,7 +53,7 @@ public class OfferManageWorkFragment extends Fragment {
     }
 
     /**
-     * requestOfferProjectList
+     * requestOfferProjectLis
      * @param offerId 해당 사업자의 프로젝트 목록을 가져온다
      */
     private void requestOfferProjectList(String offerId) {

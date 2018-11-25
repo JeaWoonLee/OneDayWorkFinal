@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
     android:layout_height="wrap_content"
-    tools:context=".offer.OfferFilterActivity"
     android:orientation="vertical">
 
     <TextView

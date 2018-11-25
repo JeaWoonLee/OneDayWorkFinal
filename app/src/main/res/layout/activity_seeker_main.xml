@@ -9,8 +9,6 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <!-- TODO 네비게이션 바 구현하기  -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,8 +19,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:title="일용직 노동자 메인 화면"/>ad
+            android:background="@color/seeker"
+            app:titleTextColor="@color/black"
+            app:title="일용직 노동자 메인 화면"/>
         <!-- //end Toolbar -->
 
         <!-- Fragment Container -->

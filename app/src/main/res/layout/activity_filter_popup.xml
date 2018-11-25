@@ -6,14 +6,36 @@
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     tools:context=".seeker.find.SeekerJobFilterPopupActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/seeker_rectangle_border">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/blackTextView"
-        android:text="필터 설정"
-        />
+        android:background="@color/seeker">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/whiteTextView"
+            android:text="필터 설정"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        
+        <Button
+            android:id="@+id/closeButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="X"
+            style="@style/seekerButton"/>
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

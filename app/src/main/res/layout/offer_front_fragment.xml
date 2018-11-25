@@ -5,87 +5,143 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- 출퇴근 관리 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/blackTextView"
+        android:text="오늘 진행되는 일감"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:id="@+id/today_work_empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/offer"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="오늘 날짜로 진행되는 일감이 없습니다"
+            style="@style/whiteTextView"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/today_work_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/today_work_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         style="@style/blackTextView"
         android:text="하루일감 메뉴"
         android:layout_gravity="center_horizontal"
-        android:textSize="35sp"/>
-    <TableLayout
+        android:textSize="25sp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/offer_rectangle_border">
 
-        <TableRow
-            android:layout_marginVertical="10dp"
-            android:gravity="center">
+        <LinearLayout
+            android:id="@+id/work_manage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:padding="10dp">
 
-            <LinearLayout
-                android:id="@+id/work_manage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:padding="10dp"
-                android:layout_marginEnd="20dp">
+                android:src="@drawable/manage"/>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/main_icon"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    style="@style/blackTextView"
-                    android:text="일감 관리"/>
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_marginVertical="10dp"
-            android:gravity="center">
-
-            <LinearLayout
-                android:id="@+id/manage_commute"
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                style="@style/blackTextView"
+                android:layout_gravity="center"
+                android:text="일감 관리"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@color/offer"/>
+
+        <LinearLayout
+            android:id="@+id/manage_commute"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:padding="10dp"
-                android:layout_marginEnd="20dp">
+                android:src="@drawable/manage_human_resources"/>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/main_icon"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    style="@style/blackTextView"
-                    android:text="출퇴근 관리"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/my_info"
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                style="@style/blackTextView"
+                android:layout_gravity="center_horizontal"
+                android:text="출퇴근 관리"/>
+        </LinearLayout>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/main_icon"/>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@color/offer"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    style="@style/blackTextView"
-                    android:text="내 정보 관리"/>
+        <LinearLayout
+            android:id="@+id/my_info"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            </LinearLayout>
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:padding="10dp"
+                android:src="@drawable/manager"/>
 
-        </TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                style="@style/blackTextView"
+                android:text="사업자 정보"/>
 
-    </TableLayout>
+        </LinearLayout>
 
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        style="@style/blackTextView"
+        android:text="메뉴고민중"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"/>
 
 </LinearLayout>

@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:background="@color/offer"
         app:title="신청 관리"
-        app:titleTextColor="@color/white"></android.support.v7.widget.Toolbar>
+        app:titleTextColor="@color/white">
+
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -22,4 +24,5 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
 </LinearLayout>

@@ -14,6 +14,43 @@ public class WorkVO {
     String jobName;
     String jobPay;
     int candidateStatus;
+    int candidateNumber;
+    String seekerSign;
+
+    String workStartTime;
+    String workEndTime;
+
+    public String getWorkStartTime() {
+        return workStartTime;
+    }
+
+    public void setWorkStartTime(String workStartTime) {
+        this.workStartTime = workStartTime;
+    }
+
+    public String getWorkEndTime() {
+        return workEndTime;
+    }
+
+    public void setWorkEndTime(String workEndTime) {
+        this.workEndTime = workEndTime;
+    }
+
+
+    public String getSeekerSign() {
+        return seekerSign;
+    }
+
+    public void setSeekerSign(String seekerSign) {
+        this.seekerSign = seekerSign;
+    }
+    public int getCandidateNumber() {
+        return candidateNumber;
+    }
+
+    public void setCandidateNumber(int candidateNumber) {
+        this.candidateNumber = candidateNumber;
+    }
 
     public String getProjectName() {
         return projectName;

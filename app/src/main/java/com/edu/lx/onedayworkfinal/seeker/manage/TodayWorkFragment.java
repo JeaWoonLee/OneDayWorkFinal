@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
@@ -45,6 +45,7 @@ public class TodayWorkFragment extends Fragment {
 
     Button commuteButton;
     Button findRouteButton;
+    Button refreshButton;
 
     RelativeLayout map_view;
 
@@ -54,7 +55,6 @@ public class TodayWorkFragment extends Fragment {
     MapPOIItem workLocation;
 
     String seekerId;
-    WorkVO item;
 
     @Override
     public void onAttach(Context context) {
@@ -73,11 +73,20 @@ public class TodayWorkFragment extends Fragment {
         candidateStatus = rootView.findViewById(R.id.candidateStatus);
         projectComment = rootView.findViewById(R.id.projectComment);
         commuteButton = rootView.findViewById(R.id.commuteButton);
-        commuteButton.setOnClickListener(v -> requestCommute(seekerId));
+        commuteButton.setOnClickListener(v -> showUnsignedContract(activity.todayWorkItem));
         findRouteButton = rootView.findViewById(R.id.findRouteButton);
         findRouteButton.setOnClickListener(v -> showDaumMapFindRoute());
+        refreshButton = rootView.findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(v -> activity.requestTodayWorkDetail(Base.sessionManager.getUserDetails().get("id")));
         map_view = rootView.findViewById(R.id.map_view);
         return rootView;
+    }
+
+    private void showUnsignedContract(WorkVO todayWorkItem) {
+        Intent intent = new Intent(activity,ShowContractActivity.class);
+        intent.putExtra("workVO",todayWorkItem.toString());
+        activity.startActivityForResult(intent,601);
+
     }
 
     @Override
@@ -89,7 +98,7 @@ public class TodayWorkFragment extends Fragment {
 
         //서버에서 정보 가져오기
         seekerId = Base.sessionManager.getUserDetails().get("id");
-        requestTodayWorkDetail(seekerId);
+        processTodayDetail(activity.todayWorkItem);
     }
 
     private void showDaumMap() {
@@ -114,34 +123,11 @@ public class TodayWorkFragment extends Fragment {
     }
 
     /**
-     * requestTodayWorkDetail
-     * @param id seekerId 를 이용하여 오늘의 수락된 일감에 대한 정보를 가져온다
-     *           job_candidate, job, project 에서 필요한 정보를 모두 가져온다
-     */
-    private void requestTodayWorkDetail(String id) {
-        String url = getResources().getString(R.string.url) + "requestTodayWorkDetail.do";
-        StringRequest request = new StringRequest(Request.Method.POST, url,
-                this::processTodayDetail, error -> {}){
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String,String> params = new HashMap<>();
-                params.put("seekerId",id);
-                return params;
-            }
-        };
-        request.setShouldCache(false);
-        Base.requestQueue.add(request);
-    }
-
-    /**
      * processTodayDetail
-     * @param response 오늘의 일감에 대한 상세정보가 담겨있다
+     * @param item 아이템으로 오늘의 일감 화면 보여주기
      */
-    private void processTodayDetail(String response) {
-        item = Base.gson.fromJson(response,WorkVO.class);
-        if (item == null) {
-            return;
-        }
+    public void processTodayDetail(WorkVO item) {
+        if (item == null) return;
         projectName.setText(item.getProjectName());
         projectSubject.setText(item.getProjectSubject());
         jobName.setText(item.getJobName());
@@ -228,7 +214,7 @@ public class TodayWorkFragment extends Fragment {
      * 출근 요청
      * @param seekerId seekerId 로 curDate 의 candidateStatus == 1 인 jobCandidate 를 2로 바꿈
      */
-    private void requestCommute(String seekerId) {
+    public void requestCommute(String seekerId) {
         String url = getResources().getString(R.string.url) + "requestCommute.do";
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 this::processCommuteResponse, error -> {}){
@@ -260,7 +246,7 @@ public class TodayWorkFragment extends Fragment {
                 break;
         }
 
-        requestTodayWorkDetail(seekerId);
+        activity.requestTodayWorkDetail(seekerId);
     }
 
 

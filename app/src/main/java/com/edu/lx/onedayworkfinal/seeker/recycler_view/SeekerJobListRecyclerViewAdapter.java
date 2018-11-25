@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.edu.lx.onedayworkfinal.R;
+import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.recycler_view.BaseViewHolder;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
@@ -30,16 +31,22 @@ public class SeekerJobListRecyclerViewAdapter extends BaseRecyclerViewAdapter<Jo
         TextView jobPay;
         TextView jobDate;
 
-
+        JobVO vo;
         SeekerProjectListViewHolder(@NonNull View itemView) {
             super(itemView);
             jobName = itemView.findViewById(R.id.jobName);
             jobPay = itemView.findViewById(R.id.jobPay);
             jobDate = itemView.findViewById(R.id.jobDate);
+
+            itemView.setOnClickListener(v -> {
+                SeekerMainActivity activity = (SeekerMainActivity) context;
+                activity.showProjectDetail(vo.getProjectNumber());
+            });
         }
 
         @Override
         public void setItem (JobVO item) {
+            vo = item;
 
             jobName.setText(item.getJobName());
             //1000 단위 숫자로 콤마를 찍어서 보여준다

@@ -15,7 +15,69 @@ public class JobCandidateVO {
     public String seekerName;
     public String score;
     public String evaluate;
+    public int total;
+    public int offWork;
+    public int jobLimitCount;
+    public int recruit;
+    public String seekerSex;
+    public String seekerBirth;
 
+
+
+    public String getSeekerSex() {
+        return seekerSex;
+    }
+
+
+    public void setSeekerSex(String seekerSex) {
+        this.seekerSex = seekerSex;
+    }
+
+
+    public String getSeekerBirth() {
+        return seekerBirth;
+    }
+
+
+    public void setSeekerBirth(String seekerBirth) {
+        this.seekerBirth = seekerBirth;
+    }
+
+    public int getRecruit() {
+        return recruit;
+    }
+
+    public void setRecruit(int recruit) {
+        this.recruit = recruit;
+    }
+    public int getJobLimitCount() {
+        return jobLimitCount;
+    }
+
+
+    public void setJobLimitCount(int jobLimitCount) {
+        this.jobLimitCount = jobLimitCount;
+    }
+
+
+    public int getTotal() {
+        return total;
+    }
+
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+
+    public int getOffWork() {
+        return offWork;
+    }
+
+
+    public void setOffWork(int offWork) {
+        this.offWork = offWork;
+    }
     public String getScore() {
         return score;
     }

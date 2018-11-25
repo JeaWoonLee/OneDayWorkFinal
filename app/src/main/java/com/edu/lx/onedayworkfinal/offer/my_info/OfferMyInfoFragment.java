@@ -48,7 +48,6 @@ public class OfferMyInfoFragment extends Fragment {
     TextView offerIsSign;
     LinearLayout offerSignLayout;
     ImageView offerSign;
-
     EditText offerAccount;
 
     Spinner accountSpinner;
@@ -188,5 +187,6 @@ public class OfferMyInfoFragment extends Fragment {
             showSignButton.setVisibility(View.GONE);
         }
     }
+
 
 }

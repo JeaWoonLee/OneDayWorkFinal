@@ -24,9 +24,9 @@
     <application
         android:name=".util.volley.Base"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/main_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/main_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
@@ -66,7 +66,7 @@
             </intent-filter>
         </activity>
         <!-- detailManage Activity -->
-        <activity android:name=".seeker.ManageProjectDetailActivity" />
+        <activity android:name=".seeker.candidate.ManageProjectDetailActivity" />
         <activity android:name=".join.JoinActivity" />
         <activity android:name=".seeker.find.ProjectDetailActivity" />
         <activity android:name=".seeker.find.CandidateActivity" />
@@ -89,13 +89,14 @@
             android:theme="@style/PopupTheme" />
         <activity android:name=".offer.manage_work.OfferManageWorkActivity" />
         <activity android:name=".offer.manage_work.OfferManageCandidateActivity" />
-        <activity android:name=".offer.manage_work.OfferManageHumanResourcesActivity"></activity>
+        <activity android:name=".offer.manage_work.OfferManageHumanResourcesActivity"/>
         <activity android:name=".login.findInfo.FindInfoActivity" />
         <activity android:name=".login.findInfo.FindIDActivity" />
         <activity android:name=".login.findInfo.FindPWActivity" />
         <activity android:name=".offer.my_info.OfferDrawSignActivity"
                   android:theme="@style/PopupTheme" />
-        <activity android:name=".seeker.manage.ShowContractActivity"/>
+        <activity android:name=".seeker.info.ShowContractActivity"/>
+        <activity android:name=".seeker.my_work.JobManageDetailActivity"/>
     </application>
 
 </manifest>

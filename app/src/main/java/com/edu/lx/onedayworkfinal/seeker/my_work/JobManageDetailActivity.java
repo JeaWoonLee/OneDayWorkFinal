@@ -1,4 +1,4 @@
-package com.edu.lx.onedayworkfinal.seeker;
+package com.edu.lx.onedayworkfinal.seeker.my_work;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;

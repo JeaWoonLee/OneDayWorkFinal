@@ -12,17 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="일감 관리"
-            android:background="@color/seeker"
-            app:titleTextColor="@color/white">
-
-        </android.support.v7.widget.Toolbar>
-
         <!-- 수령액 정보 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +29,7 @@
                 <TextView
                     android:layout_height="wrap_content"
                     style="@style/blackTextView"
-                    android:text="현재 수령액"/>
+                    android:text="총 수령액"/>
 
                 <View
                     android:layout_width="0dp"
@@ -48,9 +37,10 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/nowPay"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/receivedPayView"
                     style="@style/seekerItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="수령액" />
 
             </LinearLayout>
@@ -72,7 +62,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/expectaionPay"
+                    android:id="@+id/predictPayView"
                     android:layout_width="wrap_content"
                     style="@style/seekerItemText"
                     android:text="수령액" />

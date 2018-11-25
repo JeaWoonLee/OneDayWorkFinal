@@ -1,4 +1,4 @@
-package com.edu.lx.onedayworkfinal.seeker.manageRequest;
+package com.edu.lx.onedayworkfinal.seeker.candidate;
 
 import android.content.Context;
 import android.net.Uri;

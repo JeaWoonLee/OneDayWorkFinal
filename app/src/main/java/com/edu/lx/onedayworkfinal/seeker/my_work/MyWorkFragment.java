@@ -1,66 +1,51 @@
-package com.edu.lx.onedayworkfinal.seeker;
+package com.edu.lx.onedayworkfinal.seeker.my_work;
 
-import android.app.Activity;
-import android.app.AppComponentFactory;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import java.text.SimpleDateFormat;
 
-import java.util.Date;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.error.AuthFailureError;
+import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
-import com.edu.lx.onedayworkfinal.offer.recycler_view.WorkerRecyclerViewAdapter;
-import com.edu.lx.onedayworkfinal.seeker.manageRequest.ManageProjectDetailActivity;
+import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageAcceptJobAdapter;
 import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageFinishJobAdapter;
-import com.edu.lx.onedayworkfinal.seeker.recycler_view.SeekerManageProjectRecyclerViewAdapter;
-import com.edu.lx.onedayworkfinal.seeker.recycler_view.TargetDateRecyclerViewAdapter;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
-import com.edu.lx.onedayworkfinal.vo.JobCandidateVO;
-import com.edu.lx.onedayworkfinal.vo.JobVO;
 import com.edu.lx.onedayworkfinal.vo.ManageVO;
-import com.edu.lx.onedayworkfinal.vo.OfferWorkVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
-public class JobManageActivity extends Activity {
+public class MyWorkFragment extends Fragment {
 
+    SeekerMainActivity activity;
 
     String seekerId;
     ManageVO manageVO;
-    //intent 로 받아오는 정보
-    public int projectNumber;
-
-
-    //서버에서 받아오는 응답 정보들
+    TextView receivedPayView;
+    TextView predictPayView;
 
     //수락한 일감, 종료된 일감 목록
-    ArrayList<ManageVO> items;
+    ArrayList<ManageVO> acceptedItems;
     ArrayList<ManageVO> finishJobList;
     int nowPayData;
 
     SeekerManageAcceptJobAdapter adapter;
     SeekerManageFinishJobAdapter FinishAdapter;
-
-    //Toolbar
-    Toolbar toolbar;
 
     //현재까지 수령한 총액
     TextView nowPay;
@@ -81,53 +66,60 @@ public class JobManageActivity extends Activity {
     int todayJobVisible = 0;
     Button todayJobButton;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_today_job_manage);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (SeekerMainActivity) getActivity();
         seekerId = Base.sessionManager.getUserDetails().get("id");
 
+    }
 
-        initUI();
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.my_work_fragment,container,false);
+        rootView = initUI(rootView);
 
+
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         requestAcceptJobList(seekerId);
-        requestFinishJobList(seekerId);
-        //요청액 호출 하는즁
-//        requestNowPay(seekerId);
     }
 
     //UI 세팅
-    private void initUI() {
-        Intent intent = getIntent();
-        projectNumber = intent.getIntExtra("projectNumber", 0);
-        String projectName = intent.getStringExtra("projectName");
-        //툴바 설정
-        toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        Objects.requireNonNull(getSupportActionBar()).setTitle(projectName);
-
+    private ViewGroup initUI(ViewGroup rootView) {
         //현재까지 수령 총액
-        nowPay = findViewById(R.id.nowPay);
+        receivedPayView = rootView.findViewById(R.id.receivedPayView);
         //수령할 총액
-        expectaionReceipt = findViewById(R.id.expectaionPay);
+        predictPayView = rootView.findViewById(R.id.predictPayView);
+
 
         //수락한 일감
-        acceptJobView = findViewById(R.id.acceptJobView);
-        showAcceptButton = findViewById(R.id.showAcceptButton);
+        acceptJobView = rootView.findViewById(R.id.acceptJobView);
+        showAcceptButton = rootView.findViewById(R.id.showAcceptButton);
         showAcceptButton.setOnClickListener(v -> showAcceptJob(acceptJobVisible));
-        acceptJobRecyclerView = findViewById(R.id.acceptJobRecyclerView);
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        acceptJobRecyclerView = rootView.findViewById(R.id.acceptJobRecyclerView);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         acceptJobRecyclerView.setLayoutManager(layoutManager1);
+
         //근무결과목록 확인
-        finishJobView = findViewById(R.id.finishJobView);
-        showFinishButton = findViewById(R.id.showFinishButton);
+        finishJobView = rootView.findViewById(R.id.finishJobView);
+        showFinishButton = rootView.findViewById(R.id.showFinishButton);
         showFinishButton.setOnClickListener(v -> showFinishJob(finishJobVisible));
-        finishJobViewRecyclerView = findViewById(R.id.finishJobViewRecyclerView);
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        finishJobViewRecyclerView = rootView.findViewById(R.id.finishJobViewRecyclerView);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         finishJobViewRecyclerView.setLayoutManager(layoutManager2);
 
-
+        return rootView;
     }
+
+
+
 
 
     //수락한 일감 조회
@@ -154,18 +146,19 @@ public class JobManageActivity extends Activity {
      * */
     private void processAcceptJobList(String response) {
         ManageVO[] vo = Base.gson.fromJson(response,ManageVO[].class);
-        items = new ArrayList<>(Arrays.asList(vo));
-        adapter = new SeekerManageAcceptJobAdapter(this);
-        adapter.setItems(items);
+        acceptedItems = new ArrayList<>(Arrays.asList(vo));
+        adapter = new SeekerManageAcceptJobAdapter(activity);
+        adapter.setItems(acceptedItems);
         acceptJobRecyclerView.setAdapter(adapter);
 
+        requestFinishJobList(seekerId);
     }
 
     //수락한 일감 보여주기, 숨기기
     public void showAcceptJob(int acceptJobVisible) {
         switch (acceptJobVisible) {
             case 0:
-                if (items.size() == 0) {
+                if (acceptedItems.size() == 0) {
                     return;
                 }
                 this.acceptJobVisible = 1;
@@ -183,12 +176,12 @@ public class JobManageActivity extends Activity {
     public void requestFinishJobList(String seekerId) {
         String url = getResources().getString(R.string.url) + "requestFinishJobList.do";
         StringRequest request = new StringRequest(Request.Method.POST, url,
-                    this::processFinishJobJobList, error -> {
+                this::processFinishJobJobList, error -> {
 
 
         }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("seekerId", seekerId);
                 return params;
@@ -202,10 +195,11 @@ public class JobManageActivity extends Activity {
     public void processFinishJobJobList(String response) {
         ManageVO[] vo = Base.gson.fromJson(response,ManageVO[].class);
         finishJobList = new ArrayList<>(Arrays.asList(vo));
-        FinishAdapter = new SeekerManageFinishJobAdapter(this);
+        FinishAdapter = new SeekerManageFinishJobAdapter(activity);
         FinishAdapter.setItems(finishJobList);
         finishJobViewRecyclerView.setAdapter(FinishAdapter);
 
+        processPayInfo();
     }
 
     //FinishJob 닫기 ,펼치리
@@ -224,35 +218,18 @@ public class JobManageActivity extends Activity {
         }
     }
 
-    public void showJobDetailActivity(int candidateNumber) {
-        Intent intent = new Intent(this,JobManageDetailActivity.class);
-        intent.putExtra("candidateNumber",candidateNumber);
-        startActivityForResult(intent,500);
-    }
+    //이번 달 수령액 / 이번달 예상 수령액
+    private void processPayInfo () {
+        //예상 수령액
+        int predictPay = 0;
+        int receivedPay = 0;
 
-    //요청액 하는중임
-//    public void requestNowPay(String seekerId) {
-//        String url = getResources().getString(R.string.url) + "requestNowPay.do";
-//        StringRequest request = new StringRequest(Request.Method.POST, url,
-//                this::processNowPay, error -> {
-//
-//
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String,String> params = new HashMap<>();
-//                params.put("seekerId", seekerId);
-//                return params;
-//            }
-//        };
-//        request.setShouldCache(false);
-//        Base.requestQueue.add(request);
-//
-//    }
-//
-//    private void processNowPay(String response) {
-//
-//    }
+        for (ManageVO item : acceptedItems) predictPay += item.getJobPay();
+        for (ManageVO item : finishJobList) if (TextUtils.equals(item.getCandidateStatus(),"4")) receivedPay += item.getJobPay();
+
+        receivedPayView.setText(String.valueOf(Base.decimalFormat(receivedPay))+" 원");
+        predictPayView.setText(String.valueOf(Base.decimalFormat(predictPay))+" 원");
+    }
 
 
 }

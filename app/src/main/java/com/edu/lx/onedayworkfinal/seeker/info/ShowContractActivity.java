@@ -1,4 +1,4 @@
-package com.edu.lx.onedayworkfinal.seeker.manage;
+package com.edu.lx.onedayworkfinal.seeker.info;
 
 import android.app.Activity;
 import android.app.DownloadManager;

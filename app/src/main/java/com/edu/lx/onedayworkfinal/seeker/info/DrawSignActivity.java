@@ -1,4 +1,4 @@
-package com.edu.lx.onedayworkfinal.seeker.manage;
+package com.edu.lx.onedayworkfinal.seeker.info;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;

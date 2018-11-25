@@ -1,4 +1,4 @@
-package com.edu.lx.onedayworkfinal.seeker.manage;
+package com.edu.lx.onedayworkfinal.seeker.today_work;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.seeker.SeekerMainActivity;
+import com.edu.lx.onedayworkfinal.seeker.info.ShowContractActivity;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.WorkVO;
 

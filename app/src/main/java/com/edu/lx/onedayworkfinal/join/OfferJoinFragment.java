@@ -16,9 +16,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 import com.android.volley.Request;
+
 import com.android.volley.error.AuthFailureError;
 import com.android.volley.request.StringRequest;
+
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferVO;
@@ -117,7 +120,7 @@ public class OfferJoinFragment extends Fragment {
                 }
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("userId",userId);
                 return params;

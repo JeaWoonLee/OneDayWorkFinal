@@ -67,7 +67,7 @@
 
     <!--find_front_fragment-->
     <string name="find_front_fragment1">아이디 찾기</string>
-    <string name="find_front_fragment2">비밀번호 찾기</string>
+    <string name="find_front_fragment2">비밀번호 변경</string>
     <!--//end find_front_fragment-->
 
     <!--find_seeker_fragment-->
@@ -99,6 +99,8 @@
     <string name="join_seeker_fragment13">비밀번호 확인</string>
     <string name="join_seeker_fragment14">중복 체크</string>
     <string name="join_seeker_fragment15">비밀번호를 다시 입력하세요</string>
+    <string name="join_seeker_fragment16">주소</string>
+    <string name="join_seeker_fragment17">서울특별시 강남구 OO로 00길, 상세주소 </string>
     <string name="navigation_drawer_open">열기</string>
     <string name="navigation_drawer_close">닫기</string>
     <!-- //end join_seeker_fragment -->
@@ -120,6 +122,8 @@
     <string name="join_offer_fragment14">중복 체크</string>
     <string name="join_offer_fragment15">비밀번호를 다시 입력하세요</string>
     <string name="join_offer_fragment16">회사명</string>
+    <string name="join_offer_fragment17">주소</string>
+    <string name="join_offer_fragment18">서울특별시 강남구 OO로 00길, 상세주소 </string>
     <string name="navigation_drawer_open1">열기</string>
     <string name="navigation_drawer_close1">닫기</string>
     <string name="activity_candidate1">모집정보</string>
@@ -151,3 +155,4 @@
     <!-- //end join_seeker_fragment -->
 
 </resources>
+

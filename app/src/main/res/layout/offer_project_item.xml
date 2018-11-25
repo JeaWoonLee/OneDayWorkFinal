@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
-    android:elevation="10dp"
-    android:layout_margin="10dp">
+    android:orientation="horizontal"
+    android:background="@drawable/offer_rectangle_border">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="4"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/offer_border">
+        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/offer_header_border">
+            android:background="@color/offer">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,4 +61,22 @@
 
         </LinearLayout>
     </LinearLayout>
-</android.support.v7.widget.CardView>
+    <LinearLayout
+        android:id="@+id/showCommuteButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/offer"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="바로가기"
+            android:textSize="14sp"
+            style="@style/whiteTextView"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+</LinearLayout>
+

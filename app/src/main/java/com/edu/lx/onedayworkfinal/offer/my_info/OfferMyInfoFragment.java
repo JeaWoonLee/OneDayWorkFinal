@@ -1,7 +1,9 @@
 package com.edu.lx.onedayworkfinal.offer.my_info;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,12 +14,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.error.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.ImageRequest;
 import com.android.volley.request.SimpleMultiPartRequest;
 import com.android.volley.request.StringRequest;
 import com.edu.lx.onedayworkfinal.R;
@@ -40,11 +46,15 @@ public class OfferMyInfoFragment extends Fragment {
     TextView companyName;
     TextView offerCash;
     TextView offerIsSign;
+    LinearLayout offerSignLayout;
+    ImageView offerSign;
 
     EditText offerAccount;
-    EditText offerInfo;
 
     Spinner accountSpinner;
+
+    Button showSignButton;
+    int offerSignVisible = 0;
 
     @Override
     public void onAttach(Context context) {
@@ -66,10 +76,11 @@ public class OfferMyInfoFragment extends Fragment {
         offerIsSign = rootView.findViewById(R.id.offerIsSign);
         accountSpinner = rootView.findViewById(R.id.accountSpinner);
         offerAccount = rootView.findViewById(R.id.offerAccount);
-        offerInfo = rootView.findViewById(R.id.offerInfo);
 
-        Button showSignButton = rootView.findViewById(R.id.showSignButton);
-        showSignButton.setOnClickListener(v -> { });
+        offerSignLayout= rootView.findViewById(R.id.offerSignLayout);
+        offerSign = rootView.findViewById(R.id.offerSign);
+
+        showSignButton = rootView.findViewById(R.id.showSignButton);
         Button signRegistButton = rootView.findViewById(R.id.signRegistButton);
         signRegistButton.setOnClickListener(v -> registSign() );
         Button updateMyInfo = rootView.findViewById(R.id.updateMyInfo);
@@ -85,6 +96,7 @@ public class OfferMyInfoFragment extends Fragment {
 
     public void registSign(){
         Intent intent = new Intent(activity,OfferDrawSignActivity.class);
+        intent.putExtra("offerVO",item.toString());
         startActivityForResult(intent,411);
     }
 
@@ -126,15 +138,12 @@ public class OfferMyInfoFragment extends Fragment {
     }
 
     public void requestOfferDetail(String id){
-        Intent intent = new Intent(activity,OfferDrawSignActivity.class);
-        startActivityForResult(intent,412);
-
         String url = getResources().getString(R.string.url)+"requestOfferDetail.do";
         StringRequest request = new StringRequest(Request.Method.POST,url,
                 this::processOfferDetailResponse,
                 error -> {}){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("offerId",id);
                 return params;
@@ -149,11 +158,35 @@ public class OfferMyInfoFragment extends Fragment {
         offerId.setText(item.getOfferId());
         offerName.setText(item.getOfferName());
         offerEmail.setText(item.getOfferEmail());
-        offerInfo.setText(item.getOfferInfo());
         companyName.setText(item.getCompanyName());
         companyNo.setText(item.getCompanyNo());
-        offerCash.setText(item.getOfferCash());
+        offerCash.setText(String.valueOf(item.getOfferCash()));
         offerAccount.setText(item.getOfferAccount());
+        if (item.getOfferSign() != null) {
+            showSignButton.setOnClickListener(v -> {
+                switch (offerSignVisible) {
+                    case 0:
+                        offerSignVisible = 1;
+                        offerSignLayout.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        offerSignVisible = 0;
+                        offerSignLayout.setVisibility(View.GONE);
+                        break;
+                }
+            });
+
+            offerIsSign.setText("등록됨");
+            String url = getResources().getString(R.string.url) + item.getOfferSign();
+            ImageRequest request = new ImageRequest(url, activity.getResources(), activity.getContentResolver(),
+                    response1 -> offerSign.setImageBitmap(response1), 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.ARGB_8888,
+                    error -> {
+
+                    });
+            Base.requestQueue.add(request);
+        }else {
+            showSignButton.setVisibility(View.GONE);
+        }
     }
 
 }

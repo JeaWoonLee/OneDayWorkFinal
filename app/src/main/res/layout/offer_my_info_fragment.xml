@@ -116,25 +116,6 @@
         </LinearLayout>
         <!-- //end Basic Info -->
 
-        <!-- //seekerInfo-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="소개글"
-            style="@style/blackTextView"/>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/offer_border"
-            android:padding="10dp">
-
-            <EditText
-                android:id="@+id/offerInfo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-        </FrameLayout>
-        <!-- //end seekerInfo -->
         <!-- Account Info -->
         <TextView
             android:layout_width="wrap_content"
@@ -248,9 +229,17 @@
                     android:text="서명하기" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/offerSignLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone">
 
+                <ImageView
+                    android:id="@+id/offerSign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"/>
             </LinearLayout>
 
         </LinearLayout>

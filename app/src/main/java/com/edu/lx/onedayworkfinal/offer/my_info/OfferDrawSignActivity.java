@@ -88,7 +88,7 @@ public class OfferDrawSignActivity extends AppCompatActivity {
         String fileName = id + "_sign.png";
         String stringPath = exStorage + folderName;
 
-        File filePath = null;
+        File filePath;
         String imagePath = stringPath + fileName;
         try{
             filePath = new File(stringPath);
@@ -108,11 +108,10 @@ public class OfferDrawSignActivity extends AppCompatActivity {
     }
 
     private void requestUpdateCandidateSign(String path){
-        String offerId = Base.sessionManager.getUserDetails().get("id");
-        offerVO.setCompanyName(offerId);
         Log.d("offerVO",offerVO.toString());
-        String url = getResources().getString(R.string.url)+"updateOfferSign";
-        SimpleMultiPartRequest request = new SimpleMultiPartRequest(Request.Method.POST,url,
+        String url = getResources().getString(R.string.url)+"updateOfferSign.do";
+        SimpleMultiPartRequest request = new SimpleMultiPartRequest(
+                Request.Method.POST,url,
                 this::processUpdateResult,
                 error -> {
 

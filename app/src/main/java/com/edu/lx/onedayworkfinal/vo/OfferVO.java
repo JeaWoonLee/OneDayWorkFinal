@@ -17,7 +17,14 @@ public class OfferVO {
     int offerCash;
     String offerSign;
     String offerInfo;
+    String offerAddress;
 
+    public String getOfferAddress(){
+        return offerAddress;
+    }
+    public void setOfferAddress(){
+        this.offerAddress = offerAddress;
+    }
     public String getOfferInfo(){
         return offerInfo;
     }

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".offer.manage_commute.OfferManageCommuteDetailActivity"
+    android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="일감 관리"
+            android:background="@color/seeker"
+            app:titleTextColor="@color/white">
+
+        </android.support.v7.widget.Toolbar>
+
+        <!-- 수령액 정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="현재 수령액"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/nowPay"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="수령액" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/blackTextView"
+                    android:text="예상 수령액"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/expectaionPay"
+                    android:layout_width="wrap_content"
+                    style="@style/seekerItemText"
+                    android:text="수령액" />
+
+            </LinearLayout>
+
+
+            <!--&lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/commuteInfoForJobRecyclerView"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</android.support.v7.widget.RecyclerView>&ndash;&gt;-->
+
+        </LinearLayout>
+        <!-- //end 수령액 정보 -->
+
+        <!-- 수락 일감 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="수락 일감 목록"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/showAcceptButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/seekerButton"
+                android:layout_gravity="center_vertical"
+                android:text="-"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/acceptJobView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp"
+            android:visibility="visible">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/acceptJobRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+        <!-- //end 수락 일감 목록 -->
+
+        <!-- 근무결과 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/blackTextView"
+                android:text="근무 결과 목록 학인"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/showFinishButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/seekerButton"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/finishJobView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/seeker_border"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/finishJobViewRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <!--<Button-->
+                <!--android:id="@+id/allOffWorkButton"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--style="@style/offerButton"-->
+                <!--android:background="@color/blue1"-->
+                <!--android:text="일괄 퇴근"-->
+                <!--android:layout_margin="10dp"/>-->
+        </LinearLayout>
+        <!-- //end 근무 결과 목록 -->
+    </LinearLayout>
+
+</ScrollView>

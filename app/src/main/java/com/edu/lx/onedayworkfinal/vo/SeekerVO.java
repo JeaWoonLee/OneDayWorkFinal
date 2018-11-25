@@ -24,7 +24,14 @@ public class SeekerVO {
     String seekerPicture;
     String openPictureInfo;
     String openLocationInfo;
+    String seekerAddress;
 
+    public String getSeekerAddress(){
+        return seekerAddress;
+    }
+    public void setSeekerAddress(String seekerAddress){
+        this.seekerAddress = seekerAddress;
+    }
     public String getOpenPictureInfo() {
         return openPictureInfo;
     }

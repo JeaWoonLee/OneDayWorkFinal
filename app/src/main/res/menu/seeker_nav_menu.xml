@@ -17,7 +17,10 @@
 
         <item
             android:id="@+id/manage_job"
-            android:title="일관리"/>
+            android:title="신청 관리"/>
+        <item
+            android:id="@+id/today_job_manage"
+            android:title="일감 관리"/>
     </group>
 
 

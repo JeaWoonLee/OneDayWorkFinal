@@ -71,14 +71,13 @@ public class SeekerManageProjectRecyclerViewAdapter extends BaseRecyclerViewAdap
                 //projectName.setTextColor(context.getColor(R.color.blue1));
 
                 if(String.valueOf(manageVO.getCandidateStatus()).equals("0")) {
-                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.blue1));
-                } else if (String.valueOf(manageVO.getCandidateStatus()).equals("1")) {
-                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.black));
+                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.seeker));
+                } else if (String.valueOf(manageVO.getCandidateStatus()).equals("8")) {
+                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.danger));
                 }
-                else if(String.valueOf(manageVO.getCandidateStatus()).equals("7")) {
-                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.dark_gray));
-                }
-
+//                else if(String.valueOf(manageVO.getCandidateStatus()).equals("7")) {
+//                    SeekerListcardView.setBackgroundColor(context.getColor(R.color.dark_gray));
+//                }
 
                 Log.d("manageVO", manageVO.toString());
 

@@ -16,9 +16,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 import com.android.volley.Request;
+
 import com.android.volley.error.AuthFailureError;
 import com.android.volley.request.StringRequest;
+
 import com.edu.lx.onedayworkfinal.R;
 import com.edu.lx.onedayworkfinal.util.volley.Base;
 import com.edu.lx.onedayworkfinal.vo.OfferVO;
@@ -47,7 +50,7 @@ public class OfferJoinFragment extends Fragment {
     //회사명 입력
     AppCompatEditText companyNameInput;
 
-
+    AppCompatEditText offerAddressInput;
 
     //중복 확인
     Button checkIdOverlapButton1;
@@ -77,6 +80,7 @@ public class OfferJoinFragment extends Fragment {
         offerJoinButton = rootView.findViewById(R.id.offerJoinButton);
         offerAccountInput = rootView.findViewById(R.id.offerAccountInput);
         companyNameInput = rootView.findViewById(R.id.companyNameInput);
+        offerAddressInput = rootView.findViewById(R.id.offerAddressInput);
         checkIdOverlapButton1 = rootView.findViewById(R.id.checkIdOverlapButton1);
 
         accountSpinner = rootView.findViewById(R.id.accountSpinner);
@@ -116,7 +120,7 @@ public class OfferJoinFragment extends Fragment {
                 }
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
                 params.put("userId",userId);
                 return params;
@@ -138,6 +142,7 @@ public class OfferJoinFragment extends Fragment {
         final String offerAccount = offerAccountInput.getText().toString();
         final String companyName = companyNameInput.getText().toString();
         final String bank = accountSpinner.getSelectedItem().toString();
+        final String offerAddress = offerAddressInput.getText().toString();
 
         String url = getResources().getString(R.string.url) + "joinOffer.do";
         StringRequest request = new StringRequest(
@@ -158,6 +163,7 @@ public class OfferJoinFragment extends Fragment {
                 params.put("offerAccount",offerAccount);
                 params.put("companyName",companyName);
                 params.put("bank",bank);
+                params.put("offerAddress",offerAddress);
                 return params;
             }
         };
@@ -234,10 +240,10 @@ public class OfferJoinFragment extends Fragment {
         } else if (TextUtils.isEmpty(companyNameInput.getText())){
             companyNameInput.setError("사명을 적어주십시오");
             return true;
+        }else if (TextUtils.isEmpty(offerAddressInput.getText())){
+            offerAddressInput.setError("주소를 입력해주세요");
         }
-
         return false;
-
     }
 
 }

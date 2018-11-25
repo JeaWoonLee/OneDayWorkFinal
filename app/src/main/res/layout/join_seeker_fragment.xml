@@ -146,6 +146,24 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            style="@style/blackTextView"
+            android:text="@string/join_seeker_fragment16"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/seekerAddressInput"
+            style="@style/seekerEditText"
+            app:theme="@style/seekerEditText"
+            android:hint="@string/join_seeker_fragment17"/>
+
+    </LinearLayout>
+
     <!-- 회원가입 버튼 -->
     <LinearLayout
         android:layout_width="match_parent"

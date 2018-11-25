@@ -24,9 +24,9 @@
     <application
         android:name=".util.volley.Base"
         android:allowBackup="true"
-        android:icon="@drawable/main_icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/main_icon"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
@@ -96,6 +96,8 @@
         <activity android:name=".login.findInfo.FindInfoActivity" />
         <activity android:name=".login.findInfo.FindIDActivity" />
         <activity android:name=".login.findInfo.FindPWActivity" />
+        <activity android:name=".offer.my_info.OfferDrawSignActivity"
+                  android:theme="@style/PopupTheme" ></activity>
         <activity android:name=".seeker.manage.ShowContractActivity"></activity>
         <activity android:name=".offer.my_info.OfferDrawSignActivity"
                   android:theme="@style/PopupTheme" ></activity>

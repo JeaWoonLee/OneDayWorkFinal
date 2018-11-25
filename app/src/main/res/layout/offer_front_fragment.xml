@@ -13,6 +13,7 @@
         android:text="오늘 진행되는 일감"
         android:textSize="25sp"
         android:layout_gravity="center_horizontal"/>
+
     <LinearLayout
         android:id="@+id/today_work_empty_layout"
         android:layout_width="match_parent"
@@ -27,6 +28,20 @@
             android:layout_gravity="center"
             android:text="오늘 날짜로 진행되는 일감이 없습니다"
             style="@style/whiteTextView"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/today_work_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/today_work_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
     <TextView

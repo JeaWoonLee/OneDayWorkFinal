@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".seeker.CandidateActivity">
+    tools:context=".seeker.find.CandidateActivity">
 
     <!-- container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".seeker.CandidateActivity"
+        tools:context=".seeker.find.CandidateActivity"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -131,7 +131,8 @@
             app:selectionColor="@color/offer"
             app:selectionLabelColor="@color/seeker"
             app:disabledDaysLabelsColor="@color/danger"
-            app:type="one_day_picker">
+            app:type="one_day_picker"
+            app:eventsEnabled="true">
 
         </com.applandeo.materialcalendarview.CalendarView>
 

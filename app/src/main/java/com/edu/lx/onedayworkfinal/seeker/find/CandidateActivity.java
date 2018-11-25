@@ -1,10 +1,13 @@
-package com.edu.lx.onedayworkfinal.seeker;
+package com.edu.lx.onedayworkfinal.seeker.find;
 
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.request.StringRequest;
+import com.applandeo.materialcalendarview.CalendarUtils;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
@@ -21,10 +25,12 @@ import com.edu.lx.onedayworkfinal.vo.JobCandidateVO;
 import com.edu.lx.onedayworkfinal.vo.JobVO;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -191,30 +197,67 @@ public class CandidateActivity extends AppCompatActivity{
      *  초기 선택 날짜를 선택한다. disable 된 날짜를 선택한다면 다음 날짜를 기본적으로 선택하도록 한다.
      */
     private void processDisableDaysResponse(String response) {
+        //현재 날짜
+        Calendar curDate = Calendar.getInstance();
+        //response 처리
         JobCandidateVO[] targetDateArrays = Base.gson.fromJson(response,JobCandidateVO[].class);
+        ArrayList<JobCandidateVO> list = new ArrayList<>(Arrays.asList(targetDateArrays));
 
-        if (targetDateArrays != null){
-            Calendar[] days = new Calendar[targetDateArrays.length];
-            for (int i = 0 ; i < targetDateArrays.length ; i++){
-                days[i] = Calendar.getInstance();
-                days[i].setTime(Date.valueOf(targetDateArrays[i].getTargetDate()));
-            }
-            disableDays = new ArrayList<>(Arrays.asList(days));
-            calendar.setDisabledDays(disableDays);
-            Calendar setDate = Calendar.getInstance();
-            setDate.setTime(Date.valueOf(item.getJobStartDate()));
+        //정원이 가득 찬 날짜
+        disableDays = new ArrayList<>();
+        //이벤트 날짜
+        List<EventDay> events = new ArrayList<>();
 
-            while (disableDays.contains(setDate)) {
-                setDate.set(setDate.get(Calendar.YEAR),setDate.get(Calendar.MONTH),setDate.get(Calendar.DAY_OF_MONTH)+1);
+        for (JobCandidateVO item : list) {
+
+            //정원이 가득 차서 비활성화 할 날짜 선택
+            if (item.getRecruit() == item.getJobLimitCount()) {
+                Calendar disableDay = Calendar.getInstance();
+                disableDay.setTime(Date.valueOf(item.getTargetDate()));
+                disableDays.add(disableDay);
             }
 
-            try {
-                calendar.setDate(setDate);
-            } catch (OutOfDateRangeException e) {
-                e.printStackTrace();
-            }
+            //이벤트 날짜 설정
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(Date.valueOf(item.getTargetDate()));
+
+            int recruit = item.getRecruit();
+            int limitedCount = item.getJobLimitCount();
+
+            int color = R.color.seeker;
+            if (recruit == limitedCount) color = R.color.danger;
+
+            String eventText = recruit + "/" + limitedCount;
+            Drawable drawable = CalendarUtils.getDrawableText(this,eventText,Typeface.DEFAULT,color,15);
+            events.add(new EventDay(calendar,drawable));
+
         }
+        //비활성화 날짜 설정
+        calendar.setDisabledDays(disableDays);
+        //이벤트 날짜 설정
+        calendar.setEvents(events);
 
+        //초기 선택날짜
+        Calendar setDate;
+        //jobStartDate 보다 curDate 의 날짜가 늦다면 초기 날짜를 curDate 로 한다
+        Calendar jobStartDate = Calendar.getInstance();
+        jobStartDate.setTime(Date.valueOf(item.getJobStartDate()));
+
+        if (curDate.getTime().getTime() >= jobStartDate.getTime().getTime()) {
+            setDate = curDate;
+        } else {
+            setDate = jobStartDate;
+        }
+        //비활성화 된 날짜를 선택하게 된다면 다음 날짜를 선택하도록 하는 반복문
+        while (disableDays.contains(setDate)) {
+            setDate.set(setDate.get(Calendar.YEAR),setDate.get(Calendar.MONTH),setDate.get(Calendar.DAY_OF_MONTH)+1);
+        }
+        //초기 선택 날짜 설정
+        try {
+            calendar.setDate(setDate);
+        } catch (OutOfDateRangeException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -229,14 +272,15 @@ public class CandidateActivity extends AppCompatActivity{
             Toast.makeText(getApplicationContext(),"해당 날짜는 이미 신청이 마감되었습니다",Toast.LENGTH_SHORT).show();
             return;
         }
-        String date = clickedDayCalendar.get(Calendar.YEAR)+"-"+(clickedDayCalendar.get(Calendar.MONTH)+1)+"-"+clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
+        java.util.Date Date = clickedDayCalendar.getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String date = simpleDateFormat.format(Date);
         try {
             calendar.setDate(clickedDayCalendar);
         } catch (OutOfDateRangeException e) {
             e.printStackTrace();
         }
         selectDay.setText(date);
-        date = clickedDayCalendar.get(Calendar.YEAR)+"-"+(clickedDayCalendar.get(Calendar.MONTH)+2)+"-"+clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
         requestTargetDateCount(date,jobNumber);
     }
 
@@ -255,6 +299,7 @@ public class CandidateActivity extends AppCompatActivity{
             @Override
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
+                Log.d("targetDate",date);
                 params.put("targetDate",date);
                 params.put("jobNumber",String.valueOf(jobNumber));
                 return params;

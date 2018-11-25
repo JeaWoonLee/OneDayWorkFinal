@@ -69,7 +69,7 @@
         <activity android:name=".seeker.ManageProjectDetailActivity" />
         <activity android:name=".join.JoinActivity" />
         <activity android:name=".seeker.find.ProjectDetailActivity" />
-        <activity android:name=".seeker.CandidateActivity" />
+        <activity android:name=".seeker.find.CandidateActivity" />
         <activity android:name=".offer.OfferMainActivity" />
         <activity
             android:name=".seeker.find.SeekerJobFilterPopupActivity"
@@ -97,10 +97,9 @@
         <activity android:name=".login.findInfo.FindIDActivity" />
         <activity android:name=".login.findInfo.FindPWActivity" />
         <activity android:name=".offer.my_info.OfferDrawSignActivity"
-                  android:theme="@style/PopupTheme" ></activity>
-        <activity android:name=".seeker.manage.ShowContractActivity"></activity>
-        <activity android:name=".offer.my_info.OfferDrawSignActivity"
-                  android:theme="@style/PopupTheme" ></activity>
+                  android:theme="@style/PopupTheme" />
+        <activity android:name=".seeker.manage.ShowContractActivity"/>
+
     </application>
 
 </manifest>

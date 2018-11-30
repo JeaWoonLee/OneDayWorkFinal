@@ -30,12 +30,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
 
-            <TextView
-                android:id="@+id/recruitmentRate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/whiteTextView"
-                android:text="구인율(recruit/total)"/>
+
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

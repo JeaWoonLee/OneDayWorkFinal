@@ -193,6 +193,10 @@ public class ShowContractActivity extends AppCompatActivity {
                 case 601 :
                     String signResult = intent.getStringExtra("signResult");
                     if (TextUtils.equals(signResult,"resultOK")){
+//                        Intent intent2 = new Intent();
+//                        intent2.putExtra("signResult","resultOK");
+//                        setResult(Activity.RESULT_OK,intent2);
+//                        finish();
                         Snackbar.make(getWindow().getDecorView().getRootView(),"성공적으로 서명 정보가 업데이트 되었습니다",Snackbar.LENGTH_LONG).show();
                         signContract.setVisibility(View.GONE);
                         confirmButton.setVisibility(View.VISIBLE);

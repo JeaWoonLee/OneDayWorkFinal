@@ -18,11 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingEnd="20dp">
+            android:paddingHorizontal="20dp">
 
             <TextView
+                android:layout_width="wrap_content"
                 android:id="@+id/certificateName"
-                style="@style/whiteTextView"
+                style="@style/blackTextView"
                 android:text="자격증 명"/>
 
             <View
@@ -33,7 +34,7 @@
             <TextView
                 android:id="@+id/certificateNumber"
                 android:layout_width="wrap_content"
-                style="@style/whiteTextView"
+                style="@style/blackTextView"
                 android:text="자격증 번호"/>
         </LinearLayout>
 

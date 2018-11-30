@@ -142,8 +142,9 @@ public class OfferManageHumanResourcesActivity extends AppCompatActivity {
         Calendar startCalendar = Calendar.getInstance();
         startCalendar.setTime(startDate);
 
-        if (curTime.getTime().getTime() < startCalendar.getTime().getTime()) {
+        if (curTime.getTime().getTime() > startCalendar.getTime().getTime()) {
             startCalendar = curTime;
+            startCalendar.add(Calendar.DATE,-1);
         }
 
         Calendar endCalendar = Calendar.getInstance();

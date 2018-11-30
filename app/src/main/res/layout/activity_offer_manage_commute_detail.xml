@@ -267,6 +267,7 @@
                 android:layout_height="wrap_content"
                 style="@style/offerButton"
                 android:background="@color/blue1"
+                android:textColor="@color/black"
                 android:text="일괄 퇴근"
                 android:layout_margin="3dp"/>
         </LinearLayout>
@@ -373,6 +374,7 @@
                 android:layout_height="wrap_content"
                 style="@style/offerButton"
                 android:background="@color/danger"
+                android:textColor="@color/black"
                 android:text="일괄 결근"
                 android:layout_margin="3dp"/>
         </LinearLayout>

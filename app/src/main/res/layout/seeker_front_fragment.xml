@@ -28,7 +28,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:text="오늘 날짜의 수락된 일감이 없습니다"
-            style="@style/whiteTextView"/>
+            style="@style/blackTextView"/>
 
     </LinearLayout>
     <LinearLayout
@@ -57,14 +57,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="projectName"
-                    style="@style/whiteTextView"/>
+                    style="@style/blackTextView"/>
 
                 <TextView
                     android:id="@+id/jobName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="jobName"
-                    style="@style/whiteTextView"/>
+                    style="@style/blackTextView"/>
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -73,7 +73,7 @@
                     android:id="@+id/jobPay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/whiteTextView"
+                    style="@style/blackTextView"
                     android:text="jobPay"/>
             </LinearLayout>
             <!-- //end 오늘의 일감 헤더 -->
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="바로가기"
-                style="@style/whiteTextView"
+                style="@style/blackTextView"
                 android:textSize="14sp"/>
 
         </LinearLayout>
@@ -244,7 +244,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:text="이력정보가 존재하지 않습니다"
-            style="@style/whiteTextView"/>
+            style="@style/blackTextView"/>
 
     </LinearLayout>
 
@@ -267,14 +267,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="총 근무 일자"
-                style="@style/whiteTextView"/>
+                style="@style/blackTextView"/>
 
             <TextView
                 android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="total"
-                style="@style/whiteTextView"/>
+                style="@style/blackTextView"/>
 
             <View
                 android:layout_width="0dp"
@@ -285,14 +285,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="신뢰도"
-                style="@style/whiteTextView"/>
+                style="@style/blackTextView"/>
 
             <TextView
                 android:id="@+id/reliability"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="n%"
-                style="@style/whiteTextView"/>
+                style="@style/blackTextView"/>
 
         </LinearLayout>
 

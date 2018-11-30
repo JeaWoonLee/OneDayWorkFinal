@@ -87,31 +87,17 @@ public class OfferManageCandidateActivity extends AppCompatActivity {
         if (headerList.size() > 0) {
             emptyLayout.setVisibility(View.GONE);
 
-            List<JobCandidateVO> headArray = new ArrayList<>();
-            String targetDate = "";
-            for (JobCandidateVO header : headerList) {
-                if (TextUtils.equals(targetDate,header.getTargetDate())){
-                    break;
-                }else {
-                    targetDate = header.getTargetDate();
-
-                    List<JobCandidateVO> list = map.get(header.getTargetDate());
-                    if (list != null) {
-                        if (list.get(0) != null) {
-                            header.setJobLimitCount(list.get(0).getJobLimitCount());
-                            header.setRecruit(list.get(0).getRecruit());
-                            header.setTargetDate(list.get(0).getTargetDate());
-                            headArray.add(header);
-                        }
-                    }
-
+            ArrayList<JobCandidateVO> sortedHeaderList = new ArrayList<>();
+            ArrayList<String> targetDateList = new ArrayList<>();
+            for (JobCandidateVO item : headerList) {
+                if (!targetDateList.contains(item.getTargetDate())) {
+                    targetDateList.add(item.getTargetDate());
+                    sortedHeaderList.add(item);
                 }
-
-
             }
 
             OfferManageCandidateTargetDateRecyclerViewAdapter adapter = new OfferManageCandidateTargetDateRecyclerViewAdapter(this);
-            adapter.setItems((ArrayList<JobCandidateVO>) headArray);
+            adapter.setItems(sortedHeaderList);
             recyclerView.setAdapter(adapter);
 
         } else {

@@ -132,7 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:selectionColor="@color/offer"
-            app:selectionLabelColor="@color/seeker"
+            app:selectionLabelColor="@color/black"
             app:disabledDaysLabelsColor="@color/danger"
             app:type="one_day_picker"
             android:layout_marginHorizontal="3dp"

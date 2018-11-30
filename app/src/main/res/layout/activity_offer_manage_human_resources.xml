@@ -56,7 +56,7 @@
             android:orientation="vertical"
             android:background="@drawable/offer_rectangle_border"
             android:padding="3dp"
-            android:layout_marginHorizontal="10dp">
+            >
 
             <com.applandeo.materialcalendarview.CalendarView
                 android:id="@+id/calendarView"

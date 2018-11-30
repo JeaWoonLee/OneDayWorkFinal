@@ -229,7 +229,7 @@ public class WorkerRecyclerViewAdapter extends BaseRecyclerViewAdapter<JobCandid
                     cardView.setCardBackgroundColor(res.getColor(R.color.seeker,context.getTheme()));
                     checkButton.setBackgroundColor(res.getColor(R.color.offer,context.getTheme()));
                     checkButton.setText("출근확인");
-//                    jobName.setTextColor(res.getColor(R.color.black,context.getTheme()));
+                    checkButton.setTextColor(res.getColor(R.color.white,context.getTheme()));
 //                    seekerName.setTextColor(res.getColor(R.color.black,context.getTheme()));
                     break;
                 case 3:
@@ -237,8 +237,8 @@ public class WorkerRecyclerViewAdapter extends BaseRecyclerViewAdapter<JobCandid
                     cardView.setCardBackgroundColor(res.getColor(R.color.offer,context.getTheme()));
                     checkButton.setBackgroundColor(res.getColor(R.color.blue1,context.getTheme()));
                     checkButton.setText("퇴근");
-//                    jobName.setTextColor(res.getColor(R.color.black,context.getTheme()));
-//                    seekerName.setTextColor(res.getColor(R.color.black,context.getTheme()));
+                    jobName.setTextColor(res.getColor(R.color.white,context.getTheme()));
+                    seekerName.setTextColor(res.getColor(R.color.white,context.getTheme()));
                     break;
                 case 4:
                     //퇴근 : 배경 blue1 / 글자 black / 버튼 seeker

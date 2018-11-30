@@ -224,7 +224,7 @@ public class CandidateActivity extends AppCompatActivity{
             int recruit = item.getRecruit();
             int limitedCount = item.getJobLimitCount();
 
-            int color = R.color.seeker;
+            int color = R.color.black;
             if (recruit == limitedCount) color = R.color.danger;
 
             String eventText = recruit + "/" + limitedCount;

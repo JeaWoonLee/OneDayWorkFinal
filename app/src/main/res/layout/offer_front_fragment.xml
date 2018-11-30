@@ -136,12 +136,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        style="@style/blackTextView"
-        android:text="메뉴고민중"
-        android:layout_gravity="center_horizontal"
-        android:textSize="25sp"/>
-
 </LinearLayout>

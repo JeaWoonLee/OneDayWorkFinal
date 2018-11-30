@@ -258,11 +258,12 @@ public class MyInfoFragment extends Fragment implements  MapView.POIItemEventLis
 
         if (item.getSeekerPicture() != null) {
             showPicture(item);
-        }
-        //사진 존재 유무
-        if (item.getSeekerPicture().length() > 0) {
-            seekerIsPicture.setText("사진 있음");
-        }else {
+
+            //사진 존재 유무
+            if (item.getSeekerPicture().length() > 0) {
+                seekerIsPicture.setText("사진 있음");
+            }
+        } else {
             seekerIsPicture.setText("없음");
         }
 

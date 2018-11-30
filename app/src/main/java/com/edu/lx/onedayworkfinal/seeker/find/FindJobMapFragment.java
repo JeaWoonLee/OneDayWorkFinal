@@ -160,6 +160,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
                 //LocationService 로 부터 lastLocation 을 받아옴
                 try {
                     lastLocation = Base.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (lastLocation == null) lastLocation = Base.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 }
                 catch (SecurityException e) {
                     Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
@@ -244,9 +245,20 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
             projectMarker.setTag(i);
             projectMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(item.getProjectLat(),item.getProjectLng()));
             projectMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
-            projectMarker.setCustomImageResourceId(R.drawable.select_loctaion);
+            if (TextUtils.equals(item.getProjectSubject(),"건설현장")){
+                projectMarker.setCustomImageResourceId(R.drawable.construct);
+            } else if (TextUtils.equals(item.getProjectSubject(),"토목")) {
+                projectMarker.setCustomImageResourceId(R.drawable.civil);
+            } else if (TextUtils.equals(item.getProjectSubject(),"조선")) {
+                projectMarker.setCustomImageResourceId(R.drawable.ship);
+            } else if (TextUtils.equals(item.getProjectSubject(),"공장")) {
+                projectMarker.setCustomImageResourceId(R.drawable.making);
+            } else if (TextUtils.equals(item.getProjectSubject(),"청소")) {
+                projectMarker.setCustomImageResourceId(R.drawable.clean);
+            } else {
+                projectMarker.setCustomImageResourceId(R.drawable.select_loctaion);
+            }
             projectMarker.setSelectedMarkerType(MapPOIItem.MarkerType.CustomImage);
-            projectMarker.setCustomSelectedImageResourceId(R.drawable.mylocation);
 
             //각 마커를 생성할 때 직업 목록을 조회해서 map 에 담아둔다
             requestProjectJobList(item.getProjectNumber());
@@ -290,6 +302,7 @@ public class FindJobMapFragment extends Fragment implements LocationListener,Map
         //LocationService 로 부터 lastLocation 을 받아옴
         try {
             lastLocation = Base.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (lastLocation == null) lastLocation = Base.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
         catch (SecurityException e) {
             Toast.makeText(activity,"내 위치 권한이 설정 되어 있지 않습니다",Toast.LENGTH_SHORT).show();
